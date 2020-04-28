@@ -1,6 +1,7 @@
 * Scheda di specifica
 ** Gestione Utente
 *** Registrazione utente
+**** Inserimento dati anagrafici
 Per gli utenti si memorizzano:
 - Nome
 - Cognome
@@ -9,6 +10,7 @@ Per gli utenti si memorizzano:
 - Città
 - Numero di telefono
 - Email
+**** Inserimento tessera fedeltà
 Ha eventualmente associata una tessera fedeltà per la raccolta punti. Ogni tessera fedeltà ha:
 - Numero identificativo
 - Data di emissione
