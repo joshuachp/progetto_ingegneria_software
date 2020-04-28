@@ -39,6 +39,7 @@ Per ogni prodotto viene visualizzato:
 *** Aggiunta al carrello
 Aggiungo solo prodotti disponibili al prodotto della spesa.
 **** Controllo disponibilità prodotto
+Se il prodotto non è disponibile il sistema lo segnala al cliente e non viene aggiunto al carrello.
 ** Carrello
 *** Visualizzazione del carrello
 **** Modifica della quantità
@@ -54,9 +55,27 @@ La ricerca può avvenire per:
 I prodotti possono essere ordinati in ordine crescente o decrescente secondo:
 - Prezzo
 - Marca
-*** Conferma spesa (data orario)
+*** Conferma spesa
+**** Seleziona pagamento
+I metodi di pagamento possono essere:
+- Carta di credito
+- Paypal
+- Alla consegna
+**** Selezione data e orario
+Il cliente seleziona la data e l'orario della consegna.
 ** Spesa Effettuata
 *** Registrare dati spesa e consegna
+Per ogni spesa si memorizza:
+- Codice univoco
+- Data consegna
+  - Intervallo di temo in cui la spesa potrà essere consegnata
+- Prodotti che la compongono
+  - Quantità
+  - Prezzo unitario di ogni prodotto
+  - Prezzo totale di ogni prodotto
+- Utente che l'ha effettuata
+- Costo totale
+- Tipo di pagamento
 *** Accredito sulla carta di fedeltà
 ** Profilo Utente
 *** Preferenze di pagamento

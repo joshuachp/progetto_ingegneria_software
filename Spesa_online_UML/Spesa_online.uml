@@ -82,6 +82,7 @@
   <packagedElement xmi:type="uml:UseCase" xmi:id="_f5zEoIlUEeq_27M3S-XvKQ" name="Conferma spesa">
     <extensionPoint xmi:type="uml:ExtensionPoint" xmi:id="_xKDrgIlUEeq_27M3S-XvKQ" name="ExtensionPoint2"/>
     <include xmi:type="uml:Include" xmi:id="_r6AuMIlUEeq_27M3S-XvKQ" addition="_k0SosIlUEeq_27M3S-XvKQ"/>
+    <include xmi:type="uml:Include" xmi:id="_tv7eQIllEeqrfby84-Hd4w" addition="_mos84IllEeqrfby84-Hd4w"/>
   </packagedElement>
   <packagedElement xmi:type="uml:UseCase" xmi:id="_k0SosIlUEeq_27M3S-XvKQ" name="Seleziona data consegna"/>
   <packagedElement xmi:type="uml:UseCase" xmi:id="_uxdccIlUEeq_27M3S-XvKQ" name="Accredito punti fedelta">
@@ -99,4 +100,14 @@
     <generalization xmi:type="uml:Generalization" xmi:id="_SwbvwIlWEeq_27M3S-XvKQ" general="_YaK04IlVEeq_27M3S-XvKQ"/>
   </packagedElement>
   <packagedElement xmi:type="uml:UseCase" xmi:id="_hWYFcIlWEeq_27M3S-XvKQ" name="Visualizza prodotto"/>
+  <packagedElement xmi:type="uml:UseCase" xmi:id="_mos84IllEeqrfby84-Hd4w" name="Pagamento"/>
+  <packagedElement xmi:type="uml:UseCase" xmi:id="_z5nZUIllEeqrfby84-Hd4w" name="Carta di credito">
+    <generalization xmi:type="uml:Generalization" xmi:id="_7CVvgIllEeqrfby84-Hd4w" general="_mos84IllEeqrfby84-Hd4w"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:UseCase" xmi:id="_0ROBAIllEeqrfby84-Hd4w" name="Paypal">
+    <generalization xmi:type="uml:Generalization" xmi:id="_8PllwIllEeqrfby84-Hd4w" general="_mos84IllEeqrfby84-Hd4w"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:UseCase" xmi:id="_0k_RkIllEeqrfby84-Hd4w" name="Alla consegna">
+    <generalization xmi:type="uml:Generalization" xmi:id="_9LrakIllEeqrfby84-Hd4w" general="_mos84IllEeqrfby84-Hd4w"/>
+  </packagedElement>
 </uml:Model>
