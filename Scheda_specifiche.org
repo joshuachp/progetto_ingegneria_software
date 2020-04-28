@@ -21,12 +21,14 @@ Ogni utente registrato accede con:
 - Password
 ** Catalogo
 # Ricerca dei prodotti -- Non specificato
-*** Visualizzazione dei prodotti
+*** Selezione reparto
+**** Visualizzazione dei prodotti
 *** Aggiunta al carrello
+**** Controllo disponibilità prodotto
 ** Carrello
 *** Visualizzazione del carrello
-*** Modifica del spesa
-*** Ricerca nel carrello
+**** Modifica del spesa
+**** Ricerca nel carrello
 *** Conferma spesa (data orario)
 # Può essere necessario anche nel catalogo
 ** Spesa Effettuata
