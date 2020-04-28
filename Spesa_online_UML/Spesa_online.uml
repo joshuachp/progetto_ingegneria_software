@@ -68,6 +68,8 @@
     <include xmi:type="uml:Include" xmi:id="_OQ7wgIlUEeq_27M3S-XvKQ" addition="_v0MhQIlTEeq_27M3S-XvKQ"/>
     <include xmi:type="uml:Include" xmi:id="_PIBJgIlUEeq_27M3S-XvKQ" addition="_9mSYIIlTEeq_27M3S-XvKQ"/>
     <include xmi:type="uml:Include" xmi:id="_i84bIIlUEeq_27M3S-XvKQ" addition="_f5zEoIlUEeq_27M3S-XvKQ"/>
+    <include xmi:type="uml:Include" xmi:id="_67mAkIlgEeqrfby84-Hd4w" addition="_1qhvkIlgEeqrfby84-Hd4w"/>
+    <include xmi:type="uml:Include" xmi:id="_qQPBEIlhEeqrfby84-Hd4w" addition="_Vz-_UIlhEeqrfby84-Hd4w"/>
   </packagedElement>
   <packagedElement xmi:type="uml:UseCase" xmi:id="_gOkDcIlDEeq_27M3S-XvKQ" name="Controllo discponibilità prodotto"/>
   <packagedElement xmi:type="uml:Association" xmi:id="_t7GRoIlTEeq_27M3S-XvKQ" memberEnd="_t7IG0IlTEeq_27M3S-XvKQ _t7IG0YlTEeq_27M3S-XvKQ">
@@ -115,5 +117,22 @@
     </eAnnotations>
     <ownedEnd xmi:type="uml:Property" xmi:id="_1Rvq4olaEeqFwYpZAzDF-Q" name="inserimento prodotto" type="_xouVwIlaEeqFwYpZAzDF-Q" association="_1RvD0IlaEeqFwYpZAzDF-Q"/>
     <ownedEnd xmi:type="uml:Property" xmi:id="_1Rvq44laEeqFwYpZAzDF-Q" name="capo reparto" type="_oiPSYIlaEeqFwYpZAzDF-Q" association="_1RvD0IlaEeqFwYpZAzDF-Q"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:UseCase" xmi:id="_1qhvkIlgEeqrfby84-Hd4w" name="Ricerca nel carrello"/>
+  <packagedElement xmi:type="uml:UseCase" xmi:id="_73NUQIlgEeqrfby84-Hd4w" name="Ricerca per tipo">
+    <generalization xmi:type="uml:Generalization" xmi:id="_P00SMIlhEeqrfby84-Hd4w" general="_1qhvkIlgEeqrfby84-Hd4w"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:UseCase" xmi:id="_9hRCUIlgEeqrfby84-Hd4w" name="Ricerca per marca">
+    <generalization xmi:type="uml:Generalization" xmi:id="_Qy_xsIlhEeqrfby84-Hd4w" general="_1qhvkIlgEeqrfby84-Hd4w"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:UseCase" xmi:id="_KTVmoIlhEeqrfby84-Hd4w" name="Ricerca per caratteristica">
+    <generalization xmi:type="uml:Generalization" xmi:id="_R__wUIlhEeqrfby84-Hd4w" general="_1qhvkIlgEeqrfby84-Hd4w"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:UseCase" xmi:id="_Vz-_UIlhEeqrfby84-Hd4w" name="Ordinamento"/>
+  <packagedElement xmi:type="uml:UseCase" xmi:id="_rSVXQIlhEeqrfby84-Hd4w" name="Ordinamento per prezzo">
+    <generalization xmi:type="uml:Generalization" xmi:id="_wIZHQIlhEeqrfby84-Hd4w" general="_Vz-_UIlhEeqrfby84-Hd4w"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:UseCase" xmi:id="_tosxsIlhEeqrfby84-Hd4w" name="Ordinamento per marca">
+    <generalization xmi:type="uml:Generalization" xmi:id="_w4tJ4IlhEeqrfby84-Hd4w" general="_Vz-_UIlhEeqrfby84-Hd4w"/>
   </packagedElement>
 </uml:Model>
