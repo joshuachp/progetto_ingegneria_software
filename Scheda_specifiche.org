@@ -1,0 +1,40 @@
+* Scheda di specifica
+** Gestione Utente
+*** Registrazione utente
+Per gli utenti si memorizzano:
+- Nome
+- Cognome
+- Indirizzo
+- CAP
+- Città
+- Numero di telefono
+- Email
+Ha eventualmente associata una tessera fedeltà per la raccolta punti. Ogni tessera fedeltà ha:
+- Numero identificativo
+- Data di emissione
+- Totale dei punti raccolti
+*** Login utente
+Ogni utente registrato accede con:
+- Email
+- Password
+** Catalogo
+# Ricerca dei prodotti -- Non specificato
+*** Visualizzazione dei prodotti
+*** Aggiunta al carrello
+** Carrello
+*** Visualizzazione del carrello
+*** Modifica del spesa
+*** Ricerca nel carrello
+*** Conferma spesa (data orario)
+# Può essere necessario anche nel catalogo
+** Spesa Effettuata
+*** Registrare dati spesa e consegna
+*** Accredito sulla carta di fedeltà
+** Profilo Utente
+*** Preferenze di pagamento
+*** Modifica dati
+*** Cronologia delle spesa
+** Back Office
+*** Aggiunta nuovi prodotti
+*** Verifica stato spese
+*** Autenticazione addetti
