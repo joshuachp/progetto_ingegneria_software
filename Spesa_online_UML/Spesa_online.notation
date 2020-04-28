@@ -157,7 +157,7 @@
       <layoutConstraint xmi:type="notation:Bounds" xmi:id="_gOl4polDEeq_27M3S-XvKQ"/>
     </children>
     <element xmi:type="uml:UseCase" href="Spesa_online.uml#_gOkDcIlDEeq_27M3S-XvKQ"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_gOlRkYlDEeq_27M3S-XvKQ" x="880" y="200"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_gOlRkYlDEeq_27M3S-XvKQ" x="880" y="220"/>
   </children>
   <children xmi:type="notation:Shape" xmi:id="_v0OWcIlTEeq_27M3S-XvKQ" type="UseCase_Shape">
     <children xmi:type="notation:DecorationNode" xmi:id="_v0OWcolTEeq_27M3S-XvKQ" type="UseCase_NameLabel"/>
