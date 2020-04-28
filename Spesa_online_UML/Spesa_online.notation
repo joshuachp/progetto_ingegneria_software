@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<notation:Diagram xmi:version="2.0" 
-  xmlns:xmi="http://www.omg.org/XMI" 
-  xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" 
-  xmlns:style="http://www.eclipse.org/papyrus/infra/gmfdiag/style" 
-  xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_l4XzUIk9Eeq_27M3S-XvKQ" type="UseCase" name="ClienteUseCaseDiagram" measurementUnit="Pixel">
+<notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:style="http://www.eclipse.org/papyrus/infra/gmfdiag/style" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_l4XzUIk9Eeq_27M3S-XvKQ" type="UseCase" name="ClienteUseCaseDiagram" measurementUnit="Pixel">
   <children xmi:type="notation:Shape" xmi:id="_qUup4Ik9Eeq_27M3S-XvKQ" type="Actor_Shape">
     <children xmi:type="notation:DecorationNode" xmi:id="_qUvQ8Ik9Eeq_27M3S-XvKQ" type="Actor_NameLabel">
       <layoutConstraint xmi:type="notation:Location" xmi:id="_qUvQ8Yk9Eeq_27M3S-XvKQ" y="15"/>
