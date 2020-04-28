@@ -20,14 +20,40 @@ Ogni utente registrato accede con:
 - Email
 - Password
 ** Catalogo
+L'accesso deve avvenire dopo l'autenticazione.
 *** Selezione reparto
+I prodotti disponibili sono visualizzati per reparto, ad esempio:
+- Carne
+- Pesce
+- Frutta e verdura
+- Alimentari
 **** Visualizzazione dei prodotti
+Per ogni prodotto viene visualizzato:
+- Nome
+- Marca
+- Quantità per confezione
+- Prezzo
+- Immagine
+- Disponibilità
+- Caratteristica (visto la ricerca nel carrello)
 *** Aggiunta al carrello
+Aggiungo solo prodotti disponibili al prodotto della spesa.
 **** Controllo disponibilità prodotto
 ** Carrello
 *** Visualizzazione del carrello
-**** Modifica del spesa
+**** Modifica della quantità
+L'utente può modificare la quantità dei prodotti aggiunti al carrello
+**** Rimuovere prodotto
+L'utente può rimuovere un prodotto nel carrello
 **** Ricerca nel carrello
+La ricerca può avvenire per:
+- Tipo (uova, biscotti, pasta)
+- Marca
+- Caratteristica (senza glutine, bio, senza latte,...)
+**** Ordine
+I prodotti possono essere ordinati in ordine crescente o decrescente secondo:
+- Prezzo
+- Marca
 *** Conferma spesa (data orario)
 ** Spesa Effettuata
 *** Registrare dati spesa e consegna
