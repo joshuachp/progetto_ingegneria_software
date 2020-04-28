@@ -105,7 +105,7 @@
       <layoutConstraint xmi:type="notation:Bounds" xmi:id="_b6yMBYlBEeq_27M3S-XvKQ"/>
     </children>
     <element xmi:type="uml:UseCase" href="Spesa_online.uml#_b6vIsIlBEeq_27M3S-XvKQ"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_b6xk8YlBEeq_27M3S-XvKQ" x="360" y="180"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_b6xk8YlBEeq_27M3S-XvKQ" x="380" y="180"/>
   </children>
   <children xmi:type="notation:Shape" xmi:id="_pgbiUIlBEeq_27M3S-XvKQ" type="UseCase_Shape">
     <children xmi:type="notation:DecorationNode" xmi:id="_pgbiUolBEeq_27M3S-XvKQ" type="UseCase_NameLabel"/>
@@ -408,7 +408,7 @@
     <styles xmi:type="notation:FontStyle" xmi:id="_nofwUYlBEeq_27M3S-XvKQ"/>
     <element xmi:type="uml:Include" href="Spesa_online.uml#_noMOUIlBEeq_27M3S-XvKQ"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_nofwUolBEeq_27M3S-XvKQ" points="[320, 263, -643984, -643984]$[420, 250, -643984, -643984]"/>
-    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_noxdIIlBEeq_27M3S-XvKQ" id="(0.9876543209876543,0.6666666666666666)"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_noxdIIlBEeq_27M3S-XvKQ" id="(1.0,0.6666666666666666)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_noyEMIlBEeq_27M3S-XvKQ" id="(0.0,0.6666666666666666)"/>
   </edges>
   <edges xmi:type="notation:Connector" xmi:id="_uETWIIlBEeq_27M3S-XvKQ" type="Include_Edge" source="_b6xk8IlBEeq_27M3S-XvKQ" target="_pgbiUIlBEeq_27M3S-XvKQ">
@@ -439,7 +439,7 @@
     <element xmi:type="uml:Include" href="Spesa_online.uml#_NkYRsIlCEeq_27M3S-XvKQ"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_NksawolCEeq_27M3S-XvKQ" points="[498, 220, -643984, -643984]$[560, 251, -643984, -643984]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_NlCZAIlCEeq_27M3S-XvKQ" id="(1.0,0.6666666666666666)"/>
-    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_NlCZAYlCEeq_27M3S-XvKQ" id="(0.027472527472527472,0.3333333333333333)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_NlCZAYlCEeq_27M3S-XvKQ" id="(0.0,0.3333333333333333)"/>
   </edges>
   <edges xmi:type="notation:Connector" xmi:id="_RIaZIIlCEeq_27M3S-XvKQ" type="Extend_Edge" source="_9CyusIlBEeq_27M3S-XvKQ" target="_pgbiUIlBEeq_27M3S-XvKQ">
     <children xmi:type="notation:DecorationNode" xmi:id="_RIaZI4lCEeq_27M3S-XvKQ" type="Extend_KeywordLabel">

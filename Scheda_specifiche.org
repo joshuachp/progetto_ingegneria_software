@@ -20,7 +20,6 @@ Ogni utente registrato accede con:
 - Email
 - Password
 ** Catalogo
-# Ricerca dei prodotti -- Non specificato
 *** Selezione reparto
 **** Visualizzazione dei prodotti
 *** Aggiunta al carrello
@@ -30,7 +29,6 @@ Ogni utente registrato accede con:
 **** Modifica del spesa
 **** Ricerca nel carrello
 *** Conferma spesa (data orario)
-# Può essere necessario anche nel catalogo
 ** Spesa Effettuata
 *** Registrare dati spesa e consegna
 *** Accredito sulla carta di fedeltà
