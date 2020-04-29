@@ -56,7 +56,6 @@
       <packagedElement xmi:type="uml:UseCase" xmi:id="_b7NqIIpPEeqxxJ07F9VUAA" name="Visualizzazione profilo">
         <include xmi:type="uml:Include" xmi:id="_9zNfUIpPEeqxxJ07F9VUAA" addition="_pKJJkIpPEeqxxJ07F9VUAA"/>
         <include xmi:type="uml:Include" xmi:id="_-YdhcIpPEeqxxJ07F9VUAA" addition="_s_AiUIpPEeqxxJ07F9VUAA"/>
-        <include xmi:type="uml:Include" xmi:id="__hhbQIpPEeqxxJ07F9VUAA" addition="_xEyr8IpPEeqxxJ07F9VUAA"/>
       </packagedElement>
       <packagedElement xmi:type="uml:UseCase" xmi:id="_pKJJkIpPEeqxxJ07F9VUAA" name="Modifica dati anagrafici"/>
       <packagedElement xmi:type="uml:UseCase" xmi:id="_s_AiUIpPEeqxxJ07F9VUAA" name="Modifica carta fedeltà"/>
@@ -93,6 +92,13 @@
       </eAnnotations>
       <ownedEnd xmi:type="uml:Property" xmi:id="_4rohgopPEeqxxJ07F9VUAA" name="visualizzazione carrello" type="_oKgG8IpOEeqxxJ07F9VUAA" association="_4rnTYIpPEeqxxJ07F9VUAA"/>
       <ownedEnd xmi:type="uml:Property" xmi:id="_4rpIkIpPEeqxxJ07F9VUAA" name="cliente" type="_PW3rgIodEeqL7JdXmRlyew" association="_4rnTYIpPEeqxxJ07F9VUAA"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_CM9RUIpREeqxxJ07F9VUAA" memberEnd="_CM-fcopREeqxxJ07F9VUAA _CM_GgIpREeqxxJ07F9VUAA">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_CM-fcIpREeqxxJ07F9VUAA" source="org.eclipse.papyrus">
+        <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_CM-fcYpREeqxxJ07F9VUAA" key="nature" value="UML_Nature"/>
+      </eAnnotations>
+      <ownedEnd xmi:type="uml:Property" xmi:id="_CM-fcopREeqxxJ07F9VUAA" name="visualizzazione storico spese" type="_xEyr8IpPEeqxxJ07F9VUAA" association="_CM9RUIpREeqxxJ07F9VUAA"/>
+      <ownedEnd xmi:type="uml:Property" xmi:id="_CM_GgIpREeqxxJ07F9VUAA" name="cliente" type="_PW3rgIodEeqL7JdXmRlyew" association="_CM9RUIpREeqxxJ07F9VUAA"/>
     </packagedElement>
   </packagedElement>
 </uml:Model>
