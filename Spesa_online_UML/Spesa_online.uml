@@ -9,7 +9,8 @@
     <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#_0"/>
   </packageImport>
   <packagedElement xmi:type="uml:Actor" xmi:id="_qUtbwIk9Eeq_27M3S-XvKQ" name="Cliente"/>
-  <packagedElement xmi:type="uml:UseCase" xmi:id="_uv-tMIk9Eeq_27M3S-XvKQ" name="Registrazione">
+  <packagedElement xmi:type="uml:UseCase" xmi:id="_uv-tMIk9Eeq_27M3S-XvKQ" name="Registrazione" classifierBehavior="_i5d-4IoREeqHiqJhAaE9WA">
+    <ownedBehavior xmi:type="uml:Interaction" xmi:id="_i5d-4IoREeqHiqJhAaE9WA" name="Registrazione"/>
     <extensionPoint xmi:type="uml:ExtensionPoint" xmi:id="_xhhV0Ik_Eeq_27M3S-XvKQ" name="ExtensionPoint2"/>
     <include xmi:type="uml:Include" xmi:id="_twOOcIk_Eeq_27M3S-XvKQ" addition="_pxSTsIk_Eeq_27M3S-XvKQ"/>
   </packagedElement>
@@ -65,7 +66,8 @@
   <packagedElement xmi:type="uml:UseCase" xmi:id="_pgaUMIlBEeq_27M3S-XvKQ" name="Visualizzazione prodotto">
     <extensionPoint xmi:type="uml:ExtensionPoint" xmi:id="_RIJTYIlCEeq_27M3S-XvKQ" name="ExtensionPoint1"/>
   </packagedElement>
-  <packagedElement xmi:type="uml:UseCase" xmi:id="_9Cw5gIlBEeq_27M3S-XvKQ" name="Aggiunta prodotto al carello">
+  <packagedElement xmi:type="uml:UseCase" xmi:id="_9Cw5gIlBEeq_27M3S-XvKQ" name="Aggiunta prodotto al carello" classifierBehavior="_gQwawIoSEeqHiqJhAaE9WA">
+    <ownedBehavior xmi:type="uml:Interaction" xmi:id="_gQwawIoSEeqHiqJhAaE9WA" name="Interaction3"/>
     <extend xmi:type="uml:Extend" xmi:id="_RIIsUIlCEeq_27M3S-XvKQ" extendedCase="_pgaUMIlBEeq_27M3S-XvKQ" extensionLocation="_RIJTYIlCEeq_27M3S-XvKQ"/>
     <include xmi:type="uml:Include" xmi:id="_l6o1cIlDEeq_27M3S-XvKQ" addition="_gOkDcIlDEeq_27M3S-XvKQ"/>
   </packagedElement>
@@ -159,11 +161,12 @@
   </packagedElement>
   <packagedElement xmi:type="uml:UseCase" xmi:id="__zBUoImDEeqFwYpZAzDF-Q" name="Visualizza prodotto"/>
   <packagedElement xmi:type="uml:UseCase" xmi:id="_kcRwgImEEeqFwYpZAzDF-Q" name="Visualizza spesa"/>
-  <packagedElement xmi:type="uml:Actor" xmi:id="_6uX5kImEEeqFwYpZAzDF-Q" name="Responsabile di reparto">
+  <packagedElement xmi:type="uml:Actor" xmi:id="_6uX5kImEEeqFwYpZAzDF-Q" name="Responsabile reparto">
     <generalization xmi:type="uml:Generalization" xmi:id="_FcebAImFEeqFwYpZAzDF-Q" general="_-qDE8ImEEeqFwYpZAzDF-Q"/>
   </packagedElement>
   <packagedElement xmi:type="uml:Actor" xmi:id="_-qDE8ImEEeqFwYpZAzDF-Q" name="utente"/>
-  <packagedElement xmi:type="uml:UseCase" xmi:id="_IACj8ImFEeqFwYpZAzDF-Q" name="Autenticazione">
+  <packagedElement xmi:type="uml:UseCase" xmi:id="_IACj8ImFEeqFwYpZAzDF-Q" name="Autenticazione" classifierBehavior="_3NbnUIoREeqHiqJhAaE9WA">
+    <ownedBehavior xmi:type="uml:Interaction" xmi:id="_3NbnUIoREeqHiqJhAaE9WA" name="Autenticazione"/>
     <include xmi:type="uml:Include" xmi:id="_ShAoUImFEeqFwYpZAzDF-Q" addition="_Ow5zwImFEeqFwYpZAzDF-Q"/>
   </packagedElement>
   <packagedElement xmi:type="uml:Association" xmi:id="_KuNaYImFEeqFwYpZAzDF-Q" memberEnd="_KuOBcomFEeqFwYpZAzDF-Q _KuOogImFEeqFwYpZAzDF-Q">

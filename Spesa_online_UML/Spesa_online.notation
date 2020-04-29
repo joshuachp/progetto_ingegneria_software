@@ -1179,4 +1179,52 @@
       <targetAnchor xsi:type="notation:IdentityAnchor" xmi:id="_ShRuEYmFEeqFwYpZAzDF-Q" id="(0.47619047619047616,0.9833333333333333)"/>
     </edges>
   </notation:Diagram>
+  <notation:Diagram xmi:id="_kFJu4IoREeqHiqJhAaE9WA" type="PapyrusUMLSequenceDiagram" name="RegisrazioneSequenceDiagram" measurementUnit="Pixel">
+    <children xsi:type="notation:Shape" xmi:id="_kFJu4YoREeqHiqJhAaE9WA" type="Interaction_Shape">
+      <children xsi:type="notation:DecorationNode" xmi:id="_kFJu4ooREeqHiqJhAaE9WA" type="Interaction_NameLabel"/>
+      <children xsi:type="notation:BasicCompartment" xmi:id="_kFJu44oREeqHiqJhAaE9WA" type="Interaction_SubfragmentCompartment">
+        <layoutConstraint xsi:type="notation:Bounds" xmi:id="_kFJu5IoREeqHiqJhAaE9WA"/>
+      </children>
+      <element href="Spesa_online.uml#_i5d-4IoREeqHiqJhAaE9WA"/>
+      <layoutConstraint xsi:type="notation:Bounds" xmi:id="_kFJu5YoREeqHiqJhAaE9WA"/>
+    </children>
+    <styles xsi:type="notation:StringValueStyle" xmi:id="_kFJu5ooREeqHiqJhAaE9WA" name="diagram_compatibility_version" stringValue="1.4.0"/>
+    <styles xsi:type="notation:DiagramStyle" xmi:id="_kFJu54oREeqHiqJhAaE9WA"/>
+    <styles xsi:type="style:PapyrusDiagramStyle" xmi:id="_kFJu6IoREeqHiqJhAaE9WA" diagramKindId="org.eclipse.papyrus.uml.diagram.sequence">
+      <owner href="Spesa_online.uml#_uv-tMIk9Eeq_27M3S-XvKQ"/>
+    </styles>
+    <element href="Spesa_online.uml#_i5d-4IoREeqHiqJhAaE9WA"/>
+  </notation:Diagram>
+  <notation:Diagram xmi:id="_4OmwcIoREeqHiqJhAaE9WA" type="PapyrusUMLSequenceDiagram" name="AutenticazioneSequenceDiagram" measurementUnit="Pixel">
+    <children xsi:type="notation:Shape" xmi:id="_4OmwcYoREeqHiqJhAaE9WA" type="Interaction_Shape">
+      <children xsi:type="notation:DecorationNode" xmi:id="_4OmwcooREeqHiqJhAaE9WA" type="Interaction_NameLabel"/>
+      <children xsi:type="notation:BasicCompartment" xmi:id="_4Omwc4oREeqHiqJhAaE9WA" type="Interaction_SubfragmentCompartment">
+        <layoutConstraint xsi:type="notation:Bounds" xmi:id="_4OmwdIoREeqHiqJhAaE9WA"/>
+      </children>
+      <element href="Spesa_online.uml#_3NbnUIoREeqHiqJhAaE9WA"/>
+      <layoutConstraint xsi:type="notation:Bounds" xmi:id="_4OmwdYoREeqHiqJhAaE9WA"/>
+    </children>
+    <styles xsi:type="notation:StringValueStyle" xmi:id="_4OmwdooREeqHiqJhAaE9WA" name="diagram_compatibility_version" stringValue="1.4.0"/>
+    <styles xsi:type="notation:DiagramStyle" xmi:id="_4Omwd4oREeqHiqJhAaE9WA"/>
+    <styles xsi:type="style:PapyrusDiagramStyle" xmi:id="_4OmweIoREeqHiqJhAaE9WA" diagramKindId="org.eclipse.papyrus.uml.diagram.sequence">
+      <owner href="Spesa_online.uml#_IACj8ImFEeqFwYpZAzDF-Q"/>
+    </styles>
+    <element href="Spesa_online.uml#_3NbnUIoREeqHiqJhAaE9WA"/>
+  </notation:Diagram>
+  <notation:Diagram xmi:id="_jyYHYIoSEeqHiqJhAaE9WA" type="PapyrusUMLSequenceDiagram" name="AggiuntaProdottoAlCarrelloSequenceDiagram" measurementUnit="Pixel">
+    <children xsi:type="notation:Shape" xmi:id="_jyYHYYoSEeqHiqJhAaE9WA" type="Interaction_Shape">
+      <children xsi:type="notation:DecorationNode" xmi:id="_jyYHYooSEeqHiqJhAaE9WA" type="Interaction_NameLabel"/>
+      <children xsi:type="notation:BasicCompartment" xmi:id="_jyYHY4oSEeqHiqJhAaE9WA" type="Interaction_SubfragmentCompartment">
+        <layoutConstraint xsi:type="notation:Bounds" xmi:id="_jyYHZIoSEeqHiqJhAaE9WA"/>
+      </children>
+      <element href="Spesa_online.uml#_gQwawIoSEeqHiqJhAaE9WA"/>
+      <layoutConstraint xsi:type="notation:Bounds" xmi:id="_jyYHZYoSEeqHiqJhAaE9WA"/>
+    </children>
+    <styles xsi:type="notation:StringValueStyle" xmi:id="_jyYHZooSEeqHiqJhAaE9WA" name="diagram_compatibility_version" stringValue="1.4.0"/>
+    <styles xsi:type="notation:DiagramStyle" xmi:id="_jyYHZ4oSEeqHiqJhAaE9WA"/>
+    <styles xsi:type="style:PapyrusDiagramStyle" xmi:id="_jyYHaIoSEeqHiqJhAaE9WA" diagramKindId="org.eclipse.papyrus.uml.diagram.sequence">
+      <owner href="Spesa_online.uml#_9Cw5gIlBEeq_27M3S-XvKQ"/>
+    </styles>
+    <element href="Spesa_online.uml#_gQwawIoSEeqHiqJhAaE9WA"/>
+  </notation:Diagram>
 </xmi:XMI>
