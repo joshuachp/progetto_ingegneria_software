@@ -864,12 +864,12 @@
             <layoutConstraint xsi:type="notation:Bounds" xmi:id="_HydShopXEeq4YZ6stDk94w"/>
           </children>
           <element href="SpesaOnLine.uml#_IFPv0IpQEeqxxJ07F9VUAA"/>
-          <layoutConstraint xsi:type="notation:Bounds" xmi:id="_HycEYYpXEeq4YZ6stDk94w" x="614" y="7"/>
+          <layoutConstraint xsi:type="notation:Bounds" xmi:id="_HycEYYpXEeq4YZ6stDk94w" x="574" y="7"/>
         </children>
         <layoutConstraint xsi:type="notation:Bounds" xmi:id="_nWDuEopVEeq4YZ6stDk94w"/>
       </children>
       <element href="SpesaOnLine.uml#_nWB44IpVEeq4YZ6stDk94w"/>
-      <layoutConstraint xsi:type="notation:Bounds" xmi:id="_nWDHAYpVEeq4YZ6stDk94w" x="240" y="520" width="801" height="301"/>
+      <layoutConstraint xsi:type="notation:Bounds" xmi:id="_nWDHAYpVEeq4YZ6stDk94w" x="240" y="520" width="801" height="261"/>
     </children>
     <children xsi:type="notation:Shape" xmi:id="_Oy_LcIpWEeq4YZ6stDk94w" type="Actor_Shape">
       <children xsi:type="notation:DecorationNode" xmi:id="_Oy_LcopWEeq4YZ6stDk94w" type="Actor_NameLabel">
@@ -947,10 +947,12 @@
     </edges>
     <edges xsi:type="notation:Connector" xmi:id="_Ak-_MIpXEeq4YZ6stDk94w" type="Association_Edge" source="_Oy_LcIpWEeq4YZ6stDk94w" target="_dRNvkIpWEeq4YZ6stDk94w">
       <children xsi:type="notation:DecorationNode" xmi:id="_Ak-_M4pXEeq4YZ6stDk94w" type="Association_NameLabel">
-        <layoutConstraint xsi:type="notation:Location" xmi:id="_Ak-_NIpXEeq4YZ6stDk94w" y="40"/>
+        <styles xsi:type="notation:BooleanValueStyle" xmi:id="_rzKgoIpXEeq4YZ6stDk94w" name="IS_UPDATED_POSITION" booleanValue="true"/>
+        <layoutConstraint xsi:type="notation:Location" xmi:id="_Ak-_NIpXEeq4YZ6stDk94w" x="-1" y="38"/>
       </children>
       <children xsi:type="notation:DecorationNode" xmi:id="_Ak-_NYpXEeq4YZ6stDk94w" type="Association_StereotypeLabel">
-        <layoutConstraint xsi:type="notation:Location" xmi:id="_Ak-_NopXEeq4YZ6stDk94w" y="-20"/>
+        <styles xsi:type="notation:BooleanValueStyle" xmi:id="_rzSccIpXEeq4YZ6stDk94w" name="IS_UPDATED_POSITION" booleanValue="true"/>
+        <layoutConstraint xsi:type="notation:Location" xmi:id="_Ak-_NopXEeq4YZ6stDk94w" y="-19"/>
       </children>
       <styles xsi:type="notation:FontStyle" xmi:id="_Ak-_MYpXEeq4YZ6stDk94w"/>
       <element href="SpesaOnLine.uml#_Ak9xEIpXEeq4YZ6stDk94w"/>
@@ -960,9 +962,11 @@
     </edges>
     <edges xsi:type="notation:Connector" xmi:id="_CuXtkIpXEeq4YZ6stDk94w" type="Include_Edge" source="_dRNvkIpWEeq4YZ6stDk94w" target="_9bF2EIpWEeq4YZ6stDk94w">
       <children xsi:type="notation:DecorationNode" xmi:id="_CuXtk4pXEeq4YZ6stDk94w" type="Include_KeywordLabel">
+        <styles xsi:type="notation:BooleanValueStyle" xmi:id="_ry4z0IpXEeq4YZ6stDk94w" name="IS_UPDATED_POSITION" booleanValue="true"/>
         <layoutConstraint xsi:type="notation:Location" xmi:id="_CuXtlIpXEeq4YZ6stDk94w" y="20"/>
       </children>
       <children xsi:type="notation:DecorationNode" xmi:id="_CuXtlYpXEeq4YZ6stDk94w" type="Include_StereotypeLabel">
+        <styles xsi:type="notation:BooleanValueStyle" xmi:id="_rzBWsIpXEeq4YZ6stDk94w" name="IS_UPDATED_POSITION" booleanValue="true"/>
         <layoutConstraint xsi:type="notation:Location" xmi:id="_CuXtlopXEeq4YZ6stDk94w" y="-20"/>
       </children>
       <styles xsi:type="notation:FontStyle" xmi:id="_CuXtkYpXEeq4YZ6stDk94w"/>
@@ -973,7 +977,8 @@
     </edges>
     <edges xsi:type="notation:Connector" xmi:id="_P9CuUIpXEeq4YZ6stDk94w" type="Generalization_Edge" source="_HycEYIpXEeq4YZ6stDk94w" target="_9bF2EIpWEeq4YZ6stDk94w">
       <children xsi:type="notation:DecorationNode" xmi:id="_P9DVYIpXEeq4YZ6stDk94w" type="Generalization_StereotypeLabel">
-        <layoutConstraint xsi:type="notation:Location" xmi:id="_P9DVYYpXEeq4YZ6stDk94w" y="-20"/>
+        <styles xsi:type="notation:BooleanValueStyle" xmi:id="_oW8RYIpXEeq4YZ6stDk94w" name="IS_UPDATED_POSITION" booleanValue="true"/>
+        <layoutConstraint xsi:type="notation:Location" xmi:id="_P9DVYYpXEeq4YZ6stDk94w" y="-19"/>
       </children>
       <styles xsi:type="notation:FontStyle" xmi:id="_P9CuUYpXEeq4YZ6stDk94w"/>
       <element href="SpesaOnLine.uml#_Mv5hEIpQEeqxxJ07F9VUAA"/>
@@ -1117,5 +1122,101 @@
       <sourceAnchor xsi:type="notation:IdentityAnchor" xmi:id="_u-NssIodEeqL7JdXmRlyew" id="(1.0,0.8)"/>
       <targetAnchor xsi:type="notation:IdentityAnchor" xmi:id="_u-NssYodEeqL7JdXmRlyew" id="(0.02857142857142857,0.3333333333333333)"/>
     </edges>
+  </notation:Diagram>
+  <notation:Diagram xmi:id="_Lb2loIpYEeq4YZ6stDk94w" type="PapyrusUMLSequenceDiagram" name="AutenticazioneSequenceDiagram" measurementUnit="Pixel">
+    <children xsi:type="notation:Shape" xmi:id="_Lb2loYpYEeq4YZ6stDk94w" type="Interaction_Shape">
+      <children xsi:type="notation:DecorationNode" xmi:id="_Lb2loopYEeq4YZ6stDk94w" type="Interaction_NameLabel"/>
+      <children xsi:type="notation:BasicCompartment" xmi:id="_Lb2lo4pYEeq4YZ6stDk94w" type="Interaction_SubfragmentCompartment">
+        <layoutConstraint xsi:type="notation:Bounds" xmi:id="_Lb2lpIpYEeq4YZ6stDk94w"/>
+      </children>
+      <element href="SpesaOnLine.uml#_KHVpwIpYEeq4YZ6stDk94w"/>
+      <layoutConstraint xsi:type="notation:Bounds" xmi:id="_Lb2lpYpYEeq4YZ6stDk94w"/>
+    </children>
+    <styles xsi:type="notation:StringValueStyle" xmi:id="_Lb2lpopYEeq4YZ6stDk94w" name="diagram_compatibility_version" stringValue="1.4.0"/>
+    <styles xsi:type="notation:DiagramStyle" xmi:id="_Lb2lp4pYEeq4YZ6stDk94w"/>
+    <styles xsi:type="style:PapyrusDiagramStyle" xmi:id="_Lb2lqIpYEeq4YZ6stDk94w" diagramKindId="org.eclipse.papyrus.uml.diagram.sequence">
+      <owner href="SpesaOnLine.uml#_UV0RwIodEeqL7JdXmRlyew"/>
+    </styles>
+    <element href="SpesaOnLine.uml#_KHVpwIpYEeq4YZ6stDk94w"/>
+  </notation:Diagram>
+  <notation:Diagram xmi:id="_dq0QcIpYEeq4YZ6stDk94w" type="PapyrusUMLSequenceDiagram" name="registrazioneSequenceDiagram" measurementUnit="Pixel">
+    <children xsi:type="notation:Shape" xmi:id="_dq0QcYpYEeq4YZ6stDk94w" type="Interaction_Shape">
+      <children xsi:type="notation:DecorationNode" xmi:id="_dq0QcopYEeq4YZ6stDk94w" type="Interaction_NameLabel"/>
+      <children xsi:type="notation:BasicCompartment" xmi:id="_dq0Qc4pYEeq4YZ6stDk94w" type="Interaction_SubfragmentCompartment">
+        <layoutConstraint xsi:type="notation:Bounds" xmi:id="_dq0QdIpYEeq4YZ6stDk94w"/>
+      </children>
+      <element href="SpesaOnLine.uml#_cLsnEIpYEeq4YZ6stDk94w"/>
+      <layoutConstraint xsi:type="notation:Bounds" xmi:id="_dq0QdYpYEeq4YZ6stDk94w"/>
+    </children>
+    <styles xsi:type="notation:StringValueStyle" xmi:id="_dq0QdopYEeq4YZ6stDk94w" name="diagram_compatibility_version" stringValue="1.4.0"/>
+    <styles xsi:type="notation:DiagramStyle" xmi:id="_dq0Qd4pYEeq4YZ6stDk94w"/>
+    <styles xsi:type="style:PapyrusDiagramStyle" xmi:id="_dq0QeIpYEeq4YZ6stDk94w" diagramKindId="org.eclipse.papyrus.uml.diagram.sequence">
+      <owner href="SpesaOnLine.uml#_6OZngIodEeqL7JdXmRlyew"/>
+    </styles>
+    <element href="SpesaOnLine.uml#_cLsnEIpYEeq4YZ6stDk94w"/>
+  </notation:Diagram>
+  <notation:Diagram xmi:id="_lvFo4IpYEeq4YZ6stDk94w" type="PapyrusUMLSequenceDiagram" name="SpesaSequenceDiagram" measurementUnit="Pixel">
+    <children xsi:type="notation:Shape" xmi:id="_lvFo4YpYEeq4YZ6stDk94w" type="Interaction_Shape">
+      <children xsi:type="notation:DecorationNode" xmi:id="_lvFo4opYEeq4YZ6stDk94w" type="Interaction_NameLabel"/>
+      <children xsi:type="notation:BasicCompartment" xmi:id="_lvFo44pYEeq4YZ6stDk94w" type="Interaction_SubfragmentCompartment">
+        <layoutConstraint xsi:type="notation:Bounds" xmi:id="_lvFo5IpYEeq4YZ6stDk94w"/>
+      </children>
+      <element href="SpesaOnLine.uml#_i0qfIIpYEeq4YZ6stDk94w"/>
+      <layoutConstraint xsi:type="notation:Bounds" xmi:id="_lvFo5YpYEeq4YZ6stDk94w"/>
+    </children>
+    <styles xsi:type="notation:StringValueStyle" xmi:id="_lvFo5opYEeq4YZ6stDk94w" name="diagram_compatibility_version" stringValue="1.4.0"/>
+    <styles xsi:type="notation:DiagramStyle" xmi:id="_lvFo54pYEeq4YZ6stDk94w"/>
+    <styles xsi:type="style:PapyrusDiagramStyle" xmi:id="_lvFo6IpYEeq4YZ6stDk94w" diagramKindId="org.eclipse.papyrus.uml.diagram.sequence">
+      <owner href="SpesaOnLine.uml#_nnSQgIofEeqL7JdXmRlyew"/>
+    </styles>
+    <element href="SpesaOnLine.uml#_i0qfIIpYEeq4YZ6stDk94w"/>
+  </notation:Diagram>
+  <notation:Diagram xmi:id="_rtDcIIpYEeq4YZ6stDk94w" type="PapyrusUMLSequenceDiagram" name="GestioneCatalogoSequenceDiagram" measurementUnit="Pixel">
+    <children xsi:type="notation:Shape" xmi:id="_rtDcIYpYEeq4YZ6stDk94w" type="Interaction_Shape">
+      <children xsi:type="notation:DecorationNode" xmi:id="_rtDcIopYEeq4YZ6stDk94w" type="Interaction_NameLabel"/>
+      <children xsi:type="notation:BasicCompartment" xmi:id="_rtDcI4pYEeq4YZ6stDk94w" type="Interaction_SubfragmentCompartment">
+        <layoutConstraint xsi:type="notation:Bounds" xmi:id="_rtDcJIpYEeq4YZ6stDk94w"/>
+      </children>
+      <element href="SpesaOnLine.uml#_qH74cIpYEeq4YZ6stDk94w"/>
+      <layoutConstraint xsi:type="notation:Bounds" xmi:id="_rtDcJYpYEeq4YZ6stDk94w"/>
+    </children>
+    <styles xsi:type="notation:StringValueStyle" xmi:id="_rtDcJopYEeq4YZ6stDk94w" name="diagram_compatibility_version" stringValue="1.4.0"/>
+    <styles xsi:type="notation:DiagramStyle" xmi:id="_rtDcJ4pYEeq4YZ6stDk94w"/>
+    <styles xsi:type="style:PapyrusDiagramStyle" xmi:id="_rtDcKIpYEeq4YZ6stDk94w" diagramKindId="org.eclipse.papyrus.uml.diagram.sequence">
+      <owner href="SpesaOnLine.uml#_dp5KwIpVEeq4YZ6stDk94w"/>
+    </styles>
+    <element href="SpesaOnLine.uml#_qH74cIpYEeq4YZ6stDk94w"/>
+  </notation:Diagram>
+  <notation:Diagram xmi:id="_yofkQIpYEeq4YZ6stDk94w" type="PapyrusUMLSequenceDiagram" name="GestioneSpeseSequenceDiagram" measurementUnit="Pixel">
+    <children xsi:type="notation:Shape" xmi:id="_yofkQYpYEeq4YZ6stDk94w" type="Interaction_Shape">
+      <children xsi:type="notation:DecorationNode" xmi:id="_yofkQopYEeq4YZ6stDk94w" type="Interaction_NameLabel"/>
+      <children xsi:type="notation:BasicCompartment" xmi:id="_yofkQ4pYEeq4YZ6stDk94w" type="Interaction_SubfragmentCompartment">
+        <layoutConstraint xsi:type="notation:Bounds" xmi:id="_yofkRIpYEeq4YZ6stDk94w"/>
+      </children>
+      <element href="SpesaOnLine.uml#_wFs3YIpYEeq4YZ6stDk94w"/>
+      <layoutConstraint xsi:type="notation:Bounds" xmi:id="_yofkRYpYEeq4YZ6stDk94w"/>
+    </children>
+    <styles xsi:type="notation:StringValueStyle" xmi:id="_yofkRopYEeq4YZ6stDk94w" name="diagram_compatibility_version" stringValue="1.4.0"/>
+    <styles xsi:type="notation:DiagramStyle" xmi:id="_yofkR4pYEeq4YZ6stDk94w"/>
+    <styles xsi:type="style:PapyrusDiagramStyle" xmi:id="_yofkSIpYEeq4YZ6stDk94w" diagramKindId="org.eclipse.papyrus.uml.diagram.sequence">
+      <owner href="SpesaOnLine.uml#_nWB44IpVEeq4YZ6stDk94w"/>
+    </styles>
+    <element href="SpesaOnLine.uml#_wFs3YIpYEeq4YZ6stDk94w"/>
+  </notation:Diagram>
+  <notation:Diagram xmi:id="_5RmmQIpYEeq4YZ6stDk94w" type="PapyrusUMLSequenceDiagram" name="ProfiloSequenceDiagram" measurementUnit="Pixel">
+    <children xsi:type="notation:Shape" xmi:id="_5RmmQYpYEeq4YZ6stDk94w" type="Interaction_Shape">
+      <children xsi:type="notation:DecorationNode" xmi:id="_5RmmQopYEeq4YZ6stDk94w" type="Interaction_NameLabel"/>
+      <children xsi:type="notation:BasicCompartment" xmi:id="_5RmmQ4pYEeq4YZ6stDk94w" type="Interaction_SubfragmentCompartment">
+        <layoutConstraint xsi:type="notation:Bounds" xmi:id="_5RmmRIpYEeq4YZ6stDk94w"/>
+      </children>
+      <element href="SpesaOnLine.uml#_4QDpsIpYEeq4YZ6stDk94w"/>
+      <layoutConstraint xsi:type="notation:Bounds" xmi:id="_5RmmRYpYEeq4YZ6stDk94w"/>
+    </children>
+    <styles xsi:type="notation:StringValueStyle" xmi:id="_5RmmRopYEeq4YZ6stDk94w" name="diagram_compatibility_version" stringValue="1.4.0"/>
+    <styles xsi:type="notation:DiagramStyle" xmi:id="_5RmmR4pYEeq4YZ6stDk94w"/>
+    <styles xsi:type="style:PapyrusDiagramStyle" xmi:id="_5RmmSIpYEeq4YZ6stDk94w" diagramKindId="org.eclipse.papyrus.uml.diagram.sequence">
+      <owner href="SpesaOnLine.uml#_VP0JIIpPEeqxxJ07F9VUAA"/>
+    </styles>
+    <element href="SpesaOnLine.uml#_4QDpsIpYEeq4YZ6stDk94w"/>
   </notation:Diagram>
 </xmi:XMI>

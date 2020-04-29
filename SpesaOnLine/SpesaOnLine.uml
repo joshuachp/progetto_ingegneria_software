@@ -9,6 +9,7 @@
         <packagedElement xmi:type="uml:Actor" xmi:id="_ZjfQgIodEeqL7JdXmRlyew" name="Utente"/>
         <packagedElement xmi:type="uml:UseCase" xmi:id="_jBjtcIodEeqL7JdXmRlyew" name="Autenticazione"/>
         <packagedElement xmi:type="uml:UseCase" xmi:id="_lSnKEIodEeqL7JdXmRlyew" name="Deautenticazione"/>
+        <packagedElement xmi:type="uml:Interaction" xmi:id="_KHVpwIpYEeq4YZ6stDk94w" name="Autenticazione"/>
       </packagedElement>
       <packagedElement xmi:type="uml:Package" xmi:id="_6OZngIodEeqL7JdXmRlyew" name="Registrazione">
         <packagedElement xmi:type="uml:UseCase" xmi:id="_A82cgIoeEeqL7JdXmRlyew" name="Registrazione">
@@ -19,6 +20,7 @@
         <packagedElement xmi:type="uml:UseCase" xmi:id="_JVWYgIoeEeqL7JdXmRlyew" name="Inserimento tessera fedeltà">
           <extend xmi:type="uml:Extend" xmi:id="_PuazYIoeEeqL7JdXmRlyew" extendedCase="_A82cgIoeEeqL7JdXmRlyew" extensionLocation="_PucBgIoeEeqL7JdXmRlyew"/>
         </packagedElement>
+        <packagedElement xmi:type="uml:Interaction" xmi:id="_cLsnEIpYEeq4YZ6stDk94w" name="Registrazione"/>
       </packagedElement>
       <packagedElement xmi:type="uml:Package" xmi:id="_nnSQgIofEeqL7JdXmRlyew" name="Spesa">
         <packagedElement xmi:type="uml:UseCase" xmi:id="_nsII4IpOEeqxxJ07F9VUAA" name="Visualizzazione catalogo">
@@ -63,6 +65,7 @@
         <packagedElement xmi:type="uml:UseCase" xmi:id="_pZh3IIpUEeq4YZ6stDk94w" name="Alla consegna">
           <generalization xmi:type="uml:Generalization" xmi:id="_yUAe0IpUEeq4YZ6stDk94w" general="_T14IcIpUEeq4YZ6stDk94w"/>
         </packagedElement>
+        <packagedElement xmi:type="uml:Interaction" xmi:id="_i0qfIIpYEeq4YZ6stDk94w" name="Spesa"/>
       </packagedElement>
       <packagedElement xmi:type="uml:Package" xmi:id="_dp5KwIpVEeq4YZ6stDk94w" name="GestioneCatalogo">
         <packagedElement xmi:type="uml:UseCase" xmi:id="_uK9JUIpVEeq4YZ6stDk94w" name="Visualizza catologo">
@@ -74,6 +77,7 @@
         </packagedElement>
         <packagedElement xmi:type="uml:UseCase" xmi:id="_yc6twIpVEeq4YZ6stDk94w" name="Aggiungi prodotto"/>
         <packagedElement xmi:type="uml:UseCase" xmi:id="_03UToIpVEeq4YZ6stDk94w" name="Modifica prodotto"/>
+        <packagedElement xmi:type="uml:Interaction" xmi:id="_qH74cIpYEeq4YZ6stDk94w" name="GestioneCatalogo"/>
       </packagedElement>
       <packagedElement xmi:type="uml:Package" xmi:id="_nWB44IpVEeq4YZ6stDk94w" name="GestioneSpese">
         <packagedElement xmi:type="uml:UseCase" xmi:id="_dRHo8IpWEeq4YZ6stDk94w" name="Visualizza storico spese generale">
@@ -83,6 +87,7 @@
         <packagedElement xmi:type="uml:UseCase" xmi:id="_IFPv0IpQEeqxxJ07F9VUAA" name="Visualizzazione stato spesa">
           <generalization xmi:type="uml:Generalization" xmi:id="_Mv5hEIpQEeqxxJ07F9VUAA" general="_BiX4sIpQEeqxxJ07F9VUAA"/>
         </packagedElement>
+        <packagedElement xmi:type="uml:Interaction" xmi:id="_wFs3YIpYEeq4YZ6stDk94w" name="GestioneSpese"/>
       </packagedElement>
       <packagedElement xmi:type="uml:Package" xmi:id="_VP0JIIpPEeqxxJ07F9VUAA" name="Profilo">
         <packagedElement xmi:type="uml:UseCase" xmi:id="_b7NqIIpPEeqxxJ07F9VUAA" name="Visualizzazione profilo">
@@ -99,6 +104,7 @@
           <include xmi:type="uml:Include" xmi:id="_VdSvAIpQEeqxxJ07F9VUAA" addition="_SmC1EIpQEeqxxJ07F9VUAA"/>
         </packagedElement>
         <packagedElement xmi:type="uml:UseCase" xmi:id="_SmC1EIpQEeqxxJ07F9VUAA" name="Visualizzazione prodotto"/>
+        <packagedElement xmi:type="uml:Interaction" xmi:id="_4QDpsIpYEeq4YZ6stDk94w" name="Profilo"/>
       </packagedElement>
     </packagedElement>
     <packagedElement xmi:type="uml:Actor" xmi:id="_PW3rgIodEeqL7JdXmRlyew" name="Cliente">
