@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_uemVUIoZEeqL7JdXmRlyew" name="SpesaOnLine">
+  <packageImport xmi:type="uml:PackageImport" xmi:id="_utee0IoZEeqL7JdXmRlyew">
+    <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#_0"/>
+  </packageImport>
+  <packagedElement xmi:type="uml:Package" xmi:id="_2Lw1UIoZEeqL7JdXmRlyew" name="UseCases">
+    <packagedElement xmi:type="uml:Package" xmi:id="_MmfOkIodEeqL7JdXmRlyew" name="Applicazione">
+      <packagedElement xmi:type="uml:Package" xmi:id="_UV0RwIodEeqL7JdXmRlyew" name="Autenticazione">
+        <packagedElement xmi:type="uml:Actor" xmi:id="_ZjfQgIodEeqL7JdXmRlyew" name="Utente"/>
+        <packagedElement xmi:type="uml:UseCase" xmi:id="_jBjtcIodEeqL7JdXmRlyew" name="Autenticazione"/>
+        <packagedElement xmi:type="uml:UseCase" xmi:id="_lSnKEIodEeqL7JdXmRlyew" name="Deautenticazione"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Package" xmi:id="_6OZngIodEeqL7JdXmRlyew" name="Registrazione">
+        <packagedElement xmi:type="uml:UseCase" xmi:id="_A82cgIoeEeqL7JdXmRlyew" name="Registrazione">
+          <extensionPoint xmi:type="uml:ExtensionPoint" xmi:id="_PucBgIoeEeqL7JdXmRlyew" name="ExtensionPoint2"/>
+          <include xmi:type="uml:Include" xmi:id="_ImbdAIoeEeqL7JdXmRlyew" addition="_E3gUMIoeEeqL7JdXmRlyew"/>
+        </packagedElement>
+        <packagedElement xmi:type="uml:UseCase" xmi:id="_E3gUMIoeEeqL7JdXmRlyew" name="Inserimento dati utente"/>
+        <packagedElement xmi:type="uml:UseCase" xmi:id="_JVWYgIoeEeqL7JdXmRlyew" name="Inserimento tessera fedeltà">
+          <extend xmi:type="uml:Extend" xmi:id="_PuazYIoeEeqL7JdXmRlyew" extendedCase="_A82cgIoeEeqL7JdXmRlyew" extensionLocation="_PucBgIoeEeqL7JdXmRlyew"/>
+        </packagedElement>
+      </packagedElement>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Actor" xmi:id="_PW3rgIodEeqL7JdXmRlyew" name="Cliente">
+      <generalization xmi:type="uml:Generalization" xmi:id="_fFeSYIodEeqL7JdXmRlyew" general="_ZjfQgIodEeqL7JdXmRlyew"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Actor" xmi:id="_QobaAIodEeqL7JdXmRlyew" name="Responsabile Reparto">
+      <generalization xmi:type="uml:Generalization" xmi:id="_gWw7IIodEeqL7JdXmRlyew" general="_ZjfQgIodEeqL7JdXmRlyew"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_tckTwIodEeqL7JdXmRlyew" memberEnd="_tcn-IIodEeqL7JdXmRlyew _tcolMIodEeqL7JdXmRlyew">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_tcmwAIodEeqL7JdXmRlyew" source="org.eclipse.papyrus">
+        <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_tcnXEIodEeqL7JdXmRlyew" key="nature" value="UML_Nature"/>
+      </eAnnotations>
+      <ownedEnd xmi:type="uml:Property" xmi:id="_tcn-IIodEeqL7JdXmRlyew" name="autenticazione" type="_jBjtcIodEeqL7JdXmRlyew" association="_tckTwIodEeqL7JdXmRlyew"/>
+      <ownedEnd xmi:type="uml:Property" xmi:id="_tcolMIodEeqL7JdXmRlyew" name="utente" type="_ZjfQgIodEeqL7JdXmRlyew" association="_tckTwIodEeqL7JdXmRlyew"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_u9TGsIodEeqL7JdXmRlyew" memberEnd="_u9Vi8IodEeqL7JdXmRlyew _u9Vi8YodEeqL7JdXmRlyew">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_u9U74IodEeqL7JdXmRlyew" source="org.eclipse.papyrus">
+        <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_u9U74YodEeqL7JdXmRlyew" key="nature" value="UML_Nature"/>
+      </eAnnotations>
+      <ownedEnd xmi:type="uml:Property" xmi:id="_u9Vi8IodEeqL7JdXmRlyew" name="deautenticazione" type="_lSnKEIodEeqL7JdXmRlyew" association="_u9TGsIodEeqL7JdXmRlyew"/>
+      <ownedEnd xmi:type="uml:Property" xmi:id="_u9Vi8YodEeqL7JdXmRlyew" name="utente" type="_ZjfQgIodEeqL7JdXmRlyew" association="_u9TGsIodEeqL7JdXmRlyew"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_DrwSwIoeEeqL7JdXmRlyew" memberEnd="_Drz9IIoeEeqL7JdXmRlyew _Drz9IYoeEeqL7JdXmRlyew">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_DryvAIoeEeqL7JdXmRlyew" source="org.eclipse.papyrus">
+        <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_DrzWEIoeEeqL7JdXmRlyew" key="nature" value="UML_Nature"/>
+      </eAnnotations>
+      <ownedEnd xmi:type="uml:Property" xmi:id="_Drz9IIoeEeqL7JdXmRlyew" name="registrazione" type="_A82cgIoeEeqL7JdXmRlyew" association="_DrwSwIoeEeqL7JdXmRlyew"/>
+      <ownedEnd xmi:type="uml:Property" xmi:id="_Drz9IYoeEeqL7JdXmRlyew" name="cliente" type="_PW3rgIodEeqL7JdXmRlyew" association="_DrwSwIoeEeqL7JdXmRlyew"/>
+    </packagedElement>
+  </packagedElement>
+</uml:Model>
