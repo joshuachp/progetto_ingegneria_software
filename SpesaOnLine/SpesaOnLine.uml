@@ -20,6 +20,10 @@
           <extend xmi:type="uml:Extend" xmi:id="_PuazYIoeEeqL7JdXmRlyew" extendedCase="_A82cgIoeEeqL7JdXmRlyew" extensionLocation="_PucBgIoeEeqL7JdXmRlyew"/>
         </packagedElement>
       </packagedElement>
+      <packagedElement xmi:type="uml:Package" xmi:id="_nnSQgIofEeqL7JdXmRlyew" name="Spesa">
+        <packagedElement xmi:type="uml:UseCase" xmi:id="_nsII4IpOEeqxxJ07F9VUAA" name="Visualizzazione catalogo"/>
+        <packagedElement xmi:type="uml:UseCase" xmi:id="_oKgG8IpOEeqxxJ07F9VUAA" name="Visualizzazione carrello"/>
+      </packagedElement>
     </packagedElement>
     <packagedElement xmi:type="uml:Actor" xmi:id="_PW3rgIodEeqL7JdXmRlyew" name="Cliente">
       <generalization xmi:type="uml:Generalization" xmi:id="_fFeSYIodEeqL7JdXmRlyew" general="_ZjfQgIodEeqL7JdXmRlyew"/>
@@ -47,6 +51,48 @@
       </eAnnotations>
       <ownedEnd xmi:type="uml:Property" xmi:id="_Drz9IIoeEeqL7JdXmRlyew" name="registrazione" type="_A82cgIoeEeqL7JdXmRlyew" association="_DrwSwIoeEeqL7JdXmRlyew"/>
       <ownedEnd xmi:type="uml:Property" xmi:id="_Drz9IYoeEeqL7JdXmRlyew" name="cliente" type="_PW3rgIodEeqL7JdXmRlyew" association="_DrwSwIoeEeqL7JdXmRlyew"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Package" xmi:id="_VP0JIIpPEeqxxJ07F9VUAA" name="Profilo">
+      <packagedElement xmi:type="uml:UseCase" xmi:id="_b7NqIIpPEeqxxJ07F9VUAA" name="Visualizzazione profilo">
+        <include xmi:type="uml:Include" xmi:id="_9zNfUIpPEeqxxJ07F9VUAA" addition="_pKJJkIpPEeqxxJ07F9VUAA"/>
+        <include xmi:type="uml:Include" xmi:id="_-YdhcIpPEeqxxJ07F9VUAA" addition="_s_AiUIpPEeqxxJ07F9VUAA"/>
+        <include xmi:type="uml:Include" xmi:id="__hhbQIpPEeqxxJ07F9VUAA" addition="_xEyr8IpPEeqxxJ07F9VUAA"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:UseCase" xmi:id="_pKJJkIpPEeqxxJ07F9VUAA" name="Modifica dati anagrafici"/>
+      <packagedElement xmi:type="uml:UseCase" xmi:id="_s_AiUIpPEeqxxJ07F9VUAA" name="Modifica carta fedeltà"/>
+      <packagedElement xmi:type="uml:UseCase" xmi:id="_xEyr8IpPEeqxxJ07F9VUAA" name="Visualizzazione storico spese">
+        <include xmi:type="uml:Include" xmi:id="_HIhB0IpQEeqxxJ07F9VUAA" addition="_BiX4sIpQEeqxxJ07F9VUAA"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:UseCase" xmi:id="_BiX4sIpQEeqxxJ07F9VUAA" name="Visualizzazione spesa"/>
+      <packagedElement xmi:type="uml:UseCase" xmi:id="_IFPv0IpQEeqxxJ07F9VUAA" name="Visualizzazione stato spesa">
+        <generalization xmi:type="uml:Generalization" xmi:id="_Mv5hEIpQEeqxxJ07F9VUAA" general="_BiX4sIpQEeqxxJ07F9VUAA"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:UseCase" xmi:id="_IayiAIpQEeqxxJ07F9VUAA" name="Visualizzazione prodotti acquisstati">
+        <generalization xmi:type="uml:Generalization" xmi:id="_QI6EQIpQEeqxxJ07F9VUAA" general="_BiX4sIpQEeqxxJ07F9VUAA"/>
+        <include xmi:type="uml:Include" xmi:id="_VdSvAIpQEeqxxJ07F9VUAA" addition="_SmC1EIpQEeqxxJ07F9VUAA"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:UseCase" xmi:id="_SmC1EIpQEeqxxJ07F9VUAA" name="Visualizzazione prodotto"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_3O42sIpPEeqxxJ07F9VUAA" memberEnd="_3PD10IpPEeqxxJ07F9VUAA _3PEc4IpPEeqxxJ07F9VUAA">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_3PALcIpPEeqxxJ07F9VUAA" source="org.eclipse.papyrus">
+        <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_3PBZkIpPEeqxxJ07F9VUAA" key="nature" value="UML_Nature"/>
+      </eAnnotations>
+      <ownedEnd xmi:type="uml:Property" xmi:id="_3PD10IpPEeqxxJ07F9VUAA" name="visualizzazione catalogo" type="_nsII4IpOEeqxxJ07F9VUAA" association="_3O42sIpPEeqxxJ07F9VUAA"/>
+      <ownedEnd xmi:type="uml:Property" xmi:id="_3PEc4IpPEeqxxJ07F9VUAA" name="cliente" type="_PW3rgIodEeqL7JdXmRlyew" association="_3O42sIpPEeqxxJ07F9VUAA"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_38dHUIpPEeqxxJ07F9VUAA" memberEnd="_38duYopPEeqxxJ07F9VUAA _38eVcIpPEeqxxJ07F9VUAA">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_38duYIpPEeqxxJ07F9VUAA" source="org.eclipse.papyrus">
+        <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_38duYYpPEeqxxJ07F9VUAA" key="nature" value="UML_Nature"/>
+      </eAnnotations>
+      <ownedEnd xmi:type="uml:Property" xmi:id="_38duYopPEeqxxJ07F9VUAA" name="visualizzazione profilo" type="_b7NqIIpPEeqxxJ07F9VUAA" association="_38dHUIpPEeqxxJ07F9VUAA"/>
+      <ownedEnd xmi:type="uml:Property" xmi:id="_38eVcIpPEeqxxJ07F9VUAA" name="cliente" type="_PW3rgIodEeqL7JdXmRlyew" association="_38dHUIpPEeqxxJ07F9VUAA"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_4rnTYIpPEeqxxJ07F9VUAA" memberEnd="_4rohgopPEeqxxJ07F9VUAA _4rpIkIpPEeqxxJ07F9VUAA">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_4rohgIpPEeqxxJ07F9VUAA" source="org.eclipse.papyrus">
+        <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_4rohgYpPEeqxxJ07F9VUAA" key="nature" value="UML_Nature"/>
+      </eAnnotations>
+      <ownedEnd xmi:type="uml:Property" xmi:id="_4rohgopPEeqxxJ07F9VUAA" name="visualizzazione carrello" type="_oKgG8IpOEeqxxJ07F9VUAA" association="_4rnTYIpPEeqxxJ07F9VUAA"/>
+      <ownedEnd xmi:type="uml:Property" xmi:id="_4rpIkIpPEeqxxJ07F9VUAA" name="cliente" type="_PW3rgIodEeqL7JdXmRlyew" association="_4rnTYIpPEeqxxJ07F9VUAA"/>
     </packagedElement>
   </packagedElement>
 </uml:Model>
