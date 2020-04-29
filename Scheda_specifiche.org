@@ -19,6 +19,7 @@ Ha eventualmente associata una tessera fedeltà per la raccolta punti. Ogni tess
 Ogni utente registrato accede con:
 - Email
 - Password
+*** De autenticazione
 ** Catalogo
 L'accesso deve avvenire dopo l'autenticazione.
 *** Selezione reparto
