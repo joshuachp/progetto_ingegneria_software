@@ -1,44 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_uemVUIoZEeqL7JdXmRlyew" name="SpesaOnLine">
+<uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_uemVUIoZEeqL7JdXmRlyew" name="SpesaOnLine">
   <packageImport xmi:type="uml:PackageImport" xmi:id="_utee0IoZEeqL7JdXmRlyew">
     <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#_0"/>
   </packageImport>
-  <packagedElement xmi:type="uml:Package" xmi:id="_2Lw1UIoZEeqL7JdXmRlyew" name="UseCases">
-    <packagedElement xmi:type="uml:Actor" xmi:id="_AUFwMIoaEeqL7JdXmRlyew" name="Cliente">
-      <generalization xmi:type="uml:Generalization" xmi:id="_jWWZEIoaEeqL7JdXmRlyew" general="_c8abgIoaEeqL7JdXmRlyew"/>
-    </packagedElement>
-    <packagedElement xmi:type="uml:Actor" xmi:id="_DuZT4IoaEeqL7JdXmRlyew" name="Responsabile Reparto">
-      <generalization xmi:type="uml:Generalization" xmi:id="_lExpwIoaEeqL7JdXmRlyew" general="_c8abgIoaEeqL7JdXmRlyew"/>
-    </packagedElement>
-    <packagedElement xmi:type="uml:Package" xmi:id="_LkuW8IoaEeqL7JdXmRlyew" name="Applicazione">
-      <packagedElement xmi:type="uml:Package" xmi:id="_YxlZ0IoaEeqL7JdXmRlyew" name="Autenticazione">
-        <packagedElement xmi:type="uml:UseCase" xmi:id="_qzUg8IoaEeqL7JdXmRlyew" name="Autenticazione"/>
-        <packagedElement xmi:type="uml:Actor" xmi:id="_c8abgIoaEeqL7JdXmRlyew" name="Utente"/>
-      </packagedElement>
-      <packagedElement xmi:type="uml:Package" xmi:id="_0CDhYIoaEeqL7JdXmRlyew" name="Registrazione">
-        <packagedElement xmi:type="uml:UseCase" xmi:id="_4kX2AIoaEeqL7JdXmRlyew" name="Registrazione">
-          <extensionPoint xmi:type="uml:ExtensionPoint" xmi:id="_zBYSEIobEeqL7JdXmRlyew" name="ExtensionPoint2"/>
-          <include xmi:type="uml:Include" xmi:id="_ikjTQIobEeqL7JdXmRlyew" addition="_b5AoUIobEeqL7JdXmRlyew"/>
-        </packagedElement>
-        <packagedElement xmi:type="uml:UseCase" xmi:id="_b5AoUIobEeqL7JdXmRlyew" name="Inserimento dati anagrafici"/>
-        <packagedElement xmi:type="uml:UseCase" xmi:id="_njFCwIobEeqL7JdXmRlyew" name="Inserimento carta fedeltà">
-          <extend xmi:type="uml:Extend" xmi:id="_zBV10IobEeqL7JdXmRlyew" extendedCase="_4kX2AIoaEeqL7JdXmRlyew" extensionLocation="_zBYSEIobEeqL7JdXmRlyew"/>
-        </packagedElement>
-      </packagedElement>
-    </packagedElement>
-    <packagedElement xmi:type="uml:Association" xmi:id="_tNPlsIoaEeqL7JdXmRlyew" memberEnd="_tOAasIoaEeqL7JdXmRlyew _tOBBwIoaEeqL7JdXmRlyew">
-      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_tNRa4IoaEeqL7JdXmRlyew" source="org.eclipse.papyrus">
-        <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_tNRa4YoaEeqL7JdXmRlyew" key="nature" value="UML_Nature"/>
-      </eAnnotations>
-      <ownedEnd xmi:type="uml:Property" xmi:id="_tOAasIoaEeqL7JdXmRlyew" name="autenticazione" type="_qzUg8IoaEeqL7JdXmRlyew" association="_tNPlsIoaEeqL7JdXmRlyew"/>
-      <ownedEnd xmi:type="uml:Property" xmi:id="_tOBBwIoaEeqL7JdXmRlyew" name="utente" type="_c8abgIoaEeqL7JdXmRlyew" association="_tNPlsIoaEeqL7JdXmRlyew"/>
-    </packagedElement>
-    <packagedElement xmi:type="uml:Association" xmi:id="_QQAk4IobEeqL7JdXmRlyew" memberEnd="_QQHSkIobEeqL7JdXmRlyew _QQHSkYobEeqL7JdXmRlyew">
-      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_QQCaEIobEeqL7JdXmRlyew" source="org.eclipse.papyrus">
-        <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_QQGrgIobEeqL7JdXmRlyew" key="nature" value="UML_Nature"/>
-      </eAnnotations>
-      <ownedEnd xmi:type="uml:Property" xmi:id="_QQHSkIobEeqL7JdXmRlyew" name="registrazione" type="_4kX2AIoaEeqL7JdXmRlyew" association="_QQAk4IobEeqL7JdXmRlyew"/>
-      <ownedEnd xmi:type="uml:Property" xmi:id="_QQHSkYobEeqL7JdXmRlyew" name="cliente" type="_AUFwMIoaEeqL7JdXmRlyew" association="_QQAk4IobEeqL7JdXmRlyew"/>
-    </packagedElement>
-  </packagedElement>
+  <packagedElement xmi:type="uml:Package" xmi:id="_2Lw1UIoZEeqL7JdXmRlyew" name="UseCases"/>
 </uml:Model>
