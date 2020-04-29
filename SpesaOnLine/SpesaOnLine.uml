@@ -21,8 +21,84 @@
         </packagedElement>
       </packagedElement>
       <packagedElement xmi:type="uml:Package" xmi:id="_nnSQgIofEeqL7JdXmRlyew" name="Spesa">
-        <packagedElement xmi:type="uml:UseCase" xmi:id="_nsII4IpOEeqxxJ07F9VUAA" name="Visualizzazione catalogo"/>
-        <packagedElement xmi:type="uml:UseCase" xmi:id="_oKgG8IpOEeqxxJ07F9VUAA" name="Visualizzazione carrello"/>
+        <packagedElement xmi:type="uml:UseCase" xmi:id="_nsII4IpOEeqxxJ07F9VUAA" name="Visualizzazione catalogo">
+          <include xmi:type="uml:Include" xmi:id="__gBfEIpSEeq4YZ6stDk94w" addition="_2gEhgIpSEeq4YZ6stDk94w"/>
+        </packagedElement>
+        <packagedElement xmi:type="uml:UseCase" xmi:id="_oKgG8IpOEeqxxJ07F9VUAA" name="Visualizzazione carrello">
+          <include xmi:type="uml:Include" xmi:id="_k2iCgIpTEeq4YZ6stDk94w" addition="_iMA9AIpTEeq4YZ6stDk94w"/>
+          <include xmi:type="uml:Include" xmi:id="_1ArV4IpTEeq4YZ6stDk94w" addition="_yqKKcIpTEeq4YZ6stDk94w"/>
+          <include xmi:type="uml:Include" xmi:id="_PebAAIpUEeq4YZ6stDk94w" addition="_BaWoUIpUEeq4YZ6stDk94w"/>
+        </packagedElement>
+        <packagedElement xmi:type="uml:UseCase" xmi:id="_2gEhgIpSEeq4YZ6stDk94w" name="Selezione reparto">
+          <include xmi:type="uml:Include" xmi:id="_JrxhYIpTEeq4YZ6stDk94w" addition="_E1cEkIpTEeq4YZ6stDk94w"/>
+          <include xmi:type="uml:Include" xmi:id="_O86q4IpTEeq4YZ6stDk94w" addition="_M0PHIIpTEeq4YZ6stDk94w"/>
+        </packagedElement>
+        <packagedElement xmi:type="uml:UseCase" xmi:id="_E1cEkIpTEeq4YZ6stDk94w" name="Visualizzazione prodotto">
+          <extensionPoint xmi:type="uml:ExtensionPoint" xmi:id="_YuBYkIpTEeq4YZ6stDk94w" name="ExtensionPoint1"/>
+          <extensionPoint xmi:type="uml:ExtensionPoint" xmi:id="_QLSQkYpVEeq4YZ6stDk94w" name="ExtensionPoint2"/>
+        </packagedElement>
+        <packagedElement xmi:type="uml:UseCase" xmi:id="_M0PHIIpTEeq4YZ6stDk94w" name="Aggiunta prodotto al carrello">
+          <extend xmi:type="uml:Extend" xmi:id="_YuAxgIpTEeq4YZ6stDk94w" extendedCase="_E1cEkIpTEeq4YZ6stDk94w" extensionLocation="_YuBYkIpTEeq4YZ6stDk94w"/>
+          <include xmi:type="uml:Include" xmi:id="_evAqoIpTEeq4YZ6stDk94w" addition="_bpiugIpTEeq4YZ6stDk94w"/>
+        </packagedElement>
+        <packagedElement xmi:type="uml:UseCase" xmi:id="_bpiugIpTEeq4YZ6stDk94w" name="Controllo disponibilità prodotto"/>
+        <packagedElement xmi:type="uml:UseCase" xmi:id="_iMA9AIpTEeq4YZ6stDk94w" name="Modifica quantità prodotti"/>
+        <packagedElement xmi:type="uml:UseCase" xmi:id="_yqKKcIpTEeq4YZ6stDk94w" name="Rimuovi prodotto"/>
+        <packagedElement xmi:type="uml:UseCase" xmi:id="_BaWoUIpUEeq4YZ6stDk94w" name="Conferma spesa">
+          <extensionPoint xmi:type="uml:ExtensionPoint" xmi:id="_imh5UIpUEeq4YZ6stDk94w" name="ExtensionPoint3"/>
+          <include xmi:type="uml:Include" xmi:id="_YsaZkIpUEeq4YZ6stDk94w" addition="_T14IcIpUEeq4YZ6stDk94w"/>
+          <include xmi:type="uml:Include" xmi:id="_b25YkIpUEeq4YZ6stDk94w" addition="_Gbb8kIpUEeq4YZ6stDk94w"/>
+        </packagedElement>
+        <packagedElement xmi:type="uml:UseCase" xmi:id="_Gbb8kIpUEeq4YZ6stDk94w" name="Selezione data di consegna"/>
+        <packagedElement xmi:type="uml:UseCase" xmi:id="_K8MyAIpUEeq4YZ6stDk94w" name="Accredito punti fedeltà">
+          <extend xmi:type="uml:Extend" xmi:id="_imhSQIpUEeq4YZ6stDk94w" extendedCase="_BaWoUIpUEeq4YZ6stDk94w" extensionLocation="_imh5UIpUEeq4YZ6stDk94w"/>
+        </packagedElement>
+        <packagedElement xmi:type="uml:UseCase" xmi:id="_T14IcIpUEeq4YZ6stDk94w" name="Pagamento"/>
+        <packagedElement xmi:type="uml:UseCase" xmi:id="_mb62gIpUEeq4YZ6stDk94w" name="Carta di credito">
+          <generalization xmi:type="uml:Generalization" xmi:id="_uEnGMIpUEeq4YZ6stDk94w" general="_T14IcIpUEeq4YZ6stDk94w"/>
+        </packagedElement>
+        <packagedElement xmi:type="uml:UseCase" xmi:id="_oF-kkIpUEeq4YZ6stDk94w" name="Paypal">
+          <generalization xmi:type="uml:Generalization" xmi:id="_vwc88IpUEeq4YZ6stDk94w" general="_T14IcIpUEeq4YZ6stDk94w"/>
+        </packagedElement>
+        <packagedElement xmi:type="uml:UseCase" xmi:id="_pZh3IIpUEeq4YZ6stDk94w" name="Alla consegna">
+          <generalization xmi:type="uml:Generalization" xmi:id="_yUAe0IpUEeq4YZ6stDk94w" general="_T14IcIpUEeq4YZ6stDk94w"/>
+        </packagedElement>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Package" xmi:id="_dp5KwIpVEeq4YZ6stDk94w" name="GestioneCatalogo">
+        <packagedElement xmi:type="uml:UseCase" xmi:id="_uK9JUIpVEeq4YZ6stDk94w" name="Visualizza catologo">
+          <include xmi:type="uml:Include" xmi:id="_A_3Z0IpWEeq4YZ6stDk94w" addition="_wgpOUIpVEeq4YZ6stDk94w"/>
+          <include xmi:type="uml:Include" xmi:id="_Cgh7UIpWEeq4YZ6stDk94w" addition="_yc6twIpVEeq4YZ6stDk94w"/>
+        </packagedElement>
+        <packagedElement xmi:type="uml:UseCase" xmi:id="_wgpOUIpVEeq4YZ6stDk94w" name="Visualizza prodotto">
+          <include xmi:type="uml:Include" xmi:id="_DYMjIIpWEeq4YZ6stDk94w" addition="_03UToIpVEeq4YZ6stDk94w"/>
+        </packagedElement>
+        <packagedElement xmi:type="uml:UseCase" xmi:id="_yc6twIpVEeq4YZ6stDk94w" name="Aggiungi prodotto"/>
+        <packagedElement xmi:type="uml:UseCase" xmi:id="_03UToIpVEeq4YZ6stDk94w" name="Modifica prodotto"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Package" xmi:id="_nWB44IpVEeq4YZ6stDk94w" name="GestioneSpese">
+        <packagedElement xmi:type="uml:UseCase" xmi:id="_dRHo8IpWEeq4YZ6stDk94w" name="Visualizza storico spese generale">
+          <include xmi:type="uml:Include" xmi:id="_CuOjoIpXEeq4YZ6stDk94w" addition="_BiX4sIpQEeqxxJ07F9VUAA"/>
+        </packagedElement>
+        <packagedElement xmi:type="uml:UseCase" xmi:id="_BiX4sIpQEeqxxJ07F9VUAA" name="Visualizzazione spesa"/>
+        <packagedElement xmi:type="uml:UseCase" xmi:id="_IFPv0IpQEeqxxJ07F9VUAA" name="Visualizzazione stato spesa">
+          <generalization xmi:type="uml:Generalization" xmi:id="_Mv5hEIpQEeqxxJ07F9VUAA" general="_BiX4sIpQEeqxxJ07F9VUAA"/>
+        </packagedElement>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Package" xmi:id="_VP0JIIpPEeqxxJ07F9VUAA" name="Profilo">
+        <packagedElement xmi:type="uml:UseCase" xmi:id="_b7NqIIpPEeqxxJ07F9VUAA" name="Visualizzazione profilo">
+          <include xmi:type="uml:Include" xmi:id="_9zNfUIpPEeqxxJ07F9VUAA" addition="_pKJJkIpPEeqxxJ07F9VUAA"/>
+          <include xmi:type="uml:Include" xmi:id="_-YdhcIpPEeqxxJ07F9VUAA" addition="_s_AiUIpPEeqxxJ07F9VUAA"/>
+        </packagedElement>
+        <packagedElement xmi:type="uml:UseCase" xmi:id="_pKJJkIpPEeqxxJ07F9VUAA" name="Modifica dati anagrafici"/>
+        <packagedElement xmi:type="uml:UseCase" xmi:id="_s_AiUIpPEeqxxJ07F9VUAA" name="Modifica carta fedeltà"/>
+        <packagedElement xmi:type="uml:UseCase" xmi:id="_xEyr8IpPEeqxxJ07F9VUAA" name="Visualizzazione storico spese">
+          <include xmi:type="uml:Include" xmi:id="_HIhB0IpQEeqxxJ07F9VUAA" addition="_BiX4sIpQEeqxxJ07F9VUAA"/>
+        </packagedElement>
+        <packagedElement xmi:type="uml:UseCase" xmi:id="_IayiAIpQEeqxxJ07F9VUAA" name="Visualizzazione prodotti acquisstati">
+          <generalization xmi:type="uml:Generalization" xmi:id="_QI6EQIpQEeqxxJ07F9VUAA" general="_BiX4sIpQEeqxxJ07F9VUAA"/>
+          <include xmi:type="uml:Include" xmi:id="_VdSvAIpQEeqxxJ07F9VUAA" addition="_SmC1EIpQEeqxxJ07F9VUAA"/>
+        </packagedElement>
+        <packagedElement xmi:type="uml:UseCase" xmi:id="_SmC1EIpQEeqxxJ07F9VUAA" name="Visualizzazione prodotto"/>
       </packagedElement>
     </packagedElement>
     <packagedElement xmi:type="uml:Actor" xmi:id="_PW3rgIodEeqL7JdXmRlyew" name="Cliente">
@@ -52,26 +128,6 @@
       <ownedEnd xmi:type="uml:Property" xmi:id="_Drz9IIoeEeqL7JdXmRlyew" name="registrazione" type="_A82cgIoeEeqL7JdXmRlyew" association="_DrwSwIoeEeqL7JdXmRlyew"/>
       <ownedEnd xmi:type="uml:Property" xmi:id="_Drz9IYoeEeqL7JdXmRlyew" name="cliente" type="_PW3rgIodEeqL7JdXmRlyew" association="_DrwSwIoeEeqL7JdXmRlyew"/>
     </packagedElement>
-    <packagedElement xmi:type="uml:Package" xmi:id="_VP0JIIpPEeqxxJ07F9VUAA" name="Profilo">
-      <packagedElement xmi:type="uml:UseCase" xmi:id="_b7NqIIpPEeqxxJ07F9VUAA" name="Visualizzazione profilo">
-        <include xmi:type="uml:Include" xmi:id="_9zNfUIpPEeqxxJ07F9VUAA" addition="_pKJJkIpPEeqxxJ07F9VUAA"/>
-        <include xmi:type="uml:Include" xmi:id="_-YdhcIpPEeqxxJ07F9VUAA" addition="_s_AiUIpPEeqxxJ07F9VUAA"/>
-      </packagedElement>
-      <packagedElement xmi:type="uml:UseCase" xmi:id="_pKJJkIpPEeqxxJ07F9VUAA" name="Modifica dati anagrafici"/>
-      <packagedElement xmi:type="uml:UseCase" xmi:id="_s_AiUIpPEeqxxJ07F9VUAA" name="Modifica carta fedeltà"/>
-      <packagedElement xmi:type="uml:UseCase" xmi:id="_xEyr8IpPEeqxxJ07F9VUAA" name="Visualizzazione storico spese">
-        <include xmi:type="uml:Include" xmi:id="_HIhB0IpQEeqxxJ07F9VUAA" addition="_BiX4sIpQEeqxxJ07F9VUAA"/>
-      </packagedElement>
-      <packagedElement xmi:type="uml:UseCase" xmi:id="_BiX4sIpQEeqxxJ07F9VUAA" name="Visualizzazione spesa"/>
-      <packagedElement xmi:type="uml:UseCase" xmi:id="_IFPv0IpQEeqxxJ07F9VUAA" name="Visualizzazione stato spesa">
-        <generalization xmi:type="uml:Generalization" xmi:id="_Mv5hEIpQEeqxxJ07F9VUAA" general="_BiX4sIpQEeqxxJ07F9VUAA"/>
-      </packagedElement>
-      <packagedElement xmi:type="uml:UseCase" xmi:id="_IayiAIpQEeqxxJ07F9VUAA" name="Visualizzazione prodotti acquisstati">
-        <generalization xmi:type="uml:Generalization" xmi:id="_QI6EQIpQEeqxxJ07F9VUAA" general="_BiX4sIpQEeqxxJ07F9VUAA"/>
-        <include xmi:type="uml:Include" xmi:id="_VdSvAIpQEeqxxJ07F9VUAA" addition="_SmC1EIpQEeqxxJ07F9VUAA"/>
-      </packagedElement>
-      <packagedElement xmi:type="uml:UseCase" xmi:id="_SmC1EIpQEeqxxJ07F9VUAA" name="Visualizzazione prodotto"/>
-    </packagedElement>
     <packagedElement xmi:type="uml:Association" xmi:id="_3O42sIpPEeqxxJ07F9VUAA" memberEnd="_3PD10IpPEeqxxJ07F9VUAA _3PEc4IpPEeqxxJ07F9VUAA">
       <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_3PALcIpPEeqxxJ07F9VUAA" source="org.eclipse.papyrus">
         <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_3PBZkIpPEeqxxJ07F9VUAA" key="nature" value="UML_Nature"/>
@@ -99,6 +155,20 @@
       </eAnnotations>
       <ownedEnd xmi:type="uml:Property" xmi:id="_CM-fcopREeqxxJ07F9VUAA" name="visualizzazione storico spese" type="_xEyr8IpPEeqxxJ07F9VUAA" association="_CM9RUIpREeqxxJ07F9VUAA"/>
       <ownedEnd xmi:type="uml:Property" xmi:id="_CM_GgIpREeqxxJ07F9VUAA" name="cliente" type="_PW3rgIodEeqL7JdXmRlyew" association="_CM9RUIpREeqxxJ07F9VUAA"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_RR-WYIpWEeq4YZ6stDk94w" memberEnd="_RR-9copWEeq4YZ6stDk94w _RR_kgIpWEeq4YZ6stDk94w">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_RR-9cIpWEeq4YZ6stDk94w" source="org.eclipse.papyrus">
+        <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_RR-9cYpWEeq4YZ6stDk94w" key="nature" value="UML_Nature"/>
+      </eAnnotations>
+      <ownedEnd xmi:type="uml:Property" xmi:id="_RR-9copWEeq4YZ6stDk94w" name="visualizza catologo" type="_uK9JUIpVEeq4YZ6stDk94w" association="_RR-WYIpWEeq4YZ6stDk94w"/>
+      <ownedEnd xmi:type="uml:Property" xmi:id="_RR_kgIpWEeq4YZ6stDk94w" name="responsabile reparto" type="_QobaAIodEeqL7JdXmRlyew" association="_RR-WYIpWEeq4YZ6stDk94w"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_Ak9xEIpXEeq4YZ6stDk94w" memberEnd="_Ak-YIYpXEeq4YZ6stDk94w _Ak-YIopXEeq4YZ6stDk94w">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_Ak9xEYpXEeq4YZ6stDk94w" source="org.eclipse.papyrus">
+        <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_Ak-YIIpXEeq4YZ6stDk94w" key="nature" value="UML_Nature"/>
+      </eAnnotations>
+      <ownedEnd xmi:type="uml:Property" xmi:id="_Ak-YIYpXEeq4YZ6stDk94w" name="visualizza storico spese generale" type="_dRHo8IpWEeq4YZ6stDk94w" association="_Ak9xEIpXEeq4YZ6stDk94w"/>
+      <ownedEnd xmi:type="uml:Property" xmi:id="_Ak-YIopXEeq4YZ6stDk94w" name="responsabile reparto" type="_QobaAIodEeqL7JdXmRlyew" association="_Ak9xEIpXEeq4YZ6stDk94w"/>
     </packagedElement>
   </packagedElement>
 </uml:Model>
