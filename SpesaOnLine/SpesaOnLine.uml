@@ -83,11 +83,17 @@
         <packagedElement xmi:type="uml:UseCase" xmi:id="_dRHo8IpWEeq4YZ6stDk94w" name="Visualizza storico spese generale">
           <include xmi:type="uml:Include" xmi:id="_CuOjoIpXEeq4YZ6stDk94w" addition="_BiX4sIpQEeqxxJ07F9VUAA"/>
         </packagedElement>
-        <packagedElement xmi:type="uml:UseCase" xmi:id="_BiX4sIpQEeqxxJ07F9VUAA" name="Visualizzazione spesa"/>
+        <packagedElement xmi:type="uml:UseCase" xmi:id="_BiX4sIpQEeqxxJ07F9VUAA" name="Visualizzazione spesa">
+          <include xmi:type="uml:Include" xmi:id="_1nnz8Iq9EeqA9oyOZ95MGg" addition="_w__hgIq9EeqA9oyOZ95MGg"/>
+        </packagedElement>
         <packagedElement xmi:type="uml:UseCase" xmi:id="_IFPv0IpQEeqxxJ07F9VUAA" name="Visualizzazione stato spesa">
           <generalization xmi:type="uml:Generalization" xmi:id="_Mv5hEIpQEeqxxJ07F9VUAA" general="_BiX4sIpQEeqxxJ07F9VUAA"/>
         </packagedElement>
         <packagedElement xmi:type="uml:Interaction" xmi:id="_wFs3YIpYEeq4YZ6stDk94w" name="GestioneSpese"/>
+        <packagedElement xmi:type="uml:UseCase" xmi:id="_jmvBYIq9EeqA9oyOZ95MGg" name="Visualizza dettagli spesa">
+          <generalization xmi:type="uml:Generalization" xmi:id="_se0cYIq9EeqA9oyOZ95MGg" general="_BiX4sIpQEeqxxJ07F9VUAA"/>
+        </packagedElement>
+        <packagedElement xmi:type="uml:UseCase" xmi:id="_w__hgIq9EeqA9oyOZ95MGg" name="Modifica stato spesa"/>
       </packagedElement>
       <packagedElement xmi:type="uml:Package" xmi:id="_VP0JIIpPEeqxxJ07F9VUAA" name="Profilo">
         <packagedElement xmi:type="uml:UseCase" xmi:id="_b7NqIIpPEeqxxJ07F9VUAA" name="Visualizzazione profilo">
