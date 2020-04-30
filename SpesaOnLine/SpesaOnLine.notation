@@ -1197,7 +1197,7 @@
     </styles>
     <element xmi:type="uml:Interaction" href="SpesaOnLine.uml#_KHVpwIpYEeq4YZ6stDk94w"/>
   </notation:Diagram>
-  <notation:Diagram xmi:id="_dq0QcIpYEeq4YZ6stDk94w" type="PapyrusUMLSequenceDiagram" name="registrazioneSequenceDiagram" measurementUnit="Pixel">
+  <notation:Diagram xmi:id="_dq0QcIpYEeq4YZ6stDk94w" type="PapyrusUMLSequenceDiagram" name="RegistrazioneSequenceDiagram" measurementUnit="Pixel">
     <children xmi:type="notation:Shape" xmi:id="_dq0QcYpYEeq4YZ6stDk94w" type="Interaction_Shape">
       <children xmi:type="notation:DecorationNode" xmi:id="_dq0QcopYEeq4YZ6stDk94w" type="Interaction_NameLabel"/>
       <children xmi:type="notation:BasicCompartment" xmi:id="_dq0Qc4pYEeq4YZ6stDk94w" type="Interaction_SubfragmentCompartment">
