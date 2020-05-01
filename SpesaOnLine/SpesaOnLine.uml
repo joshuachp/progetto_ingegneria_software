@@ -9,7 +9,21 @@
         <packagedElement xmi:type="uml:Actor" xmi:id="_ZjfQgIodEeqL7JdXmRlyew" name="Utente"/>
         <packagedElement xmi:type="uml:UseCase" xmi:id="_jBjtcIodEeqL7JdXmRlyew" name="Autenticazione"/>
         <packagedElement xmi:type="uml:UseCase" xmi:id="_lSnKEIodEeqL7JdXmRlyew" name="Deautenticazione"/>
-        <packagedElement xmi:type="uml:Interaction" xmi:id="_KHVpwIpYEeq4YZ6stDk94w" name="Autenticazione"/>
+        <packagedElement xmi:type="uml:Interaction" xmi:id="_KHVpwIpYEeq4YZ6stDk94w" name="Autenticazione">
+          <ownedAttribute xmi:type="uml:Property" xmi:id="_YUvPEIrFEeqA9oyOZ95MGg" name="" type="_ZjfQgIodEeqL7JdXmRlyew"/>
+          <ownedAttribute xmi:type="uml:Property" xmi:id="_pHbJIIrFEeqA9oyOZ95MGg" name="" type="_jBjtcIodEeqL7JdXmRlyew"/>
+          <ownedAttribute xmi:type="uml:Property" xmi:id="_rPH1cIrFEeqA9oyOZ95MGg" name="" type="_lSnKEIodEeqL7JdXmRlyew"/>
+          <lifeline xmi:type="uml:Lifeline" xmi:id="_YUuA8IrFEeqA9oyOZ95MGg" name="" represents="_YUvPEIrFEeqA9oyOZ95MGg" coveredBy="_PucSMIrGEeqA9oyOZ95MGg _PvBhAIrGEeqA9oyOZ95MGg"/>
+          <lifeline xmi:type="uml:Lifeline" xmi:id="_pHZ7AIrFEeqA9oyOZ95MGg" name="" represents="_pHbJIIrFEeqA9oyOZ95MGg" coveredBy="_Puc5QIrGEeqA9oyOZ95MGg _PvA58IrGEeqA9oyOZ95MGg _Pu8ogIrGEeqA9oyOZ95MGg"/>
+          <lifeline xmi:type="uml:Lifeline" xmi:id="_rPGAQIrFEeqA9oyOZ95MGg" name="" represents="_rPH1cIrFEeqA9oyOZ95MGg"/>
+          <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_PucSMIrGEeqA9oyOZ95MGg" name="InvioCredenzialiSendEvent" covered="_YUuA8IrFEeqA9oyOZ95MGg" message="_PubEEIrGEeqA9oyOZ95MGg"/>
+          <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_Puc5QIrGEeqA9oyOZ95MGg" name="InvioCredenzialiReceiveEvent" covered="_pHZ7AIrFEeqA9oyOZ95MGg" message="_PubEEIrGEeqA9oyOZ95MGg"/>
+          <fragment xmi:type="uml:BehaviorExecutionSpecification" xmi:id="_Pu8ogIrGEeqA9oyOZ95MGg" name="Verifica credenziali" covered="_pHZ7AIrFEeqA9oyOZ95MGg" finish="_PvA58IrGEeqA9oyOZ95MGg" start="_Puc5QIrGEeqA9oyOZ95MGg"/>
+          <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_PvA58IrGEeqA9oyOZ95MGg" name="SessioneUtenteSendEvent" covered="_pHZ7AIrFEeqA9oyOZ95MGg" message="_PvAS4IrGEeqA9oyOZ95MGg"/>
+          <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_PvBhAIrGEeqA9oyOZ95MGg" name="SessioneUtenteReceiveEvent" covered="_YUuA8IrFEeqA9oyOZ95MGg" message="_PvAS4IrGEeqA9oyOZ95MGg"/>
+          <message xmi:type="uml:Message" xmi:id="_PubEEIrGEeqA9oyOZ95MGg" name="Invio credenziali" receiveEvent="_Puc5QIrGEeqA9oyOZ95MGg" sendEvent="_PucSMIrGEeqA9oyOZ95MGg"/>
+          <message xmi:type="uml:Message" xmi:id="_PvAS4IrGEeqA9oyOZ95MGg" name="Sessione utente" messageSort="reply" receiveEvent="_PvBhAIrGEeqA9oyOZ95MGg" sendEvent="_PvA58IrGEeqA9oyOZ95MGg"/>
+        </packagedElement>
       </packagedElement>
       <packagedElement xmi:type="uml:Package" xmi:id="_6OZngIodEeqL7JdXmRlyew" name="Registrazione">
         <packagedElement xmi:type="uml:UseCase" xmi:id="_A82cgIoeEeqL7JdXmRlyew" name="Registrazione">
