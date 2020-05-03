@@ -1185,6 +1185,28 @@
     <children xmi:type="notation:Shape" xmi:id="_Lb2loYpYEeq4YZ6stDk94w" type="Interaction_Shape">
       <children xmi:type="notation:DecorationNode" xmi:id="_Lb2loopYEeq4YZ6stDk94w" type="Interaction_NameLabel"/>
       <children xmi:type="notation:BasicCompartment" xmi:id="_Lb2lo4pYEeq4YZ6stDk94w" type="Interaction_SubfragmentCompartment">
+        <children xmi:type="notation:Shape" xmi:id="_YUwdMIrFEeqA9oyOZ95MGg" type="Lifeline_Shape">
+          <children xmi:type="notation:DecorationNode" xmi:id="_YUxEQIrFEeqA9oyOZ95MGg" type="Lifeline_NameLabel"/>
+          <element xmi:type="uml:Lifeline" href="SpesaOnLine.uml#_YUuA8IrFEeqA9oyOZ95MGg"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_YUwdMYrFEeqA9oyOZ95MGg" x="160" y="10"/>
+        </children>
+        <children xmi:type="notation:Shape" xmi:id="_pHc-UIrFEeqA9oyOZ95MGg" type="Lifeline_Shape">
+          <children xmi:type="notation:DecorationNode" xmi:id="_pHdlYIrFEeqA9oyOZ95MGg" type="Lifeline_NameLabel"/>
+          <children xmi:type="notation:Shape" xmi:id="_Pu92oIrGEeqA9oyOZ95MGg" type="BehaviorExecutionSpecification_Shape">
+            <children xmi:type="notation:DecorationNode" xmi:id="_Pu-dsIrGEeqA9oyOZ95MGg" type="BehaviorExecutionSpecification_Behavior">
+              <layoutConstraint xmi:type="notation:Location" xmi:id="_Pu-dsYrGEeqA9oyOZ95MGg" x="18" y="18"/>
+            </children>
+            <element xmi:type="uml:BehaviorExecutionSpecification" href="SpesaOnLine.uml#_Pu8ogIrGEeqA9oyOZ95MGg"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Pu92oYrGEeqA9oyOZ95MGg" x="40" y="47" width="20" height="100"/>
+          </children>
+          <element xmi:type="uml:Lifeline" href="SpesaOnLine.uml#_pHZ7AIrFEeqA9oyOZ95MGg"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_pHc-UYrFEeqA9oyOZ95MGg" x="354" y="10"/>
+        </children>
+        <children xmi:type="notation:Shape" xmi:id="_rPKRsIrFEeqA9oyOZ95MGg" type="Lifeline_Shape">
+          <children xmi:type="notation:DecorationNode" xmi:id="_rPKRsorFEeqA9oyOZ95MGg" type="Lifeline_NameLabel"/>
+          <element xmi:type="uml:Lifeline" href="SpesaOnLine.uml#_rPGAQIrFEeqA9oyOZ95MGg"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_rPKRsYrFEeqA9oyOZ95MGg" x="534" y="10"/>
+        </children>
         <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Lb2lpIpYEeq4YZ6stDk94w"/>
       </children>
       <element xmi:type="uml:Interaction" href="SpesaOnLine.uml#_KHVpwIpYEeq4YZ6stDk94w"/>
@@ -1196,6 +1218,32 @@
       <owner xmi:type="uml:Package" href="SpesaOnLine.uml#_UV0RwIodEeqL7JdXmRlyew"/>
     </styles>
     <element xmi:type="uml:Interaction" href="SpesaOnLine.uml#_KHVpwIpYEeq4YZ6stDk94w"/>
+    <edges xmi:type="notation:Connector" xmi:id="_PulcIIrGEeqA9oyOZ95MGg" type="Message_SynchEdge" source="_YUwdMIrFEeqA9oyOZ95MGg" target="_pHc-UIrFEeqA9oyOZ95MGg">
+      <children xmi:type="notation:DecorationNode" xmi:id="_PumDMIrGEeqA9oyOZ95MGg" type="Message_SynchNameLabel">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_PumDMYrGEeqA9oyOZ95MGg" x="1" y="-13"/>
+      </children>
+      <children xmi:type="notation:DecorationNode" xmi:id="_PumDMorGEeqA9oyOZ95MGg" type="Message_SynchStereotypeLabel">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_PumDM4rGEeqA9oyOZ95MGg" x="1" y="-33"/>
+      </children>
+      <styles xmi:type="notation:FontStyle" xmi:id="_PulcIYrGEeqA9oyOZ95MGg"/>
+      <element xmi:type="uml:Message" href="SpesaOnLine.uml#_PubEEIrGEeqA9oyOZ95MGg"/>
+      <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_PulcIorGEeqA9oyOZ95MGg" points="[0, 0, -194, 0]$[194, 0, 0, 0]"/>
+      <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_PuzekIrGEeqA9oyOZ95MGg" id="(0.5,0.06714285714285714)"/>
+      <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_Pu0FoIrGEeqA9oyOZ95MGg" id="(0.5,0.06714285714285714)"/>
+    </edges>
+    <edges xmi:type="notation:Connector" xmi:id="_PvCIEIrGEeqA9oyOZ95MGg" type="Message_ReplyEdge" source="_pHc-UIrFEeqA9oyOZ95MGg" target="_YUwdMIrFEeqA9oyOZ95MGg">
+      <children xmi:type="notation:DecorationNode" xmi:id="_PvCIE4rGEeqA9oyOZ95MGg" type="Message_ReplyNameLabel">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_PvCIFIrGEeqA9oyOZ95MGg" x="1" y="-13"/>
+      </children>
+      <children xmi:type="notation:DecorationNode" xmi:id="_PvCIFYrGEeqA9oyOZ95MGg" type="Message_ReplyStereotypeLabel">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_PvCIForGEeqA9oyOZ95MGg" x="1" y="-33"/>
+      </children>
+      <styles xmi:type="notation:FontStyle" xmi:id="_PvCIEYrGEeqA9oyOZ95MGg"/>
+      <element xmi:type="uml:Message" href="SpesaOnLine.uml#_PvAS4IrGEeqA9oyOZ95MGg"/>
+      <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_PvCIEorGEeqA9oyOZ95MGg" points="[0, 0, 194, 0]$[-194, 0, 0, 0]"/>
+      <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_PvCvIIrGEeqA9oyOZ95MGg" id="(0.5,0.21)"/>
+      <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_PvDWMIrGEeqA9oyOZ95MGg" id="(0.5,0.21)"/>
+    </edges>
   </notation:Diagram>
   <notation:Diagram xmi:id="_dq0QcIpYEeq4YZ6stDk94w" type="PapyrusUMLSequenceDiagram" name="RegistrazioneSequenceDiagram" measurementUnit="Pixel">
     <children xmi:type="notation:Shape" xmi:id="_dq0QcYpYEeq4YZ6stDk94w" type="Interaction_Shape">
