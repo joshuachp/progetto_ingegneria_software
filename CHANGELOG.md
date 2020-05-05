@@ -5,6 +5,7 @@
 ### Changed
 
 -   Completato sequence diagram dell'autenticazione. Incertezza sull'alternativa in quanto l'ok del messaggio di verifica credenziali dovrebbe terminare, ma continua nell'altra alternativa. Una possibilità è di aggiungere il verifica credenziali all'alternativa.
+-   Rinominato dei componenti autenticazione
 
 ## 03-05-2020
 
