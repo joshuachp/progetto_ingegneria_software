@@ -1,14 +1,16 @@
 # Changelog
 
+## 05-05-2020
+
+### Changed
+
+-   Completato sequence diagram dell'autenticazione. Incertezza sull'alternativa in quanto l'ok del messaggio di verifica credenziali dovrebbe terminare, ma continua nell'altra alternativa. Una possibilità è di aggiungere il verifica credenziali all'alternativa.
+
 ## 03-05-2020
 
 ### Added
 
 -   Aggiunto sequence diagram autenticazione
-
-### Changed
-
-### Removed
 
 ## 02-05-2020:
 
