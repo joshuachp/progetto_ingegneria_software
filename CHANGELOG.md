@@ -7,6 +7,7 @@
 -   Completato sequence diagram dell'autenticazione. Incertezza sull'alternativa in quanto l'ok del messaggio di verifica credenziali dovrebbe terminare, ma continua nell'altra alternativa. Una possibilità è di aggiungere il verifica credenziali all'alternativa.
 -   Rinominato dei componenti autenticazione
 - Utilizzo di gurdie nel alt Fragment
+- Aggiunto include da visualizza prodotto a modifica quantità
 
 ## 03-05-2020
 
