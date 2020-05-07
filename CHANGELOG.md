@@ -8,6 +8,7 @@
 - Aggiunto sequence diagram effettua spesa
 - Aggiunto sequence diagram conferma spesa
 - Proposta activity diagram autenticazione
+- Proposta activity diagram registrazione
 
 ## Changed
 
