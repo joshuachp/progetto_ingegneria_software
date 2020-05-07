@@ -1,0 +1,5 @@
+#+TITLE: Note
+* Note
+** Sequence diagram
+*** Effettua spesa
+Serve dire che è sottinteso che il cliente è autenticato e sta visualizzando il catalogo.
