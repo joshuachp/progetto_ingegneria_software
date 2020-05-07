@@ -1,5 +1,11 @@
 # Changelog
 
+## 07-05-2020
+
+## Added
+
+- Aggiunto sequence diagram reregistration
+
 ## 06-05-2020
 
 ### Added
