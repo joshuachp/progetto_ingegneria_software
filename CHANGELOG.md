@@ -6,6 +6,10 @@
 
 - Aggiunto sequence diagram reregistration
 
+## Changed
+
+- Rinominato pagamento con conferma spesa
+
 ## 06-05-2020
 
 ### Added
