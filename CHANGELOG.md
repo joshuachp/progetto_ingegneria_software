@@ -7,6 +7,7 @@
 - Aggiunto sequence diagram reregistration
 - Aggiunto sequence diagram effettua spesa
 - Aggiunto sequence diagram conferma spesa
+- Proposta activity diagram autenticazione
 
 ## Changed
 
