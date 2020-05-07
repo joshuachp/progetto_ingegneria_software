@@ -455,7 +455,7 @@
 									"font": "Arial;13;0",
 									"left": 308,
 									"top": 244.5,
-									"width": 95.24267578125,
+									"width": 94,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAFx5dmBdkO4V1Y="
@@ -853,7 +853,7 @@
 									"font": "Arial;13;0",
 									"left": 295,
 									"top": 380.5,
-									"width": 109.6708984375,
+									"width": 109,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAFx5do7IERDlw0="
@@ -1088,7 +1088,7 @@
 									"font": "Arial;13;0",
 									"left": 309.5,
 									"top": 172.5,
-									"width": 102.45361328125,
+									"width": 101,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAFx5dvLGUSYm5o="
@@ -2767,7 +2767,7 @@
 									"font": "Arial;13;0",
 									"left": 312.5,
 									"top": 28.5,
-									"width": 118.3291015625,
+									"width": 118,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAFx5d3wtkuhtuU="
@@ -3002,7 +3002,7 @@
 									"font": "Arial;13;0",
 									"left": 310.5,
 									"top": 92.5,
-									"width": 108.236328125,
+									"width": 108,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAFx5d4cAkxfIRk="
@@ -3026,12 +3026,48 @@
 									"model": {
 										"$ref": "AAAAAAFx5d4cAkxbD1k="
 									},
+									"subViews": [
+										{
+											"_type": "UMLAttributeView",
+											"_id": "AAAAAAFx73iRL7itczE=",
+											"_parent": {
+												"$ref": "AAAAAAFx5d4cAkxjvEQ="
+											},
+											"model": {
+												"$ref": "AAAAAAFx7q+Ce5mmQ2E="
+											},
+											"font": "Arial;13;0",
+											"left": -91,
+											"top": 13,
+											"width": 254.26171875,
+											"height": 13,
+											"text": "+RoleResponsabilereparto: Responsabile reparto",
+											"horizontalAlignment": 0
+										},
+										{
+											"_type": "UMLAttributeView",
+											"_id": "AAAAAAFx73iRMLiwaoY=",
+											"_parent": {
+												"$ref": "AAAAAAFx5d4cAkxjvEQ="
+											},
+											"model": {
+												"$ref": "AAAAAAFx7q+Y1JnFcJo="
+											},
+											"font": "Arial;13;0",
+											"left": -91,
+											"top": 28,
+											"width": 254.26171875,
+											"height": 13,
+											"text": "+RoleControlloSpese: Controllo spese",
+											"horizontalAlignment": 0
+										}
+									],
 									"visible": false,
 									"font": "Arial;13;0",
 									"left": -96,
 									"top": 8,
-									"width": 10,
-									"height": 10
+									"width": 264.26171875,
+									"height": 38
 								},
 								{
 									"_type": "UMLOperationCompartmentView",
@@ -3739,7 +3775,7 @@
 									"font": "Arial;13;0",
 									"left": 569.5,
 									"top": 252.5,
-									"width": 122.6708984375,
+									"width": 122,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAFx6NRoV3ijGh0="
@@ -4033,7 +4069,7 @@
 									"font": "Arial;13;0",
 									"left": 561,
 									"top": 324.5,
-									"width": 80.07177734375,
+									"width": 79,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAFx6NTbM3pc84k="
@@ -4232,7 +4268,7 @@
 									"font": "Arial;13;0",
 									"left": 564,
 									"top": 404.5,
-									"width": 95.25537109375,
+									"width": 94,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAFx6NUEjnvPiME="
@@ -6648,7 +6684,7 @@
 															"top": 47,
 															"width": 190.57177734375,
 															"height": 13,
-															"text": "Applicazione: Autenticazione"
+															"text": "Lifeline2: Autenticazione"
 														},
 														{
 															"_type": "LabelView",
@@ -6764,7 +6800,7 @@
 															"top": 87,
 															"width": 101.12451171875,
 															"height": 13,
-															"text": "Lifeline: Utente"
+															"text": "Lifeline1: Utente"
 														},
 														{
 															"_type": "LabelView",
@@ -7885,7 +7921,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFx6R+GQbSp0po="
 									},
-									"name": "Applicazione",
+									"name": "Lifeline2",
 									"represent": {
 										"$ref": "AAAAAAFx6R+mhbUun/w="
 									},
@@ -7897,7 +7933,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFx6R+GQbSp0po="
 									},
-									"name": "Lifeline",
+									"name": "Lifeline1",
 									"represent": {
 										"$ref": "AAAAAAFx6SR6+LWDO1c="
 									},
