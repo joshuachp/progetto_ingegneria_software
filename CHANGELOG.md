@@ -1,22 +1,20 @@
 # Changelog
 
-## 07-05-2020
+## 10-05-2020
 
-## Added
+- Aggiunto activity diagram gestione prodotti
+- Corretto nome con guardie in autenticazione
+
+## 07-05-2020
 
 - Aggiunto sequence diagram reregistration
 - Aggiunto sequence diagram effettua spesa
 - Aggiunto sequence diagram conferma spesa
 - Proposta activity diagram autenticazione
 - Proposta activity diagram registrazione
-
-## Changed
-
 - Rinominato pagamento con conferma spesa
 
 ## 06-05-2020
-
-### Added
 
 - Aggiunto i seguenti use cases:
   - Gestione prodotti
