@@ -1,0 +1,15 @@
+@startuml
+
+:Responsabile Reparto: --> (Gestione Prodotti)
+:Responsabile Reparto: --> (Controllo Spese)
+:Responsabile Reparto: --> Utente
+Utente --> (Autenticazione)
+Cliente --> Utente
+Cliente --> (Registrazione)
+Cliente --> (Effettua spesa)
+(Effettua spesa) ..> (Seleziona prodotti) : include
+(Effettua spesa) ..> (Conferma spesa) : include
+Cliente --> (Gestione profilo)
+(Gestione profilo) ..> (Storico spese) : include
+
+@enduml
