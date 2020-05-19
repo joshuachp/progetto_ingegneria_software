@@ -44747,13 +44747,31 @@
 											"height": 13,
 											"text": "-username: String {unique}",
 											"horizontalAlignment": 0
+										},
+										{
+											"_type": "UMLAttributeView",
+											"_id": "AAAAAAFyK8R+OcyUguA=",
+											"_parent": {
+												"$ref": "AAAAAAFyK67a18lSJ7M="
+											},
+											"model": {
+												"$ref": "AAAAAAFyK8R928yRGOs="
+											},
+											"font": "Arial;13;0",
+											"left": 197,
+											"top": 180,
+											"width": 154.654296875,
+											"height": 13,
+											"underline": true,
+											"text": "+sessione: String",
+											"horizontalAlignment": 0
 										}
 									],
 									"font": "Arial;13;0",
 									"left": 192,
 									"top": 145,
 									"width": 164.654296875,
-									"height": 38
+									"height": 53
 								},
 								{
 									"_type": "UMLOperationCompartmentView",
@@ -44776,7 +44794,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 197,
-											"top": 188,
+											"top": 203,
 											"width": 154.654296875,
 											"height": 13,
 											"underline": true,
@@ -44794,7 +44812,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 197,
-											"top": 203,
+											"top": 218,
 											"width": 154.654296875,
 											"height": 13,
 											"text": "+deautentica()",
@@ -44803,7 +44821,7 @@
 									],
 									"font": "Arial;13;0",
 									"left": 192,
-									"top": 183,
+									"top": 198,
 									"width": 164.654296875,
 									"height": 38
 								},
@@ -44844,7 +44862,7 @@
 							"left": 192,
 							"top": 120,
 							"width": 164.654296875,
-							"height": 101,
+							"height": 116,
 							"nameCompartment": {
 								"$ref": "AAAAAAFyK67a18lNxR8="
 							},
@@ -44895,6 +44913,18 @@
 								"$ref": "AAAAAAFyK7dAq8vASL8="
 							},
 							"isUnique": true
+						},
+						{
+							"_type": "UMLAttribute",
+							"_id": "AAAAAAFyK8R928yRGOs=",
+							"_parent": {
+								"$ref": "AAAAAAFyK67a1slKuDQ="
+							},
+							"name": "sessione",
+							"isStatic": true,
+							"type": {
+								"$ref": "AAAAAAFyK7dAq8vASL8="
+							}
 						}
 					],
 					"operations": [
