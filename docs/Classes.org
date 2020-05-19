@@ -1,0 +1,15 @@
+* Classes
+** Utente
+| Class name | Superclass | Subclass                     | Responsibilities                           | Collaborations |
+|------------+------------+------------------------------+--------------------------------------------+----------------|
+| Utente     |            | Cliente, ResponsabileReparto | Autenticazione, Deautenticazione, Sessione |                |
+*** Cliente
+| Class name | Superclass | Subclass | Responsibilities | Collaborations |
+|------------+------------+----------+------------------+----------------|
+| Cliente    | Utente     |          |                  |                |
+*** Responsabile Reparto
+** Catalogo
+*** Reparto
+**** Prodotto
+** Carrello
+*** Prodotto
