@@ -4,6 +4,7 @@
 
 - Aggiunto Class Diagram
   - User class
+- Aggiunto files progetto
 
 ## 10-05-2020
 
