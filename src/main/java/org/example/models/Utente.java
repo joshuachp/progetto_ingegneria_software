@@ -2,19 +2,24 @@ package org.example.models;
 
 public abstract class Utente {
 
-    private String username;
-    private String session;
 
-    public Utente(String username, String session) {
+    private final String username;
+    private final String session;
+    private final boolean responsabile;
+
+    public Utente(String username, String session, boolean responsabile) {
         this.username = username;
         this.session = session;
-    }
-
-    public Utente() {
+        this.responsabile = responsabile;
     }
 
     public String getUsername() {
         return username;
     }
+
+    public boolean isResponsabile() {
+        return responsabile;
+    }
+
 
 }

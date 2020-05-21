@@ -14,7 +14,7 @@ public class User {
     private boolean responsabile;
     private String session;
 
-    public User(Integer id, String username, String password, boolean responsabile, String session) {
+    private User(Integer id, String username, String password, boolean responsabile, String session) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -37,6 +37,40 @@ public class User {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public static User getSession(String session) {
+        Database database = Database.getInstance();
+        try {
+            PreparedStatement statement = database.getConnection().prepareStatement("SELECT id, username, password, " +
+                    "responsabile, session FROM users WHERE session = ?");
+            statement.setString(1, session);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                return new User(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3),
+                        resultSet.getBoolean(4), resultSet.getString(5));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public boolean updateUser() {
+        Database database = Database.getInstance();
+        try {
+            PreparedStatement statement = database.getConnection().prepareStatement("UPDATE users SET username = ?, " +
+                    "password = ?, responsabile = ?, session = ? WHERE id = ?");
+            statement.setString(1, this.username);
+            statement.setString(2, this.password);
+            statement.setBoolean(3, this.responsabile);
+            statement.setString(1, this.session);
+            statement.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 
     public String getUsername() {

@@ -8,17 +8,16 @@ import static java.lang.Thread.sleep;
 public class Utils {
 
     /**
+     * Placeholder util to simulate server authentication with username and password
      *
-     * @param username
-     * @param password
-     * @return
+     * @param username Username to autenticate
+     * @param password password to autenticate
+     * @return JSONObject of user information or null if failed
      */
-    public static JSONObject autenticaWithServer(String username, String password){
-        JSONObject res;
+    public static JSONObject autenticaWithServer(String username, String password) {
         try {
             sleep(1);
-            res = Server.getInstance().autenticateUser(username, password);
-            return res;
+            return Server.getInstance().autenticateUser(username, password);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -26,16 +25,18 @@ public class Utils {
     }
 
     /**
+     * Placeholder util to simulate server authentication with session
      *
-     * @param session
-     * @return
+     * @param session The session to autenticate
+     * @return JSONObject of user information or null if failed
      */
-    public static String autenticaWithServer(String session){
+    public static JSONObject autenticaWithServer(String session) {
         try {
             sleep(1);
+            return Server.getInstance().autenticateUser(session);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        return "username";
+        return null;
     }
 }

@@ -4,7 +4,6 @@ package org.example.server;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 /**
  * Singleton of the server database
@@ -19,7 +18,7 @@ public class Database {
     /**
      * Connection to the SQL database
      */
-    private Connection connection;
+    private final Connection connection;
 
     /**
      * Create an instance of the database and connects it to the SQL database
@@ -33,9 +32,9 @@ public class Database {
     }
 
     /**
-     * Ritorna o genera una istanza del database
+     * Returns or creates an instance of the database
      *
-     * @return Il database instantiate
+     * @return The database instance
      */
     public static Database getInstance() {
         // If the database is not initialized it will create a new instance
@@ -51,7 +50,7 @@ public class Database {
         }
         return database;
     }
-
+    
     public Connection getConnection() {
         return connection;
     }
