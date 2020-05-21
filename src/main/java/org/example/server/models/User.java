@@ -1,23 +1,23 @@
 package org.example.server.models;
 
-import javax.persistence.*;
+import org.example.server.Database;
 
-@Entity
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 public class User {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
 
-    @Column(nullable = false)
+    private Integer id;
     private String username;
-    @Column(nullable = false)
     private String password;
+    // TODO: Session handling
 
-    public User(String username, String password) {
+    public User(Integer id, String username, String password) {
+        this.id = id;
         this.username = username;
         this.password = password;
     }
-    // TODO: Session handling
 
     public String getUsername() {
         return username;
@@ -33,5 +33,22 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public static User getUser(String username) {
+        Database database = Database.getInstance();
+        try {
+            PreparedStatement statement = database.getConnection().prepareStatement("SELECT id, username, password " +
+                    "FROM users" +
+                    " WHERE username = ?");
+            statement.setString(1, username);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                return new User(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

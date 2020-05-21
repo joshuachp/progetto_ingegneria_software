@@ -1,8 +1,6 @@
 package org.example.server;
 
 
-import org.hibernate.jpa.HibernateQuery;
-
 public class Server {
 
     // Signleton del server
@@ -21,10 +19,9 @@ public class Server {
      * @param password Password dell'utente
      * @return TODO: Define the return data
      */
-    boolean autenticateUser(String username, String password) {
-        HibernateQuery()
-        return BCrypt.checkpw(password, hash);
-    }
+    //boolean autenticateUser(String username, String password) {
+    //    return BCrypt.checkpw(password, hash);
+    //}
 
     // - deautenticazione
 }
