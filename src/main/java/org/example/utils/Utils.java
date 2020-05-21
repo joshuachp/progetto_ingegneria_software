@@ -1,5 +1,8 @@
 package org.example.utils;
 
+import org.example.server.Server;
+import org.json.JSONObject;
+
 import static java.lang.Thread.sleep;
 
 public class Utils {
@@ -10,13 +13,16 @@ public class Utils {
      * @param password
      * @return
      */
-    public static String autenticaWithServer(String username, String password){
+    public static JSONObject autenticaWithServer(String username, String password){
+        JSONObject res;
         try {
             sleep(1);
+            res = Server.getInstance().autenticateUser(username, password);
+            return res;
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        return "sessione";
+        return null;
     }
 
     /**

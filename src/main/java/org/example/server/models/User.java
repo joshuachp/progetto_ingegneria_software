@@ -8,15 +8,35 @@ import java.sql.SQLException;
 
 public class User {
 
-    private Integer id;
+    private final Integer id;
     private String username;
     private String password;
-    // TODO: Session handling
+    private boolean responsabile;
+    private String session;
 
-    public User(Integer id, String username, String password) {
+    public User(Integer id, String username, String password, boolean responsabile, String session) {
         this.id = id;
         this.username = username;
         this.password = password;
+        this.responsabile = responsabile;
+        this.session = session;
+    }
+
+    public static User getUser(String username) {
+        Database database = Database.getInstance();
+        try {
+            PreparedStatement statement = database.getConnection().prepareStatement("SELECT id, username, password, " +
+                    "responsabile, session FROM users WHERE username = ?");
+            statement.setString(1, username);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                return new User(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3),
+                        resultSet.getBoolean(4), resultSet.getString(5));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     public String getUsername() {
@@ -35,20 +55,23 @@ public class User {
         this.password = password;
     }
 
-    public static User getUser(String username) {
-        Database database = Database.getInstance();
-        try {
-            PreparedStatement statement = database.getConnection().prepareStatement("SELECT id, username, password " +
-                    "FROM users" +
-                    " WHERE username = ?");
-            statement.setString(1, username);
-            ResultSet resultSet = statement.executeQuery();
-            if (resultSet.next()) {
-                return new User(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return null;
+    public boolean getResponsabile() {
+        return responsabile;
+    }
+
+    public void setResponsabile(boolean responsabile) {
+        this.responsabile = responsabile;
+    }
+
+    public String getSession() {
+        return session;
+    }
+
+    public void setSession(String session) {
+        this.session = session;
+    }
+
+    public Integer getId() {
+        return id;
     }
 }
