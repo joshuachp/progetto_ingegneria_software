@@ -59,12 +59,19 @@ public class Server {
 
     /**
      * Autentica un utente
-     * TODO: Implementation
+     * TODO: Implementation session verification
      *
      * @param session User session
      * @return Return JSONObject of user data
      */
     public JSONObject autenticateUser(String session) {
+        User user = User.getUser(session);
+        if (user != null) {
+            return new JSONObject()
+                    .put("username", user.getUsername())
+                    .put("responsabile", user.getResponsabile())
+                    .put("session", user.getSession());
+        }
         return null;
     }
 

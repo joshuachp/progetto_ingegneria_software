@@ -64,7 +64,8 @@ public class User {
             statement.setString(1, this.username);
             statement.setString(2, this.password);
             statement.setBoolean(3, this.responsabile);
-            statement.setString(1, this.session);
+            statement.setString(4, this.session);
+            statement.setInt(5, this.id);
             statement.executeUpdate();
             return true;
         } catch (SQLException e) {

@@ -21,5 +21,7 @@ public abstract class Utente {
         return responsabile;
     }
 
-
+    public String getSession() {
+        return session;
+    }
 }
