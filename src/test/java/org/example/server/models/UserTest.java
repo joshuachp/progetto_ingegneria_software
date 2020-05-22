@@ -3,8 +3,14 @@ package org.example.server.models;
 import junit.framework.TestCase;
 import org.example.server.MockDatabase;
 
+/**
+ * Test suit per la classe User
+ */
 public class UserTest extends TestCase {
 
+    /**
+     * Controlla che getUser sia eseguito correttamente
+     */
     public void testGetUser() {
         MockDatabase.createMockDatabase();
         User user = User.getUser("admin");
@@ -12,6 +18,9 @@ public class UserTest extends TestCase {
         assertEquals("admin", user.getUsername());
     }
 
+    /**
+     * Controlla che updateUser sia eseguito correttamente
+     */
     public void testUpdateUser() {
         MockDatabase.createMockDatabase();
         User admin = User.getUser("admin");
@@ -19,7 +28,7 @@ public class UserTest extends TestCase {
         admin.setUsername("username");
         admin.setPassword("password");
         admin.setResponsabile(false);
-        admin.updateUser();
+        assertTrue(admin.updateUser());
         User user = User.getUser("username");
         assertNotNull(user);
         assertEquals("username", user.getUsername());

@@ -57,7 +57,6 @@ public class Server {
         User user = User.getUser(username);
         if (user != null && Utils.checkPassword(password, user.getPassword())) {
             String session = Utils.createSession();
-            System.out.println(session);
             // TODO: Decide what to do for already authenticated user
             userSessions.put(session, user);
             return new JSONObject()

@@ -6,6 +6,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * Classe utente nel database
+ */
 public class User {
 
     private final Integer id;
@@ -20,6 +23,12 @@ public class User {
         this.responsabile = responsabile;
     }
 
+    /**
+     * Cerca un utente con l'username dato e ne ritorna le informazioni
+     *
+     * @param username Username da cercare
+     * @return Informazioni dell'utente o null se non trovato
+     */
     public static User getUser(String username) {
         Database database = Database.getInstance();
         try {
@@ -37,6 +46,10 @@ public class User {
         return null;
     }
 
+    /**
+     * Aggiorna il database con le informazioni dell'ogetto utente
+     * @return True se aggiornato con successo
+     */
     public boolean updateUser() {
         Database database = Database.getInstance();
         try {
@@ -78,8 +91,4 @@ public class User {
         this.responsabile = responsabile;
     }
 
-
-    public Integer getId() {
-        return id;
-    }
 }

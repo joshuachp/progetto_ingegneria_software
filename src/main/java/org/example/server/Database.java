@@ -59,6 +59,11 @@ public class Database {
     }
 
 
+    /**
+     * Imposta la connessione al database. Usato solamente nel test.
+     *
+     * @param connection Nuova connesione al database
+     */
     protected void setConnection(Connection connection) {
         this.connection = connection;
     }
