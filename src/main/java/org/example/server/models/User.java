@@ -12,43 +12,24 @@ public class User {
     private String username;
     private String password;
     private boolean responsabile;
-    private String session;
 
-    private User(Integer id, String username, String password, boolean responsabile, String session) {
+    private User(Integer id, String username, String password, boolean responsabile) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.responsabile = responsabile;
-        this.session = session;
     }
 
     public static User getUser(String username) {
         Database database = Database.getInstance();
         try {
             PreparedStatement statement = database.getConnection().prepareStatement("SELECT id, username, password, " +
-                    "responsabile, session FROM users WHERE username = ?");
+                    "responsabile FROM users WHERE username = ?");
             statement.setString(1, username);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
                 return new User(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3),
-                        resultSet.getBoolean(4), resultSet.getString(5));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    public static User getSession(String session) {
-        Database database = Database.getInstance();
-        try {
-            PreparedStatement statement = database.getConnection().prepareStatement("SELECT id, username, password, " +
-                    "responsabile, session FROM users WHERE session = ?");
-            statement.setString(1, session);
-            ResultSet resultSet = statement.executeQuery();
-            if (resultSet.next()) {
-                return new User(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3),
-                        resultSet.getBoolean(4), resultSet.getString(5));
+                        resultSet.getBoolean(4));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -60,12 +41,11 @@ public class User {
         Database database = Database.getInstance();
         try {
             PreparedStatement statement = database.getConnection().prepareStatement("UPDATE users SET username = ?, " +
-                    "password = ?, responsabile = ?, session = ? WHERE id = ?");
+                    "password = ?, responsabile = ? WHERE id = ?");
             statement.setString(1, this.username);
             statement.setString(2, this.password);
             statement.setBoolean(3, this.responsabile);
-            statement.setString(4, this.session);
-            statement.setInt(5, this.id);
+            statement.setInt(4, this.id);
             statement.executeUpdate();
             return true;
         } catch (SQLException e) {
@@ -98,13 +78,6 @@ public class User {
         this.responsabile = responsabile;
     }
 
-    public String getSession() {
-        return session;
-    }
-
-    public void setSession(String session) {
-        this.session = session;
-    }
 
     public Integer getId() {
         return id;

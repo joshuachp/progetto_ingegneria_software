@@ -1,9 +1,13 @@
 package org.example.server;
 
 
-import at.favre.lib.crypto.bcrypt.BCrypt;
 import org.example.server.models.User;
+import org.example.server.utils.Utils;
 import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
+
 
 /**
  * Server for database interaction
@@ -17,9 +21,15 @@ public class Server {
     private static Server server = null;
 
     /**
+     * Map of the authenticated users. It's in memory since we don't have a lot of users.
+     */
+    private final Map<String, User> userSessions;
+
+    /**
      * Privare server constructor
      */
     private Server() {
+        this.userSessions = new HashMap<>();
     }
 
 
@@ -45,45 +55,34 @@ public class Server {
      */
     public JSONObject autenticateUser(String username, String password) {
         User user = User.getUser(username);
-        if (user != null &&
-                BCrypt.verifyer().verify(password.toCharArray(), user.getPassword().toCharArray()).verified) {
-            if (!createSession(user))
-                return null;
+        if (user != null && Utils.checkPassword(password, user.getPassword())) {
+            String session = Utils.createSession();
+            System.out.println(session);
+            // TODO: Decide what to do for already authenticated user
+            userSessions.put(session, user);
             return new JSONObject()
                     .put("username", user.getUsername())
                     .put("responsabile", user.getResponsabile())
-                    .put("session", user.getSession());
+                    .put("session", session);
         }
         return null;
     }
 
     /**
-     * Autentica un utente
-     * TODO: Implementation session verification
+     * Autentica un utente with session token.
      *
      * @param session User session
      * @return Return JSONObject of user data
      */
     public JSONObject autenticateUser(String session) {
-        User user = User.getSession(session);
-        if (user != null) {
+        if (userSessions.containsKey(session)) {
+            User user = userSessions.get(session);
             return new JSONObject()
                     .put("username", user.getUsername())
                     .put("responsabile", user.getResponsabile())
-                    .put("session", user.getSession());
+                    .put("session", session);
         }
         return null;
-    }
-
-    /**
-     * Create and sets a session for the authenticated user
-     *
-     * @param user The user that is logged in
-     * @return Return true for session created successfully
-     */
-    private boolean createSession(User user) {
-        user.setSession("session:" + user.getUsername());
-        return user.updateUser();
     }
 
 
@@ -94,10 +93,9 @@ public class Server {
      * @return True for success
      */
     private boolean deautenticateUser(String session) {
-        User user = User.getSession(session);
-        if (user != null) {
-            user.setSession(null);
-            return user.updateUser();
+        if (userSessions.containsKey(session)) {
+            userSessions.remove(session);
+            return true;
         }
         return false;
     }
