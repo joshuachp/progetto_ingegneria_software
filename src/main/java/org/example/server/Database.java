@@ -11,14 +11,17 @@ import java.sql.SQLException;
 public class Database {
 
     /**
+     * Url for the database connection
+     */
+    private static final String DATABASE_URL = "jdbc:sqlite:app.db";
+    /**
      * Static instance of the database, lazy initialized
      */
     private static Database database = null;
-
     /**
      * Connection to the SQL database
      */
-    private final Connection connection;
+    private Connection connection;
 
     /**
      * Create an instance of the database and connects it to the SQL database
@@ -28,7 +31,7 @@ public class Database {
     private Database() throws SQLException {
         // TODO: Better handling of the location of the database, for test remember to initialize the database. The
         //  database should be in the main folder of the program.
-        this.connection = DriverManager.getConnection("jdbc:sqlite:app.db");
+        this.connection = DriverManager.getConnection(DATABASE_URL);
     }
 
     /**
@@ -50,9 +53,14 @@ public class Database {
         }
         return database;
     }
-    
+
     public Connection getConnection() {
         return connection;
+    }
+
+
+    protected void setConnection(Connection connection) {
+        this.connection = connection;
     }
 
 }

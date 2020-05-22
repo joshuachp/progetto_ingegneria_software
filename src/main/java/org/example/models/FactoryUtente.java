@@ -32,7 +32,6 @@ public class FactoryUtente {
      */
     public Utente getUtente(String session) {
         JSONObject json = Utils.autenticaWithServer(session);
-        assert json != null;
         return createUtente(json);
     }
 
@@ -43,11 +42,11 @@ public class FactoryUtente {
      * @return Istanza della classe Utente
      */
     private Utente createUtente(@Nullable JSONObject json) {
-        assert json != null;
+        if (json == null)
+            return null;
         String username = json.getString("username");
-        boolean responsabile = json.getBoolean("responsabile");
         String session = json.getString("session");
-        if (responsabile) {
+        if (json.getBoolean("responsabile")) {
             return new ResponsabileReparto(username, session);
         }
         return new Cliente(username, session);
