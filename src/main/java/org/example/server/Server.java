@@ -65,7 +65,7 @@ public class Server {
      * @return Return JSONObject of user data
      */
     public JSONObject autenticateUser(String session) {
-        User user = User.getUser(session);
+        User user = User.getSession(session);
         if (user != null) {
             return new JSONObject()
                     .put("username", user.getUsername())
