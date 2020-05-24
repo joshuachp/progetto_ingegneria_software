@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ProgressIndicator?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ProgressIndicator layoutX="274.0" layoutY="287.0" />
+      <Text layoutX="76.0" layoutY="123.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Spesa Online">
+         <font>
+            <Font size="73.0" />
+         </font>
+      </Text>
+   </children>
+</AnchorPane>

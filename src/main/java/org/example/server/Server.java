@@ -30,6 +30,7 @@ public class Server {
      */
     private Server() {
         this.userSessions = new HashMap<>();
+        Database.getInstance();
     }
 
 

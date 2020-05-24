@@ -13,17 +13,18 @@ repositories {
 }
 
 dependencies {
-    compile group: 'org.xerial', name: 'sqlite-jdbc', version: '3.31.1'
-    compile group: 'org.json', name: 'json', version: '20190722'
-    compile 'org.jetbrains:annotations:16.0.2'
+    implementation group: 'org.xerial', name: 'sqlite-jdbc', version: '3.31.1'
+    implementation group: 'org.json', name: 'json', version: '20190722'
+    implementation group: 'org.jetbrains', name: 'annotations', version: '16.0.2'
     implementation group: 'at.favre.lib', name: 'bcrypt', version: '0.9.0'
+    implementation group: 'com.auth0', name: 'java-jwt', version: '3.10.3'
 
-    testCompile group: 'junit', name: 'junit', version: '4.12'
+    testImplementation group: 'junit', name: 'junit', version: '4.12'
 }
 
 javafx {
-    version = "13"
-    modules = [ 'javafx.controls','javafx.fxml' ]
+    version = "14"
+    modules = ['javafx.controls', 'javafx.fxml']
 }
 
 mainClassName = "org.example.Main"
