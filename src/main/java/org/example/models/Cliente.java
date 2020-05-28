@@ -1,7 +1,9 @@
 package org.example.models;
 
 import javafx.stage.Stage;
-import org.example.controllers.AutenticazioneController;
+import org.example.controllers.CatalogoController;
+
+import java.io.IOException;
 
 public class Cliente extends Utente {
     public Cliente(String username, String session) {
@@ -10,6 +12,12 @@ public class Cliente extends Utente {
 
     @Override
     public void redirect(Stage stage) {
+        CatalogoController catalogo = new CatalogoController();
+        try {
+            catalogo.showView(stage);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }
