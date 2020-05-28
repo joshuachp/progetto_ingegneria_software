@@ -1,7 +1,10 @@
 package org.example.models;
 
+import javafx.stage.Stage;
+
 public abstract class Utente {
 
+    public abstract void redirect(Stage stage);
 
     private final String username;
     private final String session;

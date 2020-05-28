@@ -11,6 +11,8 @@ import org.example.server.Server;
 
 import java.io.IOException;
 
+import static java.lang.Thread.sleep;
+
 public class Main extends Application {
 
     public static void main(String[] args) {
@@ -18,17 +20,19 @@ public class Main extends Application {
     }
 
     @Override
-    public void start(Stage stage) throws IOException {
+    public void start(Stage stage) throws IOException, InterruptedException {
         Parent root = FXMLLoader.load(getClass().getResource("/views/main.fxml"));
+
         Scene scene = new Scene(root, 600, 400);
         Stage splashScreen = new Stage();
         splashScreen.setScene(scene);
         splashScreen.setTitle("Spesa Online");
         splashScreen.initModality(Modality.WINDOW_MODAL);
         splashScreen.show();
+        // TODO check session before asking new credential
         Server.getInstance();
-        AutenticazioneController autenticazioneController = new AutenticazioneController();
-        autenticazioneController.show(stage);
+        AutenticazioneController autenticazioneController = new AutenticazioneController(stage);
+        autenticazioneController.show();
         splashScreen.close();
     }
 
