@@ -21,8 +21,9 @@ public class Main extends Application {
     }
 
     @Override
-    public void start(Stage stage) throws IOException {
+    public void start(Stage stage) throws IOException, InterruptedException {
         Parent root = FXMLLoader.load(getClass().getResource("/views/main.fxml"));
+
         Scene scene = new Scene(root, 600, 400);
         Stage splashScreen = new Stage();
         splashScreen.setScene(scene);
@@ -32,10 +33,11 @@ public class Main extends Application {
         splashScreen.initStyle(StageStyle.UNDECORATED);
         splashScreen.alwaysOnTopProperty();
         splashScreen.show();
+        // TODO check session before asking new credential
         Server.getInstance();
-        AutenticazioneController autenticazioneController = new AutenticazioneController();
-        // autenticazioneController.show(stage);
-        // splashScreen.close();
+        AutenticazioneController autenticazioneController = new AutenticazioneController(stage);
+        autenticazioneController.show();
+        splashScreen.close();
     }
 
 }
