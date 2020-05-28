@@ -1,6 +1,6 @@
 CREATE TABLE users (
 	id INTEGER PRIMARY KEY,
-  username TEXT NOT NULL,
+  username TEXT UNIQUE NOT NULL,
   password TEXT NOT NULL,
   responsabile BOOLEAN NOT NULL
 );

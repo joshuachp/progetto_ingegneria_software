@@ -6,10 +6,13 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import org.example.controllers.AutenticazioneController;
 import org.example.server.Server;
 
 import java.io.IOException;
+
+import static java.lang.Thread.sleep;
 
 public class Main extends Application {
 
@@ -25,11 +28,14 @@ public class Main extends Application {
         splashScreen.setScene(scene);
         splashScreen.setTitle("Spesa Online");
         splashScreen.initModality(Modality.WINDOW_MODAL);
+        splashScreen.setResizable(false);
+        splashScreen.initStyle(StageStyle.UNDECORATED);
+        splashScreen.alwaysOnTopProperty();
         splashScreen.show();
         Server.getInstance();
         AutenticazioneController autenticazioneController = new AutenticazioneController();
-        autenticazioneController.show(stage);
-        splashScreen.close();
+        // autenticazioneController.show(stage);
+        // splashScreen.close();
     }
 
 }
