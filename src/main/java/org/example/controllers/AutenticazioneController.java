@@ -1,5 +1,6 @@
 package org.example.controllers;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -17,43 +18,40 @@ import java.io.IOException;
 
 public class AutenticazioneController {
 
-    private final Stage stage;
-    @FXML
-    private TextField usr;
-    @FXML
-    private Label lbl;
-    @FXML
-    private PasswordField psw;
+    private Stage stage;
 
-    public AutenticazioneController(Stage stage) {
-        this.stage = stage;
-    }
+    @FXML
+    private TextField usernameField;
+    @FXML
+    private PasswordField passwordField;
+    @FXML
+    private Label resultLabel;
 
-    public void show() throws IOException {
+    public void showView(Stage stage) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/views/autenticazione.fxml"));
         Scene scene = new Scene(root);
+        this.stage = stage;
         this.stage.setScene(scene);
         this.stage.setTitle("Autenticazione");
-        this.stage.show();
     }
 
-    public void getCredential() {
+    public void handleActionAccedi(ActionEvent actionEvent) {
         // Get username and passwords
-        String username = usr.getText();
-        String password = psw.getText();
+        String username = usernameField.getText();
+        String password = passwordField.getText();
         if (!username.isEmpty() && !password.isEmpty()) {
             Utente utente = new FactoryUtente().getUtente(username, password);
             if (utente != null) {
-                lbl.setTextFill(Color.BLACK);
-                lbl.setText("Login effettuato con successo");
+                resultLabel.setTextFill(Color.BLACK);
+                resultLabel.setText("Login effettuato con successo");
                 utente.redirect(this.stage);
             } else {
-                lbl.setTextFill(Color.RED);
-                lbl.setText("Nome utente o password errate");
+                resultLabel.setTextFill(Color.RED);
+                resultLabel.setText("Nome utente o password errate");
             }
         } else {
-            lbl.setTextFill(Color.RED);
-            lbl.setText("Username o password sono vuoti");
+            resultLabel.setTextFill(Color.RED);
+            resultLabel.setText("Username o password sono vuoti");
         }
     }
 }

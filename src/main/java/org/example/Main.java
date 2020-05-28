@@ -33,8 +33,8 @@ public class Main extends Application {
         splashScreen.show();
         // TODO: check session before asking new credential
         Server.getInstance();
-        AutenticazioneController autenticazioneController = new AutenticazioneController(stage);
-        autenticazioneController.show();
+        AutenticazioneController autenticazioneController = new AutenticazioneController();
+        autenticazioneController.showView(stage);
         splashScreen.close();
     }
 

@@ -9,13 +9,13 @@ import java.io.IOException;
 
 public class CatalogoController {
 
-    private Stage stage;
+    private final Stage stage;
 
-    public CatalogoController(Stage stage){
+    public CatalogoController(Stage stage) {
         this.stage = stage;
     }
 
-    public void show() throws IOException {
+    public void showView() throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/views/catalogo.fxml"));
         Scene scene = new Scene(root);
         this.stage.setScene(scene);
