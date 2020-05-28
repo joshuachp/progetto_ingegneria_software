@@ -12,8 +12,6 @@ import org.example.server.Server;
 
 import java.io.IOException;
 
-import static java.lang.Thread.sleep;
-
 public class Main extends Application {
 
     public static void main(String[] args) {
@@ -21,7 +19,7 @@ public class Main extends Application {
     }
 
     @Override
-    public void start(Stage stage) throws IOException, InterruptedException {
+    public void start(Stage stage) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/views/main.fxml"));
 
         Scene scene = new Scene(root, 600, 400);
@@ -33,7 +31,7 @@ public class Main extends Application {
         splashScreen.initStyle(StageStyle.UNDECORATED);
         splashScreen.alwaysOnTopProperty();
         splashScreen.show();
-        // TODO check session before asking new credential
+        // TODO: check session before asking new credential
         Server.getInstance();
         AutenticazioneController autenticazioneController = new AutenticazioneController(stage);
         autenticazioneController.show();
