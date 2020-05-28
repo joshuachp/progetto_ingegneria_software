@@ -9,6 +9,6 @@ public class ResponsabileReparto extends Utente {
 
     @Override
     public void redirect(Stage stage) {
-
+        // TODO
     }
 }

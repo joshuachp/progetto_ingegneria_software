@@ -28,12 +28,14 @@ public class AutenticazioneController {
     private Label resultLabel;
 
     public void showView(Stage stage) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/views/autenticazione.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/autenticazione.fxml"));
+        Parent root = loader.load();
         Scene scene = new Scene(root);
-        this.stage = stage;
-        this.stage.setScene(scene);
-        this.stage.setTitle("Autenticazione");
-        this.stage.show();
+        stage.setScene(scene);
+        stage.setTitle("Autenticazione");
+        stage.show();
+        AutenticazioneController autenticazioneController = loader.getController();
+        autenticazioneController.setStage(stage);
     }
 
     public void handleActionAccedi(ActionEvent actionEvent) {
@@ -45,6 +47,7 @@ public class AutenticazioneController {
             if (utente != null) {
                 resultLabel.setTextFill(Color.BLACK);
                 resultLabel.setText("Login effettuato con successo");
+                // TODO: Get scene
                 utente.redirect(this.stage);
             } else {
                 resultLabel.setTextFill(Color.RED);
@@ -52,8 +55,13 @@ public class AutenticazioneController {
             }
         } else {
             resultLabel.setTextFill(Color.RED);
+            // TODO: Label is to short and text is cut
             resultLabel.setText("Username o password sono vuoti");
         }
+    }
+
+    public void setStage(Stage stage) {
+        this.stage = stage;
     }
 }
 
