@@ -33,6 +33,7 @@ public class AutenticazioneController {
         this.stage = stage;
         this.stage.setScene(scene);
         this.stage.setTitle("Autenticazione");
+        this.stage.show();
     }
 
     public void handleActionAccedi(ActionEvent actionEvent) {
