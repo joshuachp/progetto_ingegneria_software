@@ -27,9 +27,15 @@ public class AutenticazioneController {
     @FXML
     private Label resultLabel;
 
-    public void showView(Stage stage) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/autenticazione.fxml"));
-        Parent root = loader.load();
+    public static void showView(Stage stage) {
+        FXMLLoader loader = new FXMLLoader(AutenticazioneController.class.getResource("/views/autenticazione.fxml"));
+        Parent root = null;
+        try {
+            root = loader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        assert root != null;
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.setTitle("Autenticazione");

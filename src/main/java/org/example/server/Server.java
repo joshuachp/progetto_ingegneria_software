@@ -85,6 +85,17 @@ public class Server {
         return null;
     }
 
+    /**
+     * Register a user with username and password.
+     *
+     * @param username Username of the new user
+     * @param password Password of the new user
+     * @return Return JSONObject of user data
+     */
+    public JSONObject registerUser(String username, String password) {
+        return null;
+    }
+
 
     /**
      * De autenticate a user deleting a user session

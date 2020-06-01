@@ -15,7 +15,6 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         // TODO: Check session
-        AutenticazioneController autenticazioneController = new AutenticazioneController();
-        autenticazioneController.showView(stage);
+        AutenticazioneController.showView(stage);
     }
 }
