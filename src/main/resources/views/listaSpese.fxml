@@ -1,11 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane  xmlns="http://javafx.com/javafx/11.0.1"
-             xmlns:fx="http://javafx.com/fxml/1"
-             fx:controller="org.example.controllers.ListaSpeseController"
-             prefHeight="400.0" prefWidth="600.0" >
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controllers.ListaSpeseController">
+    <children>
+        <TableView fx:id="tableview" editable="true" fixedCellSize="0.0" layoutX="6.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <columns>
+                <TableColumn fx:id="IDCol" editable="false" prefWidth="75.0" text="ID" />
+                <TableColumn fx:id="DataCol" editable="false" prefWidth="75.0" text="Data di consegna" />
+                <TableColumn fx:id="OraCol" editable="false" prefWidth="75.0" text="Ora di consegna" />
+                <TableColumn fx:id="MetodoPagamentoCol" editable="false" prefWidth="75.0" text="Metodo di pagamento" />
+                <TableColumn fx:id="TotaleCol" editable="false" prefWidth="75.0" text="Totale" />
+                <TableColumn fx:id="StatoCol" prefWidth="75.0" text="Stato" />
+            </columns>
+        </TableView>
+    </children>
 </AnchorPane>
