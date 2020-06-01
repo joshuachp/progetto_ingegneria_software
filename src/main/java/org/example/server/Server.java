@@ -93,6 +93,7 @@ public class Server {
      * @return Return JSONObject of user data
      */
     public JSONObject registerUser(String username, String password) {
+        // TODO
         return null;
     }
 
