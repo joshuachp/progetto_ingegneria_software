@@ -14,4 +14,5 @@ public enum StatoSpesa {
         return stato;
     }
 
+
 }
