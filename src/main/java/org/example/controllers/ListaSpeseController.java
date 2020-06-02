@@ -37,6 +37,7 @@ public class ListaSpeseController {
     private Stage stage;
     public ListView<Spesa> listview;
     public ObservableList<String> stato;
+    public ObservableList<Spesa> spese;
 
 
     public void showView(Stage stage) throws IOException {
@@ -49,31 +50,32 @@ public class ListaSpeseController {
         stage.show();
         ListaSpeseController listaspesecontroller = loader.getController();
 
-        ObservableList<Spesa> list = FXCollections.observableArrayList(
-                new Spesa(1, "10/09/20", "10:00 - 14:00", "utente", 100, Pagamento.PAYPAL, StatoSpesa.CONSEGNATA ),
-                new Spesa(2, "10/09/20", "10:00 - 14:00", "utente", 100, Pagamento.PAYPAL, StatoSpesa.CONSEGNATA )
-        );
+        spese = FXCollections.observableArrayList();
+        spese.add(new Spesa(1, "10/09/20", "10:00 - 14:00", "utente", 100, Pagamento.PAYPAL, StatoSpesa.CONSEGNATA ));
+        spese.add(new Spesa(2, "10/09/20", "10:00 - 14:00", "utente", 100, Pagamento.PAYPAL, StatoSpesa.CONFERMATA ));
 
         listaspesecontroller.IDCol.setCellValueFactory(new PropertyValueFactory<>("ID"));
-        //listaspesecontroller.listview.setItems(list);
+
         listaspesecontroller.stage = stage;
         listaspesecontroller.DataCol.setCellValueFactory(cellData -> cellData.getValue().nameProperty());
 
         // Dovrebbe dare un combobox in tabella...
-        listaspesecontroller.stato = FXCollections.observableArrayList();
-        listaspesecontroller.stato.add("Confermato");
-        listaspesecontroller.stato.add("In preparazione");
-        listaspesecontroller.stato.add("Consegnato");
+        stato = FXCollections.observableArrayList();
+        stato.add(StatoSpesa.CONFERMATA.getStatoSpesa());
+        stato.add(StatoSpesa.INPREPARAZIONE.getStatoSpesa());
+        stato.add(StatoSpesa.CONSEGNATA.getStatoSpesa());
 
-        listaspesecontroller.StatoCol.setCellValueFactory(new PropertyValueFactory<>("StatoSpesa"));
-        //listaspesecontroller.StatoCol.setCellFactory(ComboBoxTableCell.forTableColumn(new DefaultStringConverter(), stato));
-       /* listaspesecontroller.StatoCol.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Spesa, String>>() {
+        listaspesecontroller.StatoCol.setCellValueFactory(cellData -> cellData.getValue().nameProperty());
+        listaspesecontroller.StatoCol.setCellFactory(ComboBoxTableCell.forTableColumn(new DefaultStringConverter(), stato));
+        listaspesecontroller.StatoCol.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Spesa, String>>() {
+
+            // TODO: Handler ComboBox
             @Override
             public void handle(TableColumn.CellEditEvent<Spesa, String> event) {
                 System.out.println(event.getNewValue());
             }
-        });*/
-        listaspesecontroller.tableview.setItems(list);
+        });
+        listaspesecontroller.tableview.setItems(spese);
 
     }
 }
