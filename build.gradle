@@ -26,4 +26,4 @@ javafx {
     modules = ['javafx.controls', 'javafx.fxml']
 }
 
-mainClassName = "org.example.Main"
+mainClassName = "org.example.client.Main"

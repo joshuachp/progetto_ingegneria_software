@@ -1,8 +1,8 @@
-package org.example.models;
+package org.example.client.models;
 
 import junit.framework.TestCase;
 import org.example.server.MockDatabase;
-import org.example.utils.Utils;
+import org.example.client.utils.Utils;
 import org.json.JSONObject;
 
 /**

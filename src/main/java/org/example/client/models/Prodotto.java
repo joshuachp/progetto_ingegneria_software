@@ -1,4 +1,4 @@
-package org.example.models;
+package org.example.client.models;
 
 public class Prodotto {
     String nomeProdotto;

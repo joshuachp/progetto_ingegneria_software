@@ -1,4 +1,4 @@
-package org.example.models;
+package org.example.client.models;
 
 import javafx.stage.Stage;
 

@@ -1,9 +1,7 @@
-package org.example.models;
+package org.example.client.models;
 
 import javafx.stage.Stage;
-import org.example.controllers.CatalogoController;
-import org.example.controllers.GestioneProdottiController;
-import org.example.controllers.SceltaModalitaController;
+import org.example.client.controllers.SceltaModalitaController;
 
 import java.io.IOException;
 

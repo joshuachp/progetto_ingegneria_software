@@ -1,7 +1,7 @@
-package org.example.models;
+package org.example.client.models;
 
 
-import org.example.utils.Utils;
+import org.example.client.utils.Utils;
 import org.jetbrains.annotations.Nullable;
 import org.json.JSONObject;
 

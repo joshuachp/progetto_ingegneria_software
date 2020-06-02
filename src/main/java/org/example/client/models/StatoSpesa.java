@@ -1,4 +1,4 @@
-package org.example.models;
+package org.example.client.models;
 
 public enum StatoSpesa {
     CONFERMATA("Confermata"), INPREPARAZIONE("In preparazione"), CONSEGNATA("Consegnata");
@@ -6,7 +6,7 @@ public enum StatoSpesa {
 
     private String stato;
 
-    StatoSpesa(String stato){
+    StatoSpesa(String stato) {
         this.stato = stato;
     }
 
@@ -14,4 +14,10 @@ public enum StatoSpesa {
         return stato;
     }
 
+    @Override
+    public String toString() {
+        return "StatoSpesa{" +
+                "stato='" + stato + '\'' +
+                '}';
+    }
 }

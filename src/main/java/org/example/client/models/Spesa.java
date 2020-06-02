@@ -1,12 +1,11 @@
-package org.example.models;
+package org.example.client.models;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
-import java.util.ArrayList;
 
+public class Spesa {
 
-public class Spesa{
     int ID;
     String dataConsegna;
     String oraConsegna;
@@ -19,13 +18,13 @@ public class Spesa{
     private StringProperty date = new SimpleStringProperty();
 
     public Spesa(int ID,
-            String dataConsegna,
-            String oraConsegna,
-            //ArrayList<Prodotto> prodotti;
-            String utente,
-            float costoTotale,
-            Pagamento pagamento,
-            StatoSpesa statoSpesa){
+                 String dataConsegna,
+                 String oraConsegna,
+                 //ArrayList<Prodotto> prodotti;
+                 String utente,
+                 float costoTotale,
+                 Pagamento pagamento,
+                 StatoSpesa statoSpesa) {
 
         this.ID = ID;
         this.dataConsegna = dataConsegna;
@@ -34,16 +33,16 @@ public class Spesa{
         this.utente = utente;
         this.costoTotale = costoTotale;
         this.pagamento = pagamento;
-        this.statoSpesa =statoSpesa;
+        this.statoSpesa = statoSpesa;
         //this.prodotti = prodotti;
         setName(dataConsegna);
     }
 
-    public Integer getID(){
-        return (Integer)this.ID;
+    public Integer getID() {
+        return (Integer) this.ID;
     }
 
-    public StatoSpesa getStatoSpesa(){
+    public StatoSpesa getStatoSpesa() {
         return this.statoSpesa;
     }
 
@@ -51,11 +50,11 @@ public class Spesa{
         return this.date;
     }
 
-    public String getName(){
+    public String getName() {
         return this.nameProperty().get();
     }
 
-    public void setName(String dataConsegna){
+    public void setName(String dataConsegna) {
         this.nameProperty().set(dataConsegna);
     }
 }

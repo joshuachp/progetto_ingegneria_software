@@ -1,7 +1,7 @@
-package org.example.models;
+package org.example.client.models;
 
 import javafx.stage.Stage;
-import org.example.controllers.CatalogoController;
+import org.example.client.controllers.CatalogoController;
 
 import java.io.IOException;
 
