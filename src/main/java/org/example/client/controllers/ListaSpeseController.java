@@ -39,7 +39,7 @@ public class ListaSpeseController {
     @FXML
     private TableColumn<Spesa, Float> TotaleCol;
     @FXML
-    private TableColumn<Spesa, String> StatoCol;
+    private TableColumn<Spesa, StatoSpesa> StatoCol;
     @FXML
     private TableColumn<Spesa, Integer> IDCol;
     @FXML
