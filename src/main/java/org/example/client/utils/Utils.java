@@ -12,7 +12,6 @@ public class Utils {
     public static final String SERVER_URL_AUTH = "/api/user/authenticate";
     public static final String SERVER_URL_SESSION = "/api/user/session";
 
-    public static final MediaType JSON = MediaType.get("application/json");
 
     /**
      * Placeholder util to simulate server authentication with username and password
@@ -23,11 +22,10 @@ public class Utils {
      */
     public static JSONObject autenticaWithServer(String username, String password) {
         OkHttpClient client = new OkHttpClient();
-        String json = new JSONObject()
-                .put("username", username)
-                .put("password", password)
-                .toString();
-        RequestBody body = RequestBody.create(json, JSON);
+        RequestBody body = new FormBody.Builder()
+                .add("username", username)
+                .add("password", password)
+                .build();
         Request request = new Request.Builder()
                 .url(SERVER_URL + SERVER_URL_AUTH)
                 .post(body)
@@ -51,10 +49,9 @@ public class Utils {
      */
     public static JSONObject autenticaWithServer(String session) {
         OkHttpClient client = new OkHttpClient();
-        String json = new JSONObject()
-                .put("session", session)
-                .toString();
-        RequestBody body = RequestBody.create(json, JSON);
+        RequestBody body = new FormBody.Builder()
+                .add("session", session)
+                .build();
         Request request = new Request.Builder()
                 .url(SERVER_URL + SERVER_URL_SESSION)
                 .post(body)
