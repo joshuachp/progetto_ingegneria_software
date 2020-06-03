@@ -23,7 +23,7 @@ public class SceltaModalitaController {
         assert root != null;
         Scene scene = new Scene(root);
         stage.setScene(scene);
-        stage.setTitle("Modalita");
+        stage.setTitle("Modalità");
         stage.show();
         SceltaModalitaController controller = loader.getController();
         controller.setStage(stage);
