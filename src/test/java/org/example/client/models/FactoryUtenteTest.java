@@ -24,7 +24,7 @@ public class FactoryUtenteTest {
     @BeforeEach
     void setUp() throws IOException {
         this.server = new MockWebServer();
-        this.server.start(InetAddress.getByName("localhost.local"), 8080);
+        this.server.start(InetAddress.getByName("localhost"), 8080);
     }
 
     @AfterEach

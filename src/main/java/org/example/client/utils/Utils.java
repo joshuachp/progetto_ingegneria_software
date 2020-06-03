@@ -8,7 +8,7 @@ import java.util.Objects;
 
 public class Utils {
 
-    public static final String SERVER_URL = "http://localhost.local:8080";
+    public static final String SERVER_URL = "http://localhost:8080";
     public static final String SERVER_URL_AUTH = "/api/user/authenticate";
     public static final String SERVER_URL_SESSION = "/api/user/session";
 
