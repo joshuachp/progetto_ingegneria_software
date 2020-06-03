@@ -2,6 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Spesa_Online.iml" filepath="$PROJECT_DIR$/.idea/modules/Spesa_Online.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Spesa_Online.main.iml" filepath="$PROJECT_DIR$/.idea/modules/Spesa_Online.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Spesa_Online.test.iml" filepath="$PROJECT_DIR$/.idea/modules/Spesa_Online.test.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/progetto_ingegneria_software.iml" filepath="$PROJECT_DIR$/.idea/progetto_ingegneria_software.iml" />
     </modules>
   </component>
