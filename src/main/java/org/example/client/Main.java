@@ -1,8 +1,8 @@
-package org.example;
+package org.example.client;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
-import org.example.controllers.AutenticazioneController;
+import org.example.client.controllers.AutenticazioneController;
 
 import java.io.IOException;
 

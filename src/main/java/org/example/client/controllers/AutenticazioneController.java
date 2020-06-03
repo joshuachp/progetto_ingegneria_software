@@ -1,6 +1,5 @@
-package org.example.controllers;
+package org.example.client.controllers;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -10,8 +9,8 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import org.example.models.FactoryUtente;
-import org.example.models.Utente;
+import org.example.client.models.FactoryUtente;
+import org.example.client.models.Utente;
 
 import java.io.IOException;
 
@@ -44,7 +43,7 @@ public class AutenticazioneController {
         autenticazioneController.setStage(stage);
     }
 
-    public void handleActionAccedi(ActionEvent actionEvent) {
+    public void handleActionAccedi() {
         // Get username and passwords
         String username = usernameField.getText();
         String password = passwordField.getText();

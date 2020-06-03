@@ -1,4 +1,4 @@
-package org.example.models;
+package org.example.client.models;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -37,7 +37,7 @@ public class Spesa {
     }
 
     public Integer getID() {
-        return this.ID;
+        return (Integer) this.ID;
     }
 
     public StatoSpesa getStatoSpesa() {

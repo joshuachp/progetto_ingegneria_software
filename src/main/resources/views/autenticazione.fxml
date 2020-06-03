@@ -8,7 +8,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 <VBox xmlns:fx="http://javafx.com/fxml" xmlns="http://javafx.com/javafx"
-      fx:controller="org.example.controllers.AutenticazioneController" alignment="CENTER">
+      fx:controller="org.example.client.controllers.AutenticazioneController" alignment="CENTER">
     <opaqueInsets>
         <Insets/>
     </opaqueInsets>
