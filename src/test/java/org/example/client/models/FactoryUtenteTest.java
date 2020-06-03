@@ -1,21 +1,45 @@
 package org.example.client.models;
 
-import junit.framework.TestCase;
-import org.example.server.MockDatabase;
+import okhttp3.mockwebserver.MockResponse;
+import okhttp3.mockwebserver.MockWebServer;
 import org.example.client.utils.Utils;
 import org.json.JSONObject;
+import org.junit.Before;
+import org.junit.Test;
+
+import java.io.IOException;
+import java.net.InetAddress;
+
+import static org.junit.jupiter.api.Assertions.*;
+
 
 /**
  * Test suit per la classe FactoryUtente
  */
-public class FactoryUtenteTest extends TestCase {
+public class FactoryUtenteTest {
+
+    private MockWebServer server;
+
+    @Before
+    public void setupTest() throws IOException {
+        this.server = new MockWebServer();
+        this.server.start(InetAddress.getByName("localhost.local"), 8080);
+    }
 
     /**
      * Controlla che getUtente sia eseguito correttamente
      */
-    public void testGetUtente() {
-        MockDatabase.createMockDatabase();
+    @Test
+    public void testGetUtente() throws IOException {
+        server.enqueue(new MockResponse()
+                .setBody(new JSONObject()
+                        .put("username", "admin")
+                        .put("session", "session")
+                        .put("responsabile", true)
+                        .toString()));
+
         Utente utente = new FactoryUtente().getUtente("admin", "password");
+        assertNotNull(utente);
         assertEquals("admin", utente.getUsername());
         assertTrue(utente.isResponsabile());
     }
@@ -23,8 +47,8 @@ public class FactoryUtenteTest extends TestCase {
     /**
      * Controlla che getUtenteSession sia eseguito correttamente
      */
+    @Test
     public void testGetUtenteSession() {
-        MockDatabase.createMockDatabase();
         JSONObject session = Utils.autenticaWithServer("admin", "password");
         assertNotNull(session);
         Utente utente = new FactoryUtente().getUtente(session.getString("session"));
@@ -35,8 +59,8 @@ public class FactoryUtenteTest extends TestCase {
     /**
      * Controlla che l'utente ritornato sia un cliente
      */
+    @Test
     public void testGetUtenteCliente() {
-        MockDatabase.createMockDatabase();
         Utente utente = new FactoryUtente().getUtente("guest", "guest");
         assertFalse(utente.isResponsabile());
         assertTrue(utente instanceof Cliente);
@@ -45,8 +69,8 @@ public class FactoryUtenteTest extends TestCase {
     /**
      * Controlla che l'utente ritornato sia un Responsabile
      */
+    @Test
     public void testGetUtenteResponsabileReparto() {
-        MockDatabase.createMockDatabase();
         Utente utente = new FactoryUtente().getUtente("admin", "password");
         assertTrue(utente.isResponsabile());
         assertTrue(utente instanceof ResponsabileReparto);

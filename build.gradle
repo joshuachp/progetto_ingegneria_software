@@ -17,13 +17,19 @@ dependencies {
     implementation group: 'org.json', name: 'json', version: '20190722'
     implementation group: 'org.jetbrains', name: 'annotations', version: '16.0.2'
     implementation group: 'at.favre.lib', name: 'bcrypt', version: '0.9.0'
+    implementation("com.squareup.okhttp3:okhttp:4.7.2")
 
-    testImplementation group: 'junit', name: 'junit', version: '4.12'
+    testImplementation('org.junit.jupiter:junit-jupiter:5.6.2')
+    testImplementation("com.squareup.okhttp3:mockwebserver:4.7.2")
 }
 
 javafx {
     version = "14"
     modules = ['javafx.controls', 'javafx.fxml']
+}
+
+test {
+    useJUnitPlatform()
 }
 
 mainClassName = "org.example.client.Main"
