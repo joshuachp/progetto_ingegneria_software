@@ -5,7 +5,6 @@ import javafx.beans.property.StringProperty;
 
 
 public class Spesa {
-
     int ID;
     String dataConsegna;
     String oraConsegna;
@@ -15,8 +14,7 @@ public class Spesa {
     Pagamento pagamento;
     StatoSpesa statoSpesa;
     // metodo per utilizzo delle lambda espressioni nella tablla (Property use: javafx.beans.property)
-    private StringProperty date = new SimpleStringProperty();
-
+    private final StringProperty date = new SimpleStringProperty();
     public Spesa(int ID,
                  String dataConsegna,
                  String oraConsegna,
@@ -35,7 +33,7 @@ public class Spesa {
         this.pagamento = pagamento;
         this.statoSpesa = statoSpesa;
         //this.prodotti = prodotti;
-        setName(dataConsegna);
+        setDate(dataConsegna);
     }
 
     public Integer getID() {
@@ -46,15 +44,20 @@ public class Spesa {
         return this.statoSpesa;
     }
 
-    public StringProperty nameProperty() {
+    public void setStatoSpesa(StatoSpesa statoSpesa) {
+        this.statoSpesa = statoSpesa;
+    }
+
+    public StringProperty dateProperty() {
         return this.date;
     }
 
-    public String getName() {
-        return this.nameProperty().get();
+    public String getDate() {
+        return this.dateProperty().get();
     }
 
-    public void setName(String dataConsegna) {
-        this.nameProperty().set(dataConsegna);
+    public void setDate(String dataConsegna) {
+        this.dateProperty().set(dataConsegna);
     }
+
 }
