@@ -46066,8 +46066,8 @@
 								"$ref": "AAAAAAFyK67DEckXRDQ="
 							},
 							"font": "Arial;13;0",
-							"left": 1016,
-							"top": 880,
+							"left": 1088,
+							"top": 672,
 							"width": 95.13720703125,
 							"height": 116,
 							"text": "Pensavo di metterlo nel visulizzatore, non è necessario al model. "
@@ -46100,8 +46100,8 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"left": 640,
-											"top": 288,
+											"left": 624,
+											"top": -256,
 											"height": 13
 										},
 										{
@@ -46111,8 +46111,8 @@
 												"$ref": "AAAAAAFyOES+k2cr1/Q="
 											},
 											"font": "Arial;13;1",
-											"left": 901,
-											"top": 983,
+											"left": 893,
+											"top": 711,
 											"width": 143,
 											"height": 13,
 											"text": "Reparto"
@@ -46125,8 +46125,8 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"left": 640,
-											"top": 288,
+											"left": 624,
+											"top": -256,
 											"width": 109.79541015625,
 											"height": 13,
 											"text": "(from Class Model)"
@@ -46139,15 +46139,15 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"left": 640,
-											"top": 288,
+											"left": 624,
+											"top": -256,
 											"height": 13,
 											"horizontalAlignment": 1
 										}
 									],
 									"font": "Arial;13;0",
-									"left": 896,
-									"top": 976,
+									"left": 888,
+									"top": 704,
 									"width": 153,
 									"height": 25,
 									"stereotypeLabel": {
@@ -46172,11 +46172,30 @@
 									"model": {
 										"$ref": "AAAAAAFyOES+k2coe8Y="
 									},
+									"subViews": [
+										{
+											"_type": "UMLAttributeView",
+											"_id": "AAAAAAFyetYBVlGHyLk=",
+											"_parent": {
+												"$ref": "AAAAAAFyOES+k2cwUt8="
+											},
+											"model": {
+												"$ref": "AAAAAAFyetYA2VGB9eE="
+											},
+											"font": "Arial;13;0",
+											"left": 893,
+											"top": 734,
+											"width": 143,
+											"height": 13,
+											"text": "-Nome: String",
+											"horizontalAlignment": 0
+										}
+									],
 									"font": "Arial;13;0",
-									"left": 896,
-									"top": 1001,
+									"left": 888,
+									"top": 729,
 									"width": 153,
-									"height": 10
+									"height": 23
 								},
 								{
 									"_type": "UMLOperationCompartmentView",
@@ -46188,8 +46207,8 @@
 										"$ref": "AAAAAAFyOES+k2coe8Y="
 									},
 									"font": "Arial;13;0",
-									"left": 896,
-									"top": 1011,
+									"left": 888,
+									"top": 752,
 									"width": 153,
 									"height": 10
 								},
@@ -46204,8 +46223,8 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 320,
-									"top": 144,
+									"left": 312,
+									"top": -128,
 									"width": 10,
 									"height": 10
 								},
@@ -46220,18 +46239,18 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 320,
-									"top": 144,
+									"left": 312,
+									"top": -128,
 									"width": 10,
 									"height": 10
 								}
 							],
 							"font": "Arial;13;0",
 							"containerChangeable": true,
-							"left": 896,
-							"top": 976,
+							"left": 888,
+							"top": 704,
 							"width": 153,
-							"height": 45,
+							"height": 58,
 							"nameCompartment": {
 								"$ref": "AAAAAAFyOES+k2cr1/Q="
 							},
@@ -49013,7 +49032,21 @@
 					"_parent": {
 						"$ref": "AAAAAAFyK65FA8kSIjI="
 					},
-					"name": "Reparto"
+					"name": "Reparto",
+					"attributes": [
+						{
+							"_type": "UMLAttribute",
+							"_id": "AAAAAAFyetYA2VGB9eE=",
+							"_parent": {
+								"$ref": "AAAAAAFyOES+k2coe8Y="
+							},
+							"name": "Nome",
+							"visibility": "private",
+							"type": {
+								"$ref": "AAAAAAFyK7dAq8vASL8="
+							}
+						}
+					]
 				},
 				{
 					"_type": "UMLClass",
@@ -49591,7 +49624,8 @@
 								"$ref": "AAAAAAFyQmhNGEJEzg0="
 							},
 							"name": "userSession",
-							"visibility": "private"
+							"visibility": "private",
+							"type": ""
 						}
 					],
 					"operations": [
