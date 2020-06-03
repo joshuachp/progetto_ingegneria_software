@@ -4,8 +4,9 @@ import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
 import org.example.client.utils.Utils;
 import org.json.JSONObject;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.net.InetAddress;
@@ -20,17 +21,22 @@ public class FactoryUtenteTest {
 
     private MockWebServer server;
 
-    @Before
-    public void setupTest() throws IOException {
+    @BeforeEach
+    void setUp() throws IOException {
         this.server = new MockWebServer();
         this.server.start(InetAddress.getByName("localhost.local"), 8080);
+    }
+
+    @AfterEach
+    void tearDown() throws IOException {
+        this.server.shutdown();
     }
 
     /**
      * Controlla che getUtente sia eseguito correttamente
      */
     @Test
-    public void testGetUtente() throws IOException {
+    public void testGetUtente() {
         server.enqueue(new MockResponse()
                 .setBody(new JSONObject()
                         .put("username", "admin")
@@ -49,6 +55,19 @@ public class FactoryUtenteTest {
      */
     @Test
     public void testGetUtenteSession() {
+        server.enqueue(new MockResponse()
+                .setBody(new JSONObject()
+                        .put("username", "admin")
+                        .put("session", "session")
+                        .put("responsabile", true)
+                        .toString()));
+        server.enqueue(new MockResponse()
+                .setBody(new JSONObject()
+                        .put("username", "admin")
+                        .put("session", "session")
+                        .put("responsabile", true)
+                        .toString()));
+
         JSONObject session = Utils.autenticaWithServer("admin", "password");
         assertNotNull(session);
         Utente utente = new FactoryUtente().getUtente(session.getString("session"));
@@ -61,6 +80,13 @@ public class FactoryUtenteTest {
      */
     @Test
     public void testGetUtenteCliente() {
+        server.enqueue(new MockResponse()
+                .setBody(new JSONObject()
+                        .put("username", "guest")
+                        .put("session", "session")
+                        .put("responsabile", false)
+                        .toString()));
+
         Utente utente = new FactoryUtente().getUtente("guest", "guest");
         assertFalse(utente.isResponsabile());
         assertTrue(utente instanceof Cliente);
@@ -71,9 +97,17 @@ public class FactoryUtenteTest {
      */
     @Test
     public void testGetUtenteResponsabileReparto() {
+        server.enqueue(new MockResponse()
+                .setBody(new JSONObject()
+                        .put("username", "admin")
+                        .put("session", "session")
+                        .put("responsabile", true)
+                        .toString()));
+
         Utente utente = new FactoryUtente().getUtente("admin", "password");
         assertTrue(utente.isResponsabile());
         assertTrue(utente instanceof ResponsabileReparto);
     }
+
 
 }
