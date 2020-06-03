@@ -38,12 +38,13 @@ public class ListaSpeseController {
     @FXML
     private TableColumn<Spesa, Integer> IDCol;
     @FXML
-    private TableView<Spesa> tableview;
+    private TableView<Spesa> tableView;
     private Stage stage;
 
+    // TODO: make static
     public void showView(Stage stage) throws IOException {
 
-        FXMLLoader loader = new FXMLLoader(ListaSpeseController.class.getResource("/views/listaSpese.fxml"));
+        FXMLLoader loader = new FXMLLoader(ListaSpeseController.class.getResource("/views/lista-spese.fxml"));
         Parent root = loader.load();
         Scene scene = new Scene(root);
         stage.setScene(scene);
@@ -77,7 +78,7 @@ public class ListaSpeseController {
                 System.out.println(event.getNewValue());
             }
         });
-        listaspesecontroller.tableview.setItems(spese);
+        listaspesecontroller.tableView.setItems(spese);
 
     }
 }

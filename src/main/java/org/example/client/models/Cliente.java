@@ -3,21 +3,33 @@ package org.example.client.models;
 import javafx.stage.Stage;
 import org.example.client.controllers.CatalogoController;
 
-import java.io.IOException;
-
+/**
+ * Cliente class
+ */
 public class Cliente extends Utente {
-    public Cliente(String username, String session) {
+
+    private String name;
+    private String surname;
+    private String address;
+    private Integer cap;
+    private String city;
+    private String telephone;
+    // TODO: payment method
+
+    public Cliente(String username, String session, String name, String surname, String address,
+                   Integer cap, String city, String telephone) {
         super(username, session, false);
+        this.name = name;
+        this.surname = surname;
+        this.address = address;
+        this.cap = cap;
+        this.city = city;
+        this.telephone = telephone;
     }
 
     @Override
     public void redirect(Stage stage) {
-        CatalogoController catalogo = new CatalogoController();
-        try {
-            catalogo.showView(stage);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        CatalogoController.showView(stage);
     }
 
 }

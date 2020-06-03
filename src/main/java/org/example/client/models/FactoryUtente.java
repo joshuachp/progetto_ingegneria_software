@@ -49,6 +49,7 @@ public class FactoryUtente {
         if (json.getBoolean("responsabile")) {
             return new ResponsabileReparto(username, session);
         }
-        return new Cliente(username, session);
+        return new Cliente(username, session, json.getString("name"), json.getString("surname"), json.getString(
+                "address"), json.getInt("cap"), json.getString("city"), json.getString("telephone "));
     }
 }
