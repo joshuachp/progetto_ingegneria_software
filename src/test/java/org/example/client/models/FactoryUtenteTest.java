@@ -47,6 +47,7 @@ public class FactoryUtenteTest {
         Utente utente = new FactoryUtente().getUtente("admin", "password");
         assertNotNull(utente);
         assertEquals("admin", utente.getUsername());
+        assertEquals("session", utente.getSession());
         assertTrue(utente.isResponsabile());
     }
 
@@ -72,6 +73,7 @@ public class FactoryUtenteTest {
         assertNotNull(session);
         Utente utente = new FactoryUtente().getUtente(session.getString("session"));
         assertEquals("admin", utente.getUsername());
+        assertEquals("session", utente.getSession());
         assertTrue(utente.isResponsabile());
     }
 
