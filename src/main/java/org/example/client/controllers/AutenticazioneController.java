@@ -1,5 +1,6 @@
 package org.example.client.controllers;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -65,8 +66,13 @@ public class AutenticazioneController {
         }
     }
 
+
     public void setStage(Stage stage) {
         this.stage = stage;
+    }
+
+    public void handleActionRegistrati(ActionEvent actionEvent) {
+        RegistrazioneController.showView(this.stage);
     }
 }
 

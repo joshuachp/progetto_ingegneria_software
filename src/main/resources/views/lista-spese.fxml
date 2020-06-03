@@ -31,7 +31,7 @@
                 </Menu>
               </menus>
             </MenuBar>
-              <TableView fx:id="tableview" editable="true" fixedCellSize="0.0" onMouseClicked="#handleViewProducts" prefHeight="378.0" prefWidth="600.0" VBox.vgrow="ALWAYS">
+              <TableView fx:id="tableView" editable="true" fixedCellSize="0.0" onMouseClicked="#handleViewProducts" prefHeight="378.0" prefWidth="600.0" VBox.vgrow="ALWAYS">
                   <columns>
                       <TableColumn fx:id="IDCol" editable="false" prefWidth="75.0" text="ID" />
                       <TableColumn fx:id="DataCol" editable="false" prefWidth="75.0" text="Data di consegna" />

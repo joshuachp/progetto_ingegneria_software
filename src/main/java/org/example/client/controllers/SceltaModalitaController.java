@@ -13,7 +13,7 @@ public class SceltaModalitaController {
     private Stage stage;
 
     public static void showView(Stage stage) {
-        FXMLLoader loader = new FXMLLoader(SceltaModalitaController.class.getResource("/views/scelta-modalità.fxml"));
+        FXMLLoader loader = new FXMLLoader(SceltaModalitaController.class.getResource("/views/scelta-modalita.fxml"));
         Parent root = null;
         try {
             root = loader.load();

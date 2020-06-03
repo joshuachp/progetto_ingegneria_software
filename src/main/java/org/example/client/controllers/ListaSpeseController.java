@@ -77,7 +77,7 @@ public class ListaSpeseController {
         // TODO: Handler ComboBox
         listaspesecontroller.StatoCol.setOnEditCommit(event -> event.getRowValue().setStatoSpesa(StatoSpesa.valueOf(event.getNewValue().toString())));
 
-        listaspesecontroller.tableview.setItems(spese);
+        listaspesecontroller.tableView.setItems(spese);
 
         Task<Void> task = new Task<>(){
             @Override
