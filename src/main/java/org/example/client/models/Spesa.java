@@ -2,6 +2,9 @@ package org.example.client.models;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.scene.control.Button;
+
+import java.util.Date;
 
 
 public class Spesa {
@@ -13,8 +16,12 @@ public class Spesa {
     float costoTotale;
     Pagamento pagamento;
     StatoSpesa statoSpesa;
+    Button button;
     // metodo per utilizzo delle lambda espressioni nella tablla (Property use: javafx.beans.property)
-    private final StringProperty date = new SimpleStringProperty();
+    private final StringProperty date;
+    // TEST
+    private final SimpleStringProperty firstName;
+
     public Spesa(int ID,
                  String dataConsegna,
                  String oraConsegna,
@@ -33,7 +40,18 @@ public class Spesa {
         this.pagamento = pagamento;
         this.statoSpesa = statoSpesa;
         //this.prodotti = prodotti;
-        setDate(dataConsegna);
+        //setDate(dataConsegna);
+        this.date = new SimpleStringProperty(dataConsegna);
+        //TEST
+        this.firstName = new SimpleStringProperty("Prova");
+    }
+
+    public String getFirstName() {
+        return firstName.get();
+    }
+
+    public void setFirstName(String fName) {
+        firstName.set(fName);
     }
 
     public Integer getID() {
@@ -58,6 +76,11 @@ public class Spesa {
 
     public void setDate(String dataConsegna) {
         this.dateProperty().set(dataConsegna);
+    }
+
+    // testo la creaazione dei bottoni
+    public Button buttonProperty() {
+        return new Button("Try It");
     }
 
 }

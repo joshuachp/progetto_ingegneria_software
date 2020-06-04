@@ -35,12 +35,8 @@ public class ProductListController {
     }
 
 
-    public void handlerAddProduct(ActionEvent actionEvent) {
-        GestioneProdottiController gestioneProdottiController = new GestioneProdottiController();
-        try {
-            gestioneProdottiController.showView(this.stage);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public void handlerAddProduct(ActionEvent actionEvent) throws IOException {
+        SceltaModalitaController sceltaModalitaController = new SceltaModalitaController();
+        sceltaModalitaController.showView(this.stage);
     }
 }
