@@ -79,8 +79,6 @@ public class RegistrazioneController {
     }
 
     public void handleConfirmAction(ActionEvent actionEvent) {
-        Cliente cliente = new Cliente();
-        Name.getText()
-        System.out.println();
+
     }
 }
