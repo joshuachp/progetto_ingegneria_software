@@ -12,7 +12,7 @@
    <children>
       <HBox alignment="TOP_CENTER">
          <children>
-            <Button alignment="CENTER" contentDisplay="TOP" mnemonicParsing="false" prefHeight="90.0" prefWidth="190.0" text="Gestione prodotti" textAlignment="CENTER" textFill="#393939">
+            <Button onAction="#HandleActionManageProduct" alignment="CENTER" contentDisplay="TOP" mnemonicParsing="false" prefHeight="90.0" prefWidth="190.0" text="Gestione prodotti" textAlignment="CENTER" textFill="#393939">
                <padding>
                   <Insets bottom="10.0" top="10.0" />
                </padding>

@@ -3,6 +3,8 @@ package org.example.client.models;
 import javafx.stage.Stage;
 import org.example.client.controllers.SceltaModalitaController;
 
+import java.io.IOException;
+
 public class Manager extends Utente {
 
     private String badge;
@@ -30,6 +32,10 @@ public class Manager extends Utente {
 
     @Override
     public void redirect(Stage stage) {
-        SceltaModalitaController.showView(stage);
+        try{
+            SceltaModalitaController.showView(stage);
+        } catch (IOException e){
+            e.printStackTrace();
+        }
     }
 }

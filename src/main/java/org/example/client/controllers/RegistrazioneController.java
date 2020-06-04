@@ -9,6 +9,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import org.example.client.models.Cliente;
+import org.example.client.utils.Utils;
 
 import java.io.IOException;
 
@@ -79,6 +80,6 @@ public class RegistrazioneController {
     }
 
     public void handleConfirmAction(ActionEvent actionEvent) {
-
+        //Utils.RegisterClient();
     }
 }

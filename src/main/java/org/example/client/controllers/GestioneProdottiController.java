@@ -11,9 +11,8 @@ public class GestioneProdottiController {
 
     private Stage stage;
 
-    public static void showView(Stage stage) {
-        FXMLLoader loader = new FXMLLoader(
-                GestioneProdottiController.class.getResource("/views/gestione-prodotti.fxml"));
+    public static void showView(Stage stage) throws IOException  {
+        FXMLLoader loader = new FXMLLoader(GestioneProdottiController.class.getResource("/views/gestione-prodotti.fxml"));
         Parent root = null;
         try {
             root = loader.load();
@@ -23,7 +22,7 @@ public class GestioneProdottiController {
         assert root != null;
         Scene scene = new Scene(root);
         stage.setScene(scene);
-        stage.setTitle("Gestione Prodotti");
+        stage.setTitle("Modifica prodotto");
         stage.show();
         GestioneProdottiController controller = loader.getController();
         controller.setStage(stage);

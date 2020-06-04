@@ -67,4 +67,28 @@ public class Utils {
         return null;
     }
 
+    /*
+    public static JSONObject RegisterClient(String username, String password) {
+        OkHttpClient client = new OkHttpClient();
+        RequestBody body = new FormBody.Builder()
+                .add("username", username)
+                .add("password", password)
+                .build();
+        Request request = new Request.Builder()
+                .url(SERVER_URL + SERVER_URL_AUTH)
+                .post(body)
+                .build();
+        try {
+            Response response = client.newCall(request).execute();
+            // NOTE: Added to remove error
+            String responseBody = Objects.requireNonNull(response.body()).string();
+            return new JSONObject(responseBody);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+
+    }*/
+
+
 }
