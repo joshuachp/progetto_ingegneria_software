@@ -51,7 +51,7 @@ public class FactoryUtente {
                     json.getString("surname"), json.getString("address"), json.getInt("cap"),
                     json.getString("city"), json.getString("telephone"), json.getString("role"));
         }
-        return new Cliente(username, session, json.getString("name"), json.getString("surname"),
+        return new Client(username, session, json.getString("name"), json.getString("surname"),
                 json.getString("address"), json.getInt("cap"), json.getString("city"),
                 json.getString("telephone"));
     }

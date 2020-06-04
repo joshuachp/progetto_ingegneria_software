@@ -6,18 +6,18 @@ import org.example.client.controllers.CatalogoController;
 /**
  * Cliente class
  */
-public class Cliente extends Utente {
+public class Client extends Utente {
 
-    private String name;
-    private String surname;
-    private String address;
-    private Integer cap;
-    private String city;
-    private String telephone;
+    private final String name;
+    private final String surname;
+    private final String address;
+    private final Integer cap;
+    private final String city;
+    private final String telephone;
     // TODO: payment method
 
-    public Cliente(String username, String session, String name, String surname, String address,
-                   Integer cap, String city, String telephone) {
+    public Client(String username, String session, String name, String surname, String address,
+                  Integer cap, String city, String telephone) {
         super(username, session, false);
         this.name = name;
         this.surname = surname;

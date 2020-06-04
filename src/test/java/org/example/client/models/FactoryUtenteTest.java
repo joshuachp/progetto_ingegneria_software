@@ -91,7 +91,7 @@ public class FactoryUtenteTest {
 
         Utente utente = new FactoryUtente().getUtente("guest", "guest");
         assertFalse(utente.isResponsabile());
-        assertTrue(utente instanceof Cliente);
+        assertTrue(utente instanceof Client);
     }
 
     /**
