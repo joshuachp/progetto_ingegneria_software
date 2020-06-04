@@ -83,6 +83,11 @@ Per ogni spesa si memorizza:
 *** Modifica dati
 *** Cronologia delle spesa
 ** Back Office
-*** Autenticazione addetti
+*** Autenticazione responsabile reparto
+- login
+- password
+- matricola
+- dati anagrafici
+- ruolo
 *** Aggiunta nuovi prodotti
 *** Verifica stato spese
