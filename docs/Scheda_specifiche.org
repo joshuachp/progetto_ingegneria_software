@@ -60,7 +60,7 @@ I prodotti possono essere ordinati in ordine crescente o decrescente secondo:
 **** Seleziona pagamento
 I metodi di pagamento possono essere:
 - Carta di credito
-- Paypal
+- PayPal
 - Alla consegna
 **** Selezione data e orario
 Il cliente seleziona la data e l'orario della consegna.
@@ -83,6 +83,11 @@ Per ogni spesa si memorizza:
 *** Modifica dati
 *** Cronologia delle spesa
 ** Back Office
-*** Autenticazione addetti
+*** Autenticazione responsabile reparto
+- login
+- password
+- matricola
+- dati anagrafici
+- ruolo
 *** Aggiunta nuovi prodotti
 *** Verifica stato spese

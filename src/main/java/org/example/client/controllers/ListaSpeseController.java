@@ -3,8 +3,6 @@ package org.example.client.controllers;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -16,7 +14,6 @@ import javafx.scene.control.cell.ComboBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import javafx.util.converter.DefaultStringConverter;
 import org.example.client.models.Pagamento;
 import org.example.client.models.Spesa;
 import org.example.client.models.StatoSpesa;
@@ -79,11 +76,12 @@ public class ListaSpeseController {
 
         listaspesecontroller.tableView.setItems(spese);
 
-        Task<Void> task = new Task<>(){
+        Task<Void> task = new Task<>() {
             @Override
             protected Void call() throws Exception {
                 sleep(10000);
-                spese.add(new Spesa(3, "10/09/20", "10:00 - 14:00", "utente", 100, Pagamento.PAYPAL, StatoSpesa.CONFERMATA ));
+                spese.add(new Spesa(3, "10/09/20", "10:00 - 14:00", "utente", 100, Pagamento.PAYPAL,
+                        StatoSpesa.CONFERMATA));
                 return null;
             }
         };

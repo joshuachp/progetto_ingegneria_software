@@ -108,7 +108,7 @@ public class FactoryUtenteTest {
 
         Utente utente = new FactoryUtente().getUtente("admin", "password");
         assertTrue(utente.isResponsabile());
-        assertTrue(utente instanceof ResponsabileReparto);
+        assertTrue(utente instanceof Manager);
     }
 
 
