@@ -17,4 +17,13 @@ public enum Pagamento {
     public String toString() {
         return pagamento;
     }
+
+    public static Pagamento fromString(String text) {
+        for (Pagamento x : Pagamento.values()) {
+            if (x.pagamento.equalsIgnoreCase(text)) {
+                return x;
+            }
+        }
+        return null;
+    }
 }
