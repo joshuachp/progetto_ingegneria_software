@@ -50,4 +50,10 @@ public class SceltaModalitaController {
             e.printStackTrace();
         }
     }
+
+    public void handlerLogutAction(ActionEvent actionEvent) {
+    }
+
+    public void handlerAddManagerAction(ActionEvent actionEvent) {
+    }
 }

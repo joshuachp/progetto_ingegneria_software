@@ -32,10 +32,12 @@ public class Utils {
                 .build();
         try {
             Response response = client.newCall(request).execute();
-            // NOTE: Added to remove error
-            String responseBody = Objects.requireNonNull(response.body()).string();
-            return new JSONObject(responseBody);
-        } catch (IOException e) {
+            if (response.body() != null) {
+                // TODO: check asnwer code
+                String responseBody = Objects.requireNonNull(response.body()).string();
+                return new JSONObject(responseBody);
+            }
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
@@ -58,10 +60,12 @@ public class Utils {
                 .build();
         try {
             Response response = client.newCall(request).execute();
-            // NOTE: Added to remove error
-            String responseBody = Objects.requireNonNull(response.body()).string();
-            return new JSONObject(responseBody);
-        } catch (IOException e) {
+            // TODO: check asnwer code
+            if (response.body() != null) {
+                String responseBody = Objects.requireNonNull(response.body()).string();
+                return new JSONObject(responseBody);
+            }
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
