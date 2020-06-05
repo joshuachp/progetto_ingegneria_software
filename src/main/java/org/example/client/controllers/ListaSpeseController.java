@@ -160,4 +160,10 @@ public class ListaSpeseController {
         SceltaModalitaController sceltaModalitaController = new SceltaModalitaController();
         SceltaModalitaController.showView(this.stage);
     }
+
+    public void handlerAddManagerAction(ActionEvent actionEvent) {
+    }
+
+    public void handlerLogutAction(ActionEvent actionEvent) {
+    }
 }

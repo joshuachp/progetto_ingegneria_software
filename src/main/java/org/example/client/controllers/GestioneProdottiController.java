@@ -1,5 +1,6 @@
 package org.example.client.controllers;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -30,5 +31,8 @@ public class GestioneProdottiController {
 
     public void setStage(Stage stage) {
         this.stage = stage;
+    }
+
+    public void handleBackAction(ActionEvent actionEvent) {
     }
 }

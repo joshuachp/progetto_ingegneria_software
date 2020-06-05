@@ -39,4 +39,13 @@ public class ProductListController {
         SceltaModalitaController sceltaModalitaController = new SceltaModalitaController();
         sceltaModalitaController.showView(this.stage);
     }
+
+    public void handleBackAction(ActionEvent actionEvent) {
+    }
+
+    public void handlerLogutAction(ActionEvent actionEvent) {
+    }
+
+    public void handlerAddManagerAction(ActionEvent actionEvent) {
+    }
 }
