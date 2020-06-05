@@ -12,19 +12,13 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.control.cell.ComboBoxTableCell;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
-import org.example.client.models.Cliente;
 import org.example.client.models.Pagamento;
-import org.example.client.models.StatoSpesa;
 import org.example.client.utils.Utils;
 
 import java.io.IOException;
-import java.lang.reflect.Field;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.regex.Pattern;
 
@@ -95,56 +89,35 @@ public class RegistrazioneController implements Initializable {
 
     public void handlerSetPaymentAction(ActionEvent actionEvent) {
         this.paymentMethod = Pagamento.fromString(cbxPagamento.getValue()).ordinal();;
-
     }
 
     public void handleBackAction(ActionEvent actionEvent) {
         AutenticazioneController.showView(this.stage);
     }
 
-    public boolean handlePasswordField(ActionEvent actionEvent) {
-        this.PasswordVerify();
-        return true;
+
+    public boolean passwordVerify(String password){
+        return (Pattern.matches("[!-}]{8,16}", password.trim()));
     }
 
-    public boolean handlePasswordVerifyField(ActionEvent actionEvent) {
-        return this.PasswordVerifyEquals();
+    public boolean passwordVerifyEquals(String password, String passwordRepeat){
+        return(password.trim().equals(passwordRepeat.trim()));
     }
 
-    public boolean PasswordVerify(){
-        return (Password.getText().trim().length() > 8);
+    public boolean capVerify(String cap){
+        return(Pattern.matches("\\d{5}", cap));
     }
 
-    public boolean PasswordVerifyEquals(){
-        return(Password.getText().trim().equals(PasswordRepeat.getText().trim()));
-    }
-
-    public boolean handleCardField(ActionEvent actionEvent) {
-        return true;
-    }
-
-    public boolean handlePhoneField(ActionEvent actionEvent) {
-        return true;
-    }
-
-    public boolean capVerify(){
-        return(Pattern.matches("\\d{5}", CAP.getText()));
-    }
-
-    public boolean phoneVerify(){
+    public boolean phoneVerify(String phone){
         return(Pattern.matches(
                 "^(\\((00|\\+)39\\)|(00|\\+)39)?" +
                         "(38[890]|" +
-                        "34[7-90]|" +
+                        "34[6-90]|" +
                         "36[680]|" +
                         "33[3-90]|" +
                         "32[89])" +
                         "\\d{7}$",
-                Phone.getText()));
-    }
-
-    public boolean handleCapField(ActionEvent actionEvent) {
-        return capVerify();
+                phone));
     }
 
     public boolean errorMessage(String message, TextField field){
@@ -168,46 +141,53 @@ public class RegistrazioneController implements Initializable {
     public void handleConfirmAction(ActionEvent actionEvent) {
         boolean error = false;
         resetErrorMessage();
-        // Verifica lunghezza password
-        if(Password.getText() != null){
-            if (!PasswordVerify())
-                error = errorMessage("La lunghezza della password deve essere di almeno 8 caratteri.",Password);
-        } else
-            error = errorMessage("Il campo password è vuoto.",Password);
 
-        if (Name.getText() == null)
+        if (Name.getText().equals(""))
             error = errorMessage("Il campo Nome è vuoto.",Name);
 
-        if (Surname.getText() == null)
+        if (Surname.getText().equals(""))
             error = errorMessage("Il campo Cognome è vuoto.",Surname);
 
-        // Verifica uguaglianza password
-        if (PasswordRepeat.getText() != null) {
-            if (!PasswordVerify())
-                error = errorMessage("Le password devono coincidere.", PasswordRepeat);
-        } else
-            error = errorMessage("Il campo Ripeti password è vuoto.", PasswordRepeat);
+        if (Address.getText().equals(""))
+            error = errorMessage("Il campo Indirizzo è vuoto.",Address);
 
         // Verifica CAP
-        if (CAP.getText() != null) {
-            if (!capVerify())
+        if (!CAP.getText().equals("")) {
+            if (!capVerify(CAP.getText()))
                 error = errorMessage("Il CAP deve essere di 5 cifre.", CAP);
         } else
             error = errorMessage("Il campo CAP è vuoto.", CAP);
 
-        if (City.getText() == null)
+        if (City.getText().equals(""))
             error = errorMessage("Il campo Città è vuoto.",City);
 
-        if (Phone.getText() != null){
-            if(!phoneVerify())
+        if (!Phone.getText().equals("")){
+            if(!phoneVerify(Phone.getText()))
                 error = errorMessage("Il numero di telefono dato non è valido.",Phone);
         } else
             error = errorMessage("Il campo Telefono è vuoto.",Phone);
 
+        if (Email.getText().equals(""))
+            error = errorMessage("Il campo E-mail è vuoto.",Email);
+
+        // Verifica lunghezza password
+        if(!Password.getText().equals("")){
+            if (!passwordVerify(Password.getText()))
+                error = errorMessage("La lunghezza della password deve essere di almeno 8 caratteri.",Password);
+        } else
+            error = errorMessage("Il campo password è vuoto.",Password);
+
+        // Verifica uguaglianza password
+        if (!PasswordRepeat.getText().equals("")) {
+            if (!passwordVerifyEquals(Password.getText(), PasswordRepeat.getText()))
+                error = errorMessage("Le password devono coincidere.", PasswordRepeat);
+        } else
+            error = errorMessage("Il campo Ripeti password è vuoto.", PasswordRepeat);
+
         if(error)
             return;
-
-        Utils.RegisterClient(Email.getText(), PasswordRepeat.getText(), Name.getText(), Surname.getText(),
+        else
+            Utils.RegisterClient(Email.getText(), PasswordRepeat.getText(), Name.getText(), Surname.getText(),
                 Address.getText(), Integer.valueOf(CAP.getText()), City.getText(), Phone.getText(), 1);
 
     }
