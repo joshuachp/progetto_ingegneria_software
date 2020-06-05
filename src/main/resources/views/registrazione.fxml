@@ -106,7 +106,7 @@
                               <Insets bottom="5.0" right="5.0" top="5.0" />
                            </VBox.margin>
                         </Text>
-                        <TextField fx:id="Addess" minWidth="-Infinity">
+                        <TextField fx:id="Address" minWidth="-Infinity">
                            <VBox.margin>
                               <Insets />
                            </VBox.margin>
@@ -177,7 +177,7 @@
                               <Insets bottom="5.0" right="5.0" top="5.0" />
                            </VBox.margin>
                         </Text>
-                        <TextField fx:id="Fidelty" onAction="#handleCardField">
+                        <TextField fx:id="Fidelity" onAction="#handleCardField">
                            <padding>
                               <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                            </padding>
@@ -251,7 +251,7 @@
                               <Insets bottom="5.0" right="5.0" top="5.0" />
                            </VBox.margin>
                         </Text>
-                        <PasswordField onAction="#handlePasswordVerifyField">
+                        <PasswordField fx:id="PasswordRepeat" onAction="#handlePasswordVerifyField">
                            <padding>
                               <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                            </padding>
@@ -268,7 +268,7 @@
                               <Insets bottom="5.0" right="5.0" top="5.0" />
                            </VBox.margin>
                         </Text>
-                        <PasswordField onAction="#handlePasswordField">
+                        <PasswordField fx:id="Password" onAction="#handlePasswordField">
                            <padding>
                               <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                            </padding>

@@ -11,6 +11,7 @@ public class Utils {
     public static final String SERVER_URL = "http://localhost:8080";
     public static final String SERVER_URL_AUTH = "/api/user/authenticate";
     public static final String SERVER_URL_SESSION = "/api/user/session";
+    public static final String SERVER_URL_REGISTRATION = "/api/client/register";
 
 
     /**
@@ -71,15 +72,25 @@ public class Utils {
         return null;
     }
 
-    /*
-    public static JSONObject RegisterClient(String username, String password) {
+
+    public static JSONObject RegisterClient(  String username,  String password,
+                                              String name,  String surname,
+                                              String address,  Integer cap,  String city,
+                                              String telephone,  Integer payment ) {
         OkHttpClient client = new OkHttpClient();
         RequestBody body = new FormBody.Builder()
                 .add("username", username)
                 .add("password", password)
+                .add("name", name)
+                .add("surname", surname)
+                .add("address", address)
+                .add("cap", String.valueOf(cap))
+                .add("city", city)
+                .add("telephone", telephone)
+                .add("payment", String.valueOf(payment))
                 .build();
         Request request = new Request.Builder()
-                .url(SERVER_URL + SERVER_URL_AUTH)
+                .url(SERVER_URL + SERVER_URL_REGISTRATION)
                 .post(body)
                 .build();
         try {
@@ -92,7 +103,7 @@ public class Utils {
         }
         return null;
 
-    }*/
+    }
 
 
 }
