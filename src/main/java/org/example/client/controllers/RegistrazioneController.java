@@ -14,7 +14,9 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
+import org.example.client.models.FactoryUtente;
 import org.example.client.models.Pagamento;
+import org.example.client.models.Utente;
 import org.example.client.utils.Utils;
 
 import java.io.IOException;
@@ -191,9 +193,16 @@ public class RegistrazioneController implements Initializable {
 
         if(error)
             return;
-        else
-            Utils.registerClient(Email.getText(), PasswordRepeat.getText(), Name.getText(), Surname.getText(),
-                Address.getText(), Integer.valueOf(CAP.getText()), City.getText(), Phone.getText(), 1);
+        else{
+            int statusCode = Utils.registerClient(Email.getText(), PasswordRepeat.getText(), Name.getText(), Surname.getText(),
+                Address.getText(), Integer.valueOf(CAP.getText()), City.getText(), Phone.getText(),
+                Pagamento.fromString(cbxPagamento.getValue()).ordinal());
+           if( statusCode == 200){
+               Utente utente = new FactoryUtente().getUtente(Email.getText(), PasswordRepeat.getText());
+           } else {
+               errorMessage("Error" + statusCode, null );
+           }
+        }
 
     }
 
