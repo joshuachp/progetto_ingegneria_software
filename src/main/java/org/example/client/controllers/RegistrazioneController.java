@@ -75,6 +75,11 @@ public class RegistrazioneController implements Initializable {
 
     }
 
+    /*
+    **
+    * Override of initialize method invoked by load.
+    * Implementation of payment enum in a ComboBox.
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         cbxPagamento.getItems().addAll(payment);
@@ -186,9 +191,14 @@ public class RegistrazioneController implements Initializable {
 
         if(error)
             return;
-        else
-            Utils.RegisterClient(Email.getText(), PasswordRepeat.getText(), Name.getText(), Surname.getText(),
-                Address.getText(), Integer.valueOf(CAP.getText()), City.getText(), Phone.getText(), 1);
+        else {
+            if ( Utils.RegisterClient(Email.getText(), PasswordRepeat.getText(), Name.getText(), Surname.getText(),
+                Address.getText(), Integer.valueOf(CAP.getText()), City.getText(), Phone.getText(),
+                Pagamento.fromString(cbxPagamento.getValue()).ordinal()){
+                errorMessage("Internal server error 500", null);
+            }
+            return;
+        }
 
     }
 

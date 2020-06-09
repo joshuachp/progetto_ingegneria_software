@@ -157,7 +157,6 @@ public class ListaSpeseController {
     }
 
     public void handleBackAction(ActionEvent actionEvent) throws IOException {
-        SceltaModalitaController sceltaModalitaController = new SceltaModalitaController();
         SceltaModalitaController.showView(this.stage);
     }
 
