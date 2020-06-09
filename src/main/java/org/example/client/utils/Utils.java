@@ -73,10 +73,9 @@ public class Utils {
     }
 
 
-    public static JSONObject RegisterClient(  String username,  String password,
-                                              String name,  String surname,
-                                              String address,  Integer cap,  String city,
-                                              String telephone,  Integer payment ) {
+    public static int registerClient(String username, String password, String name, String surname,
+                                     String address, Integer cap, String city,
+                                     String telephone, Integer payment) {
         OkHttpClient client = new OkHttpClient();
         RequestBody body = new FormBody.Builder()
                 .add("username", username)
@@ -95,14 +94,11 @@ public class Utils {
                 .build();
         try {
             Response response = client.newCall(request).execute();
-            // NOTE: Added to remove error
-            String responseBody = Objects.requireNonNull(response.body()).string();
-            return new JSONObject(responseBody);
+            return response.code();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return null;
-
+        return -1;
     }
 
 

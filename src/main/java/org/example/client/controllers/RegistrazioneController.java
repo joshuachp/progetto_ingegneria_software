@@ -191,14 +191,9 @@ public class RegistrazioneController implements Initializable {
 
         if(error)
             return;
-        else {
-            if ( Utils.RegisterClient(Email.getText(), PasswordRepeat.getText(), Name.getText(), Surname.getText(),
-                Address.getText(), Integer.valueOf(CAP.getText()), City.getText(), Phone.getText(),
-                Pagamento.fromString(cbxPagamento.getValue()).ordinal()){
-                errorMessage("Internal server error 500", null);
-            }
-            return;
-        }
+        else
+            Utils.registerClient(Email.getText(), PasswordRepeat.getText(), Name.getText(), Surname.getText(),
+                Address.getText(), Integer.valueOf(CAP.getText()), City.getText(), Phone.getText(), 1);
 
     }
 
