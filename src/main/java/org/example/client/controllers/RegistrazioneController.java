@@ -187,7 +187,7 @@ public class RegistrazioneController implements Initializable {
         if(error)
             return;
         else
-            Utils.RegisterClient(Email.getText(), PasswordRepeat.getText(), Name.getText(), Surname.getText(),
+            Utils.registerClient(Email.getText(), PasswordRepeat.getText(), Name.getText(), Surname.getText(),
                 Address.getText(), Integer.valueOf(CAP.getText()), City.getText(), Phone.getText(), 1);
 
     }
