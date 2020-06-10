@@ -1,6 +1,7 @@
 package org.example.client.models;
 
 import org.example.client.controllers.RegistrazioneController;
+import org.example.client.utils.Utils;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -42,5 +43,22 @@ public class RegistrationControllerTest {
         assertNotNull(registrazioneController);
         assertTrue(registrazioneController.passwordVerifyEquals("1234abcd", "1234abcd"));
         assertFalse(registrazioneController.passwordVerifyEquals("1234ascd", "1234abcd"));
+    }
+
+    @Test
+    public void handleConfirmAction(){
+        String email = "jondoe@gmail.com";
+        String password = "12345678";
+        String name = "Jon";
+        String surname = "Doe";
+        String address = "myHome, 12";
+        int cap = 37530;
+        String city = "New York";
+        String phone = "3490327543";
+        int spesa = 1;
+
+        assertEquals(200, (Utils.registerClient(email, password, name, surname,
+                address, cap, city, phone, spesa)));
+        
     }
 }

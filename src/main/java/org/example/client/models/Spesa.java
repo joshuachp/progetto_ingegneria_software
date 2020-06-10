@@ -1,33 +1,30 @@
 package org.example.client.models;
 
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
+import javafx.beans.property.*;
 import javafx.scene.control.Button;
 
 import java.util.Date;
 
 
 public class Spesa {
-    int ID;
+    Integer ID;
     String dataConsegna;
     String oraConsegna;
-    //ArrayList<Prodotto> prodotti;
+    // ArrayList<Prodotto> prodotti;
     String utente;
-    float costoTotale;
+    Double costoTotale;
     Pagamento pagamento;
-    StatoSpesa statoSpesa;
-    Button button;
-    // metodo per utilizzo delle lambda espressioni nella tablla (Property use: javafx.beans.property)
-    private final StringProperty date;
-    // TEST
-    private final SimpleStringProperty firstName;
 
-    public Spesa(int ID,
+    StatoSpesa statoSpesa;
+
+    // metodo per utilizzo delle lambda espressioni nella tabella (Property use: javafx.beans.property)
+
+    public Spesa(Integer ID,
                  String dataConsegna,
                  String oraConsegna,
                  //ArrayList<Prodotto> prodotti;
                  String utente,
-                 float costoTotale,
+                 Double costoTotale,
                  Pagamento pagamento,
                  StatoSpesa statoSpesa) {
 
@@ -40,22 +37,36 @@ public class Spesa {
         this.pagamento = pagamento;
         this.statoSpesa = statoSpesa;
         //this.prodotti = prodotti;
-        //setDate(dataConsegna);
-        this.date = new SimpleStringProperty(dataConsegna);
-        //TEST
-        this.firstName = new SimpleStringProperty("Prova");
+
     }
 
-    public String getFirstName() {
-        return firstName.get();
+    public String getOraConsegna() {
+        return this.oraConsegna;
     }
 
-    public void setFirstName(String fName) {
-        firstName.set(fName);
+    public StringProperty propertyOraConsegna() {
+        return new SimpleStringProperty(this.oraConsegna);
+    }
+
+    public StringProperty propertyPagamento() {
+        return new SimpleStringProperty(this.pagamento.toString());
+    }
+
+
+    public String getDataConsegna() {
+        return this.dataConsegna;
+    }
+
+    public StringProperty propertyDataConsegna() {
+        return new SimpleStringProperty(this.dataConsegna);
     }
 
     public Integer getID() {
         return (Integer) this.ID;
+    }
+
+    public IntegerProperty propertyID() {
+        return new SimpleIntegerProperty(this.ID);
     }
 
     public StatoSpesa getStatoSpesa() {
@@ -66,21 +77,33 @@ public class Spesa {
         this.statoSpesa = statoSpesa;
     }
 
+    public StringProperty propertyStatoSpesa() {
+        return new SimpleStringProperty(this.statoSpesa.toString());
+    }
+
+    public String getUtente() {
+        return utente;
+    }
+
+    public Double getCostoTotale() {
+        return costoTotale;
+    }
+
+    public DoubleProperty propertyCostoTotale() {
+        return new SimpleDoubleProperty(this.costoTotale);
+    }
+
+    public Pagamento getPagamento() {
+        return pagamento;
+    }
+
+    /*
     public StringProperty dateProperty() {
         return this.date;
     }
-
-    public String getDate() {
-        return this.dateProperty().get();
-    }
-
     public void setDate(String dataConsegna) {
         this.dateProperty().set(dataConsegna);
-    }
+    }*/
 
-    // testo la creaazione dei bottoni
-    public Button buttonProperty() {
-        return new Button("Try It");
-    }
 
 }

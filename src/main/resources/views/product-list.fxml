@@ -43,12 +43,12 @@
                 <RowConstraints vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <ChoiceBox fx:id="columnchoice" prefWidth="150.0" GridPane.columnIndex="1">
+                  <ChoiceBox fx:id="CbxColumn" prefWidth="150.0" GridPane.columnIndex="1">
                      <GridPane.margin>
                         <Insets />
                      </GridPane.margin>
                   </ChoiceBox>
-                  <TextField fx:id="search" promptText="Ricerca" GridPane.columnIndex="2">
+                  <TextField fx:id="Search" promptText="Ricerca" GridPane.columnIndex="2">
                      <GridPane.margin>
                         <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
                      </GridPane.margin>
@@ -75,15 +75,16 @@
             </GridPane>
             <TableView fx:id="tableview" prefHeight="275.0" prefWidth="600.0">
               <columns>
-                  <TableColumn fx:id="IDCol" prefWidth="197.59995114803314" text="ID Prodotto" />
-                <TableColumn fx:id="NameCol" prefWidth="203.99993896484375" text="Nome Prodotto" />
-                <TableColumn fx:id="QuantityCol" prefWidth="93.5999755859375" text="Quantità" />
-                  <TableColumn fx:id="QuantityCol1" prefWidth="103.60000610351562" text="Modifica" />
+                  <TableColumn fx:id="IDCol" prefWidth="77.60003358125687" text="ID Prodotto" />
+                <TableColumn fx:id="NameCol" prefWidth="176.00006103515625" text="Nome Prodotto" />
+                  <TableColumn fx:id="BrandCol" prefWidth="162.3999786376953" text="Brand" />
+                  <TableColumn fx:id="PriceCol" prefWidth="96.0" text="Prezzo" />
+                <TableColumn fx:id="QuantityCol" editable="true" prefWidth="88.79998779296875" text="Quantità" />
               </columns>
             </TableView>
             <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Button fx:id="buttonproductlist" alignment="CENTER" mnemonicParsing="false" text="Aggiungi lista prodotti">
+                  <Button fx:id="buttonimportproductlist" alignment="CENTER" mnemonicParsing="false" text="Aggiungi lista prodotti">
                      <HBox.margin>
                         <Insets bottom="15.0" left="15.0" right="5.0" top="15.0" />
                      </HBox.margin>

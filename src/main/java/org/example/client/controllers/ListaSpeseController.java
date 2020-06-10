@@ -2,6 +2,7 @@ package org.example.client.controllers;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -22,31 +23,59 @@ import org.example.client.models.Spesa;
 import org.example.client.models.StatoSpesa;
 
 import java.io.IOException;
+import java.util.Objects;
 
 import static java.lang.Thread.sleep;
 
 public class ListaSpeseController {
 
-    public ListView<Spesa> listview;
-    public ObservableList<StatoSpesa> stato;
+    public ObservableList<String> columnFilterString;
+    public ObservableList<String> stato;
     public ObservableList<Spesa> spese;
+
     @FXML
-    private TableColumn <Spesa, Button> VisualizzaCol;
+    private ChoiceBox<String> CbxColumn;
+    @FXML
+    private TextField Search;
     @FXML
     private TableColumn<Spesa, String> DataCol;
     @FXML
     private TableColumn<Spesa, String> OraCol;
     @FXML
-    private TableColumn<Spesa, Pagamento> MetodoPagamentoCol;
+    private TableColumn<Spesa, String> MetodoPagamentoCol;
     @FXML
-    private TableColumn<Spesa, Float> TotaleCol;
+    private TableColumn<Spesa, Double> TotaleCol;
     @FXML
-    private TableColumn<Spesa, StatoSpesa> StatoCol;
+    private TableColumn<Spesa, String> StatoCol;
     @FXML
     private TableColumn<Spesa, Integer> IDCol;
     @FXML
     private TableView<Spesa> tableView;
     private Stage stage;
+
+    // Search filter enum
+    public enum columnFilterEnum{
+        ID("Id"), DATE ("Data"), HOUR ("Ora"), PAYMENT ("Tipo pagamento"), STATE ("Stato ordine");
+
+        private final String column;
+
+        columnFilterEnum(final String column) {
+            this.column = column;
+        }
+
+        public String toString() {
+            return column;
+        }
+
+        public static columnFilterEnum fromString(String text) {
+            for (columnFilterEnum x : columnFilterEnum.values()) {
+                if (x.column.equalsIgnoreCase(text)) {
+                    return x;
+                }
+            }
+            return null;
+        }
+    }
 
     // TODO: make static
     public void showView(Stage stage) throws IOException {
@@ -61,14 +90,16 @@ public class ListaSpeseController {
 
         // List Demo
         spese = FXCollections.observableArrayList();
-        spese.add(new Spesa(123, "12/09/20", "10:00 - 14:00", "utente", 100, Pagamento.PAYPAL, StatoSpesa.CONSEGNATA));
-        spese.add(new Spesa(256, "10/09/20", "10:00 - 14:00", "utente", 100, Pagamento.PAYPAL, StatoSpesa.CONFERMATA));
+        spese.add(new Spesa(123, "12/09/20", "10:00 - 14:00", "utente", 100.0, Pagamento.PAYPAL,
+                StatoSpesa.CONSEGNATA));
+        spese.add(new Spesa(256, "10/09/20", "10:00 - 14:00", "utente", 100.0, Pagamento.PAYPAL,
+                StatoSpesa.CONFERMATA));
 
         // Create setCellFactory for IDCol with link to list of product
         listaspesecontroller.IDCol.setCellFactory(new Callback<TableColumn<Spesa, Integer>, TableCell<Spesa, Integer>>() {
             @Override
             public TableCell<Spesa, Integer> call(TableColumn<Spesa, Integer> col) {
-                final TableCell<Spesa, Integer> cell = new TableCell<Spesa, Integer>() {
+                final TableCell<Spesa, Integer> cell = new TableCell<>() {
                     @Override
                     public void updateItem(Integer ID, boolean empty) {
                         super.updateItem(ID, empty);
@@ -86,7 +117,13 @@ public class ListaSpeseController {
                     @Override
                     public void handle(MouseEvent event) {
                         if (event.getClickCount() > 0) {
-                            System.out.println("double click on "+cell.getItem());
+                            // TODO: view ordered products list
+                            System.out.println("double click on " + cell.getItem());
+                            try {
+                                handleViewIdProductList(cell.getItem());
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
                         }
                     }
                 });
@@ -94,21 +131,70 @@ public class ListaSpeseController {
             }
         });
         // Setting-up data colums
-        listaspesecontroller.IDCol.setCellValueFactory(new PropertyValueFactory<>("ID"));
-        listaspesecontroller.DataCol.setCellValueFactory(cellData -> cellData.getValue().dateProperty());
+        listaspesecontroller.IDCol.setCellValueFactory(cellData -> cellData.getValue().propertyID().asObject()); // asObject needed by FX implementation
+        listaspesecontroller.DataCol.setCellValueFactory(cellData -> cellData.getValue().propertyDataConsegna());
+        //listaspesecontroller.IDCol.setCellValueFactory(new PropertyValueFactory<>("DataConsegna"));
+        listaspesecontroller.OraCol.setCellValueFactory(cellData -> cellData.getValue().propertyOraConsegna());
+        listaspesecontroller.MetodoPagamentoCol.setCellValueFactory(cellData -> cellData.getValue().propertyPagamento());
+        listaspesecontroller.TotaleCol.setCellValueFactory(cellData -> cellData.getValue().propertyCostoTotale().asObject());
+
+        // Search with filter
+        columnFilterString = FXCollections.observableArrayList(
+                columnFilterEnum.ID.toString(),
+                columnFilterEnum.HOUR.toString(),
+                columnFilterEnum.DATE.toString(),
+                columnFilterEnum.PAYMENT.toString(),
+                columnFilterEnum.STATE.toString());
+        listaspesecontroller.CbxColumn.setItems(columnFilterString);
+        listaspesecontroller.CbxColumn.setValue(columnFilterEnum.ID.toString());
+
+        FilteredList<Spesa> flspese = new FilteredList<>(spese, p -> true);
+
+        listaspesecontroller.Search.setOnKeyReleased(keyEvent ->
+        {
+            switch (Objects.requireNonNull(columnFilterEnum.fromString(listaspesecontroller.CbxColumn.getValue())))//Switch on choiceBox value
+            {
+                case ID:
+                    flspese.setPredicate(p -> p.getID().toString().contains(listaspesecontroller.Search.getText().trim()));
+                    break;
+                case DATE:
+                    flspese.setPredicate(p -> p.getDataConsegna().contains(listaspesecontroller.Search.getText().trim()));
+                    break;
+                case STATE:
+                    flspese.setPredicate(p -> p.getStatoSpesa().toString().contains(listaspesecontroller.Search.getText().trim()));
+                    break;
+                case HOUR:
+                    flspese.setPredicate(p -> p.getOraConsegna().contains(listaspesecontroller.Search.getText().trim()));
+                    break;
+                case PAYMENT:
+                    // TODO: toLowerCase dosn't work
+                    flspese.setPredicate(p -> p.getPagamento().toString().toLowerCase().contains(listaspesecontroller.Search.getText().toLowerCase().trim()));
+                    break;
+            }
+        });
 
         // Setting-up checkBox state
-        stato = FXCollections.observableArrayList();
-        stato.add(StatoSpesa.CONFERMATA);
-        stato.add(StatoSpesa.INPREPARAZIONE);
-        stato.add(StatoSpesa.CONSEGNATA);
+        stato = FXCollections.observableArrayList(StatoSpesa.CONFERMATA.toString(),
+                StatoSpesa.INPREPARAZIONE.toString(),StatoSpesa.CONSEGNATA.toString());
 
-        listaspesecontroller.StatoCol.setCellValueFactory(new PropertyValueFactory("StatoSpesa"));
+        listaspesecontroller.StatoCol.setCellValueFactory(cellData -> cellData.getValue().propertyStatoSpesa());
         listaspesecontroller.StatoCol.setCellFactory(ComboBoxTableCell.forTableColumn(stato));
-        // TODO: Handler ComboBox
-        listaspesecontroller.StatoCol.setOnEditCommit(event -> event.getRowValue().setStatoSpesa(StatoSpesa.valueOf(event.getNewValue().toString())));
 
-        listaspesecontroller.tableView.setItems(spese);
+        // TODO: Handler ComboBox: Come invio al server un singolo parametro?
+
+        listaspesecontroller.StatoCol.setEditable(true);
+
+        listaspesecontroller.StatoCol.setOnEditCommit((TableColumn.CellEditEvent<Spesa, String> event) -> {
+            ((Spesa) event.getTableView().getItems().get(
+                    event.getTablePosition().getRow()))
+                    .setStatoSpesa(StatoSpesa.fromString(event.getNewValue()));
+
+            //event.getRowValue().setStatoSpesa(StatoSpesa.fromString(event.getRowValue().getStatoSpesa().toString()));
+            System.out.println(event.getRowValue().getStatoSpesa());
+        });
+        // (event.getRowValue().getStatoSpesa().)));
+
+        listaspesecontroller.tableView.setItems(flspese);
 
         listaspesecontroller.setStage(stage);
 
@@ -116,7 +202,7 @@ public class ListaSpeseController {
             @Override
             protected Void call() throws Exception {
                 sleep(10000);
-                spese.add(new Spesa(3, "10/09/20", "10:00 - 14:00", "utente", 100, Pagamento.PAYPAL,
+                spese.add(new Spesa(3, "10/09/20", "10:00 - 14:00", "utente", 100.72, Pagamento.PAYPAL,
                         StatoSpesa.CONFERMATA));
                 return null;
             }
@@ -127,33 +213,13 @@ public class ListaSpeseController {
 
     }
 
-    private void addButtonToTable() {
-
+    private void handleViewIdProductList(Integer id) throws IOException {
+        OrderProductListController orderProductList =  new OrderProductListController();
+        orderProductList.showView(id);
     }
 
     private void setStage(Stage stage) {
         this.stage = stage;
-    }
-
-
-    public void viewProductOrder () {
-
-            FXMLLoader loader = new FXMLLoader(AutenticazioneController.class.getResource("/views/autenticazione.fxml"));
-            Parent root = null;
-            try {
-                root = loader.load();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            assert root != null;
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.setTitle("Lista prodotti Spesa");
-            stage.show();
-            AutenticazioneController autenticazioneController = loader.getController();
-            autenticazioneController.setStage(stage);
-
-
     }
 
     public void handleBackAction(ActionEvent actionEvent) throws IOException {

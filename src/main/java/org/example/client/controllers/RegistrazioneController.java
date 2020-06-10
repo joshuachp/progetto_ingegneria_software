@@ -18,13 +18,14 @@ import org.example.client.models.FactoryUtente;
 import org.example.client.models.Pagamento;
 import org.example.client.models.Utente;
 import org.example.client.utils.Utils;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.regex.Pattern;
 
-public class RegistrazioneController implements Initializable {
+public class RegistrazioneController /*implements Initializable*/ {
 
     @FXML
     public ComboBox<String> cbxPagamento;
@@ -52,9 +53,6 @@ public class RegistrazioneController implements Initializable {
     @FXML
     private Label resultLabel;
 
-    ObservableList<String> payment = FXCollections.observableArrayList(
-            Pagamento.CARTADICREDITO.toString(), Pagamento.CONTANTI.toString(), Pagamento.PAYPAL.toString());
-
     private Stage stage;
 
     public static void showView(Stage stage) {
@@ -68,12 +66,20 @@ public class RegistrazioneController implements Initializable {
         }
         assert root != null;
 
+        // ComboBox
+        ObservableList<String> payment = FXCollections.observableArrayList(
+                Pagamento.CARTADICREDITO.toString(), Pagamento.CONTANTI.toString(), Pagamento.PAYPAL.toString());
+
+        RegistrazioneController registrazioneController = loader.getController();
+        registrazioneController.cbxPagamento.setItems(payment);
+        registrazioneController.cbxPagamento.setValue(Pagamento.PAYPAL.toString());
+
         stage.show();
-        RegistrazioneController controller = loader.getController();
+
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.setTitle("Registrazione");
-        controller.setStage(stage);
+        registrazioneController.setStage(stage);
 
     }
 
@@ -82,12 +88,12 @@ public class RegistrazioneController implements Initializable {
     * Override of initialize method invoked by load.
     * Implementation of payment enum in a ComboBox.
      */
-    @Override
+    /*@Override
     public void initialize(URL location, ResourceBundle resources) {
         cbxPagamento.getItems().addAll(payment);
         // TODO: set prefer method
         cbxPagamento.setValue(Pagamento.PAYPAL.toString());
-    }
+    }*/
 
     public void setStage(Stage stage) {
         this.stage = stage;
@@ -111,6 +117,10 @@ public class RegistrazioneController implements Initializable {
         return(password.trim().equals(passwordRepeat.trim()));
     }
 
+    public boolean mailVerify(String email) {
+        return (Pattern.matches("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,}$", email));
+    }
+
     public boolean capVerify(String cap){
         return(Pattern.matches("\\d{5}", cap));
     }
@@ -127,10 +137,11 @@ public class RegistrazioneController implements Initializable {
                 phone));
     }
 
-    public boolean errorMessage(String message, TextField field){
+    public boolean errorMessage(String message, @Nullable TextField field){
         resultLabel.setText(message);
         resultLabel.setTextFill(Paint.valueOf("red"));
-        field.setStyle("-fx-border-color: red");
+        if(field != null)
+            field.setStyle("-fx-border-color: red");
         return true;
     }
 
@@ -175,6 +186,9 @@ public class RegistrazioneController implements Initializable {
             error = errorMessage("Il campo Telefono è vuoto.",Phone);
 
         if (Email.getText().equals(""))
+            if (!mailVerify(Email.getText())){
+                error = errorMessage("La mail non è coretta.", Email);
+            }
             error = errorMessage("Il campo E-mail è vuoto.",Email);
 
         // Verifica lunghezza password
@@ -198,7 +212,9 @@ public class RegistrazioneController implements Initializable {
                 Address.getText(), Integer.valueOf(CAP.getText()), City.getText(), Phone.getText(),
                 Pagamento.fromString(cbxPagamento.getValue()).ordinal());
            if( statusCode == 200){
+               errorMessage("Success" + statusCode, null );
                Utente utente = new FactoryUtente().getUtente(Email.getText(), PasswordRepeat.getText());
+               CatalogoController.showView(this.stage);
            } else {
                errorMessage("Error" + statusCode, null );
            }
