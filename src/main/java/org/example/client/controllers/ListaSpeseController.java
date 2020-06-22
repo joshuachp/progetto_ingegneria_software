@@ -3,6 +3,7 @@ package org.example.client.controllers;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -19,6 +20,7 @@ import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import org.example.client.models.Pagamento;
+import org.example.client.models.Prodotto;
 import org.example.client.models.Spesa;
 import org.example.client.models.StatoSpesa;
 
@@ -130,13 +132,13 @@ public class ListaSpeseController {
                 return cell ;
             }
         });
-        // Setting-up data colums
+        // Initializing table colums
         listaspesecontroller.IDCol.setCellValueFactory(cellData -> cellData.getValue().propertyID().asObject()); // asObject needed by FX implementation
         listaspesecontroller.DataCol.setCellValueFactory(cellData -> cellData.getValue().propertyDataConsegna());
         //listaspesecontroller.IDCol.setCellValueFactory(new PropertyValueFactory<>("DataConsegna"));
         listaspesecontroller.OraCol.setCellValueFactory(cellData -> cellData.getValue().propertyOraConsegna());
         listaspesecontroller.MetodoPagamentoCol.setCellValueFactory(cellData -> cellData.getValue().propertyPagamento());
-        listaspesecontroller.TotaleCol.setCellValueFactory(cellData -> cellData.getValue().propertyCostoTotale().asObject());
+        listaspesecontroller.TotaleCol.setCellValueFactory(new PropertyValueFactory<>("CostoTotale"));
 
         // Search with filter
         columnFilterString = FXCollections.observableArrayList(
@@ -152,7 +154,8 @@ public class ListaSpeseController {
 
         listaspesecontroller.Search.setOnKeyReleased(keyEvent ->
         {
-            switch (Objects.requireNonNull(columnFilterEnum.fromString(listaspesecontroller.CbxColumn.getValue())))//Switch on choiceBox value
+            //Switch on choiceBox value
+            switch (Objects.requireNonNull(columnFilterEnum.fromString(listaspesecontroller.CbxColumn.getValue())))
             {
                 case ID:
                     flspese.setPredicate(p -> p.getID().toString().contains(listaspesecontroller.Search.getText().trim()));
@@ -179,22 +182,19 @@ public class ListaSpeseController {
 
         listaspesecontroller.StatoCol.setCellValueFactory(cellData -> cellData.getValue().propertyStatoSpesa());
         listaspesecontroller.StatoCol.setCellFactory(ComboBoxTableCell.forTableColumn(stato));
-
-        // TODO: Handler ComboBox: Come invio al server un singolo parametro?
-
         listaspesecontroller.StatoCol.setEditable(true);
-
-        listaspesecontroller.StatoCol.setOnEditCommit((TableColumn.CellEditEvent<Spesa, String> event) -> {
-            ((Spesa) event.getTableView().getItems().get(
-                    event.getTablePosition().getRow()))
-                    .setStatoSpesa(StatoSpesa.fromString(event.getNewValue()));
-
-            //event.getRowValue().setStatoSpesa(StatoSpesa.fromString(event.getRowValue().getStatoSpesa().toString()));
+        listaspesecontroller.StatoCol.setOnEditCommit(event->{
+            event.getRowValue().setStatoSpesa(StatoSpesa.fromString(event.getNewValue()));
+            // TODO: update server
             System.out.println(event.getRowValue().getStatoSpesa());
         });
-        // (event.getRowValue().getStatoSpesa().)));
 
-        listaspesecontroller.tableView.setItems(flspese);
+        // Wrap the FilteredList in a SortedList.
+        SortedList<Spesa> sortedData = new SortedList<>(flspese);
+        // Bind the SortedList comparator to the TableView comparator.
+        sortedData.comparatorProperty().bind(listaspesecontroller.tableView.comparatorProperty());
+
+        listaspesecontroller.tableView.setItems(sortedData);
 
         listaspesecontroller.setStage(stage);
 

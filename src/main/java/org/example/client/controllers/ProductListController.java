@@ -5,6 +5,7 @@ import javafx.beans.property.IntegerPropertyBase;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -43,7 +44,7 @@ public class ProductListController {
 
     // Search filter enum
     public enum columnFilterEnum{
-        ID("Id"), NAME ("Nome prodotoo"), BRAND ("Nome brand"), PRICE ("Prezzo"), QUANTITY ("Quantità");
+        ID("Id"), NAME ("Nome prodotto"), BRAND ("Nome brand"), PRICE ("Prezzo"), QUANTITY ("Quantità");
 
         private final String column;
 
@@ -65,7 +66,8 @@ public class ProductListController {
         }
     }
 
-    public static void showView(Stage stage) throws IOException{
+    // View generation
+    public static void showView(Stage stage) {
         FXMLLoader loader = new FXMLLoader(ProductListController.class.getResource("/views/product-list.fxml"));
         Parent root = null;
         try {
@@ -88,6 +90,7 @@ public class ProductListController {
                 new Prodotto(2, "Formaggio grattuggiato", "Parmiggiano Reggiano", 1,
                         3.50, "prova", 1, "Formaggi", "Alimneti" ));
 
+        // Clickable link for ID column
         productListController.IDCol.setCellFactory(new Callback<TableColumn<Prodotto, Integer>,
                 TableCell<Prodotto, Integer>>() {
             @Override
@@ -124,7 +127,8 @@ public class ProductListController {
             }
         });
 
-        productListController.tableview.setEditable(true);
+        productListController.tableview.setEditable(true); // To allow modify quantity directly in tableview
+        // Columns initialization
         productListController.IDCol.setCellValueFactory(new PropertyValueFactory<>("ID"));
         productListController.NameCol.setCellValueFactory(new PropertyValueFactory<>("Name"));
         productListController.BrandCol.setCellValueFactory(new PropertyValueFactory<>("Brand"));
@@ -134,6 +138,7 @@ public class ProductListController {
         productListController.QuantityCol.setEditable(true);
         productListController.QuantityCol.setOnEditCommit(event->{
             event.getRowValue().setAvailability(Integer.parseInt(event.getNewValue()));
+            // TODO: implements server update on edit
             System.out.println(event.getRowValue().getAvailability());
         });
 
@@ -152,7 +157,8 @@ public class ProductListController {
 
         productListController.Search.setOnKeyReleased(keyEvent ->
         {
-            switch (Objects.requireNonNull(ProductListController.columnFilterEnum.fromString(productListController.CbxColumn.getValue())))//Switch on choiceBox value
+            // Switch on choiceBox value
+            switch (Objects.requireNonNull(ProductListController.columnFilterEnum.fromString(productListController.CbxColumn.getValue())))
             {
                 case ID:
                     flproducts.setPredicate(p -> p.getID().toString().contains(productListController.Search.getText().trim()));
@@ -172,7 +178,12 @@ public class ProductListController {
             }
         });
 
-        productListController.tableview.setItems(flproducts);
+        // Wrap the FilteredList in a SortedList.
+        SortedList<Prodotto> sortedData = new SortedList<>(flproducts);
+        // Bind the SortedList comparator to the TableView comparator.
+        sortedData.comparatorProperty().bind(productListController.tableview.comparatorProperty());
+
+        productListController.tableview.setItems(sortedData);
 
         productListController.setStage(stage);
     }

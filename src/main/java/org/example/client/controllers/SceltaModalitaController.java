@@ -44,11 +44,7 @@ public class SceltaModalitaController {
 
     public void HandleActionManageProduct(ActionEvent actionEvent) {
         ProductListController productlistcontroller = new ProductListController();
-        try {
-            productlistcontroller.showView(this.stage);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        ProductListController.showView(this.stage);
     }
 
     public void handlerLogutAction(ActionEvent actionEvent) {

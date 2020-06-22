@@ -85,8 +85,8 @@ public class Spesa {
         return utente;
     }
 
-    public Double getCostoTotale() {
-        return costoTotale;
+    public String getCostoTotale() {
+        return String.format("\u20ac %.2f", costoTotale);
     }
 
     public DoubleProperty propertyCostoTotale() {

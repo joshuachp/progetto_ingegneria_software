@@ -35,6 +35,7 @@ public class GestioneProdottiController {
 
     public void showView(@Nullable Prodotto product, boolean modify) throws IOException  {
 
+        //TODO: field charateristics and section
         FXMLLoader loader = new FXMLLoader(GestioneProdottiController.class.getResource("/views/gestione-prodotti.fxml"));
         Parent root = null;
         try {
@@ -61,13 +62,24 @@ public class GestioneProdottiController {
             gestioneProdottiController.fieldPrice.setText(product.getPrice().toString());
             gestioneProdottiController.fieldQuantity.setText(product.getAvailability());
         } else {
-            gestioneProdottiController.stage.setTitle("Crea nuovo prodotto");
+            stage.setTitle("Crea nuovo prodotto");
         }
 
         stage.show();
     }
 
     public void handleConfirmAction(ActionEvent actionEvent) {
+        product.setBrand(fieldBrand.getText());
+        product.setImage(thumbnail.getImage().getUrl());
+        product.setAvailability(Integer.parseInt(fieldQuantity.getText()));
+        product.setPrice(Double.parseDouble(fieldPrice.getText()));
+        product.setName(fieldName.getText());
+        product.setPackage_size(Integer.parseInt(fieldPackage.getText()));
+        //product.setCharacteristics(fieldBrand.getText());
+        //product.setCharacteristics(fieldBrand.getText());
+        // TODO: POST product to server
+        System.out.println(product);
+        stage.close();
     }
 
     public void handleUploadImage(ActionEvent actionEvent) throws FileNotFoundException {

@@ -4,6 +4,31 @@ import javafx.beans.property.StringProperty;
 
 public class Prodotto {
     private  Integer id;
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setBrand(String brand) {
+        this.brand = brand;
+    }
+
+    public void setPackage_size(Integer package_size) {
+        this.package_size = package_size;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
+    }
+
+    public void setCharacteristics(String characteristics) {
+        this.characteristics = characteristics;
+    }
+
+    public void setSection(String section) {
+        this.section = section;
+    }
+
     private  String name;
     private  String brand;
     private  Integer package_size;
@@ -42,8 +67,8 @@ public class Prodotto {
         return package_size;
     }
 
-    public Double getPrice() {
-        return price;
+    public String getPrice() {
+        return String.format("\u20ac %.2f",price);
     }
 
     public String getImage() {
@@ -70,4 +95,15 @@ public class Prodotto {
         return section;
     }
 
+    @Override
+    public String toString(){
+      return  name + " " +
+              brand + " " +
+              package_size.toString() + " " +
+              price.toString() + " " +
+              image + " " +
+              availability.toString() + " " +
+              characteristics + " " +
+              section;
+    }
 }
