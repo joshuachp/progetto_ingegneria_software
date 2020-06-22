@@ -1,8 +1,115 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="org.example.client.controllers.CatalogoController"
-            prefHeight="400.0" prefWidth="600.0">
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="498.0" prefWidth="731.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.client.controllers.CatalogoController">
+   <children>
+      <VBox layoutX="250.0" layoutY="81.0" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <MenuBar>
+               <menus>
+                  <Menu mnemonicParsing="false" text="Account">
+                     <items>
+                        <MenuItem mnemonicParsing="false" onAction="#handlerLogutAction" text="Logout" />
+                     </items>
+                  </Menu>
+               </menus>
+            </MenuBar>
+            <GridPane alignment="CENTER_RIGHT">
+               <columnConstraints>
+                  <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="267.5999588012695" minWidth="60.40000381469727" prefWidth="82.00001220703125" />
+                  <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="429.59998168945316" minWidth="6.800041198730469" prefWidth="321.1999877929687" />
+                  <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="383.800048828125" minWidth="10.0" prefWidth="231.00007324218757" />
+                  <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="265.4000549316406" minWidth="6.199951171875" prefWidth="88.59992675781245" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <ChoiceBox fx:id="CbxColumn" prefWidth="150.0" GridPane.columnIndex="1">
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin>
+                  </ChoiceBox>
+                  <TextField fx:id="Search" promptText="Ricerca" GridPane.columnIndex="2">
+                     <GridPane.margin>
+                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                     </GridPane.margin>
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </padding>
+                  </TextField>
+                  <Button mnemonicParsing="false" onAction="#handleBackAction" style="-fx-background-color: null;">
+                     <graphic>
+                        <ImageView fitHeight="150.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/back-arrow.png" />
+                           </image>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <HBox alignment="BOTTOM_CENTER" prefHeight="27.0" prefWidth="89.0" GridPane.columnIndex="3">
+                     <children>
+                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/shopping-cart.png" />
+                           </image>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </ImageView>
+                        <Label alignment="BOTTOM_CENTER" contentDisplay="BOTTOM" text="0" textAlignment="RIGHT" />
+                     </children>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <padding>
+                        <Insets bottom="15.0" right="15.0" top="15.0" />
+                     </padding>
+                  </HBox>
+               </children>
+               <VBox.margin>
+                  <Insets left="5.0" right="5.0" />
+               </VBox.margin>
+            </GridPane>
+            <HBox prefHeight="349.0" prefWidth="600.0" VBox.vgrow="ALWAYS">
+               <children>
+                  <ListView fx:id="listCategory" maxWidth="-Infinity" HBox.hgrow="ALWAYS" />
+                  <ScrollPane>
+                    <content>
+                      <AnchorPane>
+                           <children>
+                              <GridPane fx:id="gridpane" layoutX="-32.0" layoutY="-17.0" prefHeight="500.0" prefWidth="500.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    
+                  </GridPane>
+                           </children>
+                        </AnchorPane>
+                    </content>
+                  </ScrollPane>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
 </AnchorPane>

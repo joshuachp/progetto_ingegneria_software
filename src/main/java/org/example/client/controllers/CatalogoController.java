@@ -1,14 +1,23 @@
 package org.example.client.controllers;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
 public class CatalogoController {
 
+    public ChoiceBox CbxColumn;
+    public TextField Search;
+    public ListView listCategory;
+    public GridPane gridpane;
     private Stage stage;
 
 
@@ -31,5 +40,11 @@ public class CatalogoController {
 
     public void setStage(Stage stage) {
         this.stage = stage;
+    }
+
+    public void handlerLogutAction(ActionEvent actionEvent) {
+    }
+
+    public void handleBackAction(ActionEvent actionEvent) {
     }
 }
