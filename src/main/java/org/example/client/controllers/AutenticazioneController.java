@@ -11,7 +11,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import org.example.client.models.FactoryUtente;
-import org.example.client.models.Utente;
+import org.example.client.models.User;
 
 import java.io.IOException;
 
@@ -49,12 +49,12 @@ public class AutenticazioneController {
         String username = usernameField.getText();
         String password = passwordField.getText();
         if (!username.isEmpty() && !password.isEmpty()) {
-            Utente utente = new FactoryUtente().getUtente(username, password);
-            if (utente != null) {
+            User user = new FactoryUtente().getUtente(username, password);
+            if (user != null) {
                 resultLabel.setTextFill(Color.BLACK);
                 resultLabel.setText("Login effettuato con successo");
                 // TODO: Get scene
-                utente.redirect(this.stage);
+                user.redirect(this.stage);
             } else {
                 resultLabel.setTextFill(Color.RED);
                 resultLabel.setText("Nome utente o password errate");

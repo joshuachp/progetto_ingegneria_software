@@ -18,7 +18,7 @@ public class FactoryUtente {
      * @param password Password dell'utente
      * @return Istanza della classe Utente
      */
-    public Utente getUtente(String username, String password) {
+    public User getUtente(String username, String password) {
         JSONObject json = Utils.autenticaWithServer(username, password);
         return createUtente(json);
     }
@@ -30,7 +30,7 @@ public class FactoryUtente {
      * @param session Il token di sessione
      * @return Istanza della classe Utente
      */
-    public Utente getUtente(String session) {
+    public User getUtente(String session) {
         JSONObject json = Utils.autenticaWithServer(session);
         return createUtente(json);
     }
@@ -41,7 +41,7 @@ public class FactoryUtente {
      * @param json Risposta dell'autenticazione del server
      * @return Istanza della classe Utente
      */
-    private Utente createUtente(@Nullable JSONObject json) {
+    private User createUtente(@Nullable JSONObject json) {
         if (json == null)
             return null;
         String username = json.getString("username");

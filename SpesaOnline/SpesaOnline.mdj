@@ -16253,7 +16253,7 @@
 															"top": 423,
 															"width": 99.6962890625,
 															"height": 13,
-															"text": "Sessione utente"
+															"text": "Sessione user"
 														},
 														{
 															"_type": "LabelView",
@@ -16858,7 +16858,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFx77q9Ae+gqxQ="
 									},
-									"name": "Sessione utente",
+									"name": "Sessione user",
 									"ordering": "FIFO"
 								},
 								{
@@ -33972,7 +33972,7 @@
 											"top": 83.5,
 											"width": 142,
 											"height": 13,
-											"text": "Inserimento dati utente"
+											"text": "Inserimento dati user"
 										},
 										{
 											"_type": "LabelView",
@@ -41243,7 +41243,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFx6OITLpP5N3A="
 							},
-							"name": "Inserimento dati utente"
+							"name": "Inserimento dati user"
 						},
 						{
 							"_type": "UMLUseCase",

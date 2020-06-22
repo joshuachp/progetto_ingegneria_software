@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.*;
 /**
  * Test suit per la classe FactoryUtente
  */
-public class FactoryUtenteTest {
+public class FactoryUserTest {
 
     private MockWebServer server;
 
@@ -44,11 +44,11 @@ public class FactoryUtenteTest {
                         .put("responsabile", true)
                         .toString()));
 
-        Utente utente = new FactoryUtente().getUtente("admin", "password");
-        assertNotNull(utente);
-        assertEquals("admin", utente.getUsername());
-        assertEquals("session", utente.getSession());
-        assertTrue(utente.isResponsabile());
+        User user = new FactoryUtente().getUtente("admin", "password");
+        assertNotNull(user);
+        assertEquals("admin", user.getUsername());
+        assertEquals("session", user.getSession());
+        assertTrue(user.isResponsabile());
     }
 
     /**
@@ -71,10 +71,10 @@ public class FactoryUtenteTest {
 
         JSONObject session = Utils.autenticaWithServer("admin", "password");
         assertNotNull(session);
-        Utente utente = new FactoryUtente().getUtente(session.getString("session"));
-        assertEquals("admin", utente.getUsername());
-        assertEquals("session", utente.getSession());
-        assertTrue(utente.isResponsabile());
+        User user = new FactoryUtente().getUtente(session.getString("session"));
+        assertEquals("admin", user.getUsername());
+        assertEquals("session", user.getSession());
+        assertTrue(user.isResponsabile());
     }
 
     /**
@@ -89,9 +89,9 @@ public class FactoryUtenteTest {
                         .put("responsabile", false)
                         .toString()));
 
-        Utente utente = new FactoryUtente().getUtente("guest", "guest");
-        assertFalse(utente.isResponsabile());
-        assertTrue(utente instanceof Client);
+        User user = new FactoryUtente().getUtente("guest", "guest");
+        assertFalse(user.isResponsabile());
+        assertTrue(user instanceof Client);
     }
 
     /**
@@ -106,9 +106,9 @@ public class FactoryUtenteTest {
                         .put("responsabile", true)
                         .toString()));
 
-        Utente utente = new FactoryUtente().getUtente("admin", "password");
-        assertTrue(utente.isResponsabile());
-        assertTrue(utente instanceof Manager);
+        User user = new FactoryUtente().getUtente("admin", "password");
+        assertTrue(user.isResponsabile());
+        assertTrue(user instanceof Manager);
     }
 
 

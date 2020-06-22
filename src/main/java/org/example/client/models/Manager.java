@@ -3,7 +3,7 @@ package org.example.client.models;
 import javafx.stage.Stage;
 import org.example.client.controllers.SceltaModalitaController;
 
-public class Manager extends Utente {
+public class Manager extends User {
 
     private String badge;
     private String name;

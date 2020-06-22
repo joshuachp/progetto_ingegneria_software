@@ -6,7 +6,7 @@ import org.example.client.controllers.CatalogoController;
 /**
  * Cliente class
  */
-public class Client extends Utente {
+public class Client extends User {
 
     private final String name;
     private final String surname;
