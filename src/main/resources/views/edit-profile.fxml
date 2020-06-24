@@ -5,10 +5,12 @@
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
+
 
 <VBox xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
@@ -54,17 +56,7 @@
                   <Font size="12.0" />
                </font>
             </Text>
-            <Text fill="#797575" layoutX="40.0" layoutY="152.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Via Viale 1, CAP, Città," AnchorPane.leftAnchor="48.0" AnchorPane.topAnchor="146.0">
-               <font>
-                  <Font size="12.0" />
-               </font>
-            </Text>
             <Text layoutX="21.0" layoutY="173.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Telephone" AnchorPane.leftAnchor="24.0" AnchorPane.topAnchor="170.0">
-               <font>
-                  <Font size="12.0" />
-               </font>
-            </Text>
-            <Text fill="#656464" layoutX="24.0" layoutY="205.0" strokeType="OUTSIDE" strokeWidth="0.0" text="+39 333 444 5555" AnchorPane.leftAnchor="48.0" AnchorPane.topAnchor="194.0">
                <font>
                   <Font size="12.0" />
                </font>
@@ -92,8 +84,14 @@
                </font>
             </Text>
             <Text layoutX="52.0" layoutY="367.0" strokeType="OUTSIDE" strokeWidth="0.0" text="You have Nan points." AnchorPane.leftAnchor="48.0" AnchorPane.topAnchor="330.0" />
-            <Text fill="#8d8d8d" layoutX="58.0" layoutY="354.0" strokeType="OUTSIDE" strokeWidth="0.0" text="card n. 0000000   01/01/1970" AnchorPane.leftAnchor="240.0" AnchorPane.topAnchor="330.0" />
-            <Button layoutX="526.0" layoutY="358.0" mnemonicParsing="false" text="Edit" AnchorPane.bottomAnchor="24.0" AnchorPane.rightAnchor="24.0" />
+            <Button layoutX="526.0" layoutY="358.0" mnemonicParsing="false" text="Cancell" AnchorPane.bottomAnchor="24.0" AnchorPane.rightAnchor="24.0" />
+            <TextField layoutX="47.0" layoutY="140.0" promptText="Address" AnchorPane.leftAnchor="48.0" AnchorPane.topAnchor="140.0" />
+            <TextField layoutX="219.0" layoutY="140.0" promptText="CAP" AnchorPane.leftAnchor="220.0" AnchorPane.topAnchor="140.0" />
+            <TextField layoutX="393.0" layoutY="140.0" promptText="City" AnchorPane.leftAnchor="390.0" AnchorPane.topAnchor="140.0" />
+            <Button layoutX="457.0" layoutY="348.0" mnemonicParsing="false" text="Save" AnchorPane.bottomAnchor="24.0" AnchorPane.rightAnchor="100.0" />
+            <TextField layoutX="48.0" layoutY="188.0" promptText="Telephone" AnchorPane.leftAnchor="48.0" AnchorPane.topAnchor="188.0" />
+            <Button layoutX="441.0" layoutY="258.0" mnemonicParsing="false" text="Change" AnchorPane.leftAnchor="441.0" AnchorPane.topAnchor="258.0" />
+            <TextField layoutX="48.0" layoutY="334.0" promptText="Card number" AnchorPane.leftAnchor="48.0" AnchorPane.topAnchor="334.0" />
          </children>
       </AnchorPane>
    </children>
