@@ -1,9 +1,71 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.layout.AnchorPane?>
-<AnchorPane xmlns:fx="http://javafx.com/fxml"
-            xmlns="http://javafx.com/javafx"
-            fx:controller="org.example.client.controllers.ProfileController"
-            prefHeight="400.0" prefWidth="600.0">
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Text layoutX="34.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name Surname" AnchorPane.leftAnchor="24.0" AnchorPane.topAnchor="24.0">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Text>
+      <Text fill="#0717f7" layoutX="24.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username" AnchorPane.leftAnchor="24.0" AnchorPane.topAnchor="60.0">
+         <font>
+            <Font size="12.0" />
+         </font>
+      </Text>
+      <Separator layoutX="17.0" layoutY="77.0" prefWidth="200.0" AnchorPane.leftAnchor="24.0" AnchorPane.rightAnchor="24.0" AnchorPane.topAnchor="84.0" />
+      <Text fill="#868484" layoutX="24.0" layoutY="102.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Base Information" AnchorPane.leftAnchor="24.0" AnchorPane.topAnchor="96.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
+      <Text layoutX="24.0" layoutY="129.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Address" AnchorPane.leftAnchor="24.0" AnchorPane.topAnchor="122.0">
+         <font>
+            <Font size="12.0" />
+         </font></Text>
+      <Text fill="#797575" layoutX="40.0" layoutY="152.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Via Viale 1, CAP, Città," AnchorPane.leftAnchor="48.0" AnchorPane.topAnchor="146.0">
+         <font>
+            <Font size="12.0" />
+         </font>
+      </Text>
+      <Text layoutX="21.0" layoutY="173.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Telephone" AnchorPane.leftAnchor="24.0" AnchorPane.topAnchor="170.0">
+         <font>
+            <Font size="12.0" />
+         </font></Text>
+      <Text fill="#656464" layoutX="24.0" layoutY="205.0" strokeType="OUTSIDE" strokeWidth="0.0" text="+39 333 444 5555" AnchorPane.leftAnchor="48.0" AnchorPane.topAnchor="194.0">
+         <font>
+            <Font size="12.0" />
+         </font>
+      </Text>
+      <Separator layoutX="17.0" layoutY="221.0" prefWidth="200.0" AnchorPane.leftAnchor="24.0" AnchorPane.rightAnchor="24.0" AnchorPane.topAnchor="224.0" />
+      <Text fill="#868484" layoutX="34.0" layoutY="121.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Payment Method" AnchorPane.leftAnchor="24.0" AnchorPane.topAnchor="238.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
+      <Text layoutX="58.0" layoutY="217.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Credit card" AnchorPane.leftAnchor="48.0" AnchorPane.topAnchor="264.0">
+         <font>
+            <Font size="12.0" />
+         </font>
+      </Text>
+      <Text fill="#686262" layoutX="58.0" layoutY="281.0" strokeType="OUTSIDE" strokeWidth="0.0" text="**** **** *** **** 4567" AnchorPane.leftAnchor="240.0" AnchorPane.topAnchor="264.0">
+         <font>
+            <Font size="12.0" />
+         </font>
+      </Text>
+      <Separator layoutX="24.0" layoutY="291.0" prefWidth="200.0" AnchorPane.leftAnchor="24.0" AnchorPane.rightAnchor="24.0" AnchorPane.topAnchor="294.0" />
+      <Text fill="#868484" layoutX="34.0" layoutY="263.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Loyalty Card" AnchorPane.leftAnchor="24.0" AnchorPane.topAnchor="306.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
+      <Text layoutX="52.0" layoutY="367.0" strokeType="OUTSIDE" strokeWidth="0.0" text="You have Nan points." AnchorPane.leftAnchor="48.0" AnchorPane.topAnchor="330.0" />
+      <Text fill="#8d8d8d" layoutX="58.0" layoutY="354.0" strokeType="OUTSIDE" strokeWidth="0.0" text="01/01/1970" AnchorPane.leftAnchor="240.0" AnchorPane.topAnchor="330.0" />
+      <Button layoutX="526.0" layoutY="358.0" mnemonicParsing="false" text="Edit" AnchorPane.bottomAnchor="24.0" AnchorPane.rightAnchor="24.0" />
+   </children>
 </AnchorPane>
