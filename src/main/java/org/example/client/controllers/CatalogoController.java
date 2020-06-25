@@ -12,13 +12,13 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Box;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 import org.example.client.models.Category;
 import org.example.client.models.Prodotto;
 import org.jetbrains.annotations.NotNull;
@@ -55,85 +55,61 @@ public class CatalogoController {
         stage.show();
         CatalogoController catalogoController = loader.getController();
         categoryList = FXCollections.observableArrayList();
-        catalogoController.listCategory.setEditable(true);
         for(Category x : Category.values()){
             categoryList.add(x.toString());
         }
 
 
-        // Test
+        // prodotti Test
         ObservableList<Prodotto> products =  FXCollections.observableArrayList(
                 new Prodotto(1, "Pasta n10", "Barilla", 1,
                         1.72, "https://images.services.esselunga.it/html/img_prodotti/esselunga/image/965627.jpg", 1, "Pasta", "Alimneti" ),
                 new Prodotto(2, "Formaggio grattuggiato", "Parmiggiano Reggiano", 1,
-                        3.50, "https://images.services.esselunga.it/html/img_prodotti/esselunga/image/934922.jpg", 1, "Formaggi", "Alimneti" ));
+                        3.50, "https://images.services.esselunga.it/html/img_prodotti/esselunga/image/934922.jpg", 1,
+                        "Formaggi", "Alimneti" ),
+                new Prodotto(1, "Pasta n10", "Barilla", 1,
+                        1.72, "https://images.services.esselunga.it/html/img_prodotti/esselunga/image/965627.jpg", 1, "Pasta", "Alimneti" ),
+                new Prodotto(1, "Pasta n10", "Barilla", 1,
+                        1.72, "https://images.services.esselunga.it/html/img_prodotti/esselunga/image/965627.jpg", 1, "Pasta", "Alimneti" ),
+                new Prodotto(1, "Pasta n10", "Barilla", 1,
+                        1.72, "https://images.services.esselunga.it/html/img_prodotti/esselunga/image/965627.jpg", 1, "Pasta", "Alimneti" ),
+                new Prodotto(1, "Pasta n10", "Barilla", 1,
+                        1.72, "https://images.services.esselunga.it/html/img_prodotti/esselunga/image/965627.jpg", 1, "Pasta", "Alimneti" ),
+                new Prodotto(1, "Pasta n10", "Barilla", 1,
+                        1.72, "https://images.services.esselunga.it/html/img_prodotti/esselunga/image/965627.jpg", 1, "Pasta", "Alimneti" ),
+                new Prodotto(1, "Pasta n10", "Barilla", 1,
+                        1.72, "https://images.services.esselunga.it/html/img_prodotti/esselunga/image/965627.jpg", 1, "Pasta", "Alimneti" ),
+                new Prodotto(1, "Pasta n10", "Barilla", 1,
+                        1.72, "https://images.services.esselunga.it/html/img_prodotti/esselunga/image/965627.jpg", 1,
+                        "Pasta", "Alimneti" ));
 
         int i = 0;
         for( Prodotto x : products){
-            catalogoController.cardGenerator(products.get(i), i+1);
+            catalogoController.cardGenerator(products.get(i), i);
             i++;
         }
 
-        catalogoController.gridpane.setGridLinesVisible(true);
+        ColumnConstraints column1 = new ColumnConstraints();
+        column1.setHgrow(Priority.ALWAYS);
+        catalogoController.gridpane.getColumnConstraints().addAll(column1, column1, column1);
 
         catalogoController.listCategory.setItems(categoryList);
+
         catalogoController.setStage(stage);
+
     }
 
     // Card builder
     public void cardGenerator(@NotNull Prodotto product, int i)  {
 
-        CardController cardController = new CardController();
         VBox card = null;
         try {
-            card = cardController.generateCard(product);
+            card = CardController.generateCard(product);
         } catch (IOException e) {
             e.printStackTrace();
         }
 
         gridpane.add(card, i % 3, i / 3);
-
-        /*Image image;
-        if (product.getImage() != null)
-            image = new Image(product.getImage());
-        else
-            image = new Image("https://bitsofco.de/content/images/2018/12/Screenshot-2018-12-16-at-21.06.29.png");
-
-        ImageView imageView = new ImageView();
-        imageView.setImage(image);
-        imageView.setFitWidth(100);
-
-        imageView.setPreserveRatio(true);
-        imageView.setCache(true);
-        Rectangle2D viewportRect = new Rectangle2D(0, 0, 1000, 1000);
-        imageView.setViewport(viewportRect);
-
-        Text text = new Text(product.getName());
-
-        Text price = new Text(product.getPrice());
-        price.setFill(Paint.valueOf("red"));
-
-        Spinner<Integer> spinner = new Spinner<>();
-        spinner.setEditable(true);
-        spinner.setMaxWidth(50);
-
-        Image cart = new Image("/image/shopping-cart.png");
-        ImageView cartImage = new ImageView(cart);
-        Rectangle2D viewportRectCart = new Rectangle2D(0, 0, 1000, 1000);
-        cartImage.setViewport(viewportRect);
-        cartImage.setFitWidth(20);
-        cartImage.setFitHeight(20);
-        Button button = new Button("", cartImage);
-        button.setAlignment(Pos.CENTER);
-        button.setPadding(new Insets(0, 10, 0, 10));
-
-        Tooltip tooltip = new Tooltip("Aggiungi al carrello");
-        button.setTooltip(tooltip);
-        HBox addToCart = new HBox(spinner, button);
-
-        VBox card = new VBox(imageView, text, price, addToCart);
-        card.setAlignment(Pos.CENTER);
-        gridpane.add(card, i % 3, i / 3);*/
 
 
     }
@@ -146,5 +122,14 @@ public class CatalogoController {
     }
 
     public void handleBackAction(ActionEvent actionEvent) {
+    }
+
+    public void searchHandler(ActionEvent actionEvent) {
+    }
+
+    public void backhandler(MouseEvent mouseEvent) {
+    }
+
+    public void viewCartHandler(MouseEvent mouseEvent) {
     }
 }

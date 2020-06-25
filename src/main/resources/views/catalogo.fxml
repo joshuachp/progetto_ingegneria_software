@@ -9,7 +9,7 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -17,13 +17,12 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="700.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.client.controllers.CatalogoController">
+<AnchorPane prefHeight="700.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.client.controllers.CatalogoController">
    <children>
       <VBox layoutX="250.0" layoutY="81.0" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -52,7 +51,7 @@
                         <Insets />
                      </GridPane.margin>
                   </ChoiceBox>
-                  <TextField fx:id="Search" promptText="Ricerca" GridPane.columnIndex="2">
+                  <TextField fx:id="Search" onAction="#searchHandler" promptText="Ricerca" GridPane.columnIndex="2">
                      <GridPane.margin>
                         <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
                      </GridPane.margin>
@@ -62,7 +61,7 @@
                   </TextField>
                   <Button mnemonicParsing="false" onAction="#handleBackAction" style="-fx-background-color: null;">
                      <graphic>
-                        <ImageView fitHeight="150.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="150.0" fitWidth="50.0" onMouseClicked="#backhandler" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../image/back-arrow.png" />
                            </image>
@@ -74,7 +73,7 @@
                   </Button>
                   <HBox alignment="BOTTOM_CENTER" prefHeight="27.0" prefWidth="89.0" GridPane.columnIndex="3">
                      <children>
-                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="50.0" fitWidth="50.0" onMouseClicked="#viewCartHandler" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../image/shopping-cart.png" />
                            </image>
@@ -96,7 +95,7 @@
                   <Insets left="5.0" right="5.0" />
                </VBox.margin>
             </GridPane>
-            <GridPane prefHeight="598.0" prefWidth="800.0">
+            <GridPane hgap="10.0" prefWidth="800.0" vgap="10.0" VBox.vgrow="ALWAYS">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" />
                 <ColumnConstraints hgrow="SOMETIMES" />
@@ -105,64 +104,44 @@
                 <RowConstraints vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <ListView fx:id="listCategory">
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </ListView>
-                  <GridPane fx:id="gridpane" prefWidth="579.0" GridPane.columnIndex="1">
-                     <GridPane.margin>
-                        <Insets />
-                     </GridPane.margin>
-                     <padding>
-                        <Insets left="15.0" right="15.0" />
-                     </padding>
-                     <columnConstraints>
-                        <ColumnConstraints />
-                     </columnConstraints>
-                     <rowConstraints>
-                        <RowConstraints />
-                     </rowConstraints>
+                  <VBox prefHeight="200.0" prefWidth="100.0">
                      <children>
-                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
-                           <children>
-                              <ImageView fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../image/test-image.jpg" />
-                                 </image>
-                              </ImageView>
-                              <Pane prefHeight="200.0" prefWidth="200.0" />
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Prodotto prova">
-                                 <font>
-                                    <Font name="Calibri Bold" size="19.0" />
-                                 </font>
-                                 <VBox.margin>
-                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                 </VBox.margin>
-                              </Text>
-                              <HBox prefHeight="100.0" prefWidth="200.0">
-                                 <children>
-                                    <Spinner prefHeight="26.0" prefWidth="53.0">
-                                       <HBox.margin>
-                                          <Insets left="10.0" right="10.0" />
-                                       </HBox.margin>
-                                       <cursor>
-                                          <Cursor fx:constant="HAND" />
-                                       </cursor>
-                                    </Spinner>
-                                    <Button mnemonicParsing="false" text="Aggiungi al carrello">
-                                       <cursor>
-                                          <Cursor fx:constant="HAND" />
-                                       </cursor>
-                                    </Button>
-                                 </children>
-                              </HBox>
-                           </children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Categorie">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets bottom="15.0" left="2.0" right="15.0" top="15.0" />
+                           </VBox.margin>
+                        </Text>
+                        <ListView fx:id="listCategory" onMouseClicked="#changeCategoryHandler" prefHeight="594.0" prefWidth="214.0">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
                            <padding>
-                              <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                            </padding>
-                        </VBox>
-                     </children></GridPane>
+                        </ListView>
+                     </children>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </VBox>
+                  <ScrollPane prefHeight="594.0" prefWidth="536.0" style="-fx-background-color: CCCCCC;" GridPane.columnIndex="1">
+                     <content>
+                        <GridPane fx:id="gridpane" hgap="5.0" minHeight="100.0" minWidth="100.0" style="-fx-background-color: CCCCCC;" vgap="5.0">
+                           <padding>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </padding>
+                           <columnConstraints>
+                              <ColumnConstraints />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints />
+                           </rowConstraints>
+                        </GridPane>
+                     </content>
+                  </ScrollPane>
                </children>
             </GridPane>
          </children>
