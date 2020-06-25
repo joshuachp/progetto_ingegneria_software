@@ -44,7 +44,7 @@ public class FactoryUserTest {
                         .put("responsabile", true)
                         .toString()));
 
-        User user = new FactoryUtente().getUtente("admin", "password");
+        User user = new FactoryUser().getUtente("admin", "password");
         assertNotNull(user);
         assertEquals("admin", user.getUsername());
         assertEquals("session", user.getSession());
@@ -71,7 +71,7 @@ public class FactoryUserTest {
 
         JSONObject session = Utils.autenticaWithServer("admin", "password");
         assertNotNull(session);
-        User user = new FactoryUtente().getUtente(session.getString("session"));
+        User user = new FactoryUser().getUtente(session.getString("session"));
         assertEquals("admin", user.getUsername());
         assertEquals("session", user.getSession());
         assertTrue(user.isResponsabile());
@@ -89,7 +89,7 @@ public class FactoryUserTest {
                         .put("responsabile", false)
                         .toString()));
 
-        User user = new FactoryUtente().getUtente("guest", "guest");
+        User user = new FactoryUser().getUtente("guest", "guest");
         assertFalse(user.isResponsabile());
         assertTrue(user instanceof Client);
     }
@@ -106,7 +106,7 @@ public class FactoryUserTest {
                         .put("responsabile", true)
                         .toString()));
 
-        User user = new FactoryUtente().getUtente("admin", "password");
+        User user = new FactoryUser().getUtente("admin", "password");
         assertTrue(user.isResponsabile());
         assertTrue(user instanceof Manager);
     }

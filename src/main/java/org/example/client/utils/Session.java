@@ -1,6 +1,6 @@
 package org.example.client.utils;
 
-import org.example.client.models.FactoryUtente;
+import org.example.client.models.FactoryUser;
 import org.example.client.models.User;
 
 import java.util.prefs.Preferences;
@@ -22,7 +22,7 @@ public class Session {
         if (sessionToken == null || sessionToken.isEmpty()) {
             this.user = null;
         } else {
-            this.user = new FactoryUtente().getUtente(sessionToken);
+            this.user = new FactoryUser().getUtente(sessionToken);
         }
     }
 

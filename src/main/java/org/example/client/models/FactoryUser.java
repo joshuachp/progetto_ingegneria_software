@@ -8,7 +8,7 @@ import org.json.JSONObject;
 /**
  * Implementazione della factory per la classe Utente
  */
-public class FactoryUtente {
+public class FactoryUser {
 
     /**
      * Autentica un Utente tramite username e password. Ritorna una istanza della classe Utente in base alla tipologia

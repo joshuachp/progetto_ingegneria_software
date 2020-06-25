@@ -10,7 +10,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import org.example.client.models.FactoryUtente;
+import org.example.client.models.FactoryUser;
 import org.example.client.models.User;
 
 import java.io.IOException;
@@ -49,7 +49,7 @@ public class AutenticazioneController {
         String username = usernameField.getText();
         String password = passwordField.getText();
         if (!username.isEmpty() && !password.isEmpty()) {
-            User user = new FactoryUtente().getUtente(username, password);
+            User user = new FactoryUser().getUtente(username, password);
             if (user != null) {
                 resultLabel.setTextFill(Color.BLACK);
                 resultLabel.setText("Login effettuato con successo");
