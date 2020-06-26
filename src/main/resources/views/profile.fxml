@@ -22,12 +22,12 @@
         <padding>
             <Insets bottom="24.0" left="24.0" right="24.0" top="24.0"/>
         </padding>
-        <Text fill="#212121" strokeType="OUTSIDE" strokeWidth="0.0" text="Name Surname">
+        <Text fx:id="nameSurname" fill="#212121" strokeType="OUTSIDE" strokeWidth="0.0" text="Name Surname">
             <font>
                 <Font name="System Bold" size="26.0"/>
             </font>
         </Text>
-        <Text fill="#0066ff" strokeType="OUTSIDE" strokeWidth="0.0" text="Username">
+        <Text fx:id="username" fill="#0066ff" strokeType="OUTSIDE" strokeWidth="0.0" text="Username">
             <font>
                 <Font size="12.0"/>
             </font>
@@ -58,7 +58,7 @@
                         <Font size="14.0"/>
                     </font>
                 </Text>
-                <Text fill="#757575" strokeType="OUTSIDE" strokeWidth="0.0"
+                <Text fx:id="address" fill="#757575" strokeType="OUTSIDE" strokeWidth="0.0"
                       text="Via Viale 1, 3333, Città" wrappingWidth="226.0">
                     <VBox.margin>
                         <Insets left="24.0" top="12.0"/>
@@ -77,7 +77,7 @@
                         <Font size="14.0"/>
                     </font>
                 </Text>
-                <Text fill="#757575" strokeType="OUTSIDE" strokeWidth="0.0" text="+39 333 444 5555"
+                <Text fx:id="telephone" fill="#757575" strokeType="OUTSIDE" strokeWidth="0.0" text="+39 333 444 5555"
                       wrappingWidth="226.0">
                     <VBox.margin>
                         <Insets left="24.0" top="12.0"/>

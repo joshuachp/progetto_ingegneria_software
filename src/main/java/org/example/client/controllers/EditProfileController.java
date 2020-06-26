@@ -28,6 +28,7 @@ public class EditProfileController {
         controller.setStage(stage);
     }
 
+
     protected void setStage(Stage stage) {
         this.stage = stage;
     }

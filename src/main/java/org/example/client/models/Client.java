@@ -32,4 +32,27 @@ public class Client extends User {
         CatalogoController.showView(stage);
     }
 
+    public String getName() {
+        return this.name;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public Integer getCap() {
+        return cap;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public String getTelephone() {
+        return telephone;
+    }
 }
