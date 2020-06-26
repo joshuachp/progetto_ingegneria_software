@@ -1,224 +1,197 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.Separator?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.FlowPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
-
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <MenuBar VBox.vgrow="NEVER">
-        <menus>
-          <Menu mnemonicParsing="false" text="File">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Close" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Edit">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Delete" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Help">
-            <items>
-              <MenuItem mnemonicParsing="false" text="About" />
-            </items>
-          </Menu>
-        </menus>
-      </MenuBar>
-      <VBox prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
-         <children>
-            <Label text="Name Surname" textFill="#212121">
-               <font>
-                  <Font size="14.0" />
-               </font>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<VBox xmlns:fx="http://javafx.com/fxml" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+      minWidth="-Infinity" prefWidth="600.0" xmlns="http://javafx.com/javafx"
+      fx:controller="org.example.client.controllers.EditProfileController">
+    <MenuBar VBox.vgrow="NEVER">
+        <Menu mnemonicParsing="false" text="File">
+            <MenuItem mnemonicParsing="false" text="Close"/>
+        </Menu>
+        <Menu mnemonicParsing="false" text="Edit">
+            <MenuItem mnemonicParsing="false" text="Delete"/>
+        </Menu>
+        <Menu mnemonicParsing="false" text="Help">
+            <MenuItem mnemonicParsing="false" text="About"/>
+        </Menu>
+    </MenuBar>
+    <VBox prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
+        <padding>
+            <Insets bottom="24.0" left="24.0" right="24.0" top="24.0"/>
+        </padding>
+        <Label text="Name Surname" textFill="#212121">
+            <font>
+                <Font size="14.0"/>
+            </font>
+        </Label>
+        <TextField promptText="Name Surname">
+            <font>
+                <Font size="14.0"/>
+            </font>
+            <VBox.margin>
+                <Insets top="8.0"/>
+            </VBox.margin>
+        </TextField>
+        <Text fill="#0066ff" strokeType="OUTSIDE" strokeWidth="0.0" text="Username">
+            <font>
+                <Font size="12.0"/>
+            </font>
+            <VBox.margin>
+                <Insets top="12.0"/>
+            </VBox.margin>
+        </Text>
+        <Separator prefWidth="200.0">
+            <VBox.margin>
+                <Insets top="18.0"/>
+            </VBox.margin>
+        </Separator>
+        <Text fill="#616161" strokeType="OUTSIDE" strokeWidth="0.0" text="Base Information">
+            <VBox.margin>
+                <Insets top="12.0"/>
+            </VBox.margin>
+            <font>
+                <Font size="18.0"/>
+            </font>
+        </Text>
+        <FlowPane prefWidth="300.0" prefWrapLength="100.0" VBox.vgrow="NEVER">
+            <VBox.margin>
+                <Insets/>
+            </VBox.margin>
+            <VBox prefWidth="250.0">
+                <Label text="Address" textFill="#212121">
+                    <font>
+                        <Font size="14.0"/>
+                    </font>
+                    <VBox.margin>
+                        <Insets top="12.0"/>
+                    </VBox.margin>
+                </Label>
+                <TextField promptText="Address">
+                    <font>
+                        <Font size="12.0"/>
+                    </font>
+                    <VBox.margin>
+                        <Insets left="24.0" top="12.0"/>
+                    </VBox.margin>
+                </TextField>
+            </VBox>
+            <VBox prefWidth="250.0">
+                <Label text="Telephone" textFill="#212121">
+                    <font>
+                        <Font size="14.0"/>
+                    </font>
+                    <VBox.margin>
+                        <Insets top="12.0"/>
+                    </VBox.margin>
+                </Label>
+                <TextField promptText="Telephone">
+                    <VBox.margin>
+                        <Insets left="24.0" top="12.0"/>
+                    </VBox.margin>
+                    <font>
+                        <Font size="12.0"/>
+                    </font>
+                </TextField>
+            </VBox>
+        </FlowPane>
+        <Separator prefWidth="200.0">
+            <VBox.margin>
+                <Insets top="18.0"/>
+            </VBox.margin>
+        </Separator>
+        <Text fill="#616161" layoutX="34.0" layoutY="151.0" strokeType="OUTSIDE" strokeWidth="0.0"
+              text="Payment Method">
+            <font>
+                <Font size="18.0"/>
+            </font>
+            <VBox.margin>
+                <Insets top="12.0"/>
+            </VBox.margin>
+        </Text>
+        <HBox alignment="CENTER_LEFT">
+            <VBox.margin>
+                <Insets left="24.0" top="12.0"/>
+            </VBox.margin>
+            <Text fill="#212121" strokeType="OUTSIDE" strokeWidth="0.0" text="Credit card">
+                <font>
+                    <Font size="12.0"/>
+                </font>
+            </Text>
+            <Text fill="#757575" strokeType="OUTSIDE" strokeWidth="0.0" text="**** **** **** 0000">
+                <HBox.margin>
+                    <Insets left="24.0"/>
+                </HBox.margin>
+                <font>
+                    <Font size="12.0"/>
+                </font>
+            </Text>
+            <Button mnemonicParsing="false" style="-fx-background-color: #0066FF;" text="Change"
+                    textFill="#fafafa">
+                <font>
+                    <Font name="System Bold" size="12.0"/>
+                </font>
+                <HBox.margin>
+                    <Insets left="48.0"/>
+                </HBox.margin>
+            </Button>
+        </HBox>
+        <Separator layoutX="34.0" layoutY="235.0" prefWidth="200.0">
+            <VBox.margin>
+                <Insets top="18.0"/>
+            </VBox.margin>
+        </Separator>
+        <Text fill="#616161" layoutX="34.0" layoutY="269.0" strokeType="OUTSIDE" strokeWidth="0.0"
+              text="Loyalty Card">
+            <font>
+                <Font size="18.0"/>
+            </font>
+            <VBox.margin>
+                <Insets top="12.0"/>
+            </VBox.margin>
+        </Text>
+        <HBox alignment="CENTER_LEFT" layoutX="58.0" layoutY="287.0">
+            <VBox.margin>
+                <Insets left="24.0" top="12.0"/>
+            </VBox.margin>
+            <Label text="Card Number">
+                <font>
+                    <Font size="12.0"/>
+                </font>
             </Label>
-            <TextField promptText="Name Surname">
-               <font>
-                  <Font size="14.0" />
-               </font>
-               <VBox.margin>
-                  <Insets top="8.0" />
-               </VBox.margin>
+            <TextField prefWidth="226.0" promptText="Card Number">
+                <font>
+                    <Font size="12.0"/>
+                </font>
+                <HBox.margin>
+                    <Insets left="48.0"/>
+                </HBox.margin>
             </TextField>
-            <Text fill="#0066ff" strokeType="OUTSIDE" strokeWidth="0.0" text="Username">
-               <font>
-                  <Font size="12.0" />
-               </font>
-               <VBox.margin>
-                  <Insets top="12.0" />
-               </VBox.margin>
-            </Text>
-            <Separator prefWidth="200.0">
-               <VBox.margin>
-                  <Insets top="18.0" />
-               </VBox.margin>
-            </Separator>
-            <Text fill="#616161" strokeType="OUTSIDE" strokeWidth="0.0" text="Base Information">
-               <VBox.margin>
-                  <Insets top="12.0" />
-               </VBox.margin>
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Text>
-            <FlowPane prefWidth="300.0" prefWrapLength="100.0" VBox.vgrow="NEVER">
-               <children>
-                  <VBox prefWidth="250.0">
-                     <children>
-                        <Label text="Address" textFill="#212121">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                           <VBox.margin>
-                              <Insets top="12.0" />
-                           </VBox.margin>
-                        </Label>
-                        <TextField promptText="Address">
-                           <font>
-                              <Font size="12.0" />
-                           </font>
-                           <VBox.margin>
-                              <Insets left="24.0" top="12.0" />
-                           </VBox.margin>
-                        </TextField>
-                     </children>
-                  </VBox>
-                  <VBox prefWidth="250.0">
-                     <children>
-                        <Label text="Telephone" textFill="#212121">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                           <VBox.margin>
-                              <Insets top="12.0" />
-                           </VBox.margin>
-                        </Label>
-                        <TextField promptText="Telephone">
-                           <VBox.margin>
-                              <Insets left="24.0" top="12.0" />
-                           </VBox.margin>
-                           <font>
-                              <Font size="12.0" />
-                           </font>
-                        </TextField>
-                     </children>
-                  </VBox>
-               </children>
-               <VBox.margin>
-                  <Insets />
-               </VBox.margin>
-            </FlowPane>
-            <Separator prefWidth="200.0">
-               <VBox.margin>
-                  <Insets top="18.0" />
-               </VBox.margin>
-            </Separator>
-            <Text fill="#616161" layoutX="34.0" layoutY="151.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Payment Method">
-               <font>
-                  <Font size="18.0" />
-               </font>
-               <VBox.margin>
-                  <Insets top="12.0" />
-               </VBox.margin>
-            </Text>
-            <HBox alignment="CENTER_LEFT">
-               <children>
-                  <Text fill="#212121" strokeType="OUTSIDE" strokeWidth="0.0" text="Credit card">
-                     <font>
-                        <Font size="12.0" />
-                     </font>
-                  </Text>
-                  <Text fill="#757575" strokeType="OUTSIDE" strokeWidth="0.0" text="**** **** **** 0000">
-                     <HBox.margin>
-                        <Insets left="24.0" />
-                     </HBox.margin>
-                     <font>
-                        <Font size="12.0" />
-                     </font>
-                  </Text>
-                  <Button mnemonicParsing="false" style="-fx-background-color: #0066FF;" text="Change" textFill="#fafafa">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                     <HBox.margin>
-                        <Insets left="48.0" />
-                     </HBox.margin>
-                  </Button>
-               </children>
-               <VBox.margin>
-                  <Insets left="24.0" top="12.0" />
-               </VBox.margin>
-            </HBox>
-            <Separator layoutX="34.0" layoutY="235.0" prefWidth="200.0">
-               <VBox.margin>
-                  <Insets top="18.0" />
-               </VBox.margin>
-            </Separator>
-            <Text fill="#616161" layoutX="34.0" layoutY="269.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Loyalty Card">
-               <font>
-                  <Font size="18.0" />
-               </font>
-               <VBox.margin>
-                  <Insets top="12.0" />
-               </VBox.margin>
-            </Text>
-            <HBox alignment="CENTER_LEFT" layoutX="58.0" layoutY="287.0">
-               <VBox.margin>
-                  <Insets left="24.0" top="12.0" />
-               </VBox.margin>
-               <children>
-                  <Label text="Card Number">
-                     <font>
-                        <Font size="12.0" />
-                     </font>
-                  </Label>
-                  <TextField prefWidth="226.0" promptText="Card Number">
-                     <font>
-                        <Font size="12.0" />
-                     </font>
-                     <HBox.margin>
-                        <Insets left="48.0" />
-                     </HBox.margin>
-                  </TextField>
-               </children>
-            </HBox>
-            <HBox alignment="BOTTOM_RIGHT" VBox.vgrow="ALWAYS">
-               <children>
-                  <Button mnemonicParsing="false" style="-fx-background-color: #0066FF;" text="Save" textFill="#fafafa">
-                     <HBox.margin>
-                        <Insets />
-                     </HBox.margin>
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Button>
-                  <Button mnemonicParsing="false" style="-fx-background-color: #bdbdbd;" text="Cancell" textFill="#212121">
-                     <font>
-                        <Font size="12.0" />
-                     </font>
-                     <HBox.margin>
-                        <Insets left="12.0" />
-                     </HBox.margin>
-                  </Button>
-               </children>
-               <VBox.margin>
-                  <Insets top="24.0" />
-               </VBox.margin>
-            </HBox>
-         </children>
-         <padding>
-            <Insets bottom="24.0" left="24.0" right="24.0" top="24.0" />
-         </padding>
-      </VBox>
-   </children>
+        </HBox>
+        <HBox alignment="BOTTOM_RIGHT" VBox.vgrow="ALWAYS">
+            <VBox.margin>
+                <Insets top="24.0"/>
+            </VBox.margin>
+            <Button mnemonicParsing="false" style="-fx-background-color: #0066FF;" text="Save"
+                    textFill="#fafafa">
+                <HBox.margin>
+                    <Insets/>
+                </HBox.margin>
+                <font>
+                    <Font name="System Bold" size="12.0"/>
+                </font>
+            </Button>
+            <Button mnemonicParsing="false" style="-fx-background-color: #bdbdbd;" text="Cancell"
+                    textFill="#212121">
+                <font>
+                    <Font size="12.0"/>
+                </font>
+                <HBox.margin>
+                    <Insets left="12.0"/>
+                </HBox.margin>
+            </Button>
+        </HBox>
+    </VBox>
 </VBox>

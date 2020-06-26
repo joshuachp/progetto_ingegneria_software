@@ -1,20 +1,18 @@
 package org.example.client.controllers;
 
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import java.awt.event.ActionEvent;
 import java.io.IOException;
 
-public class ProfileController {
+public class EditProfileController {
 
     private Stage stage;
 
     public static void showView(Stage stage) {
-        FXMLLoader loader = new FXMLLoader(SceltaModalitaController.class.getResource("/views/profile.fxml"));
+        FXMLLoader loader = new FXMLLoader(SceltaModalitaController.class.getResource("/views/edit-profile.fxml"));
         Parent root = null;
         try {
             root = loader.load();
@@ -26,13 +24,8 @@ public class ProfileController {
         stage.setScene(scene);
         stage.setTitle("Profile");
         stage.show();
-        ProfileController controller = loader.getController();
+        EditProfileController controller = loader.getController();
         controller.setStage(stage);
-    }
-
-    @FXML
-    private void handleButtonEditAction(ActionEvent event) {
-        EditProfileController.showView(this.stage);
     }
 
     protected void setStage(Stage stage) {
