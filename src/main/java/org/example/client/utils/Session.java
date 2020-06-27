@@ -54,4 +54,13 @@ public class Session {
         Preferences preferences = Preferences.systemNodeForPackage(Session.class);
         preferences.putBoolean(PREFERENCE_SAVE_SESSION, saveSession);
     }
+
+    /**
+     * Returns true if the user is authenticated or a session is saved.
+     *
+     * @return True if authenticated
+     */
+    public boolean isAuth() {
+        return this.user != null;
+    }
 }

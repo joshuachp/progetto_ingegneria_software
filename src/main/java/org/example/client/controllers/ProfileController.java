@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.example.client.models.Client;
+import org.example.client.utils.Session;
 
 import java.io.IOException;
 
@@ -47,11 +48,8 @@ public class ProfileController {
 
     @FXML
     public void initialize() {
-        // XXX: Test
-        // Session session = Session.getInstance();
-        // this.client = session.getUser();
-        Client client = new Client("john", "", "John", "Snow", "Via Viale 1",
-                3333, "City", "333 444 5555");
+        Session session = Session.getInstance();
+        Client client = (Client) session.getUser();
 
         // Set the profile information
         this.nameSurname.setText(String.format("%s %s", client.getName(), client.getSurname()));

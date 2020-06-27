@@ -1,6 +1,7 @@
 package org.example.client.utils;
 
 import okhttp3.*;
+import org.intellij.lang.annotations.RegExp;
 import org.json.JSONObject;
 
 import java.io.IOException;
@@ -12,6 +13,12 @@ public class Utils {
     public static final String SERVER_URL_AUTH = "/api/user/authenticate";
     public static final String SERVER_URL_SESSION = "/api/user/session";
 
+
+    // REGEX String utils
+    @RegExp
+    public static final String REGEX_CAP = "^\\d{5}$";
+    @RegExp // TODO
+    public static final String REGEX_TELEPHONE = "";
 
     /**
      * Placeholder util to simulate server authentication with username and password

@@ -4,7 +4,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
-<VBox xmlns:fx="http://javafx.com/fxml" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+<VBox xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
       minWidth="-Infinity" prefWidth="600.0" xmlns="http://javafx.com/javafx"
       fx:controller="org.example.client.controllers.EditProfileController">
     <MenuBar VBox.vgrow="NEVER">
@@ -27,14 +27,24 @@
                 <Font size="14.0"/>
             </font>
         </Label>
-        <TextField promptText="Name Surname">
-            <font>
-                <Font size="14.0"/>
-            </font>
+        <HBox>
+            <TextField fx:id="name" promptText="Name">
+                <font>
+                    <Font size="14.0"/>
+                </font>
+            </TextField>
+            <TextField fx:id="surname" promptText="Surname">
+                <font>
+                    <Font size="14.0"/>
+                </font>
+                <HBox.margin>
+                    <Insets left="24.0"/>
+                </HBox.margin>
+            </TextField>
             <VBox.margin>
                 <Insets top="8.0"/>
             </VBox.margin>
-        </TextField>
+        </HBox>
         <Text fill="#0066ff" strokeType="OUTSIDE" strokeWidth="0.0" text="Username">
             <font>
                 <Font size="12.0"/>
@@ -56,47 +66,56 @@
                 <Font size="18.0"/>
             </font>
         </Text>
-        <FlowPane prefWidth="300.0" prefWrapLength="100.0" VBox.vgrow="NEVER">
+        <Label text="Address" textFill="#212121">
+            <font>
+                <Font size="14.0"/>
+            </font>
             <VBox.margin>
-                <Insets/>
+                <Insets top="12.0"/>
             </VBox.margin>
-            <VBox prefWidth="250.0">
-                <Label text="Address" textFill="#212121">
-                    <font>
-                        <Font size="14.0"/>
-                    </font>
-                    <VBox.margin>
-                        <Insets top="12.0"/>
-                    </VBox.margin>
-                </Label>
-                <TextField promptText="Address">
-                    <font>
-                        <Font size="12.0"/>
-                    </font>
-                    <VBox.margin>
-                        <Insets left="24.0" top="12.0"/>
-                    </VBox.margin>
-                </TextField>
-            </VBox>
-            <VBox prefWidth="250.0">
-                <Label text="Telephone" textFill="#212121">
-                    <font>
-                        <Font size="14.0"/>
-                    </font>
-                    <VBox.margin>
-                        <Insets top="12.0"/>
-                    </VBox.margin>
-                </Label>
-                <TextField promptText="Telephone">
-                    <VBox.margin>
-                        <Insets left="24.0" top="12.0"/>
-                    </VBox.margin>
-                    <font>
-                        <Font size="12.0"/>
-                    </font>
-                </TextField>
-            </VBox>
-        </FlowPane>
+        </Label>
+        <HBox>
+            <VBox.margin>
+                <Insets left="24.0" top="12.0"/>
+            </VBox.margin>
+            <TextField fx:id="address" promptText="Address">
+                <font>
+                    <Font size="12.0"/>
+                </font>
+            </TextField>
+            <TextField fx:id="cap" promptText="CAP">
+                <HBox.margin>
+                    <Insets left="24.0"/>
+                </HBox.margin>
+                <font>
+                    <Font size="12.0"/>
+                </font>
+            </TextField>
+            <TextField fx:id="city" promptText="City">
+                <HBox.margin>
+                    <Insets left="24.0"/>
+                </HBox.margin>
+                <font>
+                    <Font size="12.0"/>
+                </font>
+            </TextField>
+        </HBox>
+        <Label text="Telephone" textFill="#212121">
+            <font>
+                <Font size="14.0"/>
+            </font>
+            <VBox.margin>
+                <Insets top="12.0"/>
+            </VBox.margin>
+        </Label>
+        <TextField fx:id="telephone" maxWidth="-Infinity" prefWidth="250.0" promptText="Telephone">
+            <VBox.margin>
+                <Insets left="24.0" top="12.0"/>
+            </VBox.margin>
+            <font>
+                <Font size="12.0"/>
+            </font>
+        </TextField>
         <Separator prefWidth="200.0">
             <VBox.margin>
                 <Insets top="18.0"/>
@@ -128,8 +147,7 @@
                     <Font size="12.0"/>
                 </font>
             </Text>
-            <Button mnemonicParsing="false" style="-fx-background-color: #0066FF;" text="Change"
-                    textFill="#fafafa">
+            <Button mnemonicParsing="false" style="-fx-background-color: #0066FF;" text="Change" textFill="#fafafa">
                 <font>
                     <Font name="System Bold" size="12.0"/>
                 </font>
@@ -143,8 +161,7 @@
                 <Insets top="18.0"/>
             </VBox.margin>
         </Separator>
-        <Text fill="#616161" layoutX="34.0" layoutY="269.0" strokeType="OUTSIDE" strokeWidth="0.0"
-              text="Loyalty Card">
+        <Text fill="#616161" layoutX="34.0" layoutY="269.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Loyalty Card">
             <font>
                 <Font size="18.0"/>
             </font>
@@ -161,7 +178,7 @@
                     <Font size="12.0"/>
                 </font>
             </Label>
-            <TextField prefWidth="226.0" promptText="Card Number">
+            <TextField fx:id="cardNumber" prefWidth="226.0" promptText="Card Number">
                 <font>
                     <Font size="12.0"/>
                 </font>
@@ -174,8 +191,8 @@
             <VBox.margin>
                 <Insets top="24.0"/>
             </VBox.margin>
-            <Button mnemonicParsing="false" style="-fx-background-color: #0066FF;" text="Save"
-                    textFill="#fafafa">
+            <Button mnemonicParsing="false" onAction="#handleButtonSaveAction" style="-fx-background-color: #0066FF;"
+                    text="Save" textFill="#fafafa">
                 <HBox.margin>
                     <Insets/>
                 </HBox.margin>
@@ -183,8 +200,8 @@
                     <Font name="System Bold" size="12.0"/>
                 </font>
             </Button>
-            <Button mnemonicParsing="false" style="-fx-background-color: #bdbdbd;" text="Cancell"
-                    textFill="#212121">
+            <Button mnemonicParsing="false" onAction="#handleButtonCancelAction" style="-fx-background-color: #bdbdbd;"
+                    text="Cancel" textFill="#212121">
                 <font>
                     <Font size="12.0"/>
                 </font>

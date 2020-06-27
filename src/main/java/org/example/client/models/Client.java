@@ -8,12 +8,12 @@ import org.example.client.controllers.CatalogoController;
  */
 public class Client extends User {
 
-    private final String name;
-    private final String surname;
-    private final String address;
-    private final Integer cap;
-    private final String city;
-    private final String telephone;
+    private String surname;
+    private String address;
+    private Integer cap;
+    private String city;
+    private String telephone;
+    private String name;
     // TODO: payment method
 
     public Client(String username, String session, String name, String surname, String address,
@@ -36,23 +36,47 @@ public class Client extends User {
         return this.name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public String getSurname() {
         return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
     }
 
     public String getAddress() {
         return address;
     }
 
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
     public Integer getCap() {
         return cap;
+    }
+
+    public void setCap(Integer cap) {
+        this.cap = cap;
     }
 
     public String getCity() {
         return city;
     }
 
+    public void setCity(String city) {
+        this.city = city;
+    }
+
     public String getTelephone() {
         return telephone;
+    }
+
+    public void setTelephone(String telephone) {
+        this.telephone = telephone;
     }
 }
