@@ -22,7 +22,7 @@ public class FactoryUserTest {
     private MockWebServer server;
 
     @BeforeEach
-    void setUp() throws IOException {
+    void setUp() throws Exception {
         this.server = new MockWebServer();
         this.server.start(InetAddress.getByName("localhost"), 8080);
     }
@@ -37,7 +37,7 @@ public class FactoryUserTest {
      */
     @Test
     public void testGetUtente() {
-        server.enqueue(new MockResponse()
+        this.server.enqueue(new MockResponse()
                 .setBody(new JSONObject()
                         .put("username", "admin")
                         .put("session", "session")
@@ -56,20 +56,20 @@ public class FactoryUserTest {
      */
     @Test
     public void testGetUtenteSession() {
-        server.enqueue(new MockResponse()
+        this.server.enqueue(new MockResponse()
                 .setBody(new JSONObject()
                         .put("username", "admin")
                         .put("session", "session")
                         .put("responsabile", true)
                         .toString()));
-        server.enqueue(new MockResponse()
+        this.server.enqueue(new MockResponse()
                 .setBody(new JSONObject()
                         .put("username", "admin")
                         .put("session", "session")
                         .put("responsabile", true)
                         .toString()));
 
-        JSONObject session = Utils.autenticaWithServer("admin", "password");
+        JSONObject session = Utils.authenticate("admin", "password");
         assertNotNull(session);
         User user = new FactoryUser().getUtente(session.getString("session"));
         assertEquals("admin", user.getUsername());
@@ -82,7 +82,7 @@ public class FactoryUserTest {
      */
     @Test
     public void testGetUtenteCliente() {
-        server.enqueue(new MockResponse()
+        this.server.enqueue(new MockResponse()
                 .setBody(new JSONObject()
                         .put("username", "guest")
                         .put("session", "session")
@@ -99,7 +99,7 @@ public class FactoryUserTest {
      */
     @Test
     public void testGetUtenteResponsabileReparto() {
-        server.enqueue(new MockResponse()
+        this.server.enqueue(new MockResponse()
                 .setBody(new JSONObject()
                         .put("username", "admin")
                         .put("session", "session")

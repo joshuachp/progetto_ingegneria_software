@@ -4,8 +4,9 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
-<VBox xmlns:fx="http://javafx.com/fxml/1" stylesheets="/styles/style.css" maxHeight="-Infinity" maxWidth="-Infinity"
-      minHeight="-Infinity" minWidth="-Infinity" prefWidth="600.0" xmlns="http://javafx.com/javafx"
+<VBox xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+      minWidth="-Infinity"
+      prefWidth="600.0" stylesheets="/styles/style.css" xmlns="http://javafx.com/javafx/11.0.1"
       fx:controller="org.example.client.controllers.EditProfileController">
     <MenuBar VBox.vgrow="NEVER">
         <Menu mnemonicParsing="false" text="File">
@@ -191,6 +192,14 @@
             <VBox.margin>
                 <Insets top="24.0"/>
             </VBox.margin>
+            <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
+                <Text fx:id="error" fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" text="Internal server error"
+                      visible="false">
+                    <font>
+                        <Font size="12.0"/>
+                    </font>
+                </Text>
+            </HBox>
             <Button mnemonicParsing="false" onAction="#handleButtonSaveAction" style="-fx-background-color: #0066FF;"
                     text="Save" textFill="#fafafa">
                 <HBox.margin>

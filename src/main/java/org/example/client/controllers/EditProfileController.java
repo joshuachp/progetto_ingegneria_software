@@ -6,6 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.example.client.models.Client;
 import org.example.client.utils.Session;
@@ -30,10 +31,17 @@ public class EditProfileController {
     public TextField telephone;
     @FXML
     public TextField cardNumber;
+    @FXML
+    public Text error;
 
     private Stage stage;
     private Client client;
 
+    /**
+     * Shows the edit profile view.
+     *
+     * @param stage Stage to show the scene in
+     */
     public static void showView(Stage stage) {
         FXMLLoader loader = new FXMLLoader(SceltaModalitaController.class.getResource("/views/edit-profile.fxml"));
         Parent root = null;
@@ -83,11 +91,8 @@ public class EditProfileController {
 
     @FXML
     public void initialize() {
-        // XXX: Test
-        // Session session = Session.getInstance();
-        // this.client = (Client) session.getUser();
-        this.client = new Client("john", "", "John", "Snow", "Via Viale 1",
-                33333, "City", "3334445555");
+        Session session = Session.getInstance();
+        this.client = (Client) session.getUser();
 
         // Set the client data
         this.name.setText(this.client.getName());
@@ -170,12 +175,15 @@ public class EditProfileController {
             this.client.setCity(this.city.getText().trim());
             this.client.setTelephone(this.telephone.getText());
 
-            // TODO: Server request
+            if (Utils.updateUser(this.client) != null) {
+                // Update session
+                Session session = Session.getInstance();
+                session.setUser(this.client);
 
-            Session session = Session.getInstance();
-            session.setUser(this.client);
-
-            ProfileController.showView(this.stage);
+                ProfileController.showView(this.stage);
+            } else {
+                this.error.setVisible(true);
+            }
         }
     }
 }
