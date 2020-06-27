@@ -30,7 +30,7 @@ class UtilsTest {
     }
 
     @Test
-    void testAutenticaWithServerUsernamePassword() {
+    void autenticaWithServerUsernamePassword() {
         this.server.enqueue(new MockResponse()
                 .setBody(new JSONObject()
                         .put("username", "admin")
@@ -49,7 +49,7 @@ class UtilsTest {
     }
 
     @Test
-    void testAutenticaWithServerSession() {
+    void autenticaWithServerSession() {
         this.server.enqueue(new MockResponse()
                 .setBody(new JSONObject()
                         .put("username", "admin")
@@ -68,7 +68,7 @@ class UtilsTest {
     }
 
     @Test
-    void testUpdateUser() {
+    void updateUser() {
         this.server.enqueue(new MockResponse()
                 .setBody("OK"));
         this.server.enqueue(new MockResponse()

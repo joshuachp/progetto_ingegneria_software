@@ -8,11 +8,13 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import okhttp3.Response;
 import org.example.client.models.Client;
 import org.example.client.utils.Session;
 import org.example.client.utils.Utils;
 
 import java.io.IOException;
+import java.util.Objects;
 
 public class EditProfileController {
 
@@ -165,7 +167,7 @@ public class EditProfileController {
     }
 
     @FXML
-    public void handleButtonSaveAction() {
+    public void handleButtonSaveAction() throws IOException {
         if (validateCap() && validateTelephone()) {
             // Set client new parameters
             this.client.setName(this.name.getText().trim());
@@ -175,13 +177,20 @@ public class EditProfileController {
             this.client.setCity(this.city.getText().trim());
             this.client.setTelephone(this.telephone.getText());
 
-            if (Utils.updateUser(this.client) != null) {
+            // TODO: password
+            Response response = Utils.updateUser(this.client, null);
+            if (response == null) {
+                this.error.setVisible(true);
+            } else if (response.code() == 200) {
                 // Update session
                 Session session = Session.getInstance();
                 session.setUser(this.client);
 
                 ProfileController.showView(this.stage);
             } else {
+                // Set response error
+                if (response.body() != null)
+                    error.setText(Objects.requireNonNull(response.body()).string());
                 this.error.setVisible(true);
             }
         }

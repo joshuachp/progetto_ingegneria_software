@@ -92,9 +92,9 @@ public class Utils {
      *
      * @param user     The user information
      * @param password The new password if wants to changed
-     * @return "OK" if there's no error
+     * @return The response or null on error
      */
-    public static @Nullable String updateUser(@NotNull User user, @Nullable String password) {
+    public static @Nullable Response updateUser(@NotNull User user, @Nullable String password) {
         OkHttpClient httpClient = new OkHttpClient();
         FormBody.Builder body = new FormBody.Builder();
         Request.Builder request = new Request.Builder();
@@ -126,10 +126,7 @@ public class Utils {
         }
         // Send request
         try {
-            Response response = httpClient.newCall(request.post(body.build()).build()).execute();
-            if (response.body() != null) {
-                return Objects.requireNonNull(response.body()).string();
-            }
+            return httpClient.newCall(request.post(body.build()).build()).execute();
         } catch (IOException e) {
             e.printStackTrace();
         }
