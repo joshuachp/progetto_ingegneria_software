@@ -1,5 +1,11 @@
 # Changelog
 
+## 19-05-2020
+
+- Aggiunto Class Diagram
+  - User class
+- Aggiunto files progetto
+
 ## 10-05-2020
 
 - Aggiunto activity diagram gestione prodotti

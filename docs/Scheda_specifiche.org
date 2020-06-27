@@ -1,6 +1,6 @@
 * Scheda di specifica
 ** Gestione Utente
-*** Registrazione utente
+*** Registrazione user
 **** Inserimento dati anagrafici
 Per gli utenti si memorizzano:
 - Nome
@@ -15,8 +15,8 @@ Ha eventualmente associata una tessera fedeltà per la raccolta punti. Ogni tess
 - Numero identificativo
 - Data di emissione
 - Totale dei punti raccolti
-*** Login utente
-Ogni utente registrato accede con:
+*** Login user
+Ogni user registrato accede con:
 - Email
 - Password
 *** De autenticazione
@@ -44,9 +44,9 @@ Se il prodotto non è disponibile il sistema lo segnala al cliente e non viene a
 ** Carrello
 *** Visualizzazione del carrello
 **** Modifica della quantità
-L'utente può modificare la quantità dei prodotti aggiunti al carrello
+L'user può modificare la quantità dei prodotti aggiunti al carrello
 **** Rimuovere prodotto
-L'utente può rimuovere un prodotto nel carrello
+L'user può rimuovere un prodotto nel carrello
 **** Ricerca nel carrello
 La ricerca può avvenire per:
 - Tipo (uova, biscotti, pasta)
@@ -60,7 +60,7 @@ I prodotti possono essere ordinati in ordine crescente o decrescente secondo:
 **** Seleziona pagamento
 I metodi di pagamento possono essere:
 - Carta di credito
-- Paypal
+- PayPal
 - Alla consegna
 **** Selezione data e orario
 Il cliente seleziona la data e l'orario della consegna.
@@ -83,6 +83,11 @@ Per ogni spesa si memorizza:
 *** Modifica dati
 *** Cronologia delle spesa
 ** Back Office
-*** Autenticazione addetti
+*** Autenticazione responsabile reparto
+- login
+- password
+- matricola
+- dati anagrafici
+- ruolo
 *** Aggiunta nuovi prodotti
 *** Verifica stato spese
