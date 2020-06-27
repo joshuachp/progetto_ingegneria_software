@@ -18,7 +18,13 @@ public class Utils {
     @RegExp
     public static final String REGEX_CAP = "^\\d{5}$";
     @RegExp // TODO
-    public static final String REGEX_TELEPHONE = "";
+    public static final String REGEX_TELEPHONE = "^(\\((00|\\+)39\\)|(00|\\+)39)?" +
+            "(38[890]|" +
+            "34[6-90]|" +
+            "36[680]|" +
+            "33[3-90]|" +
+            "32[89])" +
+            "\\d{7}$";
 
     /**
      * Placeholder util to simulate server authentication with username and password

@@ -9,6 +9,7 @@ import javafx.scene.control.TextFormatter;
 import javafx.stage.Stage;
 import org.example.client.models.Client;
 import org.example.client.utils.Session;
+import org.example.client.utils.Utils;
 
 import java.io.IOException;
 
@@ -50,13 +51,43 @@ public class EditProfileController {
         controller.setStage(stage);
     }
 
+    /**
+     * Validate cap, set class t error if cap has error.
+     *
+     * @return Valid or not
+     */
+    private boolean validateTelephone() {
+        boolean valid = telephone.getText().matches(Utils.REGEX_TELEPHONE);
+        if (!valid) {
+            telephone.getStyleClass().add("error");
+        } else {
+            telephone.getStyleClass().remove("error");
+        }
+        return valid;
+    }
+
+    /**
+     * Validate cap, set class t error if cap has error.
+     *
+     * @return Valid or not
+     */
+    private boolean validateCap() {
+        boolean valid = cap.getText().matches(Utils.REGEX_CAP);
+        if (!valid) {
+            cap.getStyleClass().add("error");
+        } else {
+            cap.getStyleClass().remove("error");
+        }
+        return valid;
+    }
+
     @FXML
     public void initialize() {
         // XXX: Test
         // Session session = Session.getInstance();
         // this.client = (Client) session.getUser();
         this.client = new Client("john", "", "John", "Snow", "Via Viale 1",
-                3333, "City", "333 444 5555");
+                33333, "City", "3334445555");
 
         // Set the client data
         this.name.setText(this.client.getName());
@@ -86,7 +117,7 @@ public class EditProfileController {
             if (!change.isContentChange())
                 return change;
             String text = change.getText();
-            if (text.isEmpty() || text.matches("^[\\d+() ]*$")) {
+            if (text.isEmpty() || text.matches("^[\\d+()]*$")) {
                 return change;
             }
             return null;
@@ -100,7 +131,24 @@ public class EditProfileController {
             }
             return null;
         }));
+
+        // Validation
+        validateCap();
+        this.cap.focusedProperty().addListener(((observable, oldValue, newValue) -> {
+            // Focus lost
+            if (!newValue) {
+                validateCap();
+            }
+        }));
+        validateTelephone();
+        this.telephone.focusedProperty().addListener(((observable, oldValue, newValue) -> {
+            // Focus lost
+            if (!newValue) {
+                validateTelephone();
+            }
+        }));
     }
+
 
     @FXML
     public void handleButtonCancelAction() {
@@ -113,21 +161,21 @@ public class EditProfileController {
 
     @FXML
     public void handleButtonSaveAction() {
-        // TODO: Validate
-        // TODO: Modal?
+        if (validateCap() && validateTelephone()) {
+            // Set client new parameters
+            this.client.setName(this.name.getText().trim());
+            this.client.setSurname(this.surname.getText().trim());
+            this.client.setAddress(this.address.getText().trim());
+            this.client.setCap(Integer.valueOf(this.cap.getText().trim()));
+            this.client.setCity(this.city.getText().trim());
+            this.client.setTelephone(this.telephone.getText());
 
-        // Set client new parameters
-        this.client.setName(this.name.getText().trim());
-        this.client.setSurname(this.surname.getText().trim());
-        this.client.setAddress(this.address.getText().trim());
-        this.client.setCap(Integer.valueOf(this.cap.getText().trim()));
-        this.client.setCity(this.city.getText().trim());
-        this.client.setTelephone(this.telephone.getText());
+            // TODO: Server request
 
+            Session session = Session.getInstance();
+            session.setUser(this.client);
 
-        // TODO: Server request
-
-        Session session = Session.getInstance();
-        session.setUser(this.client);
+            ProfileController.showView(this.stage);
+        }
     }
 }
