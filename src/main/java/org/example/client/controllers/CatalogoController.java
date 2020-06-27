@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -35,7 +36,8 @@ public class CatalogoController {
     public ChoiceBox CbxColumn;
     public TextField Search;
     public ListView<String> listCategory;
-    public GridPane gridpane;
+    //public GridPane gridpane;
+    public FlowPane flowpane;
     private Stage stage;
 
     public static ObservableList<String> categoryList;
@@ -58,7 +60,6 @@ public class CatalogoController {
         for(Category x : Category.values()){
             categoryList.add(x.toString());
         }
-
 
         // prodotti Test
         ObservableList<Prodotto> products =  FXCollections.observableArrayList(
@@ -89,9 +90,9 @@ public class CatalogoController {
             i++;
         }
 
-        ColumnConstraints column1 = new ColumnConstraints();
+        /*ColumnConstraints column1 = new ColumnConstraints();
         column1.setHgrow(Priority.ALWAYS);
-        catalogoController.gridpane.getColumnConstraints().addAll(column1, column1, column1);
+        catalogoController.gridpane.getColumnConstraints().addAll(column1, column1, column1);*/
 
         catalogoController.listCategory.setItems(categoryList);
 
@@ -109,8 +110,10 @@ public class CatalogoController {
             e.printStackTrace();
         }
 
-        gridpane.add(card, i % 3, i / 3);
-
+        flowpane.setMargin(card, new Insets(5));
+        // gridpane.add(card, i % 3, i / 3);
+        ObservableList<Node> list = flowpane.getChildren();
+        list.add(card);
 
     }
 
@@ -131,5 +134,8 @@ public class CatalogoController {
     }
 
     public void viewCartHandler(MouseEvent mouseEvent) {
+    }
+
+    public void changeCategoryHandler(MouseEvent mouseEvent) {
     }
 }
