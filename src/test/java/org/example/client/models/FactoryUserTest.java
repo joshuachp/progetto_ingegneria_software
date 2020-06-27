@@ -42,6 +42,14 @@ public class FactoryUserTest {
                         .put("username", "admin")
                         .put("session", "session")
                         .put("responsabile", true)
+                        .put("badge", "D34DB33F")
+                        .put("name", "Name")
+                        .put("surname", "Surname")
+                        .put("address", "Via Viale 1")
+                        .put("cap", 33333)
+                        .put("city", "City")
+                        .put("telephone", "3334445555")
+                        .put("role", "Admin")
                         .toString()));
 
         User user = new FactoryUser().getUtente("admin", "password");
@@ -61,12 +69,28 @@ public class FactoryUserTest {
                         .put("username", "admin")
                         .put("session", "session")
                         .put("responsabile", true)
+                        .put("badge", "D34DB33F")
+                        .put("name", "Name")
+                        .put("surname", "Surname")
+                        .put("address", "Via Viale 1")
+                        .put("cap", 33333)
+                        .put("city", "City")
+                        .put("telephone", "3334445555")
+                        .put("role", "Admin")
                         .toString()));
         this.server.enqueue(new MockResponse()
                 .setBody(new JSONObject()
                         .put("username", "admin")
                         .put("session", "session")
                         .put("responsabile", true)
+                        .put("badge", "D34DB33F")
+                        .put("name", "Name")
+                        .put("surname", "Surname")
+                        .put("address", "Via Viale 1")
+                        .put("cap", 33333)
+                        .put("city", "City")
+                        .put("telephone", "3334445555")
+                        .put("role", "Admin")
                         .toString()));
 
         JSONObject session = Utils.authenticate("admin", "password");
@@ -87,6 +111,14 @@ public class FactoryUserTest {
                         .put("username", "guest")
                         .put("session", "session")
                         .put("responsabile", false)
+                        .put("badge", "D34DB33F")
+                        .put("name", "Name")
+                        .put("surname", "Surname")
+                        .put("address", "Via Viale 1")
+                        .put("cap", 33333)
+                        .put("city", "City")
+                        .put("telephone", "3334445555")
+                        .put("role", "Admin")
                         .toString()));
 
         User user = new FactoryUser().getUtente("guest", "guest");
@@ -104,7 +136,16 @@ public class FactoryUserTest {
                         .put("username", "admin")
                         .put("session", "session")
                         .put("responsabile", true)
+                        .put("badge", "D34DB33F")
+                        .put("name", "Name")
+                        .put("surname", "Surname")
+                        .put("address", "Via Viale 1")
+                        .put("cap", 33333)
+                        .put("city", "City")
+                        .put("telephone", "3334445555")
+                        .put("role", "Admin")
                         .toString()));
+
 
         User user = new FactoryUser().getUtente("admin", "password");
         assertTrue(user.isResponsabile());

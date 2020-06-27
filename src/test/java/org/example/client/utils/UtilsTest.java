@@ -4,6 +4,7 @@ import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
 import org.example.client.models.Client;
 import org.example.client.models.Manager;
+import org.json.JSONObject;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -29,11 +30,41 @@ class UtilsTest {
     }
 
     @Test
-    void autenticaWithServer() {
+    void testAutenticaWithServerUsernamePassword() {
+        this.server.enqueue(new MockResponse()
+                .setBody(new JSONObject()
+                        .put("username", "admin")
+                        .put("session", "session")
+                        .put("responsabile", true)
+                        .put("badge", "D34DB33F")
+                        .put("name", "Name")
+                        .put("surname", "Surname")
+                        .put("address", "Via Viale 1")
+                        .put("cap", 33333)
+                        .put("city", "City")
+                        .put("telephone", "3334445555")
+                        .put("role", "Admin")
+                        .toString()));
+        assertNotNull(Utils.authenticate("admin", "password"));
     }
 
     @Test
-    void testAutenticaWithServer() {
+    void testAutenticaWithServerSession() {
+        this.server.enqueue(new MockResponse()
+                .setBody(new JSONObject()
+                        .put("username", "admin")
+                        .put("session", "session")
+                        .put("responsabile", true)
+                        .put("badge", "D34DB33F")
+                        .put("name", "Name")
+                        .put("surname", "Surname")
+                        .put("address", "Via Viale 1")
+                        .put("cap", 33333)
+                        .put("city", "City")
+                        .put("telephone", "3334445555")
+                        .put("role", "Admin")
+                        .toString()));
+        assertNotNull(Utils.authenticate("session"));
     }
 
     @Test
