@@ -3,3 +3,10 @@
 ** Sequence diagram
 *** Effettua spesa
 Serve dire che è sottinteso che il cliente è autenticato e sta visualizzando il catalogo.
+*** Colors
+- Blue :: #0066FF
+- Grey :: #757575
+- Not so dark gray: #616161
+- Dark grey :: #424242
+- Black :: #212121
+- Button cancell :: bdbdbd

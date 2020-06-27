@@ -3,19 +3,16 @@ package org.example.client.models;
 import javafx.stage.Stage;
 import org.example.client.controllers.SceltaModalitaController;
 
-import java.io.IOException;
+public class Manager extends User {
 
-public class Manager extends Utente {
-
-    private String badge;
-    private String name;
-    private String surname;
-    private String address;
-    private Integer cap;
-    private String city;
-    private String telephone;
-    private String role;
-
+    private final String badge;
+    private final String name;
+    private final String surname;
+    private final String address;
+    private final Integer cap;
+    private final String city;
+    private final String telephone;
+    private final String role;
 
     public Manager(String username, String session, String badge, String name, String surname,
                    String address, Integer cap, String city, String telephone, String role) {
@@ -28,6 +25,38 @@ public class Manager extends Utente {
         this.city = city;
         this.telephone = telephone;
         this.role = role;
+    }
+
+    public String getBadge() {
+        return badge;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public Integer getCap() {
+        return cap;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public String getTelephone() {
+        return telephone;
+    }
+
+    public String getRole() {
+        return role;
     }
 
     @Override

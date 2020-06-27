@@ -8,7 +8,7 @@ import org.json.JSONObject;
 /**
  * Implementazione della factory per la classe Utente
  */
-public class FactoryUtente {
+public class FactoryUser {
 
     /**
      * Autentica un Utente tramite username e password. Ritorna una istanza della classe Utente in base alla tipologia
@@ -18,8 +18,8 @@ public class FactoryUtente {
      * @param password Password dell'utente
      * @return Istanza della classe Utente
      */
-    public Utente getUtente(String username, String password) {
-        JSONObject json = Utils.autenticaWithServer(username, password);
+    public User getUtente(String username, String password) {
+        JSONObject json = Utils.authenticate(username, password);
         return createUtente(json);
     }
 
@@ -30,8 +30,8 @@ public class FactoryUtente {
      * @param session Il token di sessione
      * @return Istanza della classe Utente
      */
-    public Utente getUtente(String session) {
-        JSONObject json = Utils.autenticaWithServer(session);
+    public User getUtente(String session) {
+        JSONObject json = Utils.authenticate(session);
         return createUtente(json);
     }
 
@@ -41,7 +41,7 @@ public class FactoryUtente {
      * @param json Risposta dell'autenticazione del server
      * @return Istanza della classe Utente
      */
-    private Utente createUtente(@Nullable JSONObject json) {
+    private User createUtente(@Nullable JSONObject json) {
         if (json == null)
             return null;
         String username = json.getString("username");
@@ -51,7 +51,7 @@ public class FactoryUtente {
                     json.getString("surname"), json.getString("address"), json.getInt("cap"),
                     json.getString("city"), json.getString("telephone"), json.getString("role"));
         }
-        return new Cliente(username, session, json.getString("name"), json.getString("surname"),
+        return new Client(username, session, json.getString("name"), json.getString("surname"),
                 json.getString("address"), json.getInt("cap"), json.getString("city"),
                 json.getString("telephone"));
     }
