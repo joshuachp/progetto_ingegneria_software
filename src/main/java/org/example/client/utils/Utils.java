@@ -26,6 +26,10 @@ public class Utils {
     @RegExp
     public static final String REGEX_CAP = "^\\d{5}$";
     @RegExp
+    public static final String REGEX_MAIL = "^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,}$";
+    @RegExp
+    public static final String REGEX_PASSWORD = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[\\W_]).{8,}$";
+    @RegExp
     public static final String REGEX_TELEPHONE = "^(\\((00|\\+)39\\)|(00|\\+)39)?" +
             "(38[890]|" +
             "34[6-90]|" +
@@ -33,8 +37,6 @@ public class Utils {
             "33[3-90]|" +
             "32[89])" +
             "\\d{7}$";
-    @RegExp
-    public static final String REGEX_PASSWORD = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[\\W_]).{8,}$";
 
     /**
      * Authenticate with the server authentication with username and password

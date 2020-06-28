@@ -49,7 +49,7 @@ public class AutenticazioneController {
         String username = usernameField.getText();
         String password = passwordField.getText();
         if (!username.isEmpty() && !password.isEmpty()) {
-            User user = new FactoryUser().getUtente(username, password);
+            User user = new FactoryUser().getUser(username, password);
             if (user != null) {
                 resultLabel.setTextFill(Color.BLACK);
                 resultLabel.setText("Login effettuato con successo");

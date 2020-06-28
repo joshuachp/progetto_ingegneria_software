@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 import java.io.IOException;
 import java.net.InetAddress;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class UtilsTest {
@@ -81,5 +82,24 @@ class UtilsTest {
         Manager manager = new Manager("username", "session", "badge", "name", "surname",
                 "address", 33333, "City", "3334445555", "admin");
         assertNotNull(Utils.updateUser(manager, null));
+    }
+
+    @Test
+    public void registerClient(){
+        String email = "jondoe@gmail.com";
+        String password = "12345678";
+        String name = "Jon";
+        String surname = "Doe";
+        String address = "myHome, 12";
+        int cap = 37530;
+        String city = "New York";
+        String phone = "3490327543";
+        int spesa = 1;
+
+        this.server.enqueue(new MockResponse()
+                .setBody("OK"));
+        assertEquals(200, (Utils.registerClient(email, password, name, surname,
+                address, cap, city, phone, spesa)));
+
     }
 }

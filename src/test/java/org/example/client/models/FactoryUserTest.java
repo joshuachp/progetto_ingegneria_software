@@ -52,7 +52,7 @@ public class FactoryUserTest {
                         .put("role", "Admin")
                         .toString()));
 
-        User user = new FactoryUser().getUtente("admin", "password");
+        User user = new FactoryUser().getUser("admin", "password");
         assertNotNull(user);
         assertEquals("admin", user.getUsername());
         assertEquals("session", user.getSession());
@@ -95,7 +95,7 @@ public class FactoryUserTest {
 
         JSONObject session = Utils.authenticate("admin", "password");
         assertNotNull(session);
-        User user = new FactoryUser().getUtente(session.getString("session"));
+        User user = new FactoryUser().getUser(session.getString("session"));
         assertEquals("admin", user.getUsername());
         assertEquals("session", user.getSession());
         assertTrue(user.isResponsabile());
@@ -121,7 +121,7 @@ public class FactoryUserTest {
                         .put("loyalty_card_number", 1234)
                         .toString()));
 
-        User user = new FactoryUser().getUtente("guest", "guest");
+        User user = new FactoryUser().getUser("guest", "guest");
         assertFalse(user.isResponsabile());
         assertTrue(user instanceof Client);
     }
@@ -147,7 +147,7 @@ public class FactoryUserTest {
                         .toString()));
 
 
-        User user = new FactoryUser().getUtente("admin", "password");
+        User user = new FactoryUser().getUser("admin", "password");
         assertTrue(user.isResponsabile());
         assertTrue(user instanceof Manager);
     }
