@@ -130,4 +130,8 @@ gradle-app.setting
 ### Gradle Patch ###
 **/build/
 
+### Eclipse
+bin/
+
 app.db
+
