@@ -1,14 +1,203 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="org.example.client.controllers.GestioneProdottiController"
-            prefHeight="400.0" prefWidth="600.0">
+<AnchorPane prefHeight="526.0" prefWidth="485.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.client.controllers.GestioneProdottiController">
+    <children>
+        <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <children>
+                <VBox alignment="CENTER" />
+                <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                    <children>
+                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                            <children>
+                                <ImageView fx:id="thumbnail" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="https://images.services.esselunga.it/html/img_prodotti/esselunga/large/974898.jpg" />
+                                    </image>
+                                </ImageView>
 
+                                <Button alignment="TOP_CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleUploadImage" text="Carica immagine">
+                                    <VBox.margin>
+                                        <Insets top="10.0" />
+                                    </VBox.margin>
+                                    <padding>
+                                        <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+                                    </padding>
+                                </Button>
+                            </children>
+                            <opaqueInsets>
+                                <Insets />
+                            </opaqueInsets>
+                            <HBox.margin>
+                                <Insets bottom="15.0" top="5.0" />
+                            </HBox.margin>
+                        </VBox>
+                    </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
+                </HBox>
+                <Separator prefWidth="200.0" />
+                <GridPane>
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="-Infinity" vgrow="SOMETIMES" />
+                        <RowConstraints vgrow="SOMETIMES" />
+                    </rowConstraints>
+                    <children>
+                        <VBox prefHeight="57.0" prefWidth="300.0">
+                            <children>
+                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nome">
+                                    <VBox.margin>
+                                        <Insets bottom="5.0" right="5.0" top="5.0" />
+                                    </VBox.margin>
+                                </Text>
+                                <TextField fx:id="fieldName">
+                                    <padding>
+                                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                    </padding>
+                                </TextField>
+                            </children>
+                            <padding>
+                                <Insets bottom="20.0" left="20.0" right="20.0" />
+                            </padding>
+                        </VBox>
+                        <VBox prefHeight="57.0" prefWidth="300.0" GridPane.rowIndex="1">
+                            <children>
+                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Marchio">
+                                    <VBox.margin>
+                                        <Insets bottom="5.0" right="5.0" top="5.0" />
+                                    </VBox.margin>
+                                </Text>
+                                <TextField fx:id="fieldBrand">
+                                    <padding>
+                                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                    </padding>
+                                </TextField>
+                            </children>
+                            <padding>
+                                <Insets bottom="20.0" left="20.0" right="20.0" />
+                            </padding>
+                        </VBox>
+                        <VBox prefHeight="57.0" prefWidth="300.0" GridPane.columnIndex="1">
+                            <children>
+                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="ID prodotto">
+                                    <VBox.margin>
+                                        <Insets bottom="5.0" right="5.0" top="5.0" />
+                                    </VBox.margin>
+                                </Text>
+                                <TextField fx:id="fieldID">
+                                    <padding>
+                                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                    </padding>
+                                </TextField>
+                            </children>
+                            <padding>
+                                <Insets bottom="20.0" left="20.0" right="20.0" />
+                            </padding>
+                        </VBox>
+                        <VBox prefHeight="57.0" prefWidth="300.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                            <children>
+                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Quantità confezione singola">
+                                    <VBox.margin>
+                                        <Insets bottom="5.0" right="5.0" top="5.0" />
+                                    </VBox.margin>
+                                </Text>
+                                <TextField fx:id="fieldPackage">
+                                    <padding>
+                                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                    </padding>
+                                </TextField>
+                            </children>
+                            <padding>
+                                <Insets bottom="20.0" left="20.0" right="20.0" />
+                            </padding>
+                        </VBox>
+                        <VBox layoutX="10.0" layoutY="96.0" prefHeight="57.0" prefWidth="300.0" GridPane.rowIndex="2">
+                            <children>
+                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Prezzo">
+                                    <VBox.margin>
+                                        <Insets bottom="5.0" right="5.0" top="5.0" />
+                                    </VBox.margin>
+                                </Text>
+                                <TextField fx:id="fieldPrice">
+                                    <padding>
+                                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                    </padding>
+                                </TextField>
+                            </children>
+                            <padding>
+                                <Insets bottom="20.0" left="20.0" right="20.0" />
+                            </padding>
+                        </VBox>
+                        <VBox prefHeight="57.0" prefWidth="300.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                            <children>
+                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Quantità magazzino">
+                                    <VBox.margin>
+                                        <Insets bottom="5.0" right="5.0" top="5.0" />
+                                    </VBox.margin>
+                                </Text>
+                                <TextField fx:id="fieldQuantity">
+                                    <padding>
+                                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                    </padding>
+                                </TextField>
+                            </children>
+                            <padding>
+                                <Insets bottom="20.0" left="20.0" right="20.0" />
+                            </padding>
+                        </VBox>
+                    </children>
+                </GridPane>
+                <VBox alignment="CENTER">
+                    <children>
+                        <Separator prefWidth="200.0" />
+                        <Label fx:id="resultLabel" />
+                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleConfirmAction" style="-fx-background-color: &quot;0066FF&quot;;" text="Conferma" textFill="WHITE">
+                            <padding>
+                                <Insets bottom="15.0" left="25.0" right="25.0" top="15.0" />
+                            </padding>
+                            <cursor>
+                                <Cursor fx:constant="HAND" />
+                            </cursor>
+                            <VBox.margin>
+                                <Insets top="15.0" />
+                            </VBox.margin>
+                        </Button>
+                    </children>
+                    <opaqueInsets>
+                        <Insets />
+                    </opaqueInsets>
+                    <padding>
+                        <Insets bottom="20.0" />
+                    </padding>
+                </VBox>
+            </children>
+            <padding>
+                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+            </padding>
+        </VBox>
+    </children>
 </AnchorPane>

@@ -17,6 +17,7 @@ public class Utils {
     public static final String SERVER_URL = "http://localhost:8080";
     public static final String SERVER_URL_AUTH = "/api/user/authenticate";
     public static final String SERVER_URL_SESSION = "/api/user/session";
+    public static final String SERVER_URL_REGISTRATION = "/api/client/register";
     public static final String SERVER_URL_MANAGER_UPDATE = "/api/manager/update";
     public static final String SERVER_URL_CLIENT_UPDATE = "/api/user/update";
 
@@ -54,10 +55,12 @@ public class Utils {
                 .build();
         try {
             Response response = client.newCall(request).execute();
-            // NOTE: Added to remove error
-            String responseBody = Objects.requireNonNull(response.body()).string();
-            return new JSONObject(responseBody);
-        } catch (IOException e) {
+            if (response.body() != null) {
+                // TODO: check asnwer code
+                String responseBody = Objects.requireNonNull(response.body()).string();
+                return new JSONObject(responseBody);
+            }
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
@@ -80,14 +83,47 @@ public class Utils {
                 .build();
         try {
             Response response = client.newCall(request).execute();
-            // NOTE: Added to remove error
-            String responseBody = Objects.requireNonNull(response.body()).string();
-            return new JSONObject(responseBody);
-        } catch (IOException e) {
+            // TODO: check asnwer code
+            if (response.body() != null) {
+                String responseBody = Objects.requireNonNull(response.body()).string();
+                return new JSONObject(responseBody);
+            }
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
     }
+
+
+
+    public static int registerClient(String username, String password, String name, String surname,
+                                     String address, Integer cap, String city,
+                                     String telephone, Integer payment) {
+        OkHttpClient client = new OkHttpClient();
+        RequestBody body = new FormBody.Builder()
+                .add("username", username)
+                .add("password", password)
+                .add("name", name)
+                .add("surname", surname)
+                .add("address", address)
+                .add("cap", String.valueOf(cap))
+                .add("city", city)
+                .add("telephone", telephone)
+                .add("payment", String.valueOf(payment))
+                .build();
+        Request request = new Request.Builder()
+                .url(SERVER_URL + SERVER_URL_REGISTRATION)
+                .post(body)
+                .build();
+        try {
+            Response response = client.newCall(request).execute();
+            return response.code();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return -1;
+    }
+
 
     /**
      * Update the user information on the server

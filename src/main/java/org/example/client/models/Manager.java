@@ -61,6 +61,10 @@ public class Manager extends User {
 
     @Override
     public void redirect(Stage stage) {
-        SceltaModalitaController.showView(stage);
+        try{
+            SceltaModalitaController.showView(stage);
+        } catch (IOException e){
+            e.printStackTrace();
+        }
     }
 }

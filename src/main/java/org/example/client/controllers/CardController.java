@@ -1,0 +1,54 @@
+package org.example.client.controllers;
+
+import javafx.collections.FXCollections;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
+import javafx.geometry.Rectangle2D;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Spinner;
+import javafx.scene.control.SpinnerValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
+import javafx.stage.Stage;
+import org.example.client.models.Category;
+import org.example.client.models.Prodotto;
+
+import java.io.IOException;
+
+
+public class CardController {
+
+    public ImageView thumbnail;
+    public Text title;
+    public Text price;
+    public Spinner<Integer> quantity;
+    public ImageView addCart;
+
+
+    public static VBox generateCard(Prodotto product) throws IOException {
+        FXMLLoader loader = new FXMLLoader(CardController.class.getResource("/views/card.fxml"));
+        VBox card = loader.load();
+        CardController cardController = loader.getController();
+        cardController.price.setText(product.getPrice());
+        cardController.title.setText(product.getName());
+        cardController.title.maxWidth(50);
+        Image image = new Image(product.getImage());
+        cardController.thumbnail.setImage(image);
+        cardController.thumbnail.setFitWidth(100);
+        cardController.thumbnail.setPreserveRatio(true);
+        cardController.thumbnail.setCache(true);
+        Rectangle2D viewportRect = new Rectangle2D(0, 0, 1000, 1000);
+        cardController.thumbnail.setViewport(viewportRect);
+        SpinnerValueFactory<Integer> spinnerValue = new SpinnerValueFactory.IntegerSpinnerValueFactory(1,99);
+        cardController.quantity.setValueFactory(spinnerValue);
+
+        return card;
+    }
+
+    public void addToCartHandler(ActionEvent actionEvent) {
+        // TODO: aggiunta prodotto carrello in tot quantità
+    }
+}
