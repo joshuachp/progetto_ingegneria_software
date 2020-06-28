@@ -15,7 +15,7 @@ public class Session {
     private boolean saveSession;
 
     private Session() {
-        Preferences preferences = Preferences.systemNodeForPackage(Session.class);
+        Preferences preferences = Preferences.userNodeForPackage(Session.class);
 
         this.saveSession = preferences.getBoolean(PREFERENCE_SAVE_SESSION, true);
         String sessionToken = preferences.get(PREFERENCE_USER_SESSION, "");
@@ -40,7 +40,7 @@ public class Session {
     public void setUser(User user) {
         this.user = user;
 
-        Preferences preferences = Preferences.systemNodeForPackage(Session.class);
+        Preferences preferences = Preferences.userNodeForPackage(Session.class);
         preferences.put(PREFERENCE_USER_SESSION, user.getSession());
     }
 
@@ -51,7 +51,7 @@ public class Session {
     public void setSaveSession(boolean saveSession) {
         this.saveSession = saveSession;
 
-        Preferences preferences = Preferences.systemNodeForPackage(Session.class);
+        Preferences preferences = Preferences.userNodeForPackage(Session.class);
         preferences.putBoolean(PREFERENCE_SAVE_SESSION, saveSession);
     }
 

@@ -101,14 +101,32 @@ public class EditProfileController {
      * @return Valid or not
      */
     private boolean validatePassword() {
-        boolean valid = cap.getText().matches(Utils.REGEX_PASSWORD);
+        boolean valid = password.getText().matches(Utils.REGEX_PASSWORD);
         if (!valid) {
-            cap.getStyleClass().add("error");
+            password.getStyleClass().add("error");
         } else {
             cap.getStyleClass().remove("error");
         }
         return valid;
     }
+
+    /**
+     * Validate password, set text field class to error if password has error.
+     *
+     * @return Valid or not
+     */
+    private boolean validateConfirmPassword() {
+        boolean valid =
+                confirmPassword.getText().matches(Utils.REGEX_PASSWORD) &&
+                        (password.getText().isEmpty() || confirmPassword.getText().equals(password.getText()));
+        if (!valid) {
+            confirmPassword.getStyleClass().add("error");
+        } else {
+            confirmPassword.getStyleClass().remove("error");
+        }
+        return valid;
+    }
+
 
     @FXML
     public void initialize() {
@@ -159,6 +177,7 @@ public class EditProfileController {
         }));
 
         // Validation
+        // CAP
         validateCap();
         this.cap.focusedProperty().addListener(((observable, oldValue, newValue) -> {
             // Focus lost
@@ -166,11 +185,26 @@ public class EditProfileController {
                 validateCap();
             }
         }));
+        // Telephone
         validateTelephone();
         this.telephone.focusedProperty().addListener(((observable, oldValue, newValue) -> {
             // Focus lost
             if (!newValue) {
                 validateTelephone();
+            }
+        }));
+        // Password
+        this.password.focusedProperty().addListener(((observable, oldValue, newValue) -> {
+            // Focus lost
+            if (!newValue) {
+                validatePassword();
+            }
+        }));
+        // Confirm password
+        this.password.focusedProperty().addListener(((observable, oldValue, newValue) -> {
+            // Focus lost
+            if (!newValue) {
+                validateConfirmPassword();
             }
         }));
     }
@@ -187,7 +221,12 @@ public class EditProfileController {
 
     @FXML
     public void handleButtonSaveAction() throws IOException {
-        if (validateCap() && validateTelephone()) {
+        boolean check = validateCap() & validateTelephone();
+        // Check for new password
+        if (!password.getText().isEmpty() || !confirmPassword.getText().isEmpty()) {
+            check &= validatePassword() & validateConfirmPassword();
+        }
+        if (check) {
             // Set client new parameters
             this.client.setName(this.name.getText().trim());
             this.client.setSurname(this.surname.getText().trim());
@@ -196,9 +235,12 @@ public class EditProfileController {
             this.client.setCity(this.city.getText().trim());
             this.client.setTelephone(this.telephone.getText());
             // TODO payment
+            // New password is set
+            String pass = null;
+            if (!password.getText().isEmpty())
+                pass = password.getText();
 
-            // TODO: password
-            Response response = Utils.updateUser(this.client, null);
+            Response response = Utils.updateUser(this.client, pass);
             if (response == null) {
                 this.error.setVisible(true);
             } else if (response.code() == 200) {
