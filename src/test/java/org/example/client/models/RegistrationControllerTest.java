@@ -1,15 +1,36 @@
 package org.example.client.models;
 
+import okhttp3.mockwebserver.MockResponse;
+import okhttp3.mockwebserver.MockWebServer;
 import org.example.client.controllers.RegistrazioneController;
 import org.example.client.utils.Utils;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
+import java.net.InetAddress;
+
 import static org.junit.jupiter.api.Assertions.*;
+
 
 /**
  * Test suit per la classe RegistrazioneController
  */
 public class RegistrationControllerTest {
+    private MockWebServer server;
+
+    @BeforeEach
+    void setUpAll() throws Exception {
+        this.server = new MockWebServer();
+        this.server.start(InetAddress.getByName("localhost"), 8080);
+    }
+
+    @AfterEach
+    void tearDown() throws IOException {
+        this.server.shutdown();
+    }
+
     @Test
     public void testPhoneVerify(){
         RegistrazioneController registrazioneController = new RegistrazioneController();
@@ -57,6 +78,8 @@ public class RegistrationControllerTest {
         String phone = "3490327543";
         int spesa = 1;
 
+        this.server.enqueue(new MockResponse()
+                .setBody("OK"));
         assertEquals(200, (Utils.registerClient(email, password, name, surname,
                 address, cap, city, phone, spesa)));
         

@@ -22,7 +22,7 @@ public class Session {
         if (sessionToken == null || sessionToken.isEmpty()) {
             this.user = null;
         } else {
-            this.user = new FactoryUser().getUtente(sessionToken);
+            this.user = new FactoryUser().getUser(sessionToken);
         }
     }
 

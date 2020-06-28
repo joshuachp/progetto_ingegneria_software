@@ -12,7 +12,7 @@ public class SceltaModalitaController {
 
     private Stage stage;
 
-    public static void showView(Stage stage) throws IOException {
+    public static void showView(Stage stage) {
         FXMLLoader loader = new FXMLLoader(SceltaModalitaController.class.getResource("/views/scelta-modalita.fxml"));
         Parent root = null;
         try {

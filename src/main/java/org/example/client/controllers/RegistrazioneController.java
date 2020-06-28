@@ -5,7 +5,6 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
@@ -14,15 +13,13 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
-import org.example.client.models.FactoryUtente;
+import org.example.client.models.FactoryUser;
 import org.example.client.models.Pagamento;
-import org.example.client.models.Utente;
+import org.example.client.models.User;
 import org.example.client.utils.Utils;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
 import java.util.regex.Pattern;
 
 public class RegistrazioneController /*implements Initializable*/ {
@@ -118,23 +115,15 @@ public class RegistrazioneController /*implements Initializable*/ {
     }
 
     public boolean mailVerify(String email) {
-        return (Pattern.matches("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,}$", email));
+        return (Pattern.matches(Utils.REGEX_MAIL, email));
     }
 
     public boolean capVerify(String cap){
-        return(Pattern.matches("\\d{5}", cap));
+        return(Pattern.matches(Utils.REGEX_CAP, cap));
     }
 
     public boolean phoneVerify(String phone){
-        return(Pattern.matches(
-                "^(\\((00|\\+)39\\)|(00|\\+)39)?" +
-                        "(38[890]|" +
-                        "34[6-90]|" +
-                        "36[680]|" +
-                        "33[3-90]|" +
-                        "32[89])" +
-                        "\\d{7}$",
-                phone));
+        return(Pattern.matches(Utils.REGEX_TELEPHONE, phone));
     }
 
     public boolean errorMessage(String message, @Nullable TextField field){
@@ -213,7 +202,7 @@ public class RegistrazioneController /*implements Initializable*/ {
                 Pagamento.fromString(cbxPagamento.getValue()).ordinal());
            if( statusCode == 200){
                errorMessage("Success" + statusCode, null );
-               Utente utente = new FactoryUtente().getUtente(Email.getText(), PasswordRepeat.getText());
+               User User = new FactoryUser().getUser(Email.getText(), PasswordRepeat.getText());
                CatalogoController.showView(this.stage);
            } else {
                errorMessage("Error" + statusCode, null );
