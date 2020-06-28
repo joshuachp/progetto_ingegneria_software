@@ -34,11 +34,35 @@ import java.util.ArrayList;
 public class CatalogoController {
 
     public ChoiceBox CbxColumn;
-    public TextField Search;
-    public ListView<String> listCategory;
+    public TextField searchBar;
+    public  ListView<String> listCategory;
     //public GridPane gridpane;
     public FlowPane flowpane;
     private Stage stage;
+
+    // prodotti Test
+    ObservableList<Prodotto> products =  FXCollections.observableArrayList(
+            new Prodotto(1, "Pasta n10", "Barilla", 1,
+                    1.72, "https://images.services.esselunga.it/html/img_prodotti/esselunga/image/965627.jpg", 1, "Pasta", "Alimneti" ),
+            new Prodotto(2, "Formaggio grattuggiato", "Parmiggiano Reggiano", 1,
+                    3.50, "https://images.services.esselunga.it/html/img_prodotti/esselunga/image/934922.jpg", 1,
+                    "Formaggi", "Alimenti" ),
+            new Prodotto(1, "Pasta n10", "Barilla", 1,
+                    1.72, "https://images.services.esselunga.it/html/img_prodotti/esselunga/image/965627.jpg", 1, "Pasta", "Alimneti" ),
+            new Prodotto(1, "Pasta n10", "Barilla", 1,
+                    1.72, "https://images.services.esselunga.it/html/img_prodotti/esselunga/image/965627.jpg", 1,
+                    "Pasta", "Frutta e verdura" ),
+            new Prodotto(1, "Pasta n10", "Barilla", 1,
+                    1.72, "https://images.services.esselunga.it/html/img_prodotti/esselunga/image/965627.jpg", 1, "Pasta", "Alimneti" ),
+            new Prodotto(1, "Pasta n10", "Barilla", 1,
+                    1.72, "https://images.services.esselunga.it/html/img_prodotti/esselunga/image/965627.jpg", 1, "Pasta", "Alimneti" ),
+            new Prodotto(1, "Pasta n10", "Barilla", 1,
+                    1.72, "https://images.services.esselunga.it/html/img_prodotti/esselunga/image/965627.jpg", 1, "Pasta", "Alimneti" ),
+            new Prodotto(1, "Pasta n10", "Barilla", 1,
+                    1.72, "https://images.services.esselunga.it/html/img_prodotti/esselunga/image/965627.jpg", 1, "Pasta", "Alimneti" ),
+            new Prodotto(1, "Pasta n10", "Barilla", 1,
+                    1.72, "https://images.services.esselunga.it/html/img_prodotti/esselunga/image/965627.jpg", 1,
+                    "Pasta", "Alimenti" ));
 
     public static ObservableList<String> categoryList;
 
@@ -61,60 +85,47 @@ public class CatalogoController {
             categoryList.add(x.toString());
         }
 
-        // prodotti Test
-        ObservableList<Prodotto> products =  FXCollections.observableArrayList(
-                new Prodotto(1, "Pasta n10", "Barilla", 1,
-                        1.72, "https://images.services.esselunga.it/html/img_prodotti/esselunga/image/965627.jpg", 1, "Pasta", "Alimneti" ),
-                new Prodotto(2, "Formaggio grattuggiato", "Parmiggiano Reggiano", 1,
-                        3.50, "https://images.services.esselunga.it/html/img_prodotti/esselunga/image/934922.jpg", 1,
-                        "Formaggi", "Alimneti" ),
-                new Prodotto(1, "Pasta n10", "Barilla", 1,
-                        1.72, "https://images.services.esselunga.it/html/img_prodotti/esselunga/image/965627.jpg", 1, "Pasta", "Alimneti" ),
-                new Prodotto(1, "Pasta n10", "Barilla", 1,
-                        1.72, "https://images.services.esselunga.it/html/img_prodotti/esselunga/image/965627.jpg", 1, "Pasta", "Alimneti" ),
-                new Prodotto(1, "Pasta n10", "Barilla", 1,
-                        1.72, "https://images.services.esselunga.it/html/img_prodotti/esselunga/image/965627.jpg", 1, "Pasta", "Alimneti" ),
-                new Prodotto(1, "Pasta n10", "Barilla", 1,
-                        1.72, "https://images.services.esselunga.it/html/img_prodotti/esselunga/image/965627.jpg", 1, "Pasta", "Alimneti" ),
-                new Prodotto(1, "Pasta n10", "Barilla", 1,
-                        1.72, "https://images.services.esselunga.it/html/img_prodotti/esselunga/image/965627.jpg", 1, "Pasta", "Alimneti" ),
-                new Prodotto(1, "Pasta n10", "Barilla", 1,
-                        1.72, "https://images.services.esselunga.it/html/img_prodotti/esselunga/image/965627.jpg", 1, "Pasta", "Alimneti" ),
-                new Prodotto(1, "Pasta n10", "Barilla", 1,
-                        1.72, "https://images.services.esselunga.it/html/img_prodotti/esselunga/image/965627.jpg", 1,
-                        "Pasta", "Alimneti" ));
-
-        int i = 0;
-        for( Prodotto x : products){
-            catalogoController.cardGenerator(products.get(i), i);
-            i++;
-        }
+        catalogoController.catalogFactory(catalogoController.products,
+                catalogoController.listCategory,
+                catalogoController.searchBar);
 
         /*ColumnConstraints column1 = new ColumnConstraints();
         column1.setHgrow(Priority.ALWAYS);
         catalogoController.gridpane.getColumnConstraints().addAll(column1, column1, column1);*/
 
         catalogoController.listCategory.setItems(categoryList);
-
+        System.out.println(catalogoController.listCategory.getItems().toString());
         catalogoController.setStage(stage);
 
     }
 
     // Card builder
-    public void cardGenerator(@NotNull Prodotto product, int i)  {
-
-        VBox card = null;
-        try {
-            card = CardController.generateCard(product);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        flowpane.setMargin(card, new Insets(5));
-        // gridpane.add(card, i % 3, i / 3);
+    public void catalogFactory(@NotNull ObservableList<Prodotto> products, ListView<String> listCategory, TextField searchBar)  {
+        // Creo la lista di figli del flow pane
         ObservableList<Node> list = flowpane.getChildren();
-        list.add(card);
+        list.clear();
+        Category category =
+                Category.fromString(listCategory.getSelectionModel().getSelectedItems().toString());
+        String search = searchBar.getText();
+        if (category == null)
+            category = Category.ALIMENTI;
+        System.out.println(category.toString());
+        // Genero i figli sulla base della categoria selezionata e del testo di ricerca nel box di ricerca
+        VBox card = null;
+        for (Prodotto product: products){
 
+            if(category == Category.fromString(product.getSection())) {
+                if (product.getCharacteristics().contains(search)) {
+                    try {
+                        card = CardController.generateCard(product);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    list.add(card);
+                    flowpane.setMargin(card, new Insets(5));
+                }
+            }
+        }
     }
 
     public void setStage(Stage stage) {
@@ -128,6 +139,7 @@ public class CatalogoController {
     }
 
     public void searchHandler(ActionEvent actionEvent) {
+        catalogFactory(this.products, this.listCategory, this.searchBar);
     }
 
     public void backhandler(MouseEvent mouseEvent) {
@@ -137,5 +149,8 @@ public class CatalogoController {
     }
 
     public void changeCategoryHandler(MouseEvent mouseEvent) {
+        catalogFactory(this.products, this.listCategory, this.searchBar);
+        System.out.println(Category.fromString(listCategory.getSelectionModel().getSelectedItems().toString()));
+        System.out.println(listCategory.getItems().toString());
     }
 }
