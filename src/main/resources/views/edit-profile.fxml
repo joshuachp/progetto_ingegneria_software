@@ -5,8 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 <VBox xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
-      minWidth="-Infinity"
-      prefWidth="600.0" stylesheets="/styles/style.css" xmlns="http://javafx.com/javafx/11.0.1"
+      minWidth="-Infinity" prefWidth="600.0" stylesheets="/styles/style.css" xmlns="http://javafx.com/javafx"
       fx:controller="org.example.client.controllers.EditProfileController">
     <MenuBar VBox.vgrow="NEVER">
         <Menu mnemonicParsing="false" text="File">
@@ -54,6 +53,40 @@
                 <Insets top="12.0"/>
             </VBox.margin>
         </Text>
+        <Separator layoutX="34.0" layoutY="139.0" prefWidth="200.0">
+            <VBox.margin>
+                <Insets top="18.0"/>
+            </VBox.margin>
+        </Separator>
+        <Text fill="#616161" layoutX="34.0" layoutY="194.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password">
+            <font>
+                <Font size="18.0"/>
+            </font>
+            <VBox.margin>
+                <Insets top="12.0"/>
+            </VBox.margin>
+        </Text>
+        <HBox prefHeight="100.0" prefWidth="200.0">
+            <VBox.margin>
+                <Insets left="24.0" top="12.0"/>
+            </VBox.margin>
+            <TextField fx:id="password" promptText="New Password">
+                <HBox.margin>
+                    <Insets/>
+                </HBox.margin>
+                <font>
+                    <Font size="12.0"/>
+                </font>
+            </TextField>
+            <TextField fx:id="confirmPassword" promptText="Confirm Password">
+                <HBox.margin>
+                    <Insets left="24.0"/>
+                </HBox.margin>
+                <font>
+                    <Font size="12.0"/>
+                </font>
+            </TextField>
+        </HBox>
         <Separator prefWidth="200.0">
             <VBox.margin>
                 <Insets top="18.0"/>

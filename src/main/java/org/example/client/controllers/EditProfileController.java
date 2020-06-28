@@ -35,6 +35,10 @@ public class EditProfileController {
     public TextField cardNumber;
     @FXML
     public Text error;
+    @FXML
+    public TextField password;
+    @FXML
+    public TextField confirmPassword;
 
     private Stage stage;
     private Client client;
@@ -77,12 +81,27 @@ public class EditProfileController {
     }
 
     /**
-     * Validate cap, set class t error if cap has error.
+     * Validate cap, set text field class to error if cap has error.
      *
      * @return Valid or not
      */
     private boolean validateCap() {
         boolean valid = cap.getText().matches(Utils.REGEX_CAP);
+        if (!valid) {
+            cap.getStyleClass().add("error");
+        } else {
+            cap.getStyleClass().remove("error");
+        }
+        return valid;
+    }
+
+    /**
+     * Validate password, set text field class to error if password has error.
+     *
+     * @return Valid or not
+     */
+    private boolean validatePassword() {
+        boolean valid = cap.getText().matches(Utils.REGEX_PASSWORD);
         if (!valid) {
             cap.getStyleClass().add("error");
         } else {
@@ -176,6 +195,7 @@ public class EditProfileController {
             this.client.setCap(Integer.valueOf(this.cap.getText().trim()));
             this.client.setCity(this.city.getText().trim());
             this.client.setTelephone(this.telephone.getText());
+            // TODO payment
 
             // TODO: password
             Response response = Utils.updateUser(this.client, null);

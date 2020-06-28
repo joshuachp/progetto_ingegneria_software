@@ -32,6 +32,8 @@ public class Utils {
             "33[3-90]|" +
             "32[89])" +
             "\\d{7}$";
+    @RegExp
+    public static final String REGEX_PASSWORD = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[\\W_]).{8,}$";
 
     /**
      * Authenticate with the server authentication with username and password
@@ -122,7 +124,8 @@ public class Utils {
             body.add("cap", client.getCap().toString());
             body.add("city", client.getCity());
             body.add("telephone", client.getTelephone());
-            // TODO: payment method e loyalty card
+            body.add("card_number", client.getCardNumber().toString());
+            // TODO: payment method
         }
         // Send request
         try {
