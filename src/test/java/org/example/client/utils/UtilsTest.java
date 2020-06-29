@@ -85,7 +85,7 @@ class UtilsTest {
     }
 
     @Test
-    public void registerClient(){
+    public void registerClient() {
         String email = "jondoe@gmail.com";
         String password = "12345678";
         String name = "Jon";

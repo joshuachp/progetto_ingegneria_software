@@ -135,10 +135,8 @@ public class EditProfileController {
 
     @FXML
     public void initialize() {
-        // XXX: TEST
-        // Session session = Session.getInstance();
-        // this.client = (Client) session.getUser();
-        this.client = new Client("AAAA", "session", "NN", "SSS", "Addr", 12334, "CCC", "3335556666", 1234);
+        Session session = Session.getInstance();
+        this.client = (Client) session.getUser();
 
         this.username.setText(this.client.getUsername());
         // Set the client data
