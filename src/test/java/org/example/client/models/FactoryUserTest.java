@@ -58,6 +58,13 @@ public class FactoryUserTest {
         assertTrue(user.isResponsabile());
     }
 
+    @Test
+    public void testGetUserError() {
+        this.server.enqueue(new MockResponse().setResponseCode(400));
+        User user = new FactoryUser().getUser("test", "test");
+        assertNull(user);
+    }
+
     /**
      * Controlla che getUtenteSession sia eseguito correttamente
      */
