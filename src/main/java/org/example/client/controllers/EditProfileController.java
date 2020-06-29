@@ -34,11 +34,14 @@ public class EditProfileController {
     @FXML
     public TextField cardNumber;
     @FXML
-    public Text error;
-    @FXML
     public TextField password;
     @FXML
     public TextField confirmPassword;
+
+    @FXML
+    public Text username;
+    @FXML
+    public Text error;
 
     private Stage stage;
     private Client client;
@@ -101,11 +104,12 @@ public class EditProfileController {
      * @return Valid or not
      */
     private boolean validatePassword() {
-        boolean valid = password.getText().matches(Utils.REGEX_PASSWORD);
+        // Validate the password only if it's not empty
+        boolean valid = password.getText().isEmpty() || password.getText().matches(Utils.REGEX_PASSWORD);
         if (!valid) {
             password.getStyleClass().add("error");
         } else {
-            cap.getStyleClass().remove("error");
+            password.getStyleClass().remove("error");
         }
         return valid;
     }
@@ -116,9 +120,10 @@ public class EditProfileController {
      * @return Valid or not
      */
     private boolean validateConfirmPassword() {
-        boolean valid =
-                confirmPassword.getText().matches(Utils.REGEX_PASSWORD) &&
-                        (password.getText().isEmpty() || confirmPassword.getText().equals(password.getText()));
+        // Validate the password confirmation only if the password it's not empty
+        boolean valid = password.getText().isEmpty() ||
+                (confirmPassword.getText().matches(Utils.REGEX_PASSWORD) &&
+                        confirmPassword.getText().equals(password.getText()));
         if (!valid) {
             confirmPassword.getStyleClass().add("error");
         } else {
@@ -130,9 +135,12 @@ public class EditProfileController {
 
     @FXML
     public void initialize() {
-        Session session = Session.getInstance();
-        this.client = (Client) session.getUser();
+        // XXX: TEST
+        // Session session = Session.getInstance();
+        // this.client = (Client) session.getUser();
+        this.client = new Client("AAAA", "session", "NN", "SSS", "Addr", 12334, "CCC", "3335556666", 1234);
 
+        this.username.setText(this.client.getUsername());
         // Set the client data
         this.name.setText(this.client.getName());
         this.surname.setText(this.client.getSurname());
@@ -140,7 +148,8 @@ public class EditProfileController {
         this.cap.setText(this.client.getCap().toString());
         this.city.setText(this.client.getCity());
         this.telephone.setText(this.client.getTelephone());
-        // TODO: Loyalty card
+        // TODO: payment
+        this.cardNumber.setText(this.client.getCardNumber().toString());
 
         // Filter for only valid CAP. You can insert more than 5 digits copy and parting, we delegate this case to
         // the validation
@@ -201,7 +210,7 @@ public class EditProfileController {
             }
         }));
         // Confirm password
-        this.password.focusedProperty().addListener(((observable, oldValue, newValue) -> {
+        this.confirmPassword.focusedProperty().addListener(((observable, oldValue, newValue) -> {
             // Focus lost
             if (!newValue) {
                 validateConfirmPassword();
@@ -223,7 +232,7 @@ public class EditProfileController {
     public void handleButtonSaveAction() throws IOException {
         boolean check = validateCap() & validateTelephone();
         // Check for new password
-        if (!password.getText().isEmpty() || !confirmPassword.getText().isEmpty()) {
+        if (!password.getText().isEmpty()) {
             check &= validatePassword() & validateConfirmPassword();
         }
         if (check) {
@@ -235,6 +244,7 @@ public class EditProfileController {
             this.client.setCity(this.city.getText().trim());
             this.client.setTelephone(this.telephone.getText());
             // TODO payment
+
             // New password is set
             String pass = null;
             if (!password.getText().isEmpty())

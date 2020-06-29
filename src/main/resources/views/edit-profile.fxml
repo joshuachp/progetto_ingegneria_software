@@ -4,7 +4,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
-<VBox xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+<VBox xmlns:fx="http://javafx.com/fxml" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
       minWidth="-Infinity" prefWidth="600.0" stylesheets="/styles/style.css" xmlns="http://javafx.com/javafx"
       fx:controller="org.example.client.controllers.EditProfileController">
     <MenuBar VBox.vgrow="NEVER">
@@ -45,7 +45,7 @@
                 <Insets top="8.0"/>
             </VBox.margin>
         </HBox>
-        <Text fill="#0066ff" strokeType="OUTSIDE" strokeWidth="0.0" text="Username">
+        <Text fx:id="username" fill="#0066ff" strokeType="OUTSIDE" strokeWidth="0.0" text="Username">
             <font>
                 <Font size="12.0"/>
             </font>
@@ -66,7 +66,7 @@
                 <Insets top="12.0"/>
             </VBox.margin>
         </Text>
-        <HBox prefHeight="100.0" prefWidth="200.0">
+        <HBox>
             <VBox.margin>
                 <Insets left="24.0" top="12.0"/>
             </VBox.margin>
