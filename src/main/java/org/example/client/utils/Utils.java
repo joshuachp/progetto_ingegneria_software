@@ -7,10 +7,8 @@ import org.example.client.models.User;
 import org.intellij.lang.annotations.RegExp;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.json.JSONObject;
 
 import java.io.IOException;
-import java.util.Objects;
 
 public class Utils {
 
@@ -43,9 +41,9 @@ public class Utils {
      *
      * @param username Username to autenticate
      * @param password password to autenticate
-     * @return JSONObject of user information or null if failed
+     * @return The response from the server
      */
-    public static @Nullable JSONObject authenticate(String username, String password) {
+    public static @Nullable Response authenticate(String username, String password) {
         OkHttpClient client = new OkHttpClient();
         RequestBody body = new FormBody.Builder()
                 .add("username", username)
@@ -56,12 +54,7 @@ public class Utils {
                 .post(body)
                 .build();
         try {
-            Response response = client.newCall(request).execute();
-            if (response.body() != null) {
-                // TODO: check asnwer code
-                String responseBody = Objects.requireNonNull(response.body()).string();
-                return new JSONObject(responseBody);
-            }
+            return client.newCall(request).execute();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -72,9 +65,9 @@ public class Utils {
      * Authenticate with the server authentication with session
      *
      * @param session The session to autenticate
-     * @return JSONObject of user information or null if failed
+     * @return Response from the server
      */
-    public static @Nullable JSONObject authenticate(String session) {
+    public static @Nullable Response authenticate(String session) {
         OkHttpClient client = new OkHttpClient();
         RequestBody body = new FormBody.Builder()
                 .add("session", session)
@@ -84,18 +77,12 @@ public class Utils {
                 .post(body)
                 .build();
         try {
-            Response response = client.newCall(request).execute();
-            // TODO: check asnwer code
-            if (response.body() != null) {
-                String responseBody = Objects.requireNonNull(response.body()).string();
-                return new JSONObject(responseBody);
-            }
+            return client.newCall(request).execute();
         } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
     }
-
 
 
     public static int registerClient(String username, String password, String name, String surname,

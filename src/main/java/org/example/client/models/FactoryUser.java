@@ -1,9 +1,15 @@
 package org.example.client.models;
 
 
+import okhttp3.Response;
 import org.example.client.utils.Utils;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.json.JSONObject;
+
+import java.io.IOException;
+import java.util.Objects;
 
 /**
  * Implementazione della factory per la classe Utente
@@ -16,23 +22,38 @@ public class FactoryUser {
      *
      * @param username Username dell'utente
      * @param password Password dell'utente
-     * @return Istanza della classe Utente
+     * @return Istanza della classe Utente null on error
      */
-    public User getUser(String username, String password) {
-        JSONObject json = Utils.authenticate(username, password);
-        return createUtente(json);
+    public @Nullable User getUser(String username, String password) {
+        Response response = Utils.authenticate(username, password);
+        if (response != null && response.code() == 200) {
+            try {
+                return createUtente(new JSONObject(Objects.requireNonNull(response.body()).string()));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return null;
     }
 
     /**
-     * Autentica un Utente tramite username e password. Ritorna una istanza della classe Utente in base alla tipologia
+     * Autentica un Utente tramite username e password. Ritorna una istanza della classe Utente in base alla
+     * tipologia
      * data dal server.
      *
      * @param session Il token di sessione
-     * @return Istanza della classe Utente
+     * @return Istanza della classe Utente null on error
      */
-    public User getUser(String session) {
-        JSONObject json = Utils.authenticate(session);
-        return createUtente(json);
+    public @Nullable User getUser(String session) {
+        Response response = Utils.authenticate(session);
+        if (response != null && response.code() == 200) {
+            try {
+                return createUtente(new JSONObject(Objects.requireNonNull(response.body()).string()));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return null;
     }
 
     /**
@@ -41,9 +62,8 @@ public class FactoryUser {
      * @param json Risposta dell'autenticazione del server
      * @return Istanza della classe Utente
      */
-    private User createUtente(@Nullable JSONObject json) {
-        if (json == null)
-            return null;
+    @Contract("_ -> new")
+    private @NotNull User createUtente(@NotNull JSONObject json) {
         String username = json.getString("username");
         String session = json.getString("session");
         if (json.getBoolean("responsabile")) {

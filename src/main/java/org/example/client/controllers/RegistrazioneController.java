@@ -16,6 +16,7 @@ import javafx.stage.Stage;
 import org.example.client.models.FactoryUser;
 import org.example.client.models.Pagamento;
 import org.example.client.models.User;
+import org.example.client.utils.Session;
 import org.example.client.utils.Utils;
 import org.jetbrains.annotations.Nullable;
 
@@ -99,11 +100,10 @@ public class RegistrazioneController /*implements Initializable*/ {
 
     public void handlerSetPaymentAction(ActionEvent actionEvent) {
         this.paymentMethod = Pagamento.fromString(cbxPagamento.getValue()).ordinal();
-        ;
     }
 
     public void handleBackAction(ActionEvent actionEvent) {
-        AutenticazioneController.showView(this.stage);
+        AuthenticationController.showView(this.stage);
     }
 
 
@@ -195,16 +195,20 @@ public class RegistrazioneController /*implements Initializable*/ {
         } else
             error = errorMessage("Il campo Ripeti password è vuoto.", PasswordRepeat);
 
-        if (error)
-            return;
-        else {
+        if (!error) {
             int statusCode = Utils.registerClient(Email.getText(), PasswordRepeat.getText(), Name.getText(),
                     Surname.getText(),
                     Address.getText(), Integer.valueOf(CAP.getText()), City.getText(), Phone.getText(),
                     Pagamento.fromString(cbxPagamento.getValue()).ordinal());
             if (statusCode == 200) {
                 errorMessage("Success" + statusCode, null);
-                User User = new FactoryUser().getUser(Email.getText(), PasswordRepeat.getText());
+
+                User user = new FactoryUser().getUser(Email.getText(), PasswordRepeat.getText());
+
+                // Set user session
+                Session session = Session.getInstance();
+                session.setUser(user);
+
                 CatalogoController.showView(this.stage);
             } else {
                 errorMessage("Error" + statusCode, null);

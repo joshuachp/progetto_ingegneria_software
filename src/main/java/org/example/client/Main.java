@@ -2,7 +2,7 @@ package org.example.client;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
-import org.example.client.controllers.AutenticazioneController;
+import org.example.client.controllers.AuthenticationController;
 import org.example.client.utils.Session;
 
 public class Main extends Application {
@@ -19,7 +19,7 @@ public class Main extends Application {
             // Redirects to the user home
             session.getUser().redirect(stage);
         } else {
-            AutenticazioneController.showView(stage);
+            AuthenticationController.showView(stage);
         }
     }
 }
