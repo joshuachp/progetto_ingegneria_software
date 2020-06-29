@@ -1,14 +1,11 @@
 package org.example.client.controllers;
 
-import com.sun.javafx.scene.control.IntegerField;
-import javafx.beans.property.IntegerPropertyBase;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Cursor;
 import javafx.scene.Parent;
@@ -21,11 +18,8 @@ import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import org.example.client.models.Prodotto;
-import org.example.client.models.Spesa;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 public class ProductListController {
@@ -41,30 +35,6 @@ public class ProductListController {
     public TableColumn<Prodotto, Double> PriceCol;
     public TableColumn<Prodotto, String> BrandCol;
     private Stage stage;
-
-    // Search filter enum
-    public enum columnFilterEnum{
-        ID("Id"), NAME ("Nome prodotto"), BRAND ("Nome brand"), PRICE ("Prezzo"), QUANTITY ("Quantità");
-
-        private final String column;
-
-        columnFilterEnum(final String column) {
-            this.column = column;
-        }
-
-        public String toString() {
-            return column;
-        }
-
-        public static ProductListController.columnFilterEnum fromString(String text) {
-            for (ProductListController.columnFilterEnum x : ProductListController.columnFilterEnum.values()) {
-                if (x.column.equalsIgnoreCase(text)) {
-                    return x;
-                }
-            }
-            return null;
-        }
-    }
 
     // View generation
     public static void showView(Stage stage) {
@@ -84,11 +54,11 @@ public class ProductListController {
         ProductListController productListController = loader.getController();
         // TODO: get products from server
         // Test products
-        ObservableList<Prodotto> products =  FXCollections.observableArrayList(
+        ObservableList<Prodotto> products = FXCollections.observableArrayList(
                 new Prodotto(1, "Pasta n10", "Barilla", 1,
-                        1.72, "C:\\Users\\david\\Pictures\\Saved Pictures\\34779.jpg", 1, "Pasta", "Alimneti" ),
+                        1.72, "C:\\Users\\david\\Pictures\\Saved Pictures\\34779.jpg", 1, "Pasta", "Alimneti"),
                 new Prodotto(2, "Formaggio grattuggiato", "Parmiggiano Reggiano", 1,
-                        3.50, "prova", 1, "Formaggi", "Alimneti" ));
+                        3.50, "prova", 1, "Formaggi", "Alimneti"));
 
         // Clickable link for ID column
         productListController.IDCol.setCellFactory(new Callback<TableColumn<Prodotto, Integer>,
@@ -123,7 +93,7 @@ public class ProductListController {
                         }
                     }
                 });
-                return cell ;
+                return cell;
             }
         });
 
@@ -136,7 +106,7 @@ public class ProductListController {
         productListController.QuantityCol.setCellValueFactory(new PropertyValueFactory<>("Availability"));
         productListController.QuantityCol.setCellFactory(TextFieldTableCell.forTableColumn());
         productListController.QuantityCol.setEditable(true);
-        productListController.QuantityCol.setOnEditCommit(event->{
+        productListController.QuantityCol.setOnEditCommit(event -> {
             event.getRowValue().setAvailability(Integer.parseInt(event.getNewValue()));
             // TODO: implements server update on edit
             System.out.println(event.getRowValue().getAvailability());
@@ -158,8 +128,7 @@ public class ProductListController {
         productListController.Search.setOnKeyReleased(keyEvent ->
         {
             // Switch on choiceBox value
-            switch (Objects.requireNonNull(ProductListController.columnFilterEnum.fromString(productListController.CbxColumn.getValue())))
-            {
+            switch (Objects.requireNonNull(ProductListController.columnFilterEnum.fromString(productListController.CbxColumn.getValue()))) {
                 case ID:
                     flproducts.setPredicate(p -> p.getID().toString().contains(productListController.Search.getText().trim()));
                     break;
@@ -188,13 +157,13 @@ public class ProductListController {
         productListController.setStage(stage);
     }
 
-    private void setStage(Stage stage) {
-        this.stage = stage;
-    }
-
     private static void handleModifyProduct(Prodotto product, boolean modify) throws IOException {
         GestioneProdottiController gestioneProdottiController = new GestioneProdottiController();
         gestioneProdottiController.showView(product, modify);
+    }
+
+    private void setStage(Stage stage) {
+        this.stage = stage;
     }
 
     public void handlerAddProduct(ActionEvent actionEvent) throws IOException {
@@ -204,9 +173,34 @@ public class ProductListController {
     public void handleBackAction(ActionEvent actionEvent) throws IOException {
         SceltaModalitaController.showView(this.stage);
     }
+
     public void handlerLogutAction(ActionEvent actionEvent) {
     }
 
     public void handlerAddManagerAction(ActionEvent actionEvent) {
+    }
+
+    // Search filter enum
+    public enum columnFilterEnum {
+        ID("Id"), NAME("Nome prodotto"), BRAND("Nome brand"), PRICE("Prezzo"), QUANTITY("Quantità");
+
+        private final String column;
+
+        columnFilterEnum(final String column) {
+            this.column = column;
+        }
+
+        public static ProductListController.columnFilterEnum fromString(String text) {
+            for (ProductListController.columnFilterEnum x : ProductListController.columnFilterEnum.values()) {
+                if (x.column.equalsIgnoreCase(text)) {
+                    return x;
+                }
+            }
+            return null;
+        }
+
+        public String toString() {
+            return column;
+        }
     }
 }

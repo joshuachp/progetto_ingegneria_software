@@ -26,6 +26,8 @@ public class RegistrazioneController /*implements Initializable*/ {
 
     @FXML
     public ComboBox<String> cbxPagamento;
+    @FXML
+    public TextField Phone;
     private Integer paymentMethod;
     @FXML
     private PasswordField PasswordRepeat;
@@ -43,8 +45,6 @@ public class RegistrazioneController /*implements Initializable*/ {
     private TextField CAP;
     @FXML
     private TextField City;
-    @FXML
-    public TextField Phone;
     @FXML
     private TextField Fidelity;
     @FXML
@@ -81,9 +81,9 @@ public class RegistrazioneController /*implements Initializable*/ {
     }
 
     /*
-    **
-    * Override of initialize method invoked by load.
-    * Implementation of payment enum in a ComboBox.
+     **
+     * Override of initialize method invoked by load.
+     * Implementation of payment enum in a ComboBox.
      */
     /*@Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -98,7 +98,8 @@ public class RegistrazioneController /*implements Initializable*/ {
 
 
     public void handlerSetPaymentAction(ActionEvent actionEvent) {
-        this.paymentMethod = Pagamento.fromString(cbxPagamento.getValue()).ordinal();;
+        this.paymentMethod = Pagamento.fromString(cbxPagamento.getValue()).ordinal();
+        ;
     }
 
     public void handleBackAction(ActionEvent actionEvent) {
@@ -106,35 +107,35 @@ public class RegistrazioneController /*implements Initializable*/ {
     }
 
 
-    public boolean passwordVerify(String password){
+    public boolean passwordVerify(String password) {
         return (Pattern.matches("[!-}]{8,16}", password.trim()));
     }
 
-    public boolean passwordVerifyEquals(String password, String passwordRepeat){
-        return(password.trim().equals(passwordRepeat.trim()));
+    public boolean passwordVerifyEquals(String password, String passwordRepeat) {
+        return (password.trim().equals(passwordRepeat.trim()));
     }
 
     public boolean mailVerify(String email) {
         return (Pattern.matches(Utils.REGEX_MAIL, email));
     }
 
-    public boolean capVerify(String cap){
-        return(Pattern.matches(Utils.REGEX_CAP, cap));
+    public boolean capVerify(String cap) {
+        return (Pattern.matches(Utils.REGEX_CAP, cap));
     }
 
-    public boolean phoneVerify(String phone){
-        return(Pattern.matches(Utils.REGEX_TELEPHONE, phone));
+    public boolean phoneVerify(String phone) {
+        return (Pattern.matches(Utils.REGEX_TELEPHONE, phone));
     }
 
-    public boolean errorMessage(String message, @Nullable TextField field){
+    public boolean errorMessage(String message, @Nullable TextField field) {
         resultLabel.setText(message);
         resultLabel.setTextFill(Paint.valueOf("red"));
-        if(field != null)
+        if (field != null)
             field.setStyle("-fx-border-color: red");
         return true;
     }
 
-    private void resetErrorMessage(){
+    private void resetErrorMessage() {
         Name.setStyle(null);
         Surname.setStyle(null);
         Phone.setStyle(null);
@@ -150,13 +151,13 @@ public class RegistrazioneController /*implements Initializable*/ {
         resetErrorMessage();
 
         if (Name.getText().equals(""))
-            error = errorMessage("Il campo Nome è vuoto.",Name);
+            error = errorMessage("Il campo Nome è vuoto.", Name);
 
         if (Surname.getText().equals(""))
-            error = errorMessage("Il campo Cognome è vuoto.",Surname);
+            error = errorMessage("Il campo Cognome è vuoto.", Surname);
 
         if (Address.getText().equals(""))
-            error = errorMessage("Il campo Indirizzo è vuoto.",Address);
+            error = errorMessage("Il campo Indirizzo è vuoto.", Address);
 
         // Verifica CAP
         if (!CAP.getText().equals("")) {
@@ -166,26 +167,26 @@ public class RegistrazioneController /*implements Initializable*/ {
             error = errorMessage("Il campo CAP è vuoto.", CAP);
 
         if (City.getText().equals(""))
-            error = errorMessage("Il campo Città è vuoto.",City);
+            error = errorMessage("Il campo Città è vuoto.", City);
 
-        if (!Phone.getText().equals("")){
-            if(!phoneVerify(Phone.getText()))
-                error = errorMessage("Il numero di telefono dato non è valido.",Phone);
+        if (!Phone.getText().equals("")) {
+            if (!phoneVerify(Phone.getText()))
+                error = errorMessage("Il numero di telefono dato non è valido.", Phone);
         } else
-            error = errorMessage("Il campo Telefono è vuoto.",Phone);
+            error = errorMessage("Il campo Telefono è vuoto.", Phone);
 
         if (Email.getText().equals(""))
-            if (!mailVerify(Email.getText())){
+            if (!mailVerify(Email.getText())) {
                 error = errorMessage("La mail non è coretta.", Email);
             }
-            error = errorMessage("Il campo E-mail è vuoto.",Email);
+        error = errorMessage("Il campo E-mail è vuoto.", Email);
 
         // Verifica lunghezza password
-        if(!Password.getText().equals("")){
+        if (!Password.getText().equals("")) {
             if (!passwordVerify(Password.getText()))
-                error = errorMessage("La lunghezza della password deve essere di almeno 8 caratteri.",Password);
+                error = errorMessage("La lunghezza della password deve essere di almeno 8 caratteri.", Password);
         } else
-            error = errorMessage("Il campo password è vuoto.",Password);
+            error = errorMessage("Il campo password è vuoto.", Password);
 
         // Verifica uguaglianza password
         if (!PasswordRepeat.getText().equals("")) {
@@ -194,19 +195,20 @@ public class RegistrazioneController /*implements Initializable*/ {
         } else
             error = errorMessage("Il campo Ripeti password è vuoto.", PasswordRepeat);
 
-        if(error)
+        if (error)
             return;
-        else{
-            int statusCode = Utils.registerClient(Email.getText(), PasswordRepeat.getText(), Name.getText(), Surname.getText(),
-                Address.getText(), Integer.valueOf(CAP.getText()), City.getText(), Phone.getText(),
-                Pagamento.fromString(cbxPagamento.getValue()).ordinal());
-           if( statusCode == 200){
-               errorMessage("Success" + statusCode, null );
-               User User = new FactoryUser().getUser(Email.getText(), PasswordRepeat.getText());
-               CatalogoController.showView(this.stage);
-           } else {
-               errorMessage("Error" + statusCode, null );
-           }
+        else {
+            int statusCode = Utils.registerClient(Email.getText(), PasswordRepeat.getText(), Name.getText(),
+                    Surname.getText(),
+                    Address.getText(), Integer.valueOf(CAP.getText()), City.getText(), Phone.getText(),
+                    Pagamento.fromString(cbxPagamento.getValue()).ordinal());
+            if (statusCode == 200) {
+                errorMessage("Success" + statusCode, null);
+                User User = new FactoryUser().getUser(Email.getText(), PasswordRepeat.getText());
+                CatalogoController.showView(this.stage);
+            } else {
+                errorMessage("Error" + statusCode, null);
+            }
         }
 
     }

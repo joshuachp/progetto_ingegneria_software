@@ -8,16 +8,17 @@ import org.example.client.controllers.CatalogoController;
  */
 public class Client extends User {
 
+    private String name;
     private String surname;
     private String address;
     private Integer cap;
     private String city;
     private String telephone;
-    private String name;
+    private Integer cardNumber;
     // TODO: payment method
 
     public Client(String username, String session, String name, String surname, String address,
-                  Integer cap, String city, String telephone) {
+                  Integer cap, String city, String telephone, Integer cardNumber) {
         super(username, session, false);
         this.name = name;
         this.surname = surname;
@@ -25,6 +26,7 @@ public class Client extends User {
         this.cap = cap;
         this.city = city;
         this.telephone = telephone;
+        this.cardNumber = cardNumber;
     }
 
     @Override
@@ -78,5 +80,13 @@ public class Client extends User {
 
     public void setTelephone(String telephone) {
         this.telephone = telephone;
+    }
+
+    public Integer getCardNumber() {
+        return cardNumber;
+    }
+
+    public void setCardNumber(Integer cardNumber) {
+        this.cardNumber = cardNumber;
     }
 }

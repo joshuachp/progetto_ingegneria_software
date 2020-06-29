@@ -31,7 +31,7 @@ class UtilsTest {
     }
 
     @Test
-    void testAutenticaWithServerUsernamePassword() {
+    void autenticaWithServerUsernamePassword() {
         this.server.enqueue(new MockResponse()
                 .setBody(new JSONObject()
                         .put("username", "admin")
@@ -50,7 +50,7 @@ class UtilsTest {
     }
 
     @Test
-    void testAutenticaWithServerSession() {
+    void autenticaWithServerSession() {
         this.server.enqueue(new MockResponse()
                 .setBody(new JSONObject()
                         .put("username", "admin")
@@ -69,21 +69,23 @@ class UtilsTest {
     }
 
     @Test
-    void testUpdateUser() {
+    void updateUser() {
         this.server.enqueue(new MockResponse()
                 .setBody("OK"));
         this.server.enqueue(new MockResponse()
                 .setBody("OK"));
+
         Client client = new Client("username", "session", "name", "surname",
-                "address", 33333, "City", "3334445555");
-        assertNotNull(Utils.updateUser(client));
+                "address", 33333, "City", "3334445555", 1234);
+        assertNotNull(Utils.updateUser(client, "password"));
+
         Manager manager = new Manager("username", "session", "badge", "name", "surname",
                 "address", 33333, "City", "3334445555", "admin");
-        assertNotNull(Utils.updateUser(manager));
+        assertNotNull(Utils.updateUser(manager, null));
     }
 
     @Test
-    public void registerClient(){
+    public void registerClient() {
         String email = "jondoe@gmail.com";
         String password = "12345678";
         String name = "Jon";

@@ -8,11 +8,13 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import okhttp3.Response;
 import org.example.client.models.Client;
 import org.example.client.utils.Session;
 import org.example.client.utils.Utils;
 
 import java.io.IOException;
+import java.util.Objects;
 
 public class EditProfileController {
 
@@ -31,6 +33,13 @@ public class EditProfileController {
     public TextField telephone;
     @FXML
     public TextField cardNumber;
+    @FXML
+    public TextField password;
+    @FXML
+    public TextField confirmPassword;
+
+    @FXML
+    public Text username;
     @FXML
     public Text error;
 
@@ -75,7 +84,7 @@ public class EditProfileController {
     }
 
     /**
-     * Validate cap, set class t error if cap has error.
+     * Validate cap, set text field class to error if cap has error.
      *
      * @return Valid or not
      */
@@ -89,11 +98,47 @@ public class EditProfileController {
         return valid;
     }
 
+    /**
+     * Validate password, set text field class to error if password has error.
+     *
+     * @return Valid or not
+     */
+    private boolean validatePassword() {
+        // Validate the password only if it's not empty
+        boolean valid = password.getText().isEmpty() || password.getText().matches(Utils.REGEX_PASSWORD);
+        if (!valid) {
+            password.getStyleClass().add("error");
+        } else {
+            password.getStyleClass().remove("error");
+        }
+        return valid;
+    }
+
+    /**
+     * Validate password, set text field class to error if password has error.
+     *
+     * @return Valid or not
+     */
+    private boolean validateConfirmPassword() {
+        // Validate the password confirmation only if the password it's not empty
+        boolean valid = password.getText().isEmpty() ||
+                (confirmPassword.getText().matches(Utils.REGEX_PASSWORD) &&
+                        confirmPassword.getText().equals(password.getText()));
+        if (!valid) {
+            confirmPassword.getStyleClass().add("error");
+        } else {
+            confirmPassword.getStyleClass().remove("error");
+        }
+        return valid;
+    }
+
+
     @FXML
     public void initialize() {
         Session session = Session.getInstance();
         this.client = (Client) session.getUser();
 
+        this.username.setText(this.client.getUsername());
         // Set the client data
         this.name.setText(this.client.getName());
         this.surname.setText(this.client.getSurname());
@@ -101,7 +146,8 @@ public class EditProfileController {
         this.cap.setText(this.client.getCap().toString());
         this.city.setText(this.client.getCity());
         this.telephone.setText(this.client.getTelephone());
-        // TODO: Loyalty card
+        // TODO: payment
+        this.cardNumber.setText(this.client.getCardNumber().toString());
 
         // Filter for only valid CAP. You can insert more than 5 digits copy and parting, we delegate this case to
         // the validation
@@ -138,6 +184,7 @@ public class EditProfileController {
         }));
 
         // Validation
+        // CAP
         validateCap();
         this.cap.focusedProperty().addListener(((observable, oldValue, newValue) -> {
             // Focus lost
@@ -145,11 +192,26 @@ public class EditProfileController {
                 validateCap();
             }
         }));
+        // Telephone
         validateTelephone();
         this.telephone.focusedProperty().addListener(((observable, oldValue, newValue) -> {
             // Focus lost
             if (!newValue) {
                 validateTelephone();
+            }
+        }));
+        // Password
+        this.password.focusedProperty().addListener(((observable, oldValue, newValue) -> {
+            // Focus lost
+            if (!newValue) {
+                validatePassword();
+            }
+        }));
+        // Confirm password
+        this.confirmPassword.focusedProperty().addListener(((observable, oldValue, newValue) -> {
+            // Focus lost
+            if (!newValue) {
+                validateConfirmPassword();
             }
         }));
     }
@@ -165,8 +227,13 @@ public class EditProfileController {
     }
 
     @FXML
-    public void handleButtonSaveAction() {
-        if (validateCap() && validateTelephone()) {
+    public void handleButtonSaveAction() throws IOException {
+        boolean check = validateCap() & validateTelephone();
+        // Check for new password
+        if (!password.getText().isEmpty()) {
+            check &= validatePassword() & validateConfirmPassword();
+        }
+        if (check) {
             // Set client new parameters
             this.client.setName(this.name.getText().trim());
             this.client.setSurname(this.surname.getText().trim());
@@ -174,14 +241,26 @@ public class EditProfileController {
             this.client.setCap(Integer.valueOf(this.cap.getText().trim()));
             this.client.setCity(this.city.getText().trim());
             this.client.setTelephone(this.telephone.getText());
+            // TODO payment
 
-            if (Utils.updateUser(this.client) != null) {
+            // New password is set
+            String pass = null;
+            if (!password.getText().isEmpty())
+                pass = password.getText();
+
+            Response response = Utils.updateUser(this.client, pass);
+            if (response == null) {
+                this.error.setVisible(true);
+            } else if (response.code() == 200) {
                 // Update session
                 Session session = Session.getInstance();
                 session.setUser(this.client);
 
                 ProfileController.showView(this.stage);
             } else {
+                // Set response error
+                if (response.body() != null)
+                    error.setText(Objects.requireNonNull(response.body()).string());
                 this.error.setVisible(true);
             }
         }

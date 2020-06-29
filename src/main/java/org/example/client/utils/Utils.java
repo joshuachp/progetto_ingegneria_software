@@ -18,13 +18,18 @@ public class Utils {
     public static final String SERVER_URL_AUTH = "/api/user/authenticate";
     public static final String SERVER_URL_SESSION = "/api/user/session";
     public static final String SERVER_URL_REGISTRATION = "/api/client/register";
-    public static final String SERVER_URL_USER_UPDATE = "/api/user/update";
+    public static final String SERVER_URL_MANAGER_UPDATE = "/api/manager/update";
+    public static final String SERVER_URL_CLIENT_UPDATE = "/api/user/update";
 
 
     // REGEX String utils
     @RegExp
     public static final String REGEX_CAP = "^\\d{5}$";
-    @RegExp // TODO
+    @RegExp
+    public static final String REGEX_MAIL = "^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,}$";
+    @RegExp
+    public static final String REGEX_PASSWORD = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[\\W_]).{8,}$";
+    @RegExp
     public static final String REGEX_TELEPHONE = "^(\\((00|\\+)39\\)|(00|\\+)39)?" +
             "(38[890]|" +
             "34[6-90]|" +
@@ -32,8 +37,7 @@ public class Utils {
             "33[3-90]|" +
             "32[89])" +
             "\\d{7}$";
-    @RegExp
-    public static final String REGEX_MAIL = "^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,}$";
+
     /**
      * Authenticate with the server authentication with username and password
      *
@@ -93,6 +97,7 @@ public class Utils {
     }
 
 
+
     public static int registerClient(String username, String password, String name, String surname,
                                      String address, Integer cap, String city,
                                      String telephone, Integer payment) {
@@ -122,15 +127,23 @@ public class Utils {
     }
 
 
-    public static @Nullable String updateUser(@NotNull User user) {
+    /**
+     * Update the user information on the server
+     *
+     * @param user     The user information
+     * @param password The new password if wants to changed
+     * @return The response or null on error
+     */
+    public static @Nullable Response updateUser(@NotNull User user, @Nullable String password) {
         OkHttpClient httpClient = new OkHttpClient();
         FormBody.Builder body = new FormBody.Builder();
+        Request.Builder request = new Request.Builder();
         // Authentication
         body.add("session", user.getSession());
-        // Manager or client
-        body.add("manager", user.isResponsabile() ? "1" : "0");
-        // Data
+        if (password != null && !password.isEmpty())
+            body.add("password", password);
         if (user.isResponsabile()) {
+            request.url(SERVER_URL + SERVER_URL_MANAGER_UPDATE);
             Manager manager = (Manager) user;
             body.add("badge", manager.getBadge());
             body.add("name", manager.getName());
@@ -141,6 +154,7 @@ public class Utils {
             body.add("telephone", manager.getTelephone());
             body.add("role", manager.getRole());
         } else {
+            request.url(SERVER_URL + SERVER_URL_CLIENT_UPDATE);
             Client client = (Client) user;
             body.add("name", client.getName());
             body.add("surname", client.getSurname());
@@ -148,20 +162,12 @@ public class Utils {
             body.add("cap", client.getCap().toString());
             body.add("city", client.getCity());
             body.add("telephone", client.getTelephone());
-            // TODO: payment method e loyalty card
+            body.add("card_number", client.getCardNumber().toString());
+            // TODO: payment method
         }
-        Request request = new Request.Builder()
-                .url(SERVER_URL + SERVER_URL_USER_UPDATE)
-                .post(body.build())
-                .build();
         // Send request
         try {
-            Response response = httpClient.newCall(request).execute();
-            // NOTE: Added to remove error
-            // TODO response
-            if (response.body() != null) {
-                return Objects.requireNonNull(response.body()).string();
-            }
+            return httpClient.newCall(request.post(body.build()).build()).execute();
         } catch (IOException e) {
             e.printStackTrace();
         }

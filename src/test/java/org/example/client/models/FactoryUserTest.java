@@ -111,14 +111,14 @@ public class FactoryUserTest {
                         .put("username", "guest")
                         .put("session", "session")
                         .put("responsabile", false)
-                        .put("badge", "D34DB33F")
                         .put("name", "Name")
                         .put("surname", "Surname")
                         .put("address", "Via Viale 1")
                         .put("cap", 33333)
                         .put("city", "City")
                         .put("telephone", "3334445555")
-                        .put("role", "Admin")
+                        .put("payment", 1)
+                        .put("loyalty_card_number", 1234)
                         .toString()));
 
         User user = new FactoryUser().getUser("guest", "guest");
