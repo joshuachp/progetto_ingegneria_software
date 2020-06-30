@@ -62,7 +62,7 @@ public class Prodotto {
             this.image = json.getString("image");
         else
             this.image = null;
-        this.characteristics = json.getString("charateristics");
+        this.characteristics = json.getString("characteristics");
         this.section = json.getString("section");
         this.availability = json.getInt("availability");
     }
