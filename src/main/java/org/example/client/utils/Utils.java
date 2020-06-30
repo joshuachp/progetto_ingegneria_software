@@ -20,6 +20,7 @@ public class Utils {
     public static final String SERVER_URL_REGISTRATION = "/api/client/register";
     public static final String SERVER_URL_MANAGER_UPDATE = "/api/manager/update";
     public static final String SERVER_URL_CLIENT_UPDATE = "/api/user/update";
+    public static final String SERVER_URL_GET_ALL_PRODUCT = "/api/product/all";
 
 
     // REGEX String utils
@@ -169,6 +170,23 @@ public class Utils {
         try {
             return httpClient.newCall(request.post(body.build()).build()).execute();
         } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static @Nullable Response getAllProducts(@NotNull String session){
+        OkHttpClient client = new OkHttpClient();
+        RequestBody body = new FormBody.Builder()
+                .add("session", session)
+                .build();
+        Request request = new Request.Builder()
+                .url(SERVER_URL + SERVER_URL_GET_ALL_PRODUCT)
+                .post(body)
+                .build();
+        try {
+            return client.newCall(request).execute();
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return null;

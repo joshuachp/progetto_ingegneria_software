@@ -1,6 +1,7 @@
 package org.example.client.models;
 
 import javafx.beans.property.StringProperty;
+import org.json.JSONObject;
 
 public class Prodotto {
     private  Integer id;
@@ -49,6 +50,21 @@ public class Prodotto {
         this.availability = availability;
         this.characteristics = characteristics;
         this.section = section;
+    }
+
+    public Prodotto(JSONObject json){
+        this.id = json.getInt("id");
+        this.name = json.getString("name");
+        this.brand = json.getString("brand");
+        this.package_size = json.getInt("package_size");
+        this.price = json.getDouble("price");
+        if (json.has("image"))
+            this.image = json.getString("image");
+        else
+            this.image = null;
+        this.characteristics = json.getString("charateristics");
+        this.section = json.getString("section");
+        this.availability = json.getInt("availability");
     }
 
     public Integer getID() {

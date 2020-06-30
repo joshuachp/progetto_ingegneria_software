@@ -27,7 +27,6 @@ public class CardController {
     public Spinner<Integer> quantity;
     public ImageView addCart;
 
-
     public static VBox generateCard(Prodotto product) throws IOException {
         FXMLLoader loader = new FXMLLoader(CardController.class.getResource("/views/card.fxml"));
         VBox card = loader.load();

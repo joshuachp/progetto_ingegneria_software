@@ -2,7 +2,9 @@ package org.example.client.controllers;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -20,18 +22,25 @@ import javafx.scene.shape.Box;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Callback;
+import okhttp3.Response;
 import org.example.client.models.Category;
 import org.example.client.models.Prodotto;
+import org.example.client.utils.Session;
+import org.example.client.utils.Utils;
 import org.jetbrains.annotations.NotNull;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
+import java.util.*;
 
 public class CatalogoController {
+
+    private Map<String, ArrayList<Prodotto>> sectionMap = new HashMap<>();
 
     public ChoiceBox CbxColumn;
     public TextField searchBar;
@@ -80,22 +89,53 @@ public class CatalogoController {
         stage.setTitle("Catalogo");
         stage.show();
         CatalogoController catalogoController = loader.getController();
-        categoryList = FXCollections.observableArrayList();
-        for(Category x : Category.values()){
-            categoryList.add(x.toString());
-        }
 
         catalogoController.catalogFactory(catalogoController.products,
                 catalogoController.listCategory,
                 catalogoController.searchBar);
 
-        /*ColumnConstraints column1 = new ColumnConstraints();
-        column1.setHgrow(Priority.ALWAYS);
-        catalogoController.gridpane.getColumnConstraints().addAll(column1, column1, column1);*/
-
-        catalogoController.listCategory.setItems(categoryList);
-        System.out.println(catalogoController.listCategory.getItems().toString());
         catalogoController.setStage(stage);
+
+    }
+
+    @FXML
+    public void initialize(){
+
+        Task<Void> task = new Task<>() {
+            @Override
+            protected Void call() throws Exception {
+                Session session = Session.getInstance();
+                Response response = Utils.getAllProducts(session.getUser().getSession());
+                if (response != null && response.code() == 200 && response.body() != null) {
+                    JSONObject json = new JSONObject(Objects.requireNonNull(response.body()).string());
+                    JSONArray products = json.getJSONArray("products");
+                    for(int i = 0; i < products.length(); i++){
+                        Prodotto prodotto = new Prodotto(products.getJSONObject(i));
+                        if (!sectionMap.containsKey(prodotto.getSection())){
+                            sectionMap.put(prodotto.getSection(), new ArrayList<>());
+                        }
+                        sectionMap.get(prodotto.getSection()).add(prodotto);
+                    }
+                    categoryList = FXCollections.observableArrayList(sectionMap.keySet());
+                    listCategory.setItems(categoryList);
+                    listCategory.getSelectionModel().selectFirst();
+                }
+
+                return null;
+
+            }
+
+
+        };
+
+        new Thread(task).start();
+
+        this.listCategory.setOnMouseClicked(event -> {
+            Category category =
+                    Category.fromString(listCategory.getSelectionModel().getSelectedItems().toString());
+        });
+
+
 
     }
 
@@ -109,7 +149,7 @@ public class CatalogoController {
         String search = searchBar.getText();
         if (category == null)
             category = Category.ALIMENTI;
-        System.out.println(category.toString());
+        System.out.println( "card generator" + category.toString());
         // Genero i figli sulla base della categoria selezionata e del testo di ricerca nel box di ricerca
         VBox card = null;
         for (Prodotto product: products){
