@@ -33,6 +33,10 @@ public class ProfileController {
     public Text emissionDate;
     @FXML
     public Text points;
+    @FXML
+    public Text cardText;
+    @FXML
+    public Text cardTextPoints;
 
     private Stage stage;
 
@@ -69,6 +73,7 @@ public class ProfileController {
         this.address.setText(String.format("%s, %d, %s", client.getAddress(), client.getCap(), client.getCity()));
         this.telephone.setText(client.getTelephone());
         // TODO: Payment method
+        // Loyalty card
         if (client.getCardNumber() != null) {
             this.cardNumber.setText(String.format("Card n. %d", client.getCardNumber()));
             // Get card data.
@@ -79,7 +84,7 @@ public class ProfileController {
                     if (response != null && response.code() == 200 && response.body() != null) {
                         LoyaltyCard loyaltyCard =
                                 new LoyaltyCard(new JSONObject(Objects.requireNonNull(response.body()).string()));
-
+                        // Sets the card information
                         points.setText(String.valueOf(loyaltyCard.getPoints()));
                         emissionDate.setText(loyaltyCard.getEmissionDate().toString());
                     }
@@ -87,8 +92,12 @@ public class ProfileController {
                 }
             };
             new Thread(getPoints).start();
+        } else {
+            cardText.setText("No loyalty card registered.");
+            points.setVisible(false);
+            emissionDate.setVisible(false);
+            cardTextPoints.setVisible(false);
         }
-
     }
 
     protected void setStage(Stage stage) {
