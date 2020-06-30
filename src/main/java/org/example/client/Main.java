@@ -19,7 +19,7 @@ public class Main extends Application {
         if (session.isAuth()) {
             // Redirects to the user home
             ProfileController.showView(stage);
-            // session.getUser().redirect(stage);
+            session.getUser().redirect(stage);
         } else {
             AuthenticationController.showView(stage);
         }

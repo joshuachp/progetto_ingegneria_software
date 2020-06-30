@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import okhttp3.Response;
@@ -87,6 +88,16 @@ public class ProfileController {
                         // Sets the card information
                         points.setText(String.valueOf(loyaltyCard.getPoints()));
                         emissionDate.setText(loyaltyCard.getEmissionDate().toString());
+                    } else {
+                        if (response != null) {
+                            cardText.setText(Objects.requireNonNull(response.body()).string());
+                        } else {
+                            cardText.setText("Error in card information request.");
+                        }
+                        cardText.setFill(Color.RED);
+                        points.setVisible(false);
+                        emissionDate.setVisible(false);
+                        cardTextPoints.setVisible(false);
                     }
                     return null;
                 }
