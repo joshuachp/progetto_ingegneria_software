@@ -26,7 +26,7 @@ public class CardController {
         FXMLLoader loader = new FXMLLoader(CardController.class.getResource("/views/card.fxml"));
         VBox card = loader.load();
         CardController cardController = loader.getController();
-        cardController.price.setText(product.getPrice());
+        cardController.price.setText(String.format("%.2f€", product.getPrice()));
         cardController.title.setText(product.getName());
         cardController.title.maxWidth(50);
         Image image = new Image(product.getImage());
@@ -36,7 +36,7 @@ public class CardController {
         cardController.thumbnail.setCache(true);
         Rectangle2D viewportRect = new Rectangle2D(0, 0, 1000, 1000);
         cardController.thumbnail.setViewport(viewportRect);
-        SpinnerValueFactory<Integer> spinnerValue = new SpinnerValueFactory.IntegerSpinnerValueFactory(1,99);
+        SpinnerValueFactory<Integer> spinnerValue = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 99);
         cardController.quantity.setValueFactory(spinnerValue);
 
         return card;

@@ -103,7 +103,7 @@ public class RegistrazioneController /*implements Initializable*/ {
     }
 
     public void handleBackAction(ActionEvent actionEvent) {
-        AuthenticationController.showView(this.stage);
+        AuthController.showView(this.stage);
     }
 
 
@@ -209,7 +209,7 @@ public class RegistrazioneController /*implements Initializable*/ {
                 Session session = Session.getInstance();
                 session.setUser(user);
 
-                CatalogoController.showView(this.stage);
+                CatalogController.showView(this.stage);
             } else {
                 errorMessage("Error" + statusCode, null);
             }

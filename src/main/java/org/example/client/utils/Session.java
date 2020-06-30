@@ -4,6 +4,7 @@ import org.example.client.models.FactoryUser;
 import org.example.client.models.Product;
 import org.example.client.models.User;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.prefs.Preferences;
@@ -118,5 +119,14 @@ public class Session {
 
     public Integer getCartQuantity() {
         return cartQuantity;
+    }
+
+    /**
+     * Return list of products in the cart
+     *
+     * @return List of products
+     */
+    public ArrayList<Product> getProducts() {
+        return new ArrayList<>(this.products.values());
     }
 }

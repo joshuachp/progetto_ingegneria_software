@@ -173,6 +173,7 @@ public class EditProfileController {
             }
             return null;
         }));
+        // Only numbers for card
         this.cardNumber.setTextFormatter(new TextFormatter<String>(change -> {
             if (!change.isContentChange())
                 return change;
@@ -242,6 +243,7 @@ public class EditProfileController {
             this.client.setCity(this.city.getText().trim());
             this.client.setTelephone(this.telephone.getText());
             // TODO payment
+            this.client.setCardNumber(Integer.valueOf(this.cardNumber.getText().trim()));
 
             // New password is set
             String pass = null;

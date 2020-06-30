@@ -58,7 +58,7 @@ public class GestioneProdottiController {
             gestioneProdottiController.fieldBrand.setText(product.getBrand());
             gestioneProdottiController.fieldName.setText(product.getName());
             gestioneProdottiController.fieldID.setText(product.getID().toString());
-            gestioneProdottiController.fieldPackage.setText(product.getPackage_size().toString());
+            gestioneProdottiController.fieldPackage.setText(product.getPackageSize().toString());
             gestioneProdottiController.fieldPrice.setText(product.getPrice().toString());
             gestioneProdottiController.fieldQuantity.setText(product.getAvailability());
         } else {
@@ -74,7 +74,7 @@ public class GestioneProdottiController {
         product.setAvailability(Integer.parseInt(fieldQuantity.getText()));
         product.setPrice(Double.parseDouble(fieldPrice.getText()));
         product.setName(fieldName.getText());
-        product.setPackage_size(Integer.parseInt(fieldPackage.getText()));
+        product.setPackageSize(Integer.parseInt(fieldPackage.getText()));
         //product.setCharacteristics(fieldBrand.getText());
         //product.setCharacteristics(fieldBrand.getText());
         // TODO: POST product to server

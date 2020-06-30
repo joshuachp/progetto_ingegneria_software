@@ -2,13 +2,13 @@ package org.example.client.models;
 
 import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
+import org.example.client.MockUtils;
 import org.json.JSONObject;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
-import java.net.InetAddress;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -22,8 +22,7 @@ public class FactoryUserTest {
 
     @BeforeEach
     void setUp() throws Exception {
-        this.server = new MockWebServer();
-        this.server.start(InetAddress.getByName("localhost"), 8080);
+        this.server = MockUtils.startServer();
     }
 
     @AfterEach

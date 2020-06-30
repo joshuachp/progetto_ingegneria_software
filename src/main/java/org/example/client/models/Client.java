@@ -1,7 +1,7 @@
 package org.example.client.models;
 
 import javafx.stage.Stage;
-import org.example.client.controllers.CatalogoController;
+import org.example.client.controllers.CatalogController;
 
 /**
  * Cliente class
@@ -31,7 +31,7 @@ public class Client extends User {
 
     @Override
     public void redirect(Stage stage) {
-        CatalogoController.showView(stage);
+        CatalogController.showView(stage);
     }
 
     public String getName() {

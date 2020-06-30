@@ -2,6 +2,7 @@ package org.example.client.models;
 
 import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
+import org.example.client.MockUtils;
 import org.example.client.controllers.RegistrazioneController;
 import org.example.client.utils.Utils;
 import org.junit.jupiter.api.AfterEach;
@@ -22,8 +23,7 @@ public class RegistrationControllerTest {
 
     @BeforeEach
     void setUpAll() throws Exception {
-        this.server = new MockWebServer();
-        this.server.start(InetAddress.getByName("localhost"), 8080);
+        this.server = MockUtils.startServer();
     }
 
     @AfterEach

@@ -2,6 +2,7 @@ package org.example.client.utils;
 
 import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
+import org.example.client.MockUtils;
 import org.example.client.models.FactoryUser;
 import org.example.client.models.Manager;
 import org.example.client.models.Product;
@@ -11,7 +12,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
-import java.net.InetAddress;
+import java.util.List;
 import java.util.prefs.Preferences;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -28,8 +29,8 @@ class SessionTest {
      */
     @BeforeEach
     void setUp() throws Exception {
-        this.server = new MockWebServer();
-        this.server.start(InetAddress.getByName("localhost"), 8080);
+        this.server = MockUtils.startServer();
+
         this.server.enqueue(new MockResponse()
                 .setBody(new JSONObject()
                         .put("username", "guest")
@@ -144,5 +145,18 @@ class SessionTest {
         assertFalse(session.isSaveSession());
         Preferences preferences = Preferences.userNodeForPackage(Session.class);
         assertFalse(preferences.getBoolean(Session.PREFERENCE_SAVE_SESSION, true));
+    }
+
+    @Test
+    void getProducts() {
+        Session session = Session.getInstance();
+        Product product = new Product(1, "Name", "Brand", 1, 1., null,
+                1, "", "Section");
+
+        assertEquals(1, session.addProduct(product));
+        assertEquals(2, session.addProduct(product));
+        List<Product> products = session.getProducts();
+        assertEquals(1, products.size());
+        assertEquals(product, products.get(0));
     }
 }

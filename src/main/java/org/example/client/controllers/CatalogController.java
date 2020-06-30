@@ -31,7 +31,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-public class CatalogoController {
+public class CatalogController {
 
     public static ObservableList<String> categoryList;
     public ChoiceBox CbxColumn;
@@ -72,7 +72,7 @@ public class CatalogoController {
     private Stage stage;
 
     public static void showView(Stage stage) {
-        FXMLLoader loader = new FXMLLoader(CatalogoController.class.getResource("/views/catalog.fxml"));
+        FXMLLoader loader = new FXMLLoader(CatalogController.class.getResource("/views/catalog.fxml"));
         Parent root = null;
         try {
             root = loader.load();
@@ -84,13 +84,13 @@ public class CatalogoController {
         stage.setScene(scene);
         stage.setTitle("Catalogo");
         stage.show();
-        CatalogoController catalogoController = loader.getController();
+        CatalogController catalogController = loader.getController();
 
-        catalogoController.catalogFactory(catalogoController.products,
-                catalogoController.listCategory,
-                catalogoController.searchBar);
+        catalogController.catalogFactory(catalogController.products,
+                catalogController.listCategory,
+                catalogController.searchBar);
 
-        catalogoController.setStage(stage);
+        catalogController.setStage(stage);
 
     }
 

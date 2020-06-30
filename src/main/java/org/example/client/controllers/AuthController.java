@@ -17,7 +17,7 @@ import org.example.client.utils.Session;
 import java.io.IOException;
 
 
-public class AuthenticationController {
+public class AuthController {
 
     @FXML
     public TextField usernameField;
@@ -31,7 +31,7 @@ public class AuthenticationController {
     private Stage stage;
 
     public static void showView(Stage stage) {
-        FXMLLoader loader = new FXMLLoader(AuthenticationController.class.getResource("/views/auth.fxml"));
+        FXMLLoader loader = new FXMLLoader(AuthController.class.getResource("/views/auth.fxml"));
         Parent root = null;
         try {
             root = loader.load();
@@ -43,8 +43,8 @@ public class AuthenticationController {
         stage.setScene(scene);
         stage.setTitle("Autenticazione");
         stage.show();
-        AuthenticationController authenticationController = loader.getController();
-        authenticationController.setStage(stage);
+        AuthController authController = loader.getController();
+        authController.setStage(stage);
     }
 
     @FXML

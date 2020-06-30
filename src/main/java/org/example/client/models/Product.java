@@ -6,7 +6,7 @@ public class Product {
     private final Integer id;
     private String name;
     private String brand;
-    private Integer package_size;
+    private Integer packageSize;
     private Double price;
     private String image;
     private Integer availability;
@@ -15,12 +15,12 @@ public class Product {
     // For shopping cart
     private Integer quantity = 0;
 
-    public Product(Integer id, String name, String brand, Integer package_size, Double price, String image,
+    public Product(Integer id, String name, String brand, Integer packageSize, Double price, String image,
                    Integer availability, String characteristics, String section) {
         this.id = id;
         this.name = name;
         this.brand = brand;
-        this.package_size = package_size;
+        this.packageSize = packageSize;
         this.price = price;
         this.image = image;
         this.availability = availability;
@@ -32,7 +32,7 @@ public class Product {
         this.id = json.getInt("id");
         this.name = json.getString("name");
         this.brand = json.getString("brand");
-        this.package_size = json.getInt("package_size");
+        this.packageSize = json.getInt("package_size");
         this.price = json.getDouble("price");
         if (json.has("image"))
             this.image = json.getString("image");
@@ -63,16 +63,16 @@ public class Product {
         this.brand = brand;
     }
 
-    public Integer getPackage_size() {
-        return package_size;
+    public Integer getPackageSize() {
+        return packageSize;
     }
 
-    public void setPackage_size(Integer package_size) {
-        this.package_size = package_size;
+    public void setPackageSize(Integer packageSize) {
+        this.packageSize = packageSize;
     }
 
-    public String getPrice() {
-        return String.format("\u20ac %.2f", price);
+    public Double getPrice() {
+        return price;
     }
 
     public void setPrice(Double price) {
@@ -115,7 +115,7 @@ public class Product {
     public String toString() {
         return name + " " +
                 brand + " " +
-                package_size.toString() + " " +
+                packageSize.toString() + " " +
                 price.toString() + " " +
                 image + " " +
                 availability.toString() + " " +
