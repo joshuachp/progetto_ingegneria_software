@@ -19,7 +19,8 @@ public class Utils {
     public static final String SERVER_URL_MANAGER_UPDATE = "/api/manager/update";
     public static final String SERVER_URL_CLIENT_UPDATE = "/api/user/update";
     public static final String SERVER_URL_GET_ALL_PRODUCT = "/api/product/all";
-
+    // Format for URL `/api/card/{cardNumber}`
+    public static final String SERVER_URL_GET_LOYALTY_CARD = "/api/card/%d";
 
     // REGEX String utils
     @RegExp
@@ -162,13 +163,43 @@ public class Utils {
         return null;
     }
 
-    public static @Nullable Response getAllProducts(@NotNull String session){
+    /**
+     * Get a list of all products. The response is a JSON with an array called products.
+     *
+     * @param session User session
+     * @return Server response null on error
+     */
+    public static @Nullable Response getAllProducts(String session) {
         OkHttpClient client = new OkHttpClient();
         RequestBody body = new FormBody.Builder()
                 .add("session", session)
                 .build();
         Request request = new Request.Builder()
                 .url(SERVER_URL + SERVER_URL_GET_ALL_PRODUCT)
+                .post(body)
+                .build();
+        try {
+            return client.newCall(request).execute();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
+    /**
+     * Get the loyalty card information. The card must be register to the user.
+     *
+     * @param session User session
+     * @return Server response null on error
+     */
+    public static @Nullable Response getLoyaltyCard(String session, Integer cardNumber) {
+        OkHttpClient client = new OkHttpClient();
+        RequestBody body = new FormBody.Builder()
+                .add("session", session)
+                .build();
+        Request request = new Request.Builder()
+                .url(String.format(SERVER_URL + SERVER_URL_GET_LOYALTY_CARD, cardNumber))
                 .post(body)
                 .build();
         try {
