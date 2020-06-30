@@ -1,8 +1,11 @@
 package org.example.client.utils;
 
 import org.example.client.models.FactoryUser;
+import org.example.client.models.Product;
 import org.example.client.models.User;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.prefs.Preferences;
 
 public class Session {
@@ -11,9 +14,15 @@ public class Session {
     public static final String PREFERENCE_USER_SESSION = "USER_SESSION";
 
     private static Session session = null;
+    // Shopping cart
+    private final Map<Integer, Product> products;
     private User user;
     private boolean saveSession;
+    private Integer cartQuantity = 0;
 
+    /**
+     * Create a new session, if a session is saved in the preferences. It will ask the server for the user information.
+     */
     private Session() {
         Preferences preferences = Preferences.userNodeForPackage(Session.class);
 
@@ -24,13 +33,48 @@ public class Session {
         } else {
             this.user = new FactoryUser().getUser(sessionToken);
         }
+        // Create empty product list
+        this.products = new HashMap<>();
     }
 
-
+    /**
+     * Create or return a singleton for the session instance
+     *
+     * @return The Session singleton instance
+     */
     public static Session getInstance() {
         if (session == null)
             session = new Session();
         return session;
+    }
+
+    /**
+     * Destroy all the data of the current session, it will cleanup all the application preferences.
+     */
+    public static void destroyInstance() {
+        // Remove saved preferences
+        Preferences preferences = Preferences.userNodeForPackage(Session.class);
+        preferences.remove(PREFERENCE_USER_SESSION);
+        preferences.remove(PREFERENCE_SAVE_SESSION);
+        // Reset the session
+        session = null;
+    }
+
+    /**
+     * Add the product to the list of products if not present and increments its quantity by 1.
+     *
+     * @param product The product to add.
+     * @return The current product quantity
+     */
+    public Integer addProduct(Product product) {
+        products.putIfAbsent(product.getID(), product);
+        Product prod = products.get(product.getID());
+        prod.setQuantity(prod.getQuantity() + 1);
+
+        // Increase the cart total quantity
+        this.cartQuantity += 1;
+
+        return product.getQuantity();
     }
 
     public User getUser() {
@@ -47,6 +91,11 @@ public class Session {
         }
     }
 
+    /**
+     * Check if the session information should be saved.
+     *
+     * @return True if save session
+     */
     public boolean isSaveSession() {
         return saveSession;
     }
@@ -65,5 +114,9 @@ public class Session {
      */
     public boolean isAuth() {
         return this.user != null;
+    }
+
+    public Integer getCartQuantity() {
+        return cartQuantity;
     }
 }

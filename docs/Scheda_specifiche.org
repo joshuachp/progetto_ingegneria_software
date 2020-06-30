@@ -29,7 +29,7 @@ I prodotti disponibili sono visualizzati per reparto, ad esempio:
 - Frutta e verdura
 - Alimentari
 **** Visualizzazione dei prodotti
-Per ogni prodotto viene visualizzato:
+Per ogni product viene visualizzato:
 - Nome
 - Marca
 - Quantità per confezione
@@ -38,15 +38,15 @@ Per ogni prodotto viene visualizzato:
 - Disponibilità
 - Caratteristica (visto la ricerca nel carrello)
 *** Aggiunta al carrello
-Aggiungo solo prodotti disponibili al prodotto della spesa.
-**** Controllo disponibilità prodotto
-Se il prodotto non è disponibile il sistema lo segnala al cliente e non viene aggiunto al carrello.
+Aggiungo solo prodotti disponibili al product della spesa.
+**** Controllo disponibilità product
+Se il product non è disponibile il sistema lo segnala al cliente e non viene aggiunto al carrello.
 ** Carrello
 *** Visualizzazione del carrello
 **** Modifica della quantità
 L'user può modificare la quantità dei prodotti aggiunti al carrello
-**** Rimuovere prodotto
-L'user può rimuovere un prodotto nel carrello
+**** Rimuovere product
+L'user può rimuovere un product nel carrello
 **** Ricerca nel carrello
 La ricerca può avvenire per:
 - Tipo (uova, biscotti, pasta)
@@ -72,8 +72,8 @@ Per ogni spesa si memorizza:
   - Intervallo di temo in cui la spesa potrà essere consegnata
 - Prodotti che la compongono
   - Quantità
-  - Prezzo unitario di ogni prodotto
-  - Prezzo totale di ogni prodotto
+  - Prezzo unitario di ogni product
+  - Prezzo totale di ogni product
 - Utente che l'ha effettuata
 - Costo totale
 - Tipo di pagamento

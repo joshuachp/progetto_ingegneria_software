@@ -18,7 +18,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import okhttp3.Response;
 import org.example.client.models.Category;
-import org.example.client.models.Prodotto;
+import org.example.client.models.Product;
 import org.example.client.utils.Session;
 import org.example.client.utils.Utils;
 import org.jetbrains.annotations.NotNull;
@@ -40,35 +40,35 @@ public class CatalogoController {
     //public GridPane gridpane;
     public FlowPane flowpane;
     // prodotti Test
-    ObservableList<Prodotto> products = FXCollections.observableArrayList(
-            new Prodotto(1, "Pasta n10", "Barilla", 1,
+    ObservableList<Product> products = FXCollections.observableArrayList(
+            new Product(1, "Pasta n10", "Barilla", 1,
                     1.72, "https://images.services.esselunga.it/html/img_prodotti/esselunga/image/965627.jpg", 1,
                     "Pasta", "Alimenti"),
-            new Prodotto(2, "Formaggio grattuggiato", "Parmiggiano Reggiano", 1,
+            new Product(2, "Formaggio grattuggiato", "Parmiggiano Reggiano", 1,
                     3.50, "https://images.services.esselunga.it/html/img_prodotti/esselunga/image/934922.jpg", 1,
                     "Formaggi", "Alimenti"),
-            new Prodotto(1, "Pasta n10", "Barilla", 1,
+            new Product(1, "Pasta n10", "Barilla", 1,
                     1.72, "https://images.services.esselunga.it/html/img_prodotti/esselunga/image/965627.jpg", 1,
                     "Pasta", "Alimenti"),
-            new Prodotto(1, "Pasta n10", "Barilla", 1,
+            new Product(1, "Pasta n10", "Barilla", 1,
                     1.72, "https://images.services.esselunga.it/html/img_prodotti/esselunga/image/965627.jpg", 1,
                     "Pasta", "Frutta e verdura"),
-            new Prodotto(1, "Pasta n10", "Barilla", 1,
+            new Product(1, "Pasta n10", "Barilla", 1,
                     1.72, "https://images.services.esselunga.it/html/img_prodotti/esselunga/image/965627.jpg", 1,
                     "Pasta", "Alimenti"),
-            new Prodotto(1, "Pasta n10", "Barilla", 1,
+            new Product(1, "Pasta n10", "Barilla", 1,
                     1.72, "https://images.services.esselunga.it/html/img_prodotti/esselunga/image/965627.jpg", 1,
                     "Pasta", "Alimenti"),
-            new Prodotto(1, "Pasta n10", "Barilla", 1,
+            new Product(1, "Pasta n10", "Barilla", 1,
                     1.72, "https://images.services.esselunga.it/html/img_prodotti/esselunga/image/965627.jpg", 1,
                     "Pasta", "Alimenti"),
-            new Prodotto(1, "Pasta n10", "Barilla", 1,
+            new Product(1, "Pasta n10", "Barilla", 1,
                     1.72, "https://images.services.esselunga.it/html/img_prodotti/esselunga/image/965627.jpg", 1,
                     "Pasta", "Alimneti"),
-            new Prodotto(1, "Pasta n10", "Barilla", 1,
+            new Product(1, "Pasta n10", "Barilla", 1,
                     1.72, "https://images.services.esselunga.it/html/img_prodotti/esselunga/image/965627.jpg", 1,
                     "Pasta", "Alimenti"));
-    private Map<String, ArrayList<Prodotto>> sectionMap = new HashMap<>();
+    private Map<String, ArrayList<Product>> sectionMap = new HashMap<>();
     private Stage stage;
 
     public static void showView(Stage stage) {
@@ -106,11 +106,11 @@ public class CatalogoController {
                     JSONObject json = new JSONObject(Objects.requireNonNull(response.body()).string());
                     JSONArray products = json.getJSONArray("products");
                     for (int i = 0; i < products.length(); i++) {
-                        Prodotto prodotto = new Prodotto(products.getJSONObject(i));
-                        if (!sectionMap.containsKey(prodotto.getSection())) {
-                            sectionMap.put(prodotto.getSection(), new ArrayList<>());
+                        Product product = new Product(products.getJSONObject(i));
+                        if (!sectionMap.containsKey(product.getSection())) {
+                            sectionMap.put(product.getSection(), new ArrayList<>());
                         }
-                        sectionMap.get(prodotto.getSection()).add(prodotto);
+                        sectionMap.get(product.getSection()).add(product);
                     }
                     categoryList = FXCollections.observableArrayList(sectionMap.keySet());
                     listCategory.setItems(categoryList);
@@ -135,7 +135,7 @@ public class CatalogoController {
     }
 
     // Card builder
-    public void catalogFactory(@NotNull ObservableList<Prodotto> products, ListView<String> listCategory,
+    public void catalogFactory(@NotNull ObservableList<Product> products, ListView<String> listCategory,
                                TextField searchBar) {
         // Creo la lista di figli del flow pane
         ObservableList<Node> list = flowpane.getChildren();
@@ -148,7 +148,7 @@ public class CatalogoController {
         System.out.println("card generator" + category.toString());
         // Genero i figli sulla base della categoria selezionata e del testo di ricerca nel box di ricerca
         VBox card = null;
-        for (Prodotto product : products) {
+        for (Product product : products) {
 
             if (category == Category.fromString(product.getSection())) {
                 if (product.getCharacteristics().contains(search)) {

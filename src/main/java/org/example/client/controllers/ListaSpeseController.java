@@ -20,7 +20,6 @@ import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import org.example.client.models.Pagamento;
-import org.example.client.models.Prodotto;
 import org.example.client.models.Spesa;
 import org.example.client.models.StatoSpesa;
 

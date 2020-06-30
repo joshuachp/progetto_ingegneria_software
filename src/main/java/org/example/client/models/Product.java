@@ -1,46 +1,22 @@
 package org.example.client.models;
 
-import javafx.beans.property.StringProperty;
 import org.json.JSONObject;
 
-public class Prodotto {
-    private  Integer id;
+public class Product {
+    private final Integer id;
+    private String name;
+    private String brand;
+    private Integer package_size;
+    private Double price;
+    private String image;
+    private Integer availability;
+    private String characteristics;
+    private String section;
+    // For shopping cart
+    private Integer quantity = 0;
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setBrand(String brand) {
-        this.brand = brand;
-    }
-
-    public void setPackage_size(Integer package_size) {
-        this.package_size = package_size;
-    }
-
-    public void setPrice(Double price) {
-        this.price = price;
-    }
-
-    public void setCharacteristics(String characteristics) {
-        this.characteristics = characteristics;
-    }
-
-    public void setSection(String section) {
-        this.section = section;
-    }
-
-    private  String name;
-    private  String brand;
-    private  Integer package_size;
-    private  Double price;
-    private  String image;
-    private  Integer availability;
-    private  String characteristics;
-    private  String section;
-
-    public Prodotto(Integer id, String name, String brand, Integer package_size, Double price, String image,
-                    Integer availability, String characteristics, String section) {
+    public Product(Integer id, String name, String brand, Integer package_size, Double price, String image,
+                   Integer availability, String characteristics, String section) {
         this.id = id;
         this.name = name;
         this.brand = brand;
@@ -52,7 +28,7 @@ public class Prodotto {
         this.section = section;
     }
 
-    public Prodotto(JSONObject json){
+    public Product(JSONObject json) {
         this.id = json.getInt("id");
         this.name = json.getString("name");
         this.brand = json.getString("brand");
@@ -68,23 +44,39 @@ public class Prodotto {
     }
 
     public Integer getID() {
-        return (Integer) this.id;
+        return this.id;
     }
 
     public String getName() {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public String getBrand() {
         return brand;
+    }
+
+    public void setBrand(String brand) {
+        this.brand = brand;
     }
 
     public Integer getPackage_size() {
         return package_size;
     }
 
+    public void setPackage_size(Integer package_size) {
+        this.package_size = package_size;
+    }
+
     public String getPrice() {
-        return String.format("\u20ac %.2f",price);
+        return String.format("\u20ac %.2f", price);
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
     }
 
     public String getImage() {
@@ -107,19 +99,35 @@ public class Prodotto {
         return characteristics;
     }
 
+    public void setCharacteristics(String characteristics) {
+        this.characteristics = characteristics;
+    }
+
     public String getSection() {
         return section;
     }
 
+    public void setSection(String section) {
+        this.section = section;
+    }
+
     @Override
-    public String toString(){
-      return  name + " " +
-              brand + " " +
-              package_size.toString() + " " +
-              price.toString() + " " +
-              image + " " +
-              availability.toString() + " " +
-              characteristics + " " +
-              section;
+    public String toString() {
+        return name + " " +
+                brand + " " +
+                package_size.toString() + " " +
+                price.toString() + " " +
+                image + " " +
+                availability.toString() + " " +
+                characteristics + " " +
+                section;
+    }
+
+    public Integer getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
     }
 }

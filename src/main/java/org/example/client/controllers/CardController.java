@@ -1,20 +1,15 @@
 package org.example.client.controllers;
 
-import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
-import org.example.client.models.Category;
-import org.example.client.models.Prodotto;
+import org.example.client.models.Product;
 
 import java.io.IOException;
 
@@ -27,7 +22,7 @@ public class CardController {
     public Spinner<Integer> quantity;
     public ImageView addCart;
 
-    public static VBox generateCard(Prodotto product) throws IOException {
+    public static VBox generateCard(Product product) throws IOException {
         FXMLLoader loader = new FXMLLoader(CardController.class.getResource("/views/card.fxml"));
         VBox card = loader.load();
         CardController cardController = loader.getController();

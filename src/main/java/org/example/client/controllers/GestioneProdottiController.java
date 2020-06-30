@@ -10,7 +10,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import org.example.client.models.Prodotto;
+import org.example.client.models.Product;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
@@ -31,9 +31,9 @@ public class GestioneProdottiController {
 
     private Stage stage = new Stage();
 
-    Prodotto product;
+    Product product;
 
-    public void showView(@Nullable Prodotto product, boolean modify) throws IOException  {
+    public void showView(@Nullable Product product, boolean modify) throws IOException  {
 
         //TODO: field charateristics and section
         FXMLLoader loader = new FXMLLoader(GestioneProdottiController.class.getResource("/views/gestione-prodotti.fxml"));

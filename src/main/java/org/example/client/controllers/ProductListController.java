@@ -17,7 +17,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import javafx.util.Callback;
-import org.example.client.models.Prodotto;
+import org.example.client.models.Product;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -26,14 +26,14 @@ public class ProductListController {
 
     public ChoiceBox<String> CbxColumn;
     public TextField Search;
-    public TableView<Prodotto> tableview;
-    public TableColumn<Prodotto, Integer> IDCol;
-    public TableColumn<Prodotto, String> NameCol;
-    public TableColumn<Prodotto, String> QuantityCol;
+    public TableView<Product> tableview;
+    public TableColumn<Product, Integer> IDCol;
+    public TableColumn<Product, String> NameCol;
+    public TableColumn<Product, String> QuantityCol;
     public Button buttonimportproductlist;
     public Button buttonaddproduct;
-    public TableColumn<Prodotto, Double> PriceCol;
-    public TableColumn<Prodotto, String> BrandCol;
+    public TableColumn<Product, Double> PriceCol;
+    public TableColumn<Product, String> BrandCol;
     private Stage stage;
 
     // View generation
@@ -54,18 +54,18 @@ public class ProductListController {
         ProductListController productListController = loader.getController();
         // TODO: get products from server
         // Test products
-        ObservableList<Prodotto> products = FXCollections.observableArrayList(
-                new Prodotto(1, "Pasta n10", "Barilla", 1,
+        ObservableList<Product> products = FXCollections.observableArrayList(
+                new Product(1, "Pasta n10", "Barilla", 1,
                         1.72, "C:\\Users\\david\\Pictures\\Saved Pictures\\34779.jpg", 1, "Pasta", "Alimneti"),
-                new Prodotto(2, "Formaggio grattuggiato", "Parmiggiano Reggiano", 1,
+                new Product(2, "Formaggio grattuggiato", "Parmiggiano Reggiano", 1,
                         3.50, "prova", 1, "Formaggi", "Alimneti"));
 
         // Clickable link for ID column
-        productListController.IDCol.setCellFactory(new Callback<TableColumn<Prodotto, Integer>,
-                TableCell<Prodotto, Integer>>() {
+        productListController.IDCol.setCellFactory(new Callback<TableColumn<Product, Integer>,
+                TableCell<Product, Integer>>() {
             @Override
-            public TableCell<Prodotto, Integer> call(TableColumn<Prodotto, Integer> col) {
-                final TableCell<Prodotto, Integer> cell = new TableCell<>() {
+            public TableCell<Product, Integer> call(TableColumn<Product, Integer> col) {
+                final TableCell<Product, Integer> cell = new TableCell<>() {
                     @Override
                     public void updateItem(Integer ID, boolean empty) {
                         super.updateItem(ID, empty);
@@ -123,7 +123,7 @@ public class ProductListController {
         productListController.CbxColumn.setItems(columnFilterString);
         productListController.CbxColumn.setValue(ListaSpeseController.columnFilterEnum.ID.toString());
 
-        FilteredList<Prodotto> flproducts = new FilteredList<>(products, p -> true);
+        FilteredList<Product> flproducts = new FilteredList<>(products, p -> true);
 
         productListController.Search.setOnKeyReleased(keyEvent ->
         {
@@ -148,7 +148,7 @@ public class ProductListController {
         });
 
         // Wrap the FilteredList in a SortedList.
-        SortedList<Prodotto> sortedData = new SortedList<>(flproducts);
+        SortedList<Product> sortedData = new SortedList<>(flproducts);
         // Bind the SortedList comparator to the TableView comparator.
         sortedData.comparatorProperty().bind(productListController.tableview.comparatorProperty());
 
@@ -157,7 +157,7 @@ public class ProductListController {
         productListController.setStage(stage);
     }
 
-    private static void handleModifyProduct(Prodotto product, boolean modify) throws IOException {
+    private static void handleModifyProduct(Product product, boolean modify) throws IOException {
         GestioneProdottiController gestioneProdottiController = new GestioneProdottiController();
         gestioneProdottiController.showView(product, modify);
     }

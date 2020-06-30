@@ -8213,7 +8213,7 @@
 														"$ref": "AAAAAAFx74kJnb/+Kc4="
 													},
 													"edgePosition": 1,
-													"text": "2 : Aggiungi prodotto da catalogo"
+													"text": "2 : Aggiungi product da catalogo"
 												},
 												{
 													"_type": "EdgeLabelView",
@@ -8435,7 +8435,7 @@
 														"$ref": "AAAAAAFx75utlMAyBo4="
 													},
 													"edgePosition": 1,
-													"text": "4 : Visualizza prodotto"
+													"text": "4 : Visualizza product"
 												},
 												{
 													"_type": "EdgeLabelView",
@@ -8546,7 +8546,7 @@
 														"$ref": "AAAAAAFx75wQucBKtuA="
 													},
 													"edgePosition": 1,
-													"text": "5 : Aggiunta prodotto"
+													"text": "5 : Aggiunta product"
 												},
 												{
 													"_type": "EdgeLabelView",
@@ -8812,7 +8812,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFx74OsJL6n0yc="
 									},
-									"name": "Aggiungi prodotto da catalogo",
+									"name": "Aggiungi product da catalogo",
 									"source": {
 										"$ref": "AAAAAAFx74QVkL8vxi4="
 									},
@@ -8841,7 +8841,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFx74OsJL6n0yc="
 									},
-									"name": "Visualizza prodotto",
+									"name": "Visualizza product",
 									"source": {
 										"$ref": "AAAAAAFx74QVkL8vxi4="
 									},
@@ -8856,7 +8856,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFx74OsJL6n0yc="
 									},
-									"name": "Aggiunta prodotto",
+									"name": "Aggiunta product",
 									"source": {
 										"$ref": "AAAAAAFx74QVkL8vxi4="
 									},
@@ -9132,7 +9132,7 @@
 															"top": 351,
 															"width": 159,
 															"height": 13,
-															"text": "Aggiungi prodotto"
+															"text": "Aggiungi product"
 														},
 														{
 															"_type": "LabelView",
@@ -9250,7 +9250,7 @@
 															"top": 215,
 															"width": 117.72998046875,
 															"height": 13,
-															"text": "visualizza prodotto"
+															"text": "visualizza product"
 														},
 														{
 															"_type": "LabelView",
@@ -10043,7 +10043,7 @@
 															"top": 503,
 															"width": 178.39453125,
 															"height": 13,
-															"text": "Aggiunta prodotto al carrello"
+															"text": "Aggiunta product al carrello"
 														},
 														{
 															"_type": "LabelView",
@@ -10726,7 +10726,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFyBGWZQBKCNM8="
 									},
-									"name": "Aggiungi prodotto"
+									"name": "Aggiungi product"
 								},
 								{
 									"_type": "UMLMergeNode",
@@ -10742,7 +10742,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFyBGWZQBKCNM8="
 									},
-									"name": "visualizza prodotto"
+									"name": "visualizza product"
 								},
 								{
 									"_type": "UMLDecisionNode",
@@ -10774,7 +10774,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFyBGWZQBKCNM8="
 									},
-									"name": "Aggiunta prodotto al carrello"
+									"name": "Aggiunta product al carrello"
 								},
 								{
 									"_type": "UMLAction",
@@ -17388,7 +17388,7 @@
 														"$ref": "AAAAAAFx6i3yHAMkv+Y="
 													},
 													"edgePosition": 1,
-													"text": "1 : Crea prodotto"
+													"text": "1 : Crea product"
 												},
 												{
 													"_type": "EdgeLabelView",
@@ -17499,7 +17499,7 @@
 														"$ref": "AAAAAAFx6jPpZgOTsaM="
 													},
 													"edgePosition": 1,
-													"text": "2 : Informazioni prodotto"
+													"text": "2 : Informazioni product"
 												},
 												{
 													"_type": "EdgeLabelView",
@@ -17945,7 +17945,7 @@
 														"$ref": "AAAAAAFx6jfdwQP+fgU="
 													},
 													"edgePosition": 1,
-													"text": "6 : Selezione prodotto"
+													"text": "6 : Selezione product"
 												},
 												{
 													"_type": "EdgeLabelView",
@@ -18037,7 +18037,7 @@
 											"top": 240,
 											"width": 136,
 											"height": 90,
-											"text": "Parte necessaria per ogni prodotto a catalogo senza il quale non è possibile andare a modifica."
+											"text": "Parte necessaria per ogni product a catalogo senza il quale non è possibile andare a modifica."
 										},
 										{
 											"_type": "UMLSeqMessageView",
@@ -18069,7 +18069,7 @@
 														"$ref": "AAAAAAFx6jaZzQPgE+Q="
 													},
 													"edgePosition": 1,
-													"text": "7 : Modifica quantità prodotto"
+													"text": "7 : Modifica quantità product"
 												},
 												{
 													"_type": "EdgeLabelView",
@@ -18495,7 +18495,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFx6ihK5QIysw4="
 									},
-									"name": "Crea prodotto",
+									"name": "Crea product",
 									"source": {
 										"$ref": "AAAAAAFx6ijdcwKnxZA="
 									},
@@ -18509,7 +18509,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFx6ihK5QIysw4="
 									},
-									"name": "Informazioni prodotto",
+									"name": "Informazioni product",
 									"source": {
 										"$ref": "AAAAAAFx6ijdcwKnxZA="
 									},
@@ -18568,7 +18568,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFx6ihK5QIysw4="
 									},
-									"name": "Selezione prodotto",
+									"name": "Selezione product",
 									"source": {
 										"$ref": "AAAAAAFx6ijdcwKnxZA="
 									},
@@ -18583,7 +18583,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFx6ihK5QIysw4="
 									},
-									"name": "Modifica quantità prodotto",
+									"name": "Modifica quantità product",
 									"source": {
 										"$ref": "AAAAAAFx6ijdcwKnxZA="
 									},
@@ -18738,7 +18738,7 @@
 															"top": 135,
 															"width": 119.16455078125,
 															"height": 13,
-															"text": "Crea prodotto"
+															"text": "Crea product"
 														},
 														{
 															"_type": "LabelView",
@@ -18840,7 +18840,7 @@
 															"top": 295,
 															"width": 203.66455078125,
 															"height": 13,
-															"text": "Inserimeto informazioni prodotto"
+															"text": "Inserimeto informazioni product"
 														},
 														{
 															"_type": "LabelView",
@@ -18942,7 +18942,7 @@
 															"top": 391,
 															"width": 238.291015625,
 															"height": 13,
-															"text": "Controllo informazioni nuovo prodotto"
+															"text": "Controllo informazioni nuovo product"
 														},
 														{
 															"_type": "LabelView",
@@ -19342,7 +19342,7 @@
 															"top": 567,
 															"width": 184.87548828125,
 															"height": 13,
-															"text": "Aggiunta prodotto al catalogo"
+															"text": "Aggiunta product al catalogo"
 														},
 														{
 															"_type": "LabelView",
@@ -19743,7 +19743,7 @@
 															"top": 159,
 															"width": 174.0654296875,
 															"height": 13,
-															"text": "Seleziona prodotto catalogo"
+															"text": "Seleziona product catalogo"
 														},
 														{
 															"_type": "LabelView",
@@ -19859,7 +19859,7 @@
 															"top": 335,
 															"width": 190.6455078125,
 															"height": 13,
-															"text": "Modifica informazioni prodotto"
+															"text": "Modifica informazioni product"
 														},
 														{
 															"_type": "LabelView",
@@ -20055,7 +20055,7 @@
 															"top": 335,
 															"width": 163.921875,
 															"height": 13,
-															"text": "Modifica quantità prodotto"
+															"text": "Modifica quantità product"
 														},
 														{
 															"_type": "LabelView",
@@ -20455,7 +20455,7 @@
 															"top": 519,
 															"width": 200.0146484375,
 															"height": 13,
-															"text": "Controllo informazioni prodotto"
+															"text": "Controllo informazioni product"
 														},
 														{
 															"_type": "LabelView",
@@ -21747,7 +21747,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFx/xcNsJFE6Wo="
 									},
-									"name": "Crea prodotto"
+									"name": "Crea product"
 								},
 								{
 									"_type": "UMLAction",
@@ -21755,7 +21755,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFx/xcNsJFE6Wo="
 									},
-									"name": "Inserimeto informazioni prodotto"
+									"name": "Inserimeto informazioni product"
 								},
 								{
 									"_type": "UMLAction",
@@ -21763,7 +21763,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFx/xcNsJFE6Wo="
 									},
-									"name": "Controllo informazioni nuovo prodotto"
+									"name": "Controllo informazioni nuovo product"
 								},
 								{
 									"_type": "UMLDecisionNode",
@@ -21779,7 +21779,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFx/xcNsJFE6Wo="
 									},
-									"name": "Aggiunta prodotto al catalogo"
+									"name": "Aggiunta product al catalogo"
 								},
 								{
 									"_type": "UMLActivityFinalNode",
@@ -21803,7 +21803,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFx/xcNsJFE6Wo="
 									},
-									"name": "Seleziona prodotto catalogo"
+									"name": "Seleziona product catalogo"
 								},
 								{
 									"_type": "UMLForkNode",
@@ -21819,7 +21819,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFx/xcNsJFE6Wo="
 									},
-									"name": "Modifica informazioni prodotto"
+									"name": "Modifica informazioni product"
 								},
 								{
 									"_type": "UMLAction",
@@ -21827,7 +21827,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFx/xcNsJFE6Wo="
 									},
-									"name": "Modifica quantità prodotto"
+									"name": "Modifica quantità product"
 								},
 								{
 									"_type": "UMLJoinNode",
@@ -21843,7 +21843,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFx/xcNsJFE6Wo="
 									},
-									"name": "Controllo informazioni prodotto"
+									"name": "Controllo informazioni product"
 								},
 								{
 									"_type": "UMLDecisionNode",
@@ -24507,7 +24507,7 @@
 														"$ref": "AAAAAAFx76RRxsG+pVY="
 													},
 													"edgePosition": 1,
-													"text": "2 : Modifica quantità prodotto"
+													"text": "2 : Modifica quantità product"
 												},
 												{
 													"_type": "EdgeLabelView",
@@ -24830,7 +24830,7 @@
 														"$ref": "AAAAAAFx76adJMIOhFw="
 													},
 													"edgePosition": 1,
-													"text": "4 : Rimuovi prodotto"
+													"text": "4 : Rimuovi product"
 												},
 												{
 													"_type": "EdgeLabelView",
@@ -25706,7 +25706,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFx751V1MB40QY="
 									},
-									"name": "Modifica quantità prodotto",
+									"name": "Modifica quantità product",
 									"source": {
 										"$ref": "AAAAAAFx754hhsC+8Mc="
 									},
@@ -25735,7 +25735,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFx751V1MB40QY="
 									},
-									"name": "Rimuovi prodotto",
+									"name": "Rimuovi product",
 									"source": {
 										"$ref": "AAAAAAFx754hhsC+8Mc="
 									},
@@ -26232,7 +26232,7 @@
 															"top": 295,
 															"width": 108.31640625,
 															"height": 13,
-															"text": "Rimuovi prodotto"
+															"text": "Rimuovi product"
 														},
 														{
 															"_type": "LabelView",
@@ -28626,7 +28626,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFyBHgaiBUqDOo="
 									},
-									"name": "Rimuovi prodotto"
+									"name": "Rimuovi product"
 								},
 								{
 									"_type": "UMLAction",
@@ -31618,7 +31618,7 @@
 											"top": 347.5,
 											"width": 178,
 											"height": 13,
-											"text": "Aggiunta prodotto al carrello"
+											"text": "Aggiunta product al carrello"
 										},
 										{
 											"_type": "LabelView",
@@ -31915,7 +31915,7 @@
 											"top": 659.5,
 											"width": 108,
 											"height": 13,
-											"text": "Rimuovi prodotto"
+											"text": "Rimuovi product"
 										},
 										{
 											"_type": "LabelView",
@@ -33568,7 +33568,7 @@
 											"top": 1347.5,
 											"width": 151,
 											"height": 13,
-											"text": "Visualizzazione prodotto"
+											"text": "Visualizzazione product"
 										},
 										{
 											"_type": "LabelView",
@@ -34578,7 +34578,7 @@
 											"top": 547.5,
 											"width": 163,
 											"height": 13,
-											"text": "Modifica quantità prodotto"
+											"text": "Modifica quantità product"
 										},
 										{
 											"_type": "LabelView",
@@ -34780,7 +34780,7 @@
 											"top": 451.5,
 											"width": 194,
 											"height": 13,
-											"text": "Controllo disponibilità prodotto"
+											"text": "Controllo disponibilità product"
 										},
 										{
 											"_type": "LabelView",
@@ -37204,7 +37204,7 @@
 											"top": 451.5,
 											"width": 118,
 											"height": 13,
-											"text": "Visualizza prodotto"
+											"text": "Visualizza product"
 										},
 										{
 											"_type": "LabelView",
@@ -40557,7 +40557,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFx6OITKpIxocQ="
 							},
-							"name": "Visualizzazione prodotto"
+							"name": "Visualizzazione product"
 						},
 						{
 							"_type": "UMLUseCase",
@@ -40732,7 +40732,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFx6OITKpJBi8U="
 							},
-							"name": "Visualizzazione prodotto"
+							"name": "Visualizzazione product"
 						},
 						{
 							"_type": "UMLUseCase",
@@ -40740,7 +40740,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFx6OITKpJBi8U="
 							},
-							"name": "Aggiunta prodotto al carrello",
+							"name": "Aggiunta product al carrello",
 							"ownedElements": [
 								{
 									"_type": "UMLExtend",
@@ -40802,7 +40802,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFx6OITKpJBi8U="
 							},
-							"name": "Rimuovi prodotto",
+							"name": "Rimuovi product",
 							"ownedElements": [
 								{
 									"_type": "UMLExtend",
@@ -40869,7 +40869,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFx6OITKpJBi8U="
 							},
-							"name": "Modifica quantità prodotto",
+							"name": "Modifica quantità product",
 							"ownedElements": [
 								{
 									"_type": "UMLExtend",
@@ -40905,7 +40905,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFx6OITKpJBi8U="
 							},
-							"name": "Controllo disponibilità prodotto"
+							"name": "Controllo disponibilità product"
 						},
 						{
 							"_type": "UMLUseCase",
@@ -41013,7 +41013,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFx6OITKpJBi8U="
 							},
-							"name": "Visualizza prodotto",
+							"name": "Visualizza product",
 							"ownedElements": [
 								{
 									"_type": "UMLInclude",
@@ -41070,7 +41070,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFx6OITLZNPU5s="
 									},
-									"documentation": "Almeno un prodotto  aggiunto.\n",
+									"documentation": "Almeno un product  aggiunto.\n",
 									"source": {
 										"$ref": "AAAAAAFx6OITLZNPU5s="
 									},
@@ -41417,7 +41417,7 @@
 											"top": 427.5,
 											"width": 118,
 											"height": 13,
-											"text": "Selezione prodotto"
+											"text": "Selezione product"
 										},
 										{
 											"_type": "LabelView",
@@ -42501,7 +42501,7 @@
 											"top": 427.5,
 											"width": 109,
 											"height": 13,
-											"text": "Modifica prodotto"
+											"text": "Modifica product"
 										},
 										{
 											"_type": "LabelView",
@@ -42703,7 +42703,7 @@
 											"top": 523.5,
 											"width": 113,
 											"height": 13,
-											"text": "Aggiungi prodotto"
+											"text": "Aggiungi product"
 										},
 										{
 											"_type": "LabelView",
@@ -44453,7 +44453,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFx6OITMJSfuDM="
 							},
-							"name": "Modifica prodotto",
+							"name": "Modifica product",
 							"ownedElements": [
 								{
 									"_type": "UMLInclude",
@@ -44476,7 +44476,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFx6OITMJSfuDM="
 							},
-							"name": "Aggiungi prodotto"
+							"name": "Aggiungi product"
 						},
 						{
 							"_type": "UMLUseCase",
@@ -44484,7 +44484,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFx6OITMJSfuDM="
 							},
-							"name": "Selezione prodotto"
+							"name": "Selezione product"
 						}
 					]
 				},
@@ -49215,7 +49215,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFyN3wi602W+98="
 							},
-							"name": "Crea prodotto",
+							"name": "Crea product",
 							"end1": {
 								"_type": "UMLAssociationEnd",
 								"_id": "AAAAAAFyOCrOPFuAGiw=",
