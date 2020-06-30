@@ -72,7 +72,7 @@ public class CatalogoController {
     private Stage stage;
 
     public static void showView(Stage stage) {
-        FXMLLoader loader = new FXMLLoader(CatalogoController.class.getResource("/views/catalogo.fxml"));
+        FXMLLoader loader = new FXMLLoader(CatalogoController.class.getResource("/views/catalog.fxml"));
         Parent root = null;
         try {
             root = loader.load();

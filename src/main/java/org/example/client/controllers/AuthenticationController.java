@@ -31,7 +31,7 @@ public class AuthenticationController {
     private Stage stage;
 
     public static void showView(Stage stage) {
-        FXMLLoader loader = new FXMLLoader(AuthenticationController.class.getResource("/views/authentication.fxml"));
+        FXMLLoader loader = new FXMLLoader(AuthenticationController.class.getResource("/views/auth.fxml"));
         Parent root = null;
         try {
             root = loader.load();
