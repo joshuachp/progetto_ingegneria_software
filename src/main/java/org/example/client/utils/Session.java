@@ -40,8 +40,11 @@ public class Session {
     public void setUser(User user) {
         this.user = user;
 
-        Preferences preferences = Preferences.userNodeForPackage(Session.class);
-        preferences.put(PREFERENCE_USER_SESSION, user.getSession());
+        // Save session only if needed
+        if (this.saveSession) {
+            Preferences preferences = Preferences.userNodeForPackage(Session.class);
+            preferences.put(PREFERENCE_USER_SESSION, user.getSession());
+        }
     }
 
     public boolean isSaveSession() {
