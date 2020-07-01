@@ -87,8 +87,8 @@ public class Product {
         this.image = path;
     }
 
-    public String getAvailability() {
-        return availability.toString();
+    public Integer getAvailability() {
+        return availability;
     }
 
     public void setAvailability(Integer availability) {
