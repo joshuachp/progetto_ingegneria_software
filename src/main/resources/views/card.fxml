@@ -35,7 +35,7 @@
             <Font name="Calibri Bold Italic" size="21.0" />
          </font>
       </Text>
-      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+      <HBox alignment="CENTER">
          <children>
             <Spinner fx:id="quantity" editable="true" style="-fx-font-size: 14px;">
                <HBox.margin>
@@ -48,12 +48,12 @@
                   <Tooltip text="Quantità" />
                </tooltip>
             </Spinner>
-            <Button mnemonicParsing="false" onAction="#addToCartHandler" style="-fx-background-color: &quot;0066FF&quot;;">
+            <Button minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#addToCartHandler" prefHeight="30.0" prefWidth="60.0" style="-fx-background-color: #0066FF;">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
                <graphic>
-                  <ImageView fx:id="addCart" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="addCart" fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../image/cart-white.png" />
                      </image>
@@ -62,9 +62,6 @@
                <HBox.margin>
                   <Insets />
                </HBox.margin>
-               <padding>
-                  <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />
-               </padding>
                <tooltip>
                   <Tooltip text="Aggiungi al carrello" />
                </tooltip>
