@@ -8,7 +8,6 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
@@ -20,7 +19,6 @@
             <Image url="@../image/test-image.jpg" />
          </image>
       </ImageView>
-      <Pane prefHeight="200.0" prefWidth="200.0" />
       <Text fx:id="title" strokeType="OUTSIDE" strokeWidth="0.0" text="Prodotto prova " textAlignment="CENTER" wrappingWidth="150.0">
          <font>
             <Font name="Calibri" size="19.0" />
@@ -37,7 +35,7 @@
             <Font name="Calibri Bold Italic" size="21.0" />
          </font>
       </Text>
-      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+      <HBox alignment="CENTER">
          <children>
             <Spinner fx:id="quantity" editable="true" style="-fx-font-size: 14px;">
                <HBox.margin>
@@ -50,12 +48,12 @@
                   <Tooltip text="Quantità" />
                </tooltip>
             </Spinner>
-            <Button minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#addToCartHandler" prefHeight="30.0" prefWidth="60.0" style="-fx-background-color: &quot;0066FF&quot;;">
+            <Button minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#addToCartHandler" prefHeight="30.0" prefWidth="60.0" style="-fx-background-color: #0066FF;">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
                <graphic>
-                  <ImageView fx:id="addCart" fitHeight="32.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="addCart" fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../image/cart-white.png" />
                      </image>

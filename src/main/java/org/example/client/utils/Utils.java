@@ -87,6 +87,20 @@ public class Utils {
     }
 
 
+    /**
+     * Register a new client on the server
+     *
+     * @param username  Username
+     * @param password  Password
+     * @param name      Name
+     * @param surname   Surname
+     * @param address   Address
+     * @param cap       CAP
+     * @param city      City
+     * @param telephone Telephone
+     * @param payment   Payment
+     * @return The response of the server or null on error
+     */
     public static int registerClient(String username, String password, String name, String surname,
                                      String address, Integer cap, String city,
                                      String telephone, Integer payment) {
