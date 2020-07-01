@@ -60,7 +60,7 @@ public class GestioneProdottiController {
             gestioneProdottiController.fieldID.setText(product.getID().toString());
             gestioneProdottiController.fieldPackage.setText(product.getPackageSize().toString());
             gestioneProdottiController.fieldPrice.setText(product.getPrice().toString());
-            gestioneProdottiController.fieldQuantity.setText(product.getAvailability());
+            gestioneProdottiController.fieldQuantity.setText(product.getAvailability().toString());
         } else {
             stage.setTitle("Crea nuovo prodotto");
         }
