@@ -86,9 +86,9 @@ public class CatalogController {
         stage.show();
         CatalogController catalogController = loader.getController();
 
-        catalogController.catalogFactory(catalogController.products,
-                catalogController.listCategory,
-                catalogController.searchBar);
+        catalogController.catalogFactory(
+                catalogController.listCategory.getSelectionModel().getSelectedItems().toString(),
+                catalogController.searchBar.getText());
 
         catalogController.setStage(stage);
     }
@@ -126,10 +126,10 @@ public class CatalogController {
 
         new Thread(task).start();
 
-        this.listCategory.setOnMouseClicked(event -> {
+        /*this.listCategory.setOnMouseClicked(event -> {
             Category category =
                     Category.fromString(listCategory.getSelectionModel().getSelectedItems().toString());
-        });
+        });*/
 
 
     }
@@ -142,16 +142,18 @@ public class CatalogController {
         ObservableList<Node> list = flowpane.getChildren();
         list.clear();
 
+
         for(Product product : sectionMap.get(category)){
             if (product.getName().contains(newSearch)){
-                
+                try {
+                    list.add(CardController.generateCard(product));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         }
 
-        list.addAll();
-
-        // Genero i figli sulla base della categoria selezionata e del testo di ricerca nel box di ricerca
-        VBox card = null;
+        //VBox card = null;
 
     }
 
@@ -166,7 +168,7 @@ public class CatalogController {
     }
 
     public void searchHandler(ActionEvent actionEvent) {
-        catalogFactory(this.products, this.listCategory, this.searchBar);
+        catalogFactory(this.listCategory.getSelectionModel().getSelectedItems().toString(), this.searchBar.getText());
     }
 
     public void backhandler(MouseEvent mouseEvent) {
@@ -176,8 +178,7 @@ public class CatalogController {
     }
 
     public void changeCategoryHandler(MouseEvent mouseEvent) {
-        catalogFactory(this.products, this.listCategory, this.searchBar);
-        System.out.println(Category.fromString(listCategory.getSelectionModel().getSelectedItems().toString()));
-        System.out.println(listCategory.getItems().toString());
+        catalogFactory(this.listCategory.getSelectionModel().getSelectedItems().toString(), this.searchBar.getText());
+
     }
 }
