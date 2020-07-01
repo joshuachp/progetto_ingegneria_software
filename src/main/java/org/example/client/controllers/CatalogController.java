@@ -88,7 +88,7 @@ public class CatalogController {
 
         catalogController.catalogFactory(
                 catalogController.listCategory.getSelectionModel().getSelectedItems().toString(),
-                catalogController.searchBar.getText());
+                catalogController.searchBar.getText(), catalogController.sectionMap);
 
         catalogController.setStage(stage);
     }
@@ -105,6 +105,7 @@ public class CatalogController {
                     JSONObject json = new JSONObject(Objects.requireNonNull(response.body()).string());
                     JSONArray products = json.getJSONArray("products");
 
+                    // Crea mappa prodotti - sezione
                     for (int i = 0; i < products.length(); i++) {
                         Product product = new Product(products.getJSONObject(i));
                         if (!sectionMap.containsKey(product.getSection())) {
@@ -135,7 +136,7 @@ public class CatalogController {
     }
 
     // Card builder
-    public void catalogFactory(String category, String search) {
+    public void catalogFactory(String category, String search, Map<String, ArrayList<Product>> sectionMap) {
 
         // Creo la lista di figli del flow pane
         String newSearch = search.trim().toLowerCase();
@@ -152,9 +153,7 @@ public class CatalogController {
                 }
             }
         }
-
         //VBox card = null;
-
     }
 
     public void setStage(Stage stage) {
@@ -168,7 +167,8 @@ public class CatalogController {
     }
 
     public void searchHandler(ActionEvent actionEvent) {
-        catalogFactory(this.listCategory.getSelectionModel().getSelectedItems().toString(), this.searchBar.getText());
+        catalogFactory(this.listCategory.getSelectionModel().getSelectedItems().toString(), this.searchBar.getText(),
+                this.sectionMap);
     }
 
     public void backhandler(MouseEvent mouseEvent) {
@@ -178,7 +178,7 @@ public class CatalogController {
     }
 
     public void changeCategoryHandler(MouseEvent mouseEvent) {
-        catalogFactory(this.listCategory.getSelectionModel().getSelectedItems().toString(), this.searchBar.getText());
-
+        catalogFactory(this.listCategory.getSelectionModel().getSelectedItems().toString(), this.searchBar.getText(),
+                this.sectionMap);
     }
 }
