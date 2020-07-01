@@ -91,7 +91,6 @@ public class CatalogController {
                 catalogController.searchBar);
 
         catalogController.setStage(stage);
-
     }
 
     @FXML
