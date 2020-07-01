@@ -105,6 +105,7 @@ public class CatalogController {
                 if (response != null && response.code() == 200 && response.body() != null) {
                     JSONObject json = new JSONObject(Objects.requireNonNull(response.body()).string());
                     JSONArray products = json.getJSONArray("products");
+
                     for (int i = 0; i < products.length(); i++) {
                         Product product = new Product(products.getJSONObject(i));
                         if (!sectionMap.containsKey(product.getSection())) {
@@ -135,33 +136,24 @@ public class CatalogController {
     }
 
     // Card builder
-    public void catalogFactory(@NotNull ObservableList<Product> products, ListView<String> listCategory,
-                               TextField searchBar) {
+    public void catalogFactory(String category, String search) {
+
         // Creo la lista di figli del flow pane
+        String newSearch = search.trim().toLowerCase();
         ObservableList<Node> list = flowpane.getChildren();
         list.clear();
-        Category category =
-                Category.fromString(listCategory.getSelectionModel().getSelectedItems().toString());
-        String search = searchBar.getText();
-        if (category == null)
-            category = Category.ALIMENTI;
-        System.out.println("card generator" + category.toString());
-        // Genero i figli sulla base della categoria selezionata e del testo di ricerca nel box di ricerca
-        VBox card = null;
-        for (Product product : products) {
 
-            if (category == Category.fromString(product.getSection())) {
-                if (product.getCharacteristics().contains(search)) {
-                    try {
-                        card = CardController.generateCard(product);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                    list.add(card);
-                    //flowpane.setMargin(card, new Insets(5));
-                }
+        for(Product product : sectionMap.get(category)){
+            if (product.getName().contains(newSearch)){
+                
             }
         }
+
+        list.addAll();
+
+        // Genero i figli sulla base della categoria selezionata e del testo di ricerca nel box di ricerca
+        VBox card = null;
+
     }
 
     public void setStage(Stage stage) {

@@ -55,7 +55,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
                <graphic>
-                  <ImageView fx:id="addCart" fitHeight="10.0" fitWidth="10.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="addCart" fitHeight="32.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../image/cart-white.png" />
                      </image>
