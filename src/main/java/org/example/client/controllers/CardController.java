@@ -22,9 +22,14 @@ public class CardController {
     public Spinner<Integer> quantity;
     public ImageView addCart;
 
-    public static VBox generateCard(Product product) throws IOException {
+    public static VBox generateCard(Product product) {
         FXMLLoader loader = new FXMLLoader(CardController.class.getResource("/views/card.fxml"));
-        VBox card = loader.load();
+        VBox card = null;
+        try {
+            card = loader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         CardController cardController = loader.getController();
         cardController.price.setText(String.format("\u20ac %.2f", product.getPrice()));
         cardController.title.setText(product.getName());

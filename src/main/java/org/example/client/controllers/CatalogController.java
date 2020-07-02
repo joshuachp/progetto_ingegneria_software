@@ -14,14 +14,12 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import okhttp3.Response;
 import org.example.client.models.Category;
 import org.example.client.models.Product;
 import org.example.client.utils.Session;
 import org.example.client.utils.Utils;
-import org.jetbrains.annotations.NotNull;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -40,7 +38,7 @@ public class CatalogController {
     //public GridPane gridpane;
     public FlowPane flowpane;
     // prodotti Test
-    ObservableList<Product> products = FXCollections.observableArrayList(
+    /*ObservableList<Product> products = FXCollections.observableArrayList(
             new Product(1, "Pasta n10", "Barilla", 1,
                     1.72, "https://images.services.esselunga.it/html/img_prodotti/esselunga/image/965627.jpg", 1,
                     "Pasta", "Alimenti"),
@@ -67,7 +65,7 @@ public class CatalogController {
                     "Pasta", "Alimneti"),
             new Product(1, "Pasta n10", "Barilla", 1,
                     1.72, "https://images.services.esselunga.it/html/img_prodotti/esselunga/image/965627.jpg", 1,
-                    "Pasta", "Alimenti"));
+                    "Pasta", "Alimenti"));*/
     private Map<String, ArrayList<Product>> sectionMap = new HashMap<>();
     private Stage stage;
 
@@ -85,11 +83,6 @@ public class CatalogController {
         stage.setTitle("Catalogo");
         stage.show();
         CatalogController catalogController = loader.getController();
-
-        catalogController.catalogFactory(
-                catalogController.listCategory.getSelectionModel().getSelectedItems().toString(),
-                catalogController.searchBar.getText(), catalogController.sectionMap);
-
         catalogController.setStage(stage);
     }
 
@@ -113,9 +106,13 @@ public class CatalogController {
                         }
                         sectionMap.get(product.getSection()).add(product);
                     }
+
                     categoryList = FXCollections.observableArrayList(sectionMap.keySet());
                     listCategory.setItems(categoryList);
                     listCategory.getSelectionModel().selectFirst();
+                    catalogFactory(
+                            listCategory.getSelectionModel().getSelectedItems().toString(),
+                            searchBar.getText());
                 }
 
                 return null;
@@ -136,23 +133,19 @@ public class CatalogController {
     }
 
     // Card builder
-    public void catalogFactory(String category, String search, Map<String, ArrayList<Product>> sectionMap) {
+    public void catalogFactory(String category, String search) {
 
         // Creo la lista di figli del flow pane
         String newSearch = search.trim().toLowerCase();
         ObservableList<Node> list = flowpane.getChildren();
         list.clear();
 
-
-        for(Product product : sectionMap.get(category)){
-            if (product.getName().contains(newSearch)){
-                try {
+        if (this.sectionMap.containsKey(category))
+            for (Product product : this.sectionMap.get(category)) {
+                if (product.getName().contains(newSearch)) {
                     list.add(CardController.generateCard(product));
-                } catch (IOException e) {
-                    e.printStackTrace();
                 }
             }
-        }
         //VBox card = null;
     }
 
@@ -167,8 +160,8 @@ public class CatalogController {
     }
 
     public void searchHandler(ActionEvent actionEvent) {
-        catalogFactory(this.listCategory.getSelectionModel().getSelectedItems().toString(), this.searchBar.getText(),
-                this.sectionMap);
+        catalogFactory(this.listCategory.getSelectionModel().getSelectedItems().toString(),
+                this.searchBar.getText().isEmpty() ? "" : this.searchBar.getText());
     }
 
     public void backhandler(MouseEvent mouseEvent) {
@@ -178,7 +171,7 @@ public class CatalogController {
     }
 
     public void changeCategoryHandler(MouseEvent mouseEvent) {
-        catalogFactory(this.listCategory.getSelectionModel().getSelectedItems().toString(), this.searchBar.getText(),
-                this.sectionMap);
+        catalogFactory(this.listCategory.getSelectionModel().getSelectedItems().toString(),
+                this.searchBar.getText().isEmpty() ? "" : this.searchBar.getText());
     }
 }
