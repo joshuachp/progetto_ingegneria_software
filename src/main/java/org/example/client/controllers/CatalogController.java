@@ -111,7 +111,7 @@ public class CatalogController {
                     listCategory.setItems(categoryList);
                     listCategory.getSelectionModel().selectFirst();
                     catalogFactory(
-                            listCategory.getSelectionModel().getSelectedItems().toString(),
+                            listCategory.getSelectionModel().getSelectedItem(),
                             searchBar.getText());
                 }
 
@@ -140,12 +140,13 @@ public class CatalogController {
         ObservableList<Node> list = flowpane.getChildren();
         list.clear();
 
-        if (this.sectionMap.containsKey(category)) // Controllo la lista dela sezione
-            for (Product product : this.sectionMap.get(category)) {
-                if (newSearch.isEmpty() || product.getName().contains(newSearch)) {
-                    list.add(CardController.generateCard(product));
-                }
+
+        assert this.sectionMap.containsKey(category); // Controllo la lista dela sezione
+        for (Product product : this.sectionMap.get(category)) {
+            if (newSearch.isEmpty() || product.getName().contains(newSearch)) {
+                list.add(CardController.generateCard(product));
             }
+        }
         //VBox card = null;
     }
 
