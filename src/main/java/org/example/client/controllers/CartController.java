@@ -1,26 +1,25 @@
 package org.example.client.controllers;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.ListView;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import org.example.client.components.CartListCell;
-import org.example.client.models.Product;
+import org.example.client.components.CartFactory;
 import org.example.client.utils.Session;
 
 import java.io.IOException;
+import java.util.List;
 
 public class CartController {
 
     @FXML
-    public ListView<Product> listView;
+    public VBox vBoxCart;
 
-    private ObservableList<Product> observableList;
     private Stage stage;
 
     public static void showView(Stage stage) {
@@ -45,13 +44,9 @@ public class CartController {
         Task<Void> loadProducts = new Task<>() {
             @Override
             protected Void call() {
-                // Get all the products
                 Session session = Session.getInstance();
-                observableList = FXCollections.observableList(session.getProducts());
-                // Set the cell factory
-                listView.setCellFactory(listView -> new CartListCell());
-                // Set the list items
-                listView.setItems(observableList);
+                List<Node> nodes = new CartFactory().getCartList(session.getProducts());
+                Platform.runLater(() -> vBoxCart.getChildren().addAll(nodes));
                 return null;
             }
         };

@@ -1,5 +1,6 @@
 package org.example.client.controllers;
 
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
@@ -83,11 +84,13 @@ public class CatalogController {
                         }
                         sectionMap.get(product.getSection()).add(product);
                     }
-
-                    categoryList = FXCollections.observableArrayList(sectionMap.keySet());
-                    listCategory.setItems(categoryList);
-                    listCategory.getSelectionModel().selectFirst();
-                    catalogFactory(listCategory.getSelectionModel().getSelectedItem(), searchBar.getText());
+                    // Run on application thread
+                    Platform.runLater(() -> {
+                        categoryList = FXCollections.observableArrayList(sectionMap.keySet());
+                        listCategory.setItems(categoryList);
+                        listCategory.getSelectionModel().selectFirst();
+                        catalogFactory(listCategory.getSelectionModel().getSelectedItem(), searchBar.getText());
+                    });
                 }
                 return null;
             }

@@ -1,42 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.layout.VBox?>
-
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="950.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.client.controllers.CartController">
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<VBox xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+      minWidth="-Infinity"
+      prefHeight="700.0" prefWidth="950.0" xmlns="http://javafx.com/javafx/11.0.1"
+      fx:controller="org.example.client.controllers.CartController">
     <children>
         <MenuBar VBox.vgrow="NEVER">
             <menus>
                 <Menu mnemonicParsing="false" text="File">
                     <items>
-                        <MenuItem mnemonicParsing="false" text="Close" />
+                        <MenuItem mnemonicParsing="false" text="Close"/>
                     </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Edit">
                     <items>
-                        <MenuItem mnemonicParsing="false" text="Delete" />
+                        <MenuItem mnemonicParsing="false" text="Delete"/>
                     </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Help">
                     <items>
-                        <MenuItem mnemonicParsing="false" text="About" />
+                        <MenuItem mnemonicParsing="false" text="About"/>
                     </items>
                 </Menu>
             </menus>
         </MenuBar>
-        <VBox VBox.vgrow="ALWAYS">
+        <VBox fx:id="vBoxCart" VBox.vgrow="ALWAYS">
             <VBox.margin>
-                <Insets />
+                <Insets/>
             </VBox.margin>
             <padding>
-                <Insets bottom="24.0" left="56.0" right="56.0" top="24.0" />
+                <Insets bottom="24.0" left="56.0" right="56.0" top="24.0"/>
             </padding>
-         <children>
-            <VBox prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS" />
-         </children>
+            <children>
+                <VBox prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS"/>
+            </children>
         </VBox>
     </children>
 </VBox>
