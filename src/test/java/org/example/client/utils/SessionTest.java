@@ -63,11 +63,11 @@ class SessionTest {
         Product product = new Product(1, "Name", "Brand", 1, 1., null,
                 1, "", "Section");
 
-        assertEquals(0, session.getCartQuantity());
+        assertEquals(0, session.getCartQuantity().get());
         assertEquals(1, session.addProduct(product));
-        assertEquals(1, session.getCartQuantity());
+        assertEquals(1, session.getCartQuantity().get());
         assertEquals(2, session.addProduct(product));
-        assertEquals(2, session.getCartQuantity());
+        assertEquals(2, session.getCartQuantity().get());
     }
 
     @Test
@@ -108,7 +108,7 @@ class SessionTest {
     @Test
     void getCartQuantity() {
         Session session = Session.getInstance();
-        assertEquals(0, session.getCartQuantity());
+        assertEquals(0, session.getCartQuantity().get());
     }
 
     @Test

@@ -46,7 +46,7 @@ public class CartItemController {
         this.textProduct.setText(product.getName());
         this.textBrand.setText(product.getBrand());
         this.textQuantity.setText(String.valueOf(product.getQuantity()));
-        this.textTotal.setText(String.format("%f", product.getQuantity() * product.getPrice()));
+        this.textTotal.setText(String.format("€ %.2f", product.getQuantity() * product.getPrice()));
     }
 }
 

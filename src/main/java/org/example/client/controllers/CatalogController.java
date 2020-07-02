@@ -13,6 +13,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import okhttp3.Response;
 import org.example.client.models.Product;
@@ -28,11 +29,18 @@ import java.util.Objects;
 
 public class CatalogController {
 
-    public static ObservableList<String> categoryList;
     private final Map<String, ArrayList<Product>> sectionMap = new HashMap<>();
-    public TextField searchBar;
+
+    public ObservableList<String> categoryList;
     public ListView<String> listCategory;
+
+    @FXML
+    public TextField searchBar;
+    @FXML
     public FlowPane flowPaneProducts;
+    @FXML
+    public Text textCartQuantity;
+
     private Stage stage;
 
     public static void showView(Stage stage) {
@@ -54,11 +62,11 @@ public class CatalogController {
 
     @FXML
     public void initialize() {
+        Session session = Session.getInstance();
+
         Task<Void> task = new Task<>() {
             @Override
             protected Void call() throws Exception {
-                // Get session
-                Session session = Session.getInstance();
                 // Request all products
                 Response response = Utils.getAllProducts(session.getUser().getSession());
                 // Check for successful response
@@ -85,6 +93,8 @@ public class CatalogController {
             }
         };
         new Thread(task).start();
+
+        this.textCartQuantity.textProperty().bind(session.getCartQuantity().asString());
     }
 
     // Card builder

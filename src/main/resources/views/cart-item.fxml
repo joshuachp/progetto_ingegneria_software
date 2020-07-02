@@ -1,48 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-
-<?import javafx.geometry.*?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
-<HBox xmlns:fx="http://javafx.com/fxml" alignment="CENTER_LEFT" prefWidth="700.0"
-      xmlns="http://javafx.com/javafx" fx:controller="org.example.client.controllers.CartItemController">
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<HBox alignment="CENTER_LEFT" prefWidth="700.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.client.controllers.CartItemController">
     <ImageView fx:id="imageView" fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
         <HBox.margin>
-            <Insets bottom="12.0" left="12.0" top="12.0"/>
+            <Insets bottom="12.0" left="12.0" top="12.0" />
         </HBox.margin>
     </ImageView>
     <Text fx:id="textProduct" fill="#212121" strokeType="OUTSIDE" strokeWidth="0.0" text="Product">
         <font>
-            <Font size="18.0"/>
+            <Font size="18.0" />
         </font>
         <HBox.margin>
-            <Insets bottom="24.0" left="24.0" top="24.0"/>
+            <Insets bottom="24.0" left="24.0" top="24.0" />
         </HBox.margin>
     </Text>
     <Text fx:id="textBrand" fill="#616161" strokeType="OUTSIDE" strokeWidth="0.0" text="Brand">
         <HBox.margin>
-            <Insets bottom="24.0" left="28.0" top="24.0"/>
+            <Insets bottom="24.0" left="28.0" top="24.0" />
         </HBox.margin>
         <font>
-            <Font size="14.0"/>
+            <Font size="14.0" />
         </font>
     </Text>
-    <HBox HBox.hgrow="ALWAYS"/>
+    <HBox HBox.hgrow="ALWAYS" />
     <Text fx:id="textQuantity" fill="#616161" strokeType="OUTSIDE" strokeWidth="0.0" text="11">
         <HBox.margin>
-            <Insets bottom="24.0" right="48.0" top="24.0"/>
+            <Insets bottom="24.0" right="48.0" top="24.0" />
         </HBox.margin>
         <font>
-            <Font size="12.0"/>
+            <Font size="12.0" />
         </font>
     </Text>
-    <Text fx:id="textTotal" fill="#212121" strokeType="OUTSIDE" strokeWidth="0.0" text="100€">
+    <Text fx:id="textTotal" fill="#212121" strokeType="OUTSIDE" strokeWidth="0.0" text="€ 100">
         <HBox.margin>
-            <Insets bottom="24.0" right="24.0" top="24.0"/>
+            <Insets bottom="24.0" right="24.0" top="24.0" />
         </HBox.margin>
         <font>
-            <Font size="12.0"/>
+            <Font size="12.0" />
         </font>
     </Text>
 </HBox>

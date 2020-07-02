@@ -1,5 +1,6 @@
 package org.example.client.utils;
 
+import javafx.beans.property.SimpleIntegerProperty;
 import org.example.client.models.FactoryUser;
 import org.example.client.models.Product;
 import org.example.client.models.User;
@@ -16,10 +17,10 @@ public class Session {
 
     private static Session session = null;
     // Shopping cart
-    private final Map<Integer, Product> products;
+    private final Map<Integer, Product> products = new HashMap<>();
+    private final SimpleIntegerProperty cartQuantity = new SimpleIntegerProperty(this, "cartQuantity", 0);
     private User user;
     private boolean saveSession;
-    private Integer cartQuantity = 0;
 
     /**
      * Create a new session, if a session is saved in the preferences. It will ask the server for the user information.
@@ -35,7 +36,6 @@ public class Session {
             this.user = new FactoryUser().getUser(sessionToken);
         }
         // Create empty product list
-        this.products = new HashMap<>();
     }
 
     /**
@@ -73,7 +73,7 @@ public class Session {
         prod.setQuantity(prod.getQuantity() + 1);
 
         // Increase the cart total quantity
-        this.cartQuantity += 1;
+        this.cartQuantity.set(this.cartQuantity.get() + 1);
 
         return product.getQuantity();
     }
@@ -117,7 +117,7 @@ public class Session {
         return this.user != null;
     }
 
-    public Integer getCartQuantity() {
+    public SimpleIntegerProperty getCartQuantity() {
         return cartQuantity;
     }
 

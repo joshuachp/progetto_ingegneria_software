@@ -71,12 +71,11 @@
                 <VBox alignment="CENTER" prefHeight="20.0" prefWidth="20.0"
                       style="-fx-background-color: #757575; -fx-background-radius: 10;" AnchorPane.rightAnchor="4.0"
                       AnchorPane.topAnchor="4.0">
-                    <Label alignment="BOTTOM_CENTER" contentDisplay="BOTTOM" text="0" textAlignment="RIGHT"
-                           textFill="WHITE">
+                    <Text fx:id="textCartQuantity" fill="#FAFAFA" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
                         <font>
                             <Font name="System Bold" size="10.0"/>
                         </font>
-                    </Label>
+                    </Text>
                 </VBox>
             </AnchorPane>
         </VBox>
