@@ -9,18 +9,15 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.FlowPane;
 import javafx.stage.Stage;
 import okhttp3.Response;
-import org.example.client.models.Category;
 import org.example.client.models.Product;
 import org.example.client.utils.Session;
 import org.example.client.utils.Utils;
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.IOException;
@@ -32,41 +29,10 @@ import java.util.Objects;
 public class CatalogController {
 
     public static ObservableList<String> categoryList;
-    public ChoiceBox CbxColumn;
+    private final Map<String, ArrayList<Product>> sectionMap = new HashMap<>();
     public TextField searchBar;
     public ListView<String> listCategory;
-    //public GridPane gridpane;
-    public FlowPane flowpane;
-    // prodotti Test
-    /*ObservableList<Product> products = FXCollections.observableArrayList(
-            new Product(1, "Pasta n10", "Barilla", 1,
-                    1.72, "https://images.services.esselunga.it/html/img_prodotti/esselunga/image/965627.jpg", 1,
-                    "Pasta", "Alimenti"),
-            new Product(2, "Formaggio grattuggiato", "Parmiggiano Reggiano", 1,
-                    3.50, "https://images.services.esselunga.it/html/img_prodotti/esselunga/image/934922.jpg", 1,
-                    "Formaggi", "Alimenti"),
-            new Product(1, "Pasta n10", "Barilla", 1,
-                    1.72, "https://images.services.esselunga.it/html/img_prodotti/esselunga/image/965627.jpg", 1,
-                    "Pasta", "Alimenti"),
-            new Product(1, "Pasta n10", "Barilla", 1,
-                    1.72, "https://images.services.esselunga.it/html/img_prodotti/esselunga/image/965627.jpg", 1,
-                    "Pasta", "Frutta e verdura"),
-            new Product(1, "Pasta n10", "Barilla", 1,
-                    1.72, "https://images.services.esselunga.it/html/img_prodotti/esselunga/image/965627.jpg", 1,
-                    "Pasta", "Alimenti"),
-            new Product(1, "Pasta n10", "Barilla", 1,
-                    1.72, "https://images.services.esselunga.it/html/img_prodotti/esselunga/image/965627.jpg", 1,
-                    "Pasta", "Alimenti"),
-            new Product(1, "Pasta n10", "Barilla", 1,
-                    1.72, "https://images.services.esselunga.it/html/img_prodotti/esselunga/image/965627.jpg", 1,
-                    "Pasta", "Alimenti"),
-            new Product(1, "Pasta n10", "Barilla", 1,
-                    1.72, "https://images.services.esselunga.it/html/img_prodotti/esselunga/image/965627.jpg", 1,
-                    "Pasta", "Alimneti"),
-            new Product(1, "Pasta n10", "Barilla", 1,
-                    1.72, "https://images.services.esselunga.it/html/img_prodotti/esselunga/image/965627.jpg", 1,
-                    "Pasta", "Alimenti"));*/
-    private Map<String, ArrayList<Product>> sectionMap = new HashMap<>();
+    public FlowPane flowPaneProducts;
     private Stage stage;
 
     public static void showView(Stage stage) {
@@ -88,19 +54,22 @@ public class CatalogController {
 
     @FXML
     public void initialize() {
-
         Task<Void> task = new Task<>() {
             @Override
             protected Void call() throws Exception {
+                // Get session
                 Session session = Session.getInstance();
+                // Request all products
                 Response response = Utils.getAllProducts(session.getUser().getSession());
+                // Check for successful response
                 if (response != null && response.code() == 200 && response.body() != null) {
                     JSONObject json = new JSONObject(Objects.requireNonNull(response.body()).string());
-                    JSONArray products = json.getJSONArray("products");
-
-                    // Crea mappa prodotti - sezione
-                    for (int i = 0; i < products.length(); i++) {
-                        Product product = new Product(products.getJSONObject(i));
+                    // Test for products array
+                    assert json.has("products");
+                    // For each product map it to section - array of products
+                    for (Object jsonProduct : json.getJSONArray("products")) {
+                        Product product = new Product((JSONObject) jsonProduct);
+                        // Create a new array if section doesn't exists
                         if (!sectionMap.containsKey(product.getSection())) {
                             sectionMap.put(product.getSection(), new ArrayList<>());
                         }
@@ -110,26 +79,12 @@ public class CatalogController {
                     categoryList = FXCollections.observableArrayList(sectionMap.keySet());
                     listCategory.setItems(categoryList);
                     listCategory.getSelectionModel().selectFirst();
-                    catalogFactory(
-                            listCategory.getSelectionModel().getSelectedItem(),
-                            searchBar.getText());
+                    catalogFactory(listCategory.getSelectionModel().getSelectedItem(), searchBar.getText());
                 }
-
                 return null;
-
             }
-
-
         };
-
         new Thread(task).start();
-
-        /*this.listCategory.setOnMouseClicked(event -> {
-            Category category =
-                    Category.fromString(listCategory.getSelectionModel().getSelectedItems().toString());
-        });*/
-
-
     }
 
     // Card builder
@@ -137,42 +92,39 @@ public class CatalogController {
 
         // Creo la lista di figli del flow pane
         String newSearch = search.trim().toLowerCase();
-        ObservableList<Node> list = flowpane.getChildren();
+        ObservableList<Node> list = flowPaneProducts.getChildren();
         list.clear();
 
-
-        assert this.sectionMap.containsKey(category); // Controllo la lista dela sezione
+        // Controllo la lista dela sezione
+        assert this.sectionMap.containsKey(category);
         for (Product product : this.sectionMap.get(category)) {
             if (newSearch.isEmpty() || product.getName().contains(newSearch)) {
                 list.add(CardController.generateCard(product));
             }
         }
-        //VBox card = null;
     }
 
     public void setStage(Stage stage) {
         this.stage = stage;
     }
 
-    public void handlerLogutAction(ActionEvent actionEvent) {
+    public void handlerLogoutAction(ActionEvent actionEvent) {
     }
 
-    public void handleBackAction(ActionEvent actionEvent) {
-    }
 
     public void searchHandler(ActionEvent actionEvent) {
         catalogFactory(this.listCategory.getSelectionModel().getSelectedItem(),
                 this.searchBar.getText());
     }
 
-    public void backhandler(MouseEvent mouseEvent) {
-    }
-
-    public void viewCartHandler(MouseEvent mouseEvent) {
-    }
 
     public void changeCategoryHandler(MouseEvent mouseEvent) {
         catalogFactory(this.listCategory.getSelectionModel().getSelectedItem(),
-              this.searchBar.getText());
+                this.searchBar.getText());
+    }
+
+    @FXML
+    public void handleCartAction() {
+        CartController.showView(stage);
     }
 }

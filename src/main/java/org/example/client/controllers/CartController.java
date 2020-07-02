@@ -9,7 +9,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ListView;
 import javafx.stage.Stage;
-import org.example.client.components.CatalogListCell;
+import org.example.client.components.CartListCell;
 import org.example.client.models.Product;
 import org.example.client.utils.Session;
 
@@ -24,7 +24,7 @@ public class CartController {
     private Stage stage;
 
     public static void showView(Stage stage) {
-        FXMLLoader loader = new FXMLLoader(AuthController.class.getResource("/views/cart.fxml"));
+        FXMLLoader loader = new FXMLLoader(CartController.class.getResource("/views/cart.fxml"));
         Parent root = null;
         try {
             root = loader.load();
@@ -49,7 +49,7 @@ public class CartController {
                 Session session = Session.getInstance();
                 observableList = FXCollections.observableList(session.getProducts());
                 // Set the cell factory
-                listView.setCellFactory(listView -> new CatalogListCell());
+                listView.setCellFactory(listView -> new CartListCell());
                 // Set the list items
                 listView.setItems(observableList);
                 return null;

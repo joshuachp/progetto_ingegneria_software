@@ -25,7 +25,7 @@ public class CartItemController {
     public Text textTotal;
 
     public static Node showView(Product product) {
-        FXMLLoader loader = new FXMLLoader(AuthController.class.getResource("/views/auth.fxml"));
+        FXMLLoader loader = new FXMLLoader(CartItemController.class.getResource("/views/cart-item.fxml"));
         Node node = null;
         try {
             node = loader.load();
