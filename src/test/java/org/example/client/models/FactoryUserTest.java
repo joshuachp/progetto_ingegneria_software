@@ -59,8 +59,13 @@ public class FactoryUserTest {
 
     @Test
     public void testGetUserError() {
+        // Error
         this.server.enqueue(new MockResponse().setResponseCode(400));
+        this.server.enqueue(new MockResponse().setResponseCode(400));
+        // Test
         User user = new FactoryUser().getUser("test", "test");
+        assertNull(user);
+        user = new FactoryUser().getUser("test");
         assertNull(user);
     }
 

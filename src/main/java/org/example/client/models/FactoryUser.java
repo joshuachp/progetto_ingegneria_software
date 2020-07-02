@@ -26,7 +26,7 @@ public class FactoryUser {
      */
     public @Nullable User getUser(String username, String password) {
         Response response = Utils.authenticate(username, password);
-        if (response != null && response.code() == 200) {
+        if (response != null && response.code() == 200 && response.body() != null) {
             try {
                 return createUtente(new JSONObject(Objects.requireNonNull(response.body()).string()));
             } catch (IOException e) {
@@ -73,6 +73,6 @@ public class FactoryUser {
         }
         return new Client(username, session, json.getString("name"), json.getString("surname"),
                 json.getString("address"), json.getInt("cap"), json.getString("city"),
-                json.getString("telephone"), json.getInt("loyalty_card_number"));
+                json.getString("telephone"), json.getInt("payment"), json.getInt("loyalty_card_number"));
     }
 }

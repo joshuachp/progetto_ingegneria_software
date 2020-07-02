@@ -14,11 +14,12 @@ public class Client extends User {
     private Integer cap;
     private String city;
     private String telephone;
+    private Payment payment;
     private Integer cardNumber;
     // TODO: payment method
 
     public Client(String username, String session, String name, String surname, String address,
-                  Integer cap, String city, String telephone, Integer cardNumber) {
+                  Integer cap, String city, String telephone, Integer payment, Integer cardNumber) {
         super(username, session, false);
         this.name = name;
         this.surname = surname;
@@ -26,6 +27,7 @@ public class Client extends User {
         this.cap = cap;
         this.city = city;
         this.telephone = telephone;
+        this.payment = Payment.values()[payment];
         this.cardNumber = cardNumber;
     }
 
@@ -88,5 +90,13 @@ public class Client extends User {
 
     public void setCardNumber(Integer cardNumber) {
         this.cardNumber = cardNumber;
+    }
+
+    public Payment getPayment() {
+        return payment;
+    }
+
+    public void setPayment(Payment payment) {
+        this.payment = payment;
     }
 }

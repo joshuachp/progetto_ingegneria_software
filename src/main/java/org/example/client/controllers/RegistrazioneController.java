@@ -14,7 +14,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import org.example.client.models.FactoryUser;
-import org.example.client.models.Pagamento;
+import org.example.client.models.Payment;
 import org.example.client.models.User;
 import org.example.client.utils.Session;
 import org.example.client.utils.Utils;
@@ -66,11 +66,11 @@ public class RegistrazioneController /*implements Initializable*/ {
 
         // ComboBox
         ObservableList<String> payment = FXCollections.observableArrayList(
-                Pagamento.CARTADICREDITO.toString(), Pagamento.CONTANTI.toString(), Pagamento.PAYPAL.toString());
+                Payment.CREDIT_CARD.toString(), Payment.CASH.toString(), Payment.PAY_PAL.toString());
 
         RegistrazioneController registrazioneController = loader.getController();
         registrazioneController.cbxPagamento.setItems(payment);
-        registrazioneController.cbxPagamento.setValue(Pagamento.PAYPAL.toString());
+        registrazioneController.cbxPagamento.setValue(Payment.PAY_PAL.toString());
 
         stage.show();
 
@@ -99,7 +99,7 @@ public class RegistrazioneController /*implements Initializable*/ {
 
 
     public void handlerSetPaymentAction(ActionEvent actionEvent) {
-        this.paymentMethod = Pagamento.fromString(cbxPagamento.getValue()).ordinal();
+        this.paymentMethod = Payment.fromString(cbxPagamento.getValue()).ordinal();
     }
 
     public void handleBackAction(ActionEvent actionEvent) {
@@ -199,7 +199,7 @@ public class RegistrazioneController /*implements Initializable*/ {
             int statusCode = Utils.registerClient(Email.getText(), PasswordRepeat.getText(), Name.getText(),
                     Surname.getText(),
                     Address.getText(), Integer.valueOf(CAP.getText()), City.getText(), Phone.getText(),
-                    Pagamento.fromString(cbxPagamento.getValue()).ordinal());
+                    Payment.fromString(cbxPagamento.getValue()).ordinal());
             if (statusCode == 200) {
                 errorMessage("Success" + statusCode, null);
 

@@ -19,7 +19,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import javafx.util.Callback;
-import org.example.client.models.Pagamento;
+import org.example.client.models.Payment;
 import org.example.client.models.Spesa;
 import org.example.client.models.StatoSpesa;
 
@@ -91,9 +91,9 @@ public class ListaSpeseController {
 
         // List Demo
         spese = FXCollections.observableArrayList();
-        spese.add(new Spesa(123, "12/09/20", "10:00 - 14:00", "utente", 100.0, Pagamento.PAYPAL,
+        spese.add(new Spesa(123, "12/09/20", "10:00 - 14:00", "utente", 100.0, Payment.PAY_PAL,
                 StatoSpesa.CONSEGNATA));
-        spese.add(new Spesa(256, "10/09/20", "10:00 - 14:00", "utente", 100.0, Pagamento.PAYPAL,
+        spese.add(new Spesa(256, "10/09/20", "10:00 - 14:00", "utente", 100.0, Payment.PAY_PAL,
                 StatoSpesa.CONFERMATA));
 
         // Create setCellFactory for IDCol with link to list of product
@@ -170,7 +170,7 @@ public class ListaSpeseController {
                     break;
                 case PAYMENT:
                     // TODO: toLowerCase dosn't work
-                    flspese.setPredicate(p -> p.getPagamento().toString().toLowerCase().contains(listaspesecontroller.Search.getText().toLowerCase().trim()));
+                    flspese.setPredicate(p -> p.getPayment().toString().toLowerCase().contains(listaspesecontroller.Search.getText().toLowerCase().trim()));
                     break;
             }
         });
@@ -201,7 +201,7 @@ public class ListaSpeseController {
             @Override
             protected Void call() throws Exception {
                 sleep(10000);
-                spese.add(new Spesa(3, "10/09/20", "10:00 - 14:00", "utente", 100.72, Pagamento.PAYPAL,
+                spese.add(new Spesa(3, "10/09/20", "10:00 - 14:00", "utente", 100.72, Payment.PAY_PAL,
                         StatoSpesa.CONFERMATA));
                 return null;
             }
