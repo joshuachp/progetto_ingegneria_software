@@ -1,6 +1,5 @@
 package org.example.client.controllers;
 
-import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -41,15 +40,15 @@ public class CartController {
 
     @FXML
     public void initialize() {
-        Task<Void> loadProducts = new Task<>() {
+        Task<List<Node>> loadProducts = new Task<>() {
             @Override
-            protected Void call() {
+            protected List<Node> call() {
                 Session session = Session.getInstance();
-                List<Node> nodes = new CartFactory().getCartList(session.getProducts());
-                Platform.runLater(() -> vBoxCart.getChildren().addAll(nodes));
-                return null;
+                return new CartFactory().getCartList(session.getProducts());
             }
+
         };
+        loadProducts.setOnSucceeded((event) -> vBoxCart.getChildren().addAll(loadProducts.getValue()));
         new Thread(loadProducts).start();
     }
 

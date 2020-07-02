@@ -1,6 +1,5 @@
 package org.example.client.controllers;
 
-import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
@@ -30,11 +29,8 @@ import java.util.Objects;
 
 public class CatalogController {
 
-    private final Map<String, ArrayList<Product>> sectionMap = new HashMap<>();
-
     public ObservableList<String> categoryList;
     public ListView<String> listCategory;
-
     @FXML
     public TextField searchBar;
     @FXML
@@ -42,6 +38,7 @@ public class CatalogController {
     @FXML
     public Text textCartQuantity;
 
+    private Map<String, ArrayList<Product>> sectionMap = new HashMap<>();
     private Stage stage;
 
     public static void showView(Stage stage) {
@@ -65,9 +62,10 @@ public class CatalogController {
     public void initialize() {
         Session session = Session.getInstance();
 
-        Task<Void> task = new Task<>() {
+        // XXX: Returning map to be thread safe, there are better ways
+        Task<Map<String, ArrayList<Product>>> task = new Task<>() {
             @Override
-            protected Void call() throws Exception {
+            protected Map<String, ArrayList<Product>> call() throws Exception {
                 // Request all products
                 Response response = Utils.getAllProducts(session.getUser().getSession());
                 // Check for successful response
@@ -75,26 +73,36 @@ public class CatalogController {
                     JSONObject json = new JSONObject(Objects.requireNonNull(response.body()).string());
                     // Test for products array
                     assert json.has("products");
+
+                    // Create map
+                    Map<String, ArrayList<Product>> map = new HashMap<>();
+
                     // For each product map it to section - array of products
                     for (Object jsonProduct : json.getJSONArray("products")) {
                         Product product = new Product((JSONObject) jsonProduct);
                         // Create a new array if section doesn't exists
-                        if (!sectionMap.containsKey(product.getSection())) {
-                            sectionMap.put(product.getSection(), new ArrayList<>());
+                        if (!map.containsKey(product.getSection())) {
+                            map.put(product.getSection(), new ArrayList<>());
                         }
-                        sectionMap.get(product.getSection()).add(product);
+                        map.get(product.getSection()).add(product);
                     }
-                    // Run on application thread
-                    Platform.runLater(() -> {
-                        categoryList = FXCollections.observableArrayList(sectionMap.keySet());
-                        listCategory.setItems(categoryList);
-                        listCategory.getSelectionModel().selectFirst();
-                        catalogFactory(listCategory.getSelectionModel().getSelectedItem(), searchBar.getText());
-                    });
+                    return map;
                 }
+
+                // Task failed
+                failed();
                 return null;
             }
         };
+        task.setOnSucceeded((event -> {
+            // Set section map to the task value
+            sectionMap = task.getValue();
+            // Run on application thread
+            categoryList = FXCollections.observableArrayList(sectionMap.keySet());
+            listCategory.setItems(categoryList);
+            listCategory.getSelectionModel().selectFirst();
+            catalogFactory(listCategory.getSelectionModel().getSelectedItem(), searchBar.getText());
+        }));
         new Thread(task).start();
 
         this.textCartQuantity.textProperty().bind(session.getCartQuantity().asString());

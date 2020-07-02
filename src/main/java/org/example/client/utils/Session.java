@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.prefs.Preferences;
 
+// XXX: NOT THREAD SAFE
 public class Session {
 
     public static final String PREFERENCE_SAVE_SESSION = "SAVE_SESSION";
