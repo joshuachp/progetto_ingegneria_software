@@ -8,7 +8,9 @@ public class CartListCell extends ListCell<Product> {
 
     @Override
     protected void updateItem(Product item, boolean empty) {
-        setGraphic(CartItemController.showView(item));
+        if (!empty) {
+            setGraphic(CartItemController.showView(item));
+        }
         super.updateItem(item, empty);
     }
 

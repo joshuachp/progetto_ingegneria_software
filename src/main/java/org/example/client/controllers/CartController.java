@@ -42,7 +42,7 @@ public class CartController {
 
     @FXML
     public void initialize() {
-        Task<Void> loadProducts = new Task<Void>() {
+        Task<Void> loadProducts = new Task<>() {
             @Override
             protected Void call() {
                 // Get all the products
