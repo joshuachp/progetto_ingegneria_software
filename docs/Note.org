@@ -8,5 +8,7 @@ Serve dire che è sottinteso che il cliente è autenticato e sta visualizzando i
 - Grey :: #757575
 - Not so dark gray: #616161
 - Dark grey :: #424242
+- White grey :: #EEEEEE
 - Black :: #212121
 - Button cancell :: bdbdbd
+

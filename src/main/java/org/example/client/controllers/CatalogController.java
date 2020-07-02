@@ -140,9 +140,9 @@ public class CatalogController {
         ObservableList<Node> list = flowpane.getChildren();
         list.clear();
 
-        if (this.sectionMap.containsKey(category))
+        if (this.sectionMap.containsKey(category)) // Controllo la lista dela sezione
             for (Product product : this.sectionMap.get(category)) {
-                if (product.getName().contains(newSearch)) {
+                if (newSearch.isEmpty() || product.getName().contains(newSearch)) {
                     list.add(CardController.generateCard(product));
                 }
             }
@@ -160,8 +160,8 @@ public class CatalogController {
     }
 
     public void searchHandler(ActionEvent actionEvent) {
-        catalogFactory(this.listCategory.getSelectionModel().getSelectedItems().toString(),
-                this.searchBar.getText().isEmpty() ? "" : this.searchBar.getText());
+        catalogFactory(this.listCategory.getSelectionModel().getSelectedItem(),
+                this.searchBar.getText());
     }
 
     public void backhandler(MouseEvent mouseEvent) {
@@ -171,7 +171,7 @@ public class CatalogController {
     }
 
     public void changeCategoryHandler(MouseEvent mouseEvent) {
-        catalogFactory(this.listCategory.getSelectionModel().getSelectedItems().toString(),
-                this.searchBar.getText().isEmpty() ? "" : this.searchBar.getText());
+        catalogFactory(this.listCategory.getSelectionModel().getSelectedItem(),
+              this.searchBar.getText());
     }
 }
