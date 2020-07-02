@@ -75,7 +75,7 @@ class UtilsTest {
                 .setBody("OK"));
 
         Client client = new Client("username", "session", "name", "surname",
-                "address", 33333, "City", "3334445555", 1234);
+                "address", 33333, "City", "3334445555", 0, 1234);
         assertNotNull(Utils.updateUser(client, "password"));
 
         Manager manager = new Manager("username", "session", "badge", "name", "surname",

@@ -1,9 +1,6 @@
 package org.example.client.models;
 
 import javafx.beans.property.*;
-import javafx.scene.control.Button;
-
-import java.util.Date;
 
 
 public class Spesa {
@@ -13,7 +10,7 @@ public class Spesa {
     // ArrayList<Prodotto> prodotti;
     String utente;
     Double costoTotale;
-    Pagamento pagamento;
+    Payment payment;
 
     StatoSpesa statoSpesa;
 
@@ -25,7 +22,7 @@ public class Spesa {
                  //ArrayList<Prodotto> prodotti;
                  String utente,
                  Double costoTotale,
-                 Pagamento pagamento,
+                 Payment pagamento,
                  StatoSpesa statoSpesa) {
 
         this.ID = ID;
@@ -34,7 +31,7 @@ public class Spesa {
         //ArrayList<Prodotto> prodotti;
         this.utente = utente;
         this.costoTotale = costoTotale;
-        this.pagamento = pagamento;
+        this.payment = pagamento;
         this.statoSpesa = statoSpesa;
         //this.prodotti = prodotti;
 
@@ -49,7 +46,7 @@ public class Spesa {
     }
 
     public StringProperty propertyPagamento() {
-        return new SimpleStringProperty(this.pagamento.toString());
+        return new SimpleStringProperty(this.payment.toString());
     }
 
 
@@ -93,8 +90,8 @@ public class Spesa {
         return new SimpleDoubleProperty(this.costoTotale);
     }
 
-    public Pagamento getPagamento() {
-        return pagamento;
+    public Payment getPayment() {
+        return payment;
     }
 
     /*

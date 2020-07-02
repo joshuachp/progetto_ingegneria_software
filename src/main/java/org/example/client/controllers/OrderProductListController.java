@@ -1,12 +1,9 @@
 package org.example.client.controllers;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import org.example.client.models.Pagamento;
 
 import java.io.IOException;
 
