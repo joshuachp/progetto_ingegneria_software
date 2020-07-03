@@ -34,7 +34,7 @@
                     <Font size="12.0"/>
                 </font>
             </Text>
-            <TextField fx:id="searchBar" onAction="#searchHandler" prefWidth="250.0" promptText="Search"
+            <TextField fx:id="searchBar" onAction="#handleSearchAction" prefWidth="250.0" promptText="Search"
                        VBox.vgrow="ALWAYS">
                 <padding>
                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>

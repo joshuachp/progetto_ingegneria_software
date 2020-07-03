@@ -50,6 +50,7 @@ public class CardController {
     @FXML
     public void handleAddToCartAction() {
         if (quantity.getValue() > 0) {
+            // The product is a reference to the session product so the quantity doesn't need to be modified
             Session session = Session.getInstance();
             session.addProduct(this.product, quantity.getValue());
             setSpinnerFactory();
@@ -59,9 +60,7 @@ public class CardController {
     }
 
     public void setProduct(Product product) {
-        // Sets reference to the product
-        Session session = Session.getInstance();
-        this.product = session.getMapProducts().getOrDefault(product.getId(), product);
+        this.product = product;
 
         price.setText(String.format("\u20ac %.2f", this.product.getPrice()));
         title.setText(this.product.getName());
