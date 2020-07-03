@@ -68,13 +68,13 @@ public class Session {
      * @param product The product to add.
      * @return The current product quantity
      */
-    public Integer addProduct(Product product) {
+    public Integer addProduct(Product product, Integer quantity) {
         products.putIfAbsent(product.getID(), product);
         Product prod = products.get(product.getID());
-        prod.setQuantity(prod.getQuantity() + 1);
+        prod.setQuantity(prod.getQuantity() + quantity);
 
         // Increase the cart total quantity
-        this.cartQuantity.set(this.cartQuantity.get() + 1);
+        this.cartQuantity.set(this.cartQuantity.get() + quantity);
 
         return product.getQuantity();
     }

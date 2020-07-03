@@ -86,6 +86,8 @@ public class CatalogController {
                         }
                         map.get(product.getSection()).add(product);
                     }
+                    // Set category list (since doesn't change the view structure)
+                    categoryList = FXCollections.observableArrayList(map.keySet());
                     return map;
                 }
 
@@ -96,9 +98,8 @@ public class CatalogController {
         };
         task.setOnSucceeded((event -> {
             // Set section map to the task value
-            sectionMap = task.getValue();
+            this.sectionMap = task.getValue();
             // Run on application thread
-            categoryList = FXCollections.observableArrayList(sectionMap.keySet());
             listCategory.setItems(categoryList);
             listCategory.getSelectionModel().selectFirst();
             catalogFactory(listCategory.getSelectionModel().getSelectedItem(), searchBar.getText());

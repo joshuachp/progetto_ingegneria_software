@@ -48,7 +48,7 @@ public class CardController {
     public void handleAddToCartAction() {
         // TODO: quantity
         Session session = Session.getInstance();
-        session.addProduct(this.product);
+        session.addProduct(this.product, quantity.getValue());
     }
 
     public void setProduct(Product product) {
