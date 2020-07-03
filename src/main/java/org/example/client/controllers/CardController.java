@@ -46,9 +46,10 @@ public class CardController {
 
     @FXML
     public void handleAddToCartAction() {
-        // TODO: quantity
         Session session = Session.getInstance();
         session.addProduct(this.product, quantity.getValue());
+        this.product.setQuantity(this.product.getQuantity() + quantity.getValue());
+        setSpinnerFactory();
     }
 
     public void setProduct(Product product) {
@@ -58,8 +59,13 @@ public class CardController {
         if (this.product.getImage() != null) {
             thumbnail.setImage(new Image(this.product.getImage()));
         }
-        SpinnerValueFactory<Integer> spinnerValue = new SpinnerValueFactory.IntegerSpinnerValueFactory(1,
-                product.getAvailability());
-        quantity.setValueFactory(spinnerValue);
+        setSpinnerFactory();
+    }
+
+    private void setSpinnerFactory() {
+        int max = this.product.getAvailability() - this.product.getQuantity();
+        SpinnerValueFactory<Integer> spinnerValueFactory =
+                new SpinnerValueFactory.IntegerSpinnerValueFactory(max == 0 ? 0 : 1, max);
+        quantity.setValueFactory(spinnerValueFactory);
     }
 }

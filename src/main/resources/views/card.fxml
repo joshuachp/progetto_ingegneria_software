@@ -23,7 +23,7 @@
             <Insets/>
         </VBox.margin>
         <ImageView fx:id="thumbnail" fitHeight="190.0" fitWidth="190.0" pickOnBounds="true" preserveRatio="true">
-            <Image url="@../image/test-image.jpg"/>
+            <Image url="@../images/test-image.jpg"/>
         </ImageView>
     </VBox>
     <Text fx:id="title" strokeType="OUTSIDE" strokeWidth="0.0" text="Prodotto prova " textAlignment="CENTER"
@@ -69,7 +69,7 @@
             <graphic>
                 <ImageView fx:id="addCart" cache="true" fitHeight="18.0" fitWidth="18.0" pickOnBounds="true"
                            preserveRatio="true">
-                    <Image url="@../image/cart-white.png"/>
+                    <Image url="@../images/cart-white.png"/>
                 </ImageView>
             </graphic>
             <HBox.margin>
