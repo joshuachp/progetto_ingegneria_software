@@ -12,6 +12,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.prefs.Preferences;
 
@@ -161,7 +162,7 @@ class SessionTest {
 
         assertEquals(1, session.addProduct(product, 1));
         assertEquals(2, session.addProduct(product, 1));
-        List<Product> products = session.getProducts();
+        List<Product> products = new ArrayList<>(session.getMapProducts().values());
         assertEquals(1, products.size());
         assertEquals(product, products.get(0));
     }

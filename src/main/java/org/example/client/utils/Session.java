@@ -5,7 +5,6 @@ import org.example.client.models.FactoryUser;
 import org.example.client.models.Product;
 import org.example.client.models.User;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.prefs.Preferences;
@@ -18,7 +17,7 @@ public class Session {
 
     private static Session session = null;
     // Shopping cart
-    private final Map<Integer, Product> products = new HashMap<>();
+    private final Map<Integer, Product> mapProducts = new HashMap<>();
     private final SimpleIntegerProperty cartQuantity = new SimpleIntegerProperty(this, "cartQuantity", 0);
     private User user;
     private boolean saveSession;
@@ -69,8 +68,8 @@ public class Session {
      * @return The current product quantity
      */
     public Integer addProduct(Product product, Integer quantity) {
-        products.putIfAbsent(product.getID(), product);
-        Product prod = products.get(product.getID());
+        mapProducts.putIfAbsent(product.getId(), product);
+        Product prod = mapProducts.get(product.getId());
         prod.setQuantity(prod.getQuantity() + quantity);
 
         // Increase the cart total quantity
@@ -127,7 +126,7 @@ public class Session {
      *
      * @return List of products
      */
-    public ArrayList<Product> getProducts() {
-        return new ArrayList<>(this.products.values());
+    public Map<Integer, Product> getMapProducts() {
+        return mapProducts;
     }
 }

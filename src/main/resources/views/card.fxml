@@ -61,13 +61,14 @@
                 <Tooltip text="Quantità"/>
             </tooltip>
         </Spinner>
-        <Button minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleAddToCartAction"
+        <Button fx:id="cartButton" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false"
+                onAction="#handleAddToCartAction"
                 prefHeight="30.0" prefWidth="60.0" style="-fx-background-color: #0066FF;">
             <cursor>
                 <Cursor fx:constant="HAND"/>
             </cursor>
             <graphic>
-                <ImageView fx:id="addCart" cache="true" fitHeight="18.0" fitWidth="18.0" pickOnBounds="true"
+                <ImageView fx:id="cartImage" cache="true" fitHeight="18.0" fitWidth="18.0" pickOnBounds="true"
                            preserveRatio="true">
                     <Image url="@../images/cart-white.png"/>
                 </ImageView>

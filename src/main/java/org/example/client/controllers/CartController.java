@@ -44,7 +44,7 @@ public class CartController {
             @Override
             protected List<Node> call() {
                 Session session = Session.getInstance();
-                return new CartFactory().getCartList(session.getProducts());
+                return new CartFactory().getCartList(session.getMapProducts().values());
             }
 
         };

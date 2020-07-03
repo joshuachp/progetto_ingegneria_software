@@ -54,10 +54,10 @@ public class GestioneProdottiController {
 
         if (modify){
             assert product != null;
-            stage.setTitle("Modifica prodotto " + product.getID());
+            stage.setTitle("Modifica prodotto " + product.getId());
             gestioneProdottiController.fieldBrand.setText(product.getBrand());
             gestioneProdottiController.fieldName.setText(product.getName());
-            gestioneProdottiController.fieldID.setText(product.getID().toString());
+            gestioneProdottiController.fieldID.setText(product.getId().toString());
             gestioneProdottiController.fieldPackage.setText(product.getPackageSize().toString());
             gestioneProdottiController.fieldPrice.setText(product.getPrice().toString());
             gestioneProdottiController.fieldQuantity.setText(product.getAvailability().toString());

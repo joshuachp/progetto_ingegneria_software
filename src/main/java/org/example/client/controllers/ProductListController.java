@@ -130,7 +130,7 @@ public class ProductListController {
             // Switch on choiceBox value
             switch (Objects.requireNonNull(ProductListController.columnFilterEnum.fromString(productListController.CbxColumn.getValue()))) {
                 case ID:
-                    flproducts.setPredicate(p -> p.getID().toString().contains(productListController.Search.getText().trim()));
+                    flproducts.setPredicate(p -> p.getId().toString().contains(productListController.Search.getText().trim()));
                     break;
                 case NAME:
                     flproducts.setPredicate(p -> p.getName().toLowerCase().contains(productListController.Search.getText().toLowerCase().trim()));

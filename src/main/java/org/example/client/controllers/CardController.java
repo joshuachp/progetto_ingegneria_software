@@ -2,6 +2,7 @@ package org.example.client.controllers;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Button;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.image.Image;
@@ -25,7 +26,9 @@ public class CardController {
     @FXML
     public Spinner<Integer> quantity;
     @FXML
-    public ImageView addCart;
+    public ImageView cartImage;
+    @FXML
+    public Button cartButton;
 
     private Product product;
 
@@ -46,26 +49,39 @@ public class CardController {
 
     @FXML
     public void handleAddToCartAction() {
-        Session session = Session.getInstance();
-        session.addProduct(this.product, quantity.getValue());
-        this.product.setQuantity(this.product.getQuantity() + quantity.getValue());
-        setSpinnerFactory();
+        if (quantity.getValue() > 0) {
+            Session session = Session.getInstance();
+            session.addProduct(this.product, quantity.getValue());
+            setSpinnerFactory();
+            if (quantity.getValue() == 0)
+                cartButton.setDisable(true);
+        }
     }
 
     public void setProduct(Product product) {
-        this.product = product;
+        // Sets reference to the product
+        Session session = Session.getInstance();
+        this.product = session.getMapProducts().getOrDefault(product.getId(), product);
+
         price.setText(String.format("\u20ac %.2f", this.product.getPrice()));
         title.setText(this.product.getName());
         if (this.product.getImage() != null) {
             thumbnail.setImage(new Image(this.product.getImage()));
         }
         setSpinnerFactory();
+
+
+        if (product.getAvailability() == 0 || quantity.getValue() == 0)
+            cartButton.setDisable(true);
     }
 
     private void setSpinnerFactory() {
         int max = this.product.getAvailability() - this.product.getQuantity();
+        int min = max == 0 ? 0 : 1;
         SpinnerValueFactory<Integer> spinnerValueFactory =
-                new SpinnerValueFactory.IntegerSpinnerValueFactory(max == 0 ? 0 : 1, max);
-        quantity.setValueFactory(spinnerValueFactory);
+                new SpinnerValueFactory.IntegerSpinnerValueFactory(min, max);
+        this.quantity.setValueFactory(spinnerValueFactory);
+        if (quantity.getValue() > max)
+            spinnerValueFactory.setValue(max);
     }
 }

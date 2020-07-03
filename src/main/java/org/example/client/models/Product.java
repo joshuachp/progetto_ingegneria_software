@@ -43,7 +43,7 @@ public class Product {
         this.availability = json.getInt("availability");
     }
 
-    public Integer getID() {
+    public Integer getId() {
         return this.id;
     }
 
