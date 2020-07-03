@@ -55,4 +55,9 @@ public class CartController {
     public void setStage(Stage stage) {
         this.stage = stage;
     }
+
+    @FXML
+    public void handleBackAction() {
+        CatalogController.showView(this.stage);
+    }
 }

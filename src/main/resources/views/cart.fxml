@@ -3,9 +3,9 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
 <VBox xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
-      minWidth="-Infinity"
-      prefHeight="700.0" prefWidth="950.0" xmlns="http://javafx.com/javafx/11.0.1"
+      minWidth="-Infinity" prefHeight="700.0" prefWidth="950.0" xmlns="http://javafx.com/javafx/11.0.1"
       fx:controller="org.example.client.controllers.CartController">
     <children>
         <MenuBar VBox.vgrow="NEVER">
@@ -27,15 +27,39 @@
                 </Menu>
             </menus>
         </MenuBar>
-        <VBox fx:id="vBoxCart" VBox.vgrow="ALWAYS">
+        <VBox VBox.vgrow="ALWAYS">
             <VBox.margin>
                 <Insets/>
             </VBox.margin>
             <padding>
-                <Insets bottom="24.0" left="56.0" right="56.0" top="24.0"/>
+                <Insets bottom="24.0" left="24.0" right="24.0" top="24.0"/>
             </padding>
             <children>
-                <VBox prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS"/>
+                <ScrollPane VBox.vgrow="ALWAYS">
+                    <VBox.margin>
+                        <Insets left="56.0" right="56.0"/>
+                    </VBox.margin>
+                    <content>
+                        <VBox fx:id="vBoxCart"/>
+                    </content>
+                </ScrollPane>
+                <ButtonBar>
+                    <buttons>
+                        <Button onAction="#handleBackAction" mnemonicParsing="false"
+                                style="-fx-background-color: #BDBDBD;"
+                                text="Back"
+                                textFill="#212121"/>
+                        <Button mnemonicParsing="false" style="-fx-background-color: #0066FF;" text="Check out"
+                                textFill="#fafafa">
+                            <font>
+                                <Font name="System Bold" size="13.0"/>
+                            </font>
+                        </Button>
+                    </buttons>
+                    <VBox.margin>
+                        <Insets top="24.0"/>
+                    </VBox.margin>
+                </ButtonBar>
             </children>
         </VBox>
     </children>

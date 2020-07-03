@@ -52,7 +52,7 @@ public class CatalogController {
         assert root != null;
         Scene scene = new Scene(root);
         stage.setScene(scene);
-        stage.setTitle("Catalogo");
+        stage.setTitle("Catalog");
         stage.show();
         CatalogController catalogController = loader.getController();
         catalogController.setStage(stage);
