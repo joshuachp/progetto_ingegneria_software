@@ -25,9 +25,11 @@ import java.util.*;
 
 public class CatalogController {
 
+    public final static String SECTION_ALL = "All";
+
     private final Map<String, ArrayList<Product>> sectionMap = new HashMap<>();
 
-    public ObservableList<String> categoryList;
+    public ObservableList<String> categoryList = FXCollections.observableArrayList();
     public ListView<String> listCategory;
     @FXML
     public TextField searchBar;
@@ -57,6 +59,8 @@ public class CatalogController {
     @FXML
     public void initialize() {
         Session session = Session.getInstance();
+        this.listCategory.setItems(this.categoryList);
+        this.sectionMap.put(SECTION_ALL, new ArrayList<>());
 
         Task<List<Node>> task = new Task<>() {
             @Override
@@ -87,10 +91,12 @@ public class CatalogController {
                             sectionMap.put(product.getSection(), new ArrayList<>());
                         }
                         sectionMap.get(product.getSection()).add(product);
+                        // Add to section all
+                        sectionMap.get(SECTION_ALL).add(product);
                     }
 
                     // Set category list (since doesn't change the view structure)
-                    categoryList = FXCollections.observableArrayList(sectionMap.keySet());
+                    categoryList.addAll(sectionMap.keySet());
                     // The  section can not be null
                     return new CatalogFactory().getCatalogList(sectionMap,
                             categoryList.size() > 0 ? categoryList.get(0) : "",
@@ -105,8 +111,8 @@ public class CatalogController {
         task.setOnSucceeded((event -> {
             // Set section map to the task value
             List<Node> nodes = task.getValue();
+
             // Run on application thread
-            this.listCategory.setItems(categoryList);
             this.listCategory.getSelectionModel().selectFirst();
 
             // Add all nodes
