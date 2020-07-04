@@ -4,6 +4,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
 import javafx.scene.text.Text;
@@ -15,6 +17,7 @@ import org.example.client.utils.Utils;
 
 import java.io.IOException;
 import java.util.Objects;
+import java.util.Optional;
 
 public class EditProfileController {
 
@@ -228,43 +231,64 @@ public class EditProfileController {
     }
 
     @FXML
-    public void handleButtonSaveAction() throws IOException {
+    public void handleButtonSaveAction() {
         boolean check = validateCap() & validateTelephone();
         // Check for new password
         if (!password.getText().isEmpty()) {
             check &= validatePassword() & validateConfirmPassword();
         }
         if (check) {
-            // Set client new parameters
-            this.client.setName(this.name.getText().trim());
-            this.client.setSurname(this.surname.getText().trim());
-            this.client.setAddress(this.address.getText().trim());
-            this.client.setCap(Integer.valueOf(this.cap.getText().trim()));
-            this.client.setCity(this.city.getText().trim());
-            this.client.setTelephone(this.telephone.getText());
-            // TODO payment
-            this.client.setCardNumber(Integer.valueOf(this.cardNumber.getText().trim()));
+            showAlert();
+        }
+    }
 
-            // New password is set
-            String pass = null;
-            if (!password.getText().isEmpty())
-                pass = password.getText();
+    private void updateProfile() {
+        // Set client new parameters
+        this.client.setName(this.name.getText().trim());
+        this.client.setSurname(this.surname.getText().trim());
+        this.client.setAddress(this.address.getText().trim());
+        this.client.setCap(Integer.valueOf(this.cap.getText().trim()));
+        this.client.setCity(this.city.getText().trim());
+        this.client.setTelephone(this.telephone.getText());
+        // TODO payment
+        this.client.setCardNumber(Integer.valueOf(this.cardNumber.getText().trim()));
 
-            Response response = Utils.updateUser(this.client, pass);
-            if (response == null) {
-                this.error.setVisible(true);
-            } else if (response.code() == 200) {
-                // Update session
-                Session session = Session.getInstance();
-                session.setUser(this.client);
+        // New password is set
+        String pass = null;
+        if (!password.getText().isEmpty())
+            pass = password.getText();
 
-                ProfileController.showView(this.stage);
-            } else {
-                // Set response error
-                if (response.body() != null)
+        Response response = Utils.updateUser(this.client, pass);
+        if (response == null) {
+            this.error.setVisible(true);
+        } else if (response.code() == 200) {
+            // Update session
+            Session session = Session.getInstance();
+            session.setUser(this.client);
+
+            ProfileController.showView(this.stage);
+        } else {
+            // Set response error
+            if (response.body() != null) {
+                try {
                     error.setText(Objects.requireNonNull(response.body()).string());
-                this.error.setVisible(true);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
+            this.error.setVisible(true);
+        }
+    }
+
+    private void showAlert() {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Save changes");
+        alert.setContentText("Are you sure you want to save the changes? This operation can not be undone.");
+
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            updateProfile();
         }
     }
 }

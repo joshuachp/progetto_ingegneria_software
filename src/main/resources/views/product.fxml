@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<VBox xmlns:fx="http://javafx.com/fxml" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+      minWidth="-Infinity" prefWidth="700.0" xmlns="http://javafx.com/javafx"
+      fx:controller="org.example.client.controllers.ProductController">
+    <MenuBar VBox.vgrow="NEVER">
+        <Menu mnemonicParsing="false" text="File">
+            <MenuItem mnemonicParsing="false" text="Close"/>
+        </Menu>
+        <Menu mnemonicParsing="false" text="Edit">
+            <MenuItem mnemonicParsing="false" text="Delete"/>
+        </Menu>
+        <Menu mnemonicParsing="false" text="Help">
+            <MenuItem mnemonicParsing="false" text="About"/>
+        </Menu>
+    </MenuBar>
+    <VBox VBox.vgrow="ALWAYS">
+        <padding>
+            <Insets bottom="24.0" left="24.0" right="24.0" top="24.0"/>
+        </padding>
+        <HBox alignment="CENTER_LEFT" VBox.vgrow="NEVER">
+            <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+                  minWidth="-Infinity" prefHeight="300.0" prefWidth="300.0"
+                  style="-fx-background-color: #EEEEEE; -fx-border-color: #0066FF;" HBox.hgrow="NEVER">
+                <ImageView fx:id="imageView" cache="true" fitHeight="300.0" fitWidth="300.0" pickOnBounds="true"
+                           preserveRatio="true" VBox.vgrow="NEVER">
+                    <Image url="@../images/test-image.jpg"/>
+                </ImageView>
+            </VBox>
+            <VBox HBox.hgrow="ALWAYS">
+                <HBox.margin>
+                    <Insets left="48.0"/>
+                </HBox.margin>
+                <Text fx:id="nameText" fill="#212121" strokeType="OUTSIDE" strokeWidth="0.0" text="Name">
+                    <font>
+                        <Font size="24.0"/>
+                    </font>
+                    <VBox.margin>
+                        <Insets top="12.0"/>
+                    </VBox.margin>
+                </Text>
+                <Text fx:id="brandText" fill="#424242" strokeType="OUTSIDE" strokeWidth="0.0" text="Brand">
+                    <VBox.margin>
+                        <Insets top="8.0"/>
+                    </VBox.margin>
+                    <font>
+                        <Font size="14.0"/>
+                    </font>
+                </Text>
+                <Text fx:id="characteristicsText" fill="#212121" strokeType="OUTSIDE" strokeWidth="0.0"
+                      text="Characteristics">
+                    <font>
+                        <Font size="12.0"/>
+                    </font>
+                    <VBox.margin>
+                        <Insets top="14.0"/>
+                    </VBox.margin>
+                </Text>
+                <HBox VBox.vgrow="NEVER">
+                    <VBox.margin>
+                        <Insets top="24.0"/>
+                    </VBox.margin>
+                    <Text fill="#212121" strokeType="OUTSIDE" strokeWidth="0.0"
+                          text="Package size is ">
+                        <HBox.margin>
+                            <Insets/>
+                        </HBox.margin>
+                        <font>
+                            <Font size="12.0"/>
+                        </font>
+                    </Text>
+                    <Text fx:id="packageSizeText" fill="#212121" strokeType="OUTSIDE" strokeWidth="0.0" text="1">
+                        <font>
+                            <Font name="System Bold" size="12.0"/>
+                        </font>
+                    </Text>
+                    <Text fill="#212121" strokeType="OUTSIDE" strokeWidth="0.0" text=" piece.">
+                        <font>
+                            <Font size="12.0"/>
+                        </font>
+                    </Text>
+                </HBox>
+                <HBox VBox.vgrow="NEVER">
+                    <VBox.margin>
+                        <Insets top="8.0"/>
+                    </VBox.margin>
+                    <Text fill="#212121" strokeType="OUTSIDE" strokeWidth="0.0" text="Price:">
+                        <font>
+                            <Font size="12.0"/>
+                        </font>
+                    </Text>
+                    <Text fx:id="priceText" fill="#212121" strokeType="OUTSIDE" strokeWidth="0.0" text="1.00">
+                        <font>
+                            <Font name="System Bold" size="12.0"/>
+                        </font>
+                        <HBox.margin>
+                            <Insets left="8.0"/>
+                        </HBox.margin>
+                    </Text>
+                    <Text fill="#212121" strokeType="OUTSIDE" strokeWidth="0.0" text=" €">
+                        <font>
+                            <Font name="System Bold" size="12.0"/>
+                        </font>
+                    </Text>
+                </HBox>
+                <VBox alignment="BOTTOM_CENTER" VBox.vgrow="ALWAYS">
+                    <HBox alignment="CENTER" VBox.vgrow="NEVER">
+                        <Spinner/>
+                        <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+                                minWidth="-Infinity" mnemonicParsing="false" prefHeight="28.0"
+                                prefWidth="48.0" style="-fx-background-color: #0066FF;">
+                            <HBox.margin>
+                                <Insets left="12.0"/>
+                            </HBox.margin>
+                            <graphic>
+                                <ImageView cache="true" fitHeight="18.0" fitWidth="18.0"
+                                           pickOnBounds="true" preserveRatio="true">
+                                    <Image url="@../images/cart-white.png"/>
+                                </ImageView>
+                            </graphic>
+                            <tooltip>
+                                <Tooltip text="Add to cart"/>
+                            </tooltip>
+                        </Button>
+                    </HBox>
+                </VBox>
+            </VBox>
+        </HBox>
+    </VBox>
+</VBox>

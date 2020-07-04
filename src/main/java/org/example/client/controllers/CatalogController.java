@@ -98,9 +98,8 @@ public class CatalogController {
                     // Set category list (since doesn't change the view structure)
                     categoryList.addAll(sectionMap.keySet());
                     // The  section can not be null
-                    return new CatalogFactory().getCatalogList(sectionMap,
-                            categoryList.size() > 0 ? categoryList.get(0) : "",
-                            searchBar.getText());
+                    return new CatalogFactory().getCatalogList(stage, sectionMap,
+                            categoryList.size() > 0 ? categoryList.get(0) : "", searchBar.getText());
                 }
 
                 // Task failed
@@ -130,7 +129,7 @@ public class CatalogController {
     public void refreshProducts() {
         ObservableList<Node> list = this.flowPaneProducts.getChildren();
         list.clear();
-        list.addAll(new CatalogFactory().getCatalogList(this.sectionMap,
+        list.addAll(new CatalogFactory().getCatalogList(this.stage, this.sectionMap,
                 this.listCategory.getSelectionModel().getSelectedItem(), this.searchBar.getText()));
     }
 
@@ -157,5 +156,10 @@ public class CatalogController {
     @FXML
     public void handleCartAction() {
         CartController.showView(stage);
+    }
+
+    @FXML
+    public void handleProfileAction() {
+        ProfileController.showView(this.stage);
     }
 }

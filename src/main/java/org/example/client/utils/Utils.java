@@ -17,7 +17,7 @@ public class Utils {
     public static final String SERVER_URL_SESSION = "/api/user/session";
     public static final String SERVER_URL_REGISTRATION = "/api/client/register";
     public static final String SERVER_URL_MANAGER_UPDATE = "/api/manager/update";
-    public static final String SERVER_URL_CLIENT_UPDATE = "/api/user/update";
+    public static final String SERVER_URL_CLIENT_UPDATE = "/api/client/update";
     public static final String SERVER_URL_GET_ALL_PRODUCT = "/api/product/all";
     // Format for URL `/api/card/{cardNumber}`
     public static final String SERVER_URL_GET_LOYALTY_CARD = "/api/card/%d";
@@ -165,6 +165,7 @@ public class Utils {
             body.add("cap", client.getCap().toString());
             body.add("city", client.getCity());
             body.add("telephone", client.getTelephone());
+            body.add("payment", client.getPaymentInteger().toString());
             body.add("card_number", client.getCardNumber().toString());
             // TODO: payment method
         }

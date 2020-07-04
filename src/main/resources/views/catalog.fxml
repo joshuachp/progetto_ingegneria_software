@@ -51,6 +51,7 @@
             </TextField>
         </VBox>
         <HBox HBox.hgrow="ALWAYS"/>
+        <Button text="Profile" HBox.hgrow="never" onAction="#handleProfileAction"/>
         <VBox alignment="CENTER" minWidth="-Infinity" prefWidth="56.0" HBox.hgrow="NEVER">
             <HBox.margin>
                 <Insets/>

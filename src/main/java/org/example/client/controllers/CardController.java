@@ -9,6 +9,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import org.example.client.models.Product;
 import org.example.client.utils.Session;
 
@@ -31,9 +32,10 @@ public class CardController {
     public Button cartButton;
 
     private Product product;
+    private Stage stage;
 
 
-    public static VBox generateCard(Product product) {
+    public static VBox generateCard(Stage stage, Product product) {
         FXMLLoader loader = new FXMLLoader(CardController.class.getResource("/views/card.fxml"));
         VBox card = null;
         try {
@@ -44,7 +46,12 @@ public class CardController {
         CardController controller = loader.getController();
         // Set product for controller
         controller.setProduct(product);
+        controller.setStage(stage);
         return card;
+    }
+
+    private void setStage(Stage stage) {
+        this.stage = stage;
     }
 
     @FXML
@@ -82,5 +89,9 @@ public class CardController {
         this.quantity.setValueFactory(spinnerValueFactory);
         if (quantity.getValue() > max)
             spinnerValueFactory.setValue(max);
+    }
+
+    public void handleImageMouseClicked() {
+        ProductController.showView(this.stage, product);
     }
 }

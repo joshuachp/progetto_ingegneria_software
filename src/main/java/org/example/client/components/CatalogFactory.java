@@ -1,6 +1,7 @@
 package org.example.client.components;
 
 import javafx.scene.Node;
+import javafx.stage.Stage;
 import org.example.client.controllers.CardController;
 import org.example.client.models.Product;
 import org.jetbrains.annotations.NotNull;
@@ -20,7 +21,8 @@ public class CatalogFactory {
      * @param search     Search
      * @return List of nodes
      */
-    public List<Node> getCatalogList(@NotNull Map<String, ArrayList<Product>> productMap, @NotNull String section,
+    public List<Node> getCatalogList(Stage stage, @NotNull Map<String, ArrayList<Product>> productMap,
+                                     @NotNull String section,
                                      @NotNull String search) {
         // Format the search string
         String newSearch = search.trim().toLowerCase();
@@ -33,7 +35,7 @@ public class CatalogFactory {
             if (newSearch.isEmpty() ||
                     product.getName().contains(newSearch) ||
                     product.getCharacteristics().contains(newSearch)) {
-                nodes.add(CardController.generateCard(product));
+                nodes.add(CardController.generateCard(stage, product));
             }
         }
         return nodes;

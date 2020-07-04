@@ -3,6 +3,7 @@ package org.example.client.models;
 import org.json.JSONObject;
 
 public class Product {
+
     private final Integer id;
     private String name;
     private String brand;

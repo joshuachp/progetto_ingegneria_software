@@ -99,4 +99,8 @@ public class Client extends User {
     public void setPayment(Payment payment) {
         this.payment = payment;
     }
+
+    public Integer getPaymentInteger() {
+        return payment.ordinal();
+    }
 }
