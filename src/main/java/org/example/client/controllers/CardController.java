@@ -4,20 +4,22 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.Spinner;
-import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import org.example.client.components.QuantitySpinnerFactory;
 import org.example.client.models.Product;
 import org.example.client.utils.Session;
+import org.example.client.utils.TaskLoadImage;
 
 import java.io.IOException;
 
 
 public class CardController {
 
+    private final QuantitySpinnerFactory spinnerFactory = new QuantitySpinnerFactory();
     @FXML
     public ImageView thumbnail;
     @FXML
@@ -30,10 +32,8 @@ public class CardController {
     public ImageView cartImage;
     @FXML
     public Button cartButton;
-
     private Product product;
     private Stage stage;
-
 
     public static VBox generateCard(Stage stage, Product product) {
         FXMLLoader loader = new FXMLLoader(CardController.class.getResource("/views/card.fxml"));
@@ -60,7 +60,9 @@ public class CardController {
             // The product is a reference to the session product so the quantity doesn't need to be modified
             Session session = Session.getInstance();
             session.addProduct(this.product, quantity.getValue());
-            setSpinnerFactory();
+
+            this.quantity = spinnerFactory.getSpinner(this.product, this.quantity);
+
             if (quantity.getValue() == 0)
                 cartButton.setDisable(true);
         }
@@ -72,24 +74,24 @@ public class CardController {
         price.setText(String.format("\u20ac %.2f", this.product.getPrice()));
         title.setText(this.product.getName());
         if (this.product.getImage() != null) {
-            thumbnail.setImage(new Image(this.product.getImage()));
+            setImage(this.product.getImage());
         }
-        setSpinnerFactory();
 
+        this.quantity = spinnerFactory.getSpinner(this.product, this.quantity);
 
         if (product.getAvailability() == 0 || quantity.getValue() == 0)
             cartButton.setDisable(true);
     }
 
-    private void setSpinnerFactory() {
-        int max = this.product.getAvailability() - this.product.getQuantity();
-        int min = max == 0 ? 0 : 1;
-        SpinnerValueFactory<Integer> spinnerValueFactory =
-                new SpinnerValueFactory.IntegerSpinnerValueFactory(min, max);
-        this.quantity.setValueFactory(spinnerValueFactory);
-        if (quantity.getValue() > max)
-            spinnerValueFactory.setValue(max);
+    private void setImage(String image) {
+        TaskLoadImage task = new TaskLoadImage(image);
+        task.setOnSucceeded((event -> {
+            Image img = task.getValue();
+            this.thumbnail.setImage(img);
+        }));
+        new Thread(task).start();
     }
+
 
     public void handleImageMouseClicked() {
         ProductController.showView(this.stage, product);

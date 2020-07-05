@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.*?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
-<HBox xmlns:fx="http://javafx.com/fxml" alignment="CENTER_LEFT" prefWidth="700.0" xmlns="http://javafx.com/javafx"
-      fx:controller="org.example.client.controllers.CartItemController">
+<HBox xmlns:fx="http://javafx.com/fxml" onMouseClicked="#handleOnMouseClick" alignment="CENTER_LEFT" prefWidth="700.0"
+      xmlns="http://javafx.com/javafx" fx:controller="org.example.client.controllers.CartItemController">
+    <cursor>
+        <Cursor fx:constant="HAND"/>
+    </cursor>
     <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
           prefHeight="64.0" prefWidth="64.0" style="-fx-background-color: #EEEEEE;">
         <HBox.margin>

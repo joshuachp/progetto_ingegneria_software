@@ -11,13 +11,7 @@
       fx:controller="org.example.client.controllers.ProductController">
     <MenuBar VBox.vgrow="NEVER">
         <Menu mnemonicParsing="false" text="File">
-            <MenuItem mnemonicParsing="false" text="Close"/>
-        </Menu>
-        <Menu mnemonicParsing="false" text="Edit">
-            <MenuItem mnemonicParsing="false" text="Delete"/>
-        </Menu>
-        <Menu mnemonicParsing="false" text="Help">
-            <MenuItem mnemonicParsing="false" text="About"/>
+            <MenuItem onAction="#handleCloseAction" mnemonicParsing="false" text="Close"/>
         </Menu>
     </MenuBar>
     <VBox VBox.vgrow="ALWAYS">
@@ -111,10 +105,10 @@
                 </HBox>
                 <VBox alignment="BOTTOM_CENTER" VBox.vgrow="ALWAYS">
                     <HBox alignment="CENTER" VBox.vgrow="NEVER">
-                        <Spinner/>
-                        <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
-                                minWidth="-Infinity" mnemonicParsing="false" prefHeight="28.0"
-                                prefWidth="48.0" style="-fx-background-color: #0066FF;">
+                        <Spinner fx:id="quantitySpinner"/>
+                        <Button fx:id="cartButton" onAction="#handleAddToCartAction" maxHeight="-Infinity"
+                                maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false"
+                                prefHeight="28.0" prefWidth="48.0" style="-fx-background-color: #0066FF;">
                             <HBox.margin>
                                 <Insets left="12.0"/>
                             </HBox.margin>

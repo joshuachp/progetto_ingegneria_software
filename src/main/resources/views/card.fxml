@@ -17,16 +17,18 @@
     <padding>
         <Insets bottom="15.0" left="15.0" right="15.0" top="15.0"/>
     </padding>
-    <VBox onMouseClicked="#handleImageMouseClicked" alignment="CENTER" cache="true" minHeight="-Infinity"
-          minWidth="-Infinity"
-          prefHeight="190.0"
-          prefWidth="190.0" style="-fx-background-color: #EEEEEE;">
+    <VBox alignment="CENTER" cache="true" minHeight="-Infinity" minWidth="-Infinity"
+          onMouseClicked="#handleImageMouseClicked" prefHeight="190.0" prefWidth="190.0"
+          style="-fx-background-color: #EEEEEE;">
         <VBox.margin>
             <Insets/>
         </VBox.margin>
         <ImageView fx:id="thumbnail" fitHeight="190.0" fitWidth="190.0" pickOnBounds="true" preserveRatio="true">
             <Image url="@../images/test-image.jpg"/>
         </ImageView>
+        <cursor>
+            <Cursor fx:constant="HAND"/>
+        </cursor>
     </VBox>
     <Text fx:id="title" strokeType="OUTSIDE" strokeWidth="0.0" text="Prodotto prova " textAlignment="CENTER"
           wrappingWidth="150.0">
@@ -64,8 +66,8 @@
             </tooltip>
         </Spinner>
         <Button fx:id="cartButton" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false"
-                onAction="#handleAddToCartAction"
-                prefHeight="30.0" prefWidth="60.0" style="-fx-background-color: #0066FF;">
+                onAction="#handleAddToCartAction" prefHeight="30.0" prefWidth="60.0"
+                style="-fx-background-color: #0066FF;">
             <cursor>
                 <Cursor fx:constant="HAND"/>
             </cursor>
