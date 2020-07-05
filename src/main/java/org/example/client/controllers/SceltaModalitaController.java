@@ -41,4 +41,15 @@ public class SceltaModalitaController {
     public void setStage(Stage stage) {
         this.stage = stage;
     }
+
+    public void HandleActionManageProduct(ActionEvent actionEvent) {
+        ProductListController productlistcontroller = new ProductListController();
+        ProductListController.showView(this.stage);
+    }
+
+    public void handlerLogutAction(ActionEvent actionEvent) {
+    }
+
+    public void handlerAddManagerAction(ActionEvent actionEvent) {
+    }
 }

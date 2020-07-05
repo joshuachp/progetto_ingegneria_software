@@ -2,6 +2,7 @@ package org.example.client.utils;
 
 import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
+import org.example.client.MockUtils;
 import org.example.client.models.Client;
 import org.example.client.models.Manager;
 import org.json.JSONObject;
@@ -10,8 +11,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
-import java.net.InetAddress;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class UtilsTest {
@@ -20,8 +21,7 @@ class UtilsTest {
 
     @BeforeEach
     void setUpAll() throws Exception {
-        this.server = new MockWebServer();
-        this.server.start(InetAddress.getByName("localhost"), 8080);
+        this.server = MockUtils.startServer();
     }
 
     @AfterEach
@@ -30,7 +30,7 @@ class UtilsTest {
     }
 
     @Test
-    void testAutenticaWithServerUsernamePassword() {
+    void autenticaWithServerUsernamePassword() {
         this.server.enqueue(new MockResponse()
                 .setBody(new JSONObject()
                         .put("username", "admin")
@@ -49,7 +49,7 @@ class UtilsTest {
     }
 
     @Test
-    void testAutenticaWithServerSession() {
+    void autenticaWithServerSession() {
         this.server.enqueue(new MockResponse()
                 .setBody(new JSONObject()
                         .put("username", "admin")
@@ -68,16 +68,37 @@ class UtilsTest {
     }
 
     @Test
-    void testUpdateUser() {
+    void updateUser() {
         this.server.enqueue(new MockResponse()
                 .setBody("OK"));
         this.server.enqueue(new MockResponse()
                 .setBody("OK"));
+
         Client client = new Client("username", "session", "name", "surname",
-                "address", 33333, "City", "3334445555");
-        assertNotNull(Utils.updateUser(client));
+                "address", 33333, "City", "3334445555", 0, 1234);
+        assertNotNull(Utils.updateUser(client, "password"));
+
         Manager manager = new Manager("username", "session", "badge", "name", "surname",
                 "address", 33333, "City", "3334445555", "admin");
-        assertNotNull(Utils.updateUser(manager));
+        assertNotNull(Utils.updateUser(manager, null));
+    }
+
+    @Test
+    public void registerClient() {
+        this.server.enqueue(new MockResponse()
+                .setBody("OK"));
+        assertEquals(200, (Utils.registerClient("username", "password", "Name", "Surname",
+                "Address", 33333, "City", "3334445555", 1)));
+    }
+
+
+    @Test
+    void getAllProducts() {
+        // TODO
+    }
+
+    @Test
+    void getLoyaltyCard() {
+        // TODO
     }
 }

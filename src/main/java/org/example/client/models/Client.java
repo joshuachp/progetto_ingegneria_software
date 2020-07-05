@@ -1,23 +1,25 @@
 package org.example.client.models;
 
 import javafx.stage.Stage;
-import org.example.client.controllers.CatalogoController;
+import org.example.client.controllers.CatalogController;
 
 /**
  * Cliente class
  */
 public class Client extends User {
 
+    private String name;
     private String surname;
     private String address;
     private Integer cap;
     private String city;
     private String telephone;
-    private String name;
+    private Payment payment;
+    private Integer cardNumber;
     // TODO: payment method
 
     public Client(String username, String session, String name, String surname, String address,
-                  Integer cap, String city, String telephone) {
+                  Integer cap, String city, String telephone, Integer payment, Integer cardNumber) {
         super(username, session, false);
         this.name = name;
         this.surname = surname;
@@ -25,11 +27,13 @@ public class Client extends User {
         this.cap = cap;
         this.city = city;
         this.telephone = telephone;
+        this.payment = Payment.values()[payment];
+        this.cardNumber = cardNumber;
     }
 
     @Override
     public void redirect(Stage stage) {
-        CatalogoController.showView(stage);
+        CatalogController.showView(stage);
     }
 
     public String getName() {
@@ -78,5 +82,25 @@ public class Client extends User {
 
     public void setTelephone(String telephone) {
         this.telephone = telephone;
+    }
+
+    public Integer getCardNumber() {
+        return cardNumber;
+    }
+
+    public void setCardNumber(Integer cardNumber) {
+        this.cardNumber = cardNumber;
+    }
+
+    public Payment getPayment() {
+        return payment;
+    }
+
+    public void setPayment(Payment payment) {
+        this.payment = payment;
+    }
+
+    public Integer getPaymentInteger() {
+        return payment.ordinal();
     }
 }

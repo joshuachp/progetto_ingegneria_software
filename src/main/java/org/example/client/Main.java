@@ -2,7 +2,8 @@ package org.example.client;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
-import org.example.client.controllers.AutenticazioneController;
+import org.example.client.controllers.AuthController;
+import org.example.client.controllers.ProfileController;
 import org.example.client.utils.Session;
 
 public class Main extends Application {
@@ -17,9 +18,10 @@ public class Main extends Application {
         // Check if user is authenticated
         if (session.isAuth()) {
             // Redirects to the user home
+            ProfileController.showView(stage);
             session.getUser().redirect(stage);
         } else {
-            AutenticazioneController.showView(stage);
+            AuthController.showView(stage);
         }
     }
 }
