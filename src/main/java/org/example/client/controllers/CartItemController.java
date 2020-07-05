@@ -63,6 +63,7 @@ public class CartItemController {
             Image img = task.getValue();
             Platform.runLater(() -> this.imageView.setImage(img));
         }));
+        new Thread(task).start();
     }
 
     public void handleOnMouseClick() {
