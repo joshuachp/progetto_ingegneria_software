@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public enum Payment {
-    CREDIT_CARD("Credit card"), PAY_PAL("PayPal"), CASH("Cash on delivery");
+    CASH("Cash on delivery"), CREDIT_CARD("Credit card"), PAY_PAL("PayPal");
 
     private final String pagamento;
 
