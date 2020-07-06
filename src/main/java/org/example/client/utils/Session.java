@@ -14,6 +14,7 @@ public class Session {
 
     public static final String PREFERENCE_SAVE_SESSION = "SAVE_SESSION";
     public static final String PREFERENCE_USER_SESSION = "USER_SESSION";
+    public static final String PREFERENCE_PAYMENT_DATA = "PAYMENT_DATA";
 
     private static Session session = null;
     // Shopping cart
@@ -21,6 +22,8 @@ public class Session {
     private final SimpleIntegerProperty cartQuantity = new SimpleIntegerProperty(this, "cartQuantity", 0);
     private User user;
     private boolean saveSession;
+    // Payment data
+    private String paymentData;
 
     /**
      * Create a new session, if a session is saved in the preferences. It will ask the server for the user information.
@@ -29,7 +32,8 @@ public class Session {
         Preferences preferences = Preferences.userNodeForPackage(Session.class);
 
         this.saveSession = preferences.getBoolean(PREFERENCE_SAVE_SESSION, true);
-        String sessionToken = preferences.get(PREFERENCE_USER_SESSION, "");
+        this.paymentData = preferences.get(PREFERENCE_PAYMENT_DATA, "0123 4567 8910 1112");
+        String sessionToken = preferences.get(PREFERENCE_USER_SESSION, null);
         if (sessionToken == null || sessionToken.isEmpty()) {
             this.user = null;
         } else {
@@ -57,6 +61,7 @@ public class Session {
         Preferences preferences = Preferences.userNodeForPackage(Session.class);
         preferences.remove(PREFERENCE_USER_SESSION);
         preferences.remove(PREFERENCE_SAVE_SESSION);
+        preferences.remove(PREFERENCE_PAYMENT_DATA);
         // Reset the session
         session = null;
     }
@@ -128,5 +133,13 @@ public class Session {
      */
     public Map<Integer, Product> getMapProducts() {
         return mapProducts;
+    }
+
+    public String getPaymentData() {
+        return this.paymentData;
+    }
+
+    public void setPaymentData(String paymentData) {
+        this.paymentData = paymentData;
     }
 }

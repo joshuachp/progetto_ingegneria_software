@@ -46,6 +46,20 @@ class SessionTest {
                         .put("payment", 1)
                         .put("loyalty_card_number", 1234)
                         .toString()));
+        this.server.enqueue(new MockResponse()
+                .setBody(new JSONObject()
+                        .put("username", "guest")
+                        .put("session", "session")
+                        .put("responsabile", false)
+                        .put("name", "Name")
+                        .put("surname", "Surname")
+                        .put("address", "Via Viale 1")
+                        .put("cap", 33333)
+                        .put("city", "City")
+                        .put("telephone", "3334445555")
+                        .put("payment", 1)
+                        .put("loyalty_card_number", 1234)
+                        .toString()));
         Session session = Session.getInstance();
         // Set the user session
         session.setUser(new FactoryUser().getUser("session"));
@@ -124,6 +138,7 @@ class SessionTest {
         Preferences preferences = Preferences.userNodeForPackage(Session.class);
         assertNull(preferences.get(Session.PREFERENCE_USER_SESSION, null));
         assertNull(preferences.get(Session.PREFERENCE_SAVE_SESSION, null));
+        assertNull(preferences.get(Session.PREFERENCE_PAYMENT_DATA, null));
     }
 
     @Test
@@ -155,7 +170,7 @@ class SessionTest {
     }
 
     @Test
-    void getProducts() {
+    void getMapProducts() {
         Session session = Session.getInstance();
         Product product = new Product(1, "Name", "Brand", 1, 1., null,
                 1, "", "Section");
@@ -165,5 +180,18 @@ class SessionTest {
         List<Product> products = new ArrayList<>(session.getMapProducts().values());
         assertEquals(1, products.size());
         assertEquals(product, products.get(0));
+    }
+
+    @Test
+    void getPaymentData() {
+        Session session = Session.getInstance();
+        assertEquals("0123 4567 8910 1112", session.getPaymentData());
+    }
+
+    @Test
+    void setPaymentData() {
+        Session session = Session.getInstance();
+        session.setPaymentData("Test payment");
+        assertEquals("Test payment", session.getPaymentData());
     }
 }
