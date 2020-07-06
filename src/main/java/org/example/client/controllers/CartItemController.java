@@ -9,7 +9,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.example.client.models.Product;
-import org.example.client.utils.TaskLoadImage;
+import org.example.client.tasks.TaskLoadImage;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;

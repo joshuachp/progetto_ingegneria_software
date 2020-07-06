@@ -168,12 +168,12 @@
             <VBox.margin>
                 <Insets left="24.0" top="12.0"/>
             </VBox.margin>
-            <Text fill="#212121" strokeType="OUTSIDE" strokeWidth="0.0" text="Credit card">
+            <Text fx:id="paymentText" fill="#212121" strokeType="OUTSIDE" strokeWidth="0.0" text="Credit card">
                 <font>
                     <Font size="12.0"/>
                 </font>
             </Text>
-            <Text fill="#757575" strokeType="OUTSIDE" strokeWidth="0.0" text="**** **** **** 0000">
+            <Text fx:id="paymentData" fill="#757575" strokeType="OUTSIDE" strokeWidth="0.0" text="**** **** **** 0000">
                 <HBox.margin>
                     <Insets left="24.0"/>
                 </HBox.margin>

@@ -2,7 +2,6 @@ package org.example.client.controllers;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -23,39 +22,39 @@ import org.jetbrains.annotations.Nullable;
 import java.io.IOException;
 import java.util.regex.Pattern;
 
-public class RegistrazioneController /*implements Initializable*/ {
+// TODO: Refactor validation and request should return response to show the server error
+public class RegistrazioneController {
 
     @FXML
     public ComboBox<String> cbxPagamento;
     @FXML
-    public TextField Phone;
-    private Integer paymentMethod;
+    public TextField telephone;
     @FXML
-    private PasswordField PasswordRepeat;
+    private PasswordField password;
     @FXML
-    private PasswordField Password;
+    private PasswordField passwordRepeat;
     @FXML
-    private TextField Email;
+    private TextField rename;
     @FXML
-    private TextField Name;
+    private TextField name;
     @FXML
-    private TextField Surname;
+    private TextField surname;
     @FXML
-    private TextField Address;
+    private TextField address;
     @FXML
-    private TextField CAP;
+    private TextField cap;
     @FXML
-    private TextField City;
+    private TextField city;
     @FXML
-    private TextField Fidelity;
+    private TextField cardNumber;
     @FXML
     private Label resultLabel;
 
     private Stage stage;
+    private Integer paymentMethod = 0;
 
     public static void showView(Stage stage) {
-
-        FXMLLoader loader = new FXMLLoader(SceltaModalitaController.class.getResource("/views/registrazione.fxml"));
+        FXMLLoader loader = new FXMLLoader(SceltaModalitaController.class.getResource("/views/registration.fxml"));
         Parent root = null;
         try {
             root = loader.load();
@@ -64,55 +63,45 @@ public class RegistrazioneController /*implements Initializable*/ {
         }
         assert root != null;
 
-        // ComboBox
-        ObservableList<String> payment = FXCollections.observableArrayList(
-                Payment.CREDIT_CARD.toString(), Payment.CASH.toString(), Payment.PAY_PAL.toString());
-
         RegistrazioneController registrazioneController = loader.getController();
-        registrazioneController.cbxPagamento.setItems(payment);
-        registrazioneController.cbxPagamento.setValue(Payment.PAY_PAL.toString());
-
-        stage.show();
+        registrazioneController.setStage(stage);
 
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.setTitle("Registrazione");
-        registrazioneController.setStage(stage);
-
+        stage.show();
     }
 
-    /*
-     **
-     * Override of initialize method invoked by load.
-     * Implementation of payment enum in a ComboBox.
-     */
-    /*@Override
-    public void initialize(URL location, ResourceBundle resources) {
-        cbxPagamento.getItems().addAll(payment);
-        // TODO: set prefer method
-        cbxPagamento.setValue(Pagamento.PAYPAL.toString());
-    }*/
+    @FXML
+    public void initialize() {
+        // Initialize ComboBox with all payments
+        ObservableList<String> payments = FXCollections.observableArrayList(Payment.getPayments());
+        this.cbxPagamento.setItems(payments);
+        this.cbxPagamento.getSelectionModel().selectFirst();
+    }
 
     public void setStage(Stage stage) {
         this.stage = stage;
     }
 
 
-    public void handlerSetPaymentAction(ActionEvent actionEvent) {
-        this.paymentMethod = Payment.fromString(cbxPagamento.getValue()).ordinal();
+    @FXML
+    public void handlerSetPaymentAction() {
+        this.paymentMethod = cbxPagamento.getSelectionModel().getSelectedIndex();
     }
 
-    public void handleBackAction(ActionEvent actionEvent) {
+    @FXML
+    public void handleBackAction() {
         AuthController.showView(this.stage);
     }
 
 
     public boolean passwordVerify(String password) {
-        return (Pattern.matches(Utils.REGEX_PASSWORD, password));
+        return Pattern.matches(Utils.REGEX_PASSWORD, password);
     }
 
     public boolean passwordVerifyEquals(String password, String passwordRepeat) {
-        return (password.trim().equals(passwordRepeat.trim()));
+        return password.equals(passwordRepeat);
     }
 
     public boolean mailVerify(String email) {
@@ -136,74 +125,76 @@ public class RegistrazioneController /*implements Initializable*/ {
     }
 
     private void resetErrorMessage() {
-        Name.setStyle(null);
-        Surname.setStyle(null);
-        Phone.setStyle(null);
-        Password.setStyle(null);
-        PasswordRepeat.setStyle(null);
-        CAP.setStyle(null);
-        City.setStyle(null);
-        Address.setStyle(null);
+        name.setStyle(null);
+        surname.setStyle(null);
+        telephone.setStyle(null);
+        password.setStyle(null);
+        passwordRepeat.setStyle(null);
+        cap.setStyle(null);
+        city.setStyle(null);
+        address.setStyle(null);
     }
 
-    public void handleConfirmAction(ActionEvent actionEvent) {
-        boolean error = false;
+    @FXML
+    public void handleConfirmAction() {
+        boolean error;
         resetErrorMessage();
 
-        if (Name.getText().equals(""))
-            error = errorMessage("Il campo Nome è vuoto.", Name);
+        if (name.getText().equals("")) {
+            error = true;
+            errorMessage("Il campo Nome è vuoto.", name);
+        }
 
-        if (Surname.getText().equals(""))
-            error = errorMessage("Il campo Cognome è vuoto.", Surname);
+        if (surname.getText().equals(""))
+            error = errorMessage("Il campo Cognome è vuoto.", surname);
 
-        if (Address.getText().equals(""))
-            error = errorMessage("Il campo Indirizzo è vuoto.", Address);
+        if (address.getText().equals(""))
+            error = errorMessage("Il campo Indirizzo è vuoto.", address);
 
         // Verifica CAP
-        if (!CAP.getText().equals("")) {
-            if (!capVerify(CAP.getText()))
-                error = errorMessage("Il CAP deve essere di 5 cifre.", CAP);
+        if (!cap.getText().equals("")) {
+            if (!capVerify(cap.getText()))
+                error = errorMessage("Il CAP deve essere di 5 cifre.", cap);
         } else
-            error = errorMessage("Il campo CAP è vuoto.", CAP);
+            error = errorMessage("Il campo CAP è vuoto.", cap);
 
-        if (City.getText().equals(""))
-            error = errorMessage("Il campo Città è vuoto.", City);
+        if (city.getText().equals(""))
+            error = errorMessage("Il campo Città è vuoto.", city);
 
-        if (!Phone.getText().equals("")) {
-            if (!phoneVerify(Phone.getText()))
-                error = errorMessage("Il numero di telefono dato non è valido.", Phone);
+        if (!telephone.getText().equals("")) {
+            if (!phoneVerify(telephone.getText()))
+                error = errorMessage("Il numero di telefono dato non è valido.", telephone);
         } else
-            error = errorMessage("Il campo Telefono è vuoto.", Phone);
+            error = errorMessage("Il campo Telefono è vuoto.", telephone);
 
-        if (Email.getText().equals(""))
-            if (!mailVerify(Email.getText())) {
-                error = errorMessage("La mail non è coretta.", Email);
+        if (rename.getText().equals(""))
+            if (!mailVerify(rename.getText())) {
+                error = errorMessage("La mail non è coretta.", rename);
             }
-        error = errorMessage("Il campo E-mail è vuoto.", Email);
+        error = errorMessage("Il campo E-mail è vuoto.", rename);
 
         // Verifica lunghezza password
-        if (!Password.getText().equals("")) {
-            if (!passwordVerify(Password.getText()))
-                error = errorMessage("La lunghezza della password deve essere di almeno 8 caratteri.", Password);
+        if (!password.getText().equals("")) {
+            if (!passwordVerify(password.getText()))
+                error = errorMessage("La lunghezza della password deve essere di almeno 8 caratteri.", password);
         } else
-            error = errorMessage("Il campo password è vuoto.", Password);
+            error = errorMessage("Il campo password è vuoto.", password);
 
         // Verifica uguaglianza password
-        if (!PasswordRepeat.getText().equals("")) {
-            if (!passwordVerifyEquals(Password.getText(), PasswordRepeat.getText()))
-                error = errorMessage("Le password devono coincidere.", PasswordRepeat);
+        if (!passwordRepeat.getText().equals("")) {
+            if (!passwordVerifyEquals(password.getText(), passwordRepeat.getText()))
+                error = errorMessage("Le password devono coincidere.", passwordRepeat);
         } else
-            error = errorMessage("Il campo Ripeti password è vuoto.", PasswordRepeat);
+            error = errorMessage("Il campo Ripeti password è vuoto.", passwordRepeat);
 
         if (!error) {
-            int statusCode = Utils.registerClient(Email.getText(), PasswordRepeat.getText(), Name.getText(),
-                    Surname.getText(),
-                    Address.getText(), Integer.valueOf(CAP.getText()), City.getText(), Phone.getText(),
-                    Payment.fromString(cbxPagamento.getValue()).ordinal());
+            int statusCode = Utils.registerClient(rename.getText(), passwordRepeat.getText(), name.getText(),
+                    surname.getText(), address.getText(), Integer.valueOf(cap.getText()), city.getText(),
+                    telephone.getText(), this.paymentMethod);
             if (statusCode == 200) {
                 errorMessage("Success" + statusCode, null);
 
-                User user = new FactoryUser().getUser(Email.getText(), PasswordRepeat.getText());
+                User user = new FactoryUser().getUser(rename.getText(), passwordRepeat.getText());
 
                 // Set user session
                 Session session = Session.getInstance();

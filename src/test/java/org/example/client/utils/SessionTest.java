@@ -193,5 +193,8 @@ class SessionTest {
         Session session = Session.getInstance();
         session.setPaymentData("Test payment");
         assertEquals("Test payment", session.getPaymentData());
+
+        Preferences preferences = Preferences.userNodeForPackage(Session.class);
+        assertEquals("Test payment", preferences.get(Session.PREFERENCE_PAYMENT_DATA, null));
     }
 }

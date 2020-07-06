@@ -111,7 +111,7 @@
                     <Font size="12.0"/>
                 </font>
             </Text>
-            <Text fill="#757575" strokeType="OUTSIDE" strokeWidth="0.0" text="**** **** **** 0000">
+            <Text fx:id="paymentData" fill="#757575" strokeType="OUTSIDE" strokeWidth="0.0" text="**** **** **** 0000">
                 <HBox.margin>
                     <Insets left="24.0"/>
                 </HBox.margin>
@@ -142,7 +142,7 @@
                     <Font size="12.0"/>
                 </font>
             </Text>
-            <Text fx:id="points" fill="#212121" strokeType="OUTSIDE" strokeWidth="0.0" text="500">
+            <Text fx:id="pointsText" fill="#212121" strokeType="OUTSIDE" strokeWidth="0.0" text="500">
                 <font>
                     <Font name="System Bold" size="12.0"/>
                 </font>

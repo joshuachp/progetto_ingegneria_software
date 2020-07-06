@@ -1,4 +1,4 @@
-package org.example.client.utils;
+package org.example.client.tasks;
 
 import javafx.concurrent.Task;
 import javafx.scene.image.Image;

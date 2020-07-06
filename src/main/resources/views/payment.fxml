@@ -82,8 +82,8 @@
                     <Font name="System Bold" size="12.0"/>
                 </font>
             </Button>
-            <Button mnemonicParsing="false" style="-fx-background-color: #0066FF;" text="Change"
-                    textFill="#fafafa">
+            <Button onAction="#handleChangeAction" mnemonicParsing="false" style="-fx-background-color: #0066FF;"
+                    text="Change" textFill="#fafafa">
                 <font>
                     <Font name="System Bold" size="12.0"/>
                 </font>

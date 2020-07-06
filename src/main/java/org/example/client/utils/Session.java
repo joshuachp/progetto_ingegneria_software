@@ -141,5 +141,10 @@ public class Session {
 
     public void setPaymentData(String paymentData) {
         this.paymentData = paymentData;
+        // Save session only if needed
+        if (this.saveSession) {
+            Preferences preferences = Preferences.userNodeForPackage(Session.class);
+            preferences.put(PREFERENCE_PAYMENT_DATA, paymentData);
+        }
     }
 }

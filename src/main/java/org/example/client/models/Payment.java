@@ -1,6 +1,8 @@
 package org.example.client.models;
 
-import org.jetbrains.annotations.Nullable;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public enum Payment {
     CREDIT_CARD("Credit card"), PAY_PAL("PayPal"), CASH("Cash on delivery");
@@ -11,18 +13,8 @@ public enum Payment {
         this.pagamento = pagamento;
     }
 
-    public static @Nullable Payment fromString(String text) {
-        for (Payment x : Payment.values()) {
-            if (x.pagamento.equalsIgnoreCase(text)) {
-                return x;
-            }
-        }
-        try {
-            throw new Exception("Value \"" + text + "\" not present in Enum.");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
+    public static List<String> getPayments() {
+        return Arrays.stream(Payment.values()).map(Payment::toString).collect(Collectors.toList());
     }
 
     @Override
