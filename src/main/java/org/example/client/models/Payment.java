@@ -25,10 +25,6 @@ public enum Payment {
         return null;
     }
 
-    public String getPagamento() {
-        return pagamento;
-    }
-
     @Override
     public String toString() {
         return pagamento;

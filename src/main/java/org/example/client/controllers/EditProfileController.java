@@ -291,4 +291,10 @@ public class EditProfileController {
             updateProfile();
         }
     }
+
+    @FXML
+    public void handleChangePaymentAction() {
+        PaymentController.showView(this.stage);
+    }
+
 }

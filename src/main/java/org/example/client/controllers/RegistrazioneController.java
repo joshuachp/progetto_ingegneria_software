@@ -108,7 +108,7 @@ public class RegistrazioneController /*implements Initializable*/ {
 
 
     public boolean passwordVerify(String password) {
-        return (Pattern.matches("[!-}]{8,16}", password));
+        return (Pattern.matches(Utils.REGEX_PASSWORD, password));
     }
 
     public boolean passwordVerifyEquals(String password, String passwordRepeat) {

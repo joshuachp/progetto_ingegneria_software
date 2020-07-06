@@ -38,6 +38,8 @@ public class ProfileController {
     public Text cardText;
     @FXML
     public Text cardTextPoints;
+    @FXML
+    public Text paymentText;
 
     private Stage stage;
 
@@ -73,6 +75,7 @@ public class ProfileController {
         this.username.setText(client.getUsername());
         this.address.setText(String.format("%s, %d, %s", client.getAddress(), client.getCap(), client.getCity()));
         this.telephone.setText(client.getTelephone());
+        this.cardText.setText(client.getPayment().toString());
         // TODO: Payment method
         // Loyalty card
         if (client.getCardNumber() != null) {
@@ -115,4 +118,10 @@ public class ProfileController {
         this.stage = stage;
     }
 
+    @FXML
+    public void handleBackAction() {
+        Session session = Session.getInstance();
+        Client client = (Client) session.getUser();
+        client.redirect(stage);
+    }
 }

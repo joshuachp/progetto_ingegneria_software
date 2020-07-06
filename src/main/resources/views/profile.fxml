@@ -106,7 +106,7 @@
             <VBox.margin>
                 <Insets left="24.0" top="12.0"/>
             </VBox.margin>
-            <Text fill="#212121" strokeType="OUTSIDE" strokeWidth="0.0" text="Credit card">
+            <Text  fx:id="paymentText" fill="#212121" strokeType="OUTSIDE" strokeWidth="0.0" text="Credit card">
                 <font>
                     <Font size="12.0"/>
                 </font>
@@ -125,8 +125,7 @@
                 <Insets top="18.0"/>
             </VBox.margin>
         </Separator>
-        <Text fill="#616161" layoutX="34.0" layoutY="269.0" strokeType="OUTSIDE" strokeWidth="0.0"
-              text="Loyalty Card">
+        <Text fill="#616161" layoutX="34.0" layoutY="269.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Loyalty Card">
             <font>
                 <Font size="18.0"/>
             </font>
@@ -160,8 +159,7 @@
                 </HBox.margin>
             </Text>
             <Text fx:id="emissionDate" fill="#757575" layoutX="152.0" layoutY="24.0" strokeType="OUTSIDE"
-                  strokeWidth="0.0"
-                  text="01/01/1970">
+                  strokeWidth="0.0" text="01/01/1970">
                 <HBox.margin>
                     <Insets left="24.0"/>
                 </HBox.margin>
@@ -171,8 +169,17 @@
             <VBox.margin>
                 <Insets top="24.0"/>
             </VBox.margin>
-            <Button mnemonicParsing="false" style="-fx-background-color: #0066FF;" text="Edit" textFill="#fafafa"
-                    onAction="#handleButtonEditAction">
+            <Button onAction="#handleBackAction" mnemonicParsing="false" style="-fx-background-color: #BDBDBD;"
+                    text="Back" textFill="#424242">
+                <font>
+                    <Font name="System Bold" size="12.0"/>
+                </font>
+                <HBox.margin>
+                    <Insets right="12.0"/>
+                </HBox.margin>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#handleButtonEditAction" style="-fx-background-color: #0066FF;"
+                    text="Edit" textFill="#fafafa">
                 <HBox.margin>
                     <Insets/>
                 </HBox.margin>

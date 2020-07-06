@@ -1,9 +1,93 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.AnchorPane?>
-<AnchorPane xmlns:fx="http://javafx.com/fxml"
-            xmlns="http://javafx.com/javafx"
-            fx:controller="org.example.client.controllers.PaymentController"
-            prefHeight="400.0" prefWidth="600.0">
 
-</AnchorPane>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<VBox xmlns:fx="http://javafx.com/fxml" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+      minWidth="-Infinity" prefWidth="500.0" xmlns="http://javafx.com/javafx"
+      fx:controller="org.example.client.controllers.PaymentController">
+    <MenuBar VBox.vgrow="NEVER">
+        <Menu mnemonicParsing="false" text="File">
+            <MenuItem mnemonicParsing="false" text="Close"/>
+        </Menu>
+    </MenuBar>
+    <VBox VBox.vgrow="ALWAYS">
+        <VBox.margin>
+            <Insets bottom="24.0" left="24.0" right="24.0" top="24.0"/>
+        </VBox.margin>
+        <Text fill="#212121" strokeType="OUTSIDE" strokeWidth="0.0" text="Payment method">
+            <font>
+                <Font size="18.0"/>
+            </font>
+        </Text>
+        <HBox spacing="56.0">
+            <VBox.margin>
+                <Insets left="12.0" right="12.0" top="12.0"/>
+            </VBox.margin>
+            <RadioButton mnemonicParsing="false" selected="true" text="Credit card" textFill="#212121">
+                <toggleGroup>
+                    <ToggleGroup fx:id="paymentMethod"/>
+                </toggleGroup>
+                <font>
+                    <Font size="12.0"/>
+                </font>
+            </RadioButton>
+            <RadioButton mnemonicParsing="false" text="PayPal" textFill="#212121"
+                         toggleGroup="$paymentMethod">
+                <font>
+                    <Font size="12.0"/>
+                </font>
+            </RadioButton>
+            <RadioButton mnemonicParsing="false" text="Cash on delivery" textFill="#212121"
+                         toggleGroup="$paymentMethod">
+                <font>
+                    <Font size="12.0"/>
+                </font>
+            </RadioButton>
+        </HBox>
+        <Separator prefWidth="200.0">
+            <VBox.margin>
+                <Insets left="4.0" right="4.0" top="18.0"/>
+            </VBox.margin>
+        </Separator>
+        <Text fill="#212121" strokeType="OUTSIDE" strokeWidth="0.0" text="Payment details">
+            <VBox.margin>
+                <Insets top="18.0"/>
+            </VBox.margin>
+            <font>
+                <Font size="18.0"/>
+            </font>
+        </Text>
+        <TextField fx:id="paymentDataTextField" promptText="Payment details">
+            <font>
+                <Font size="12.0"/>
+            </font>
+            <VBox.margin>
+                <Insets left="12.0" right="12.0" top="12.0"/>
+            </VBox.margin>
+        </TextField>
+        <HBox alignment="BOTTOM_RIGHT" VBox.vgrow="ALWAYS">
+            <VBox.margin>
+                <Insets top="48.0"/>
+            </VBox.margin>
+            <Button onAction="#handleCancelAction" mnemonicParsing="false" style="-fx-background-color: #BDBDBD;"
+                    text="Cancel"
+                    textFill="#424242">
+                <HBox.margin>
+                    <Insets right="12.0"/>
+                </HBox.margin>
+                <font>
+                    <Font name="System Bold" size="12.0"/>
+                </font>
+            </Button>
+            <Button mnemonicParsing="false" style="-fx-background-color: #0066FF;" text="Change"
+                    textFill="#fafafa">
+                <font>
+                    <Font name="System Bold" size="12.0"/>
+                </font>
+            </Button>
+        </HBox>
+    </VBox>
+</VBox>
