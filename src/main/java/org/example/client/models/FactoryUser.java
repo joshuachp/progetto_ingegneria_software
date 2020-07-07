@@ -46,12 +46,17 @@ public class FactoryUser {
      */
     public @Nullable User getUser(String session) {
         Response response = Utils.authenticate(session);
-        if (response != null && response.code() == 200) {
-            try {
-                return createUtente(new JSONObject(Objects.requireNonNull(response.body()).string()));
-            } catch (IOException e) {
-                e.printStackTrace();
+        if (response != null) {
+            if (response.code() == 200) {
+                try {
+                    JSONObject json = new JSONObject(Objects.requireNonNull(response.body()).string());
+                    Objects.requireNonNull(response.body()).close();
+                    return createUtente(json);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
+            Objects.requireNonNull(response.body()).close();
         }
         return null;
     }

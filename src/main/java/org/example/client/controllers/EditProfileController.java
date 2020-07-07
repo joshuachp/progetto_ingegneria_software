@@ -292,22 +292,28 @@ public class EditProfileController {
         Response response = Utils.updateUser(this.client, pass);
         if (response == null) {
             this.error.setVisible(true);
-        } else if (response.code() == 200) {
-            // Update session
-            Session session = Session.getInstance();
-            session.setUser(this.client);
-
-            ProfileController.showView(this.stage);
         } else {
-            // Set response error
-            if (response.body() != null) {
-                try {
-                    error.setText(Objects.requireNonNull(response.body()).string());
-                } catch (IOException e) {
-                    e.printStackTrace();
+            if (response.code() == 200) {
+                // Update session
+                Session session = Session.getInstance();
+                session.setUser(this.client);
+
+                ProfileController.showView(this.stage);
+
+            } else {
+                // Set response error
+                if (response.body() != null) {
+                    try {
+                        error.setText(Objects.requireNonNull(response.body()).string());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
+                this.error.setVisible(true);
+
             }
-            this.error.setVisible(true);
+
+            Objects.requireNonNull(response.body()).close();
         }
     }
 
