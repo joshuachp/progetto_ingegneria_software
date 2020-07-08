@@ -1,7 +1,8 @@
 package org.example.client.controllers;
 
+import javafx.application.Platform;
+import javafx.collections.MapChangeListener;
 import javafx.concurrent.Task;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -10,6 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import org.example.client.components.CartFactory;
+import org.example.client.models.Product;
 import org.example.client.utils.Session;
 
 import java.io.IOException;
@@ -21,7 +23,7 @@ public class CartController {
     public VBox vBoxCart;
 
     private Stage stage;
-
+    private List<Node> nodes = null;
 
     public static void showView(Stage stage) {
         FXMLLoader loader = new FXMLLoader(CartController.class.getResource("/views/cart.fxml"));
@@ -42,17 +44,26 @@ public class CartController {
 
     @FXML
     public void initialize() {
-        Task<List<Node>> loadProducts = new Task<>() {
-            @Override
-            protected List<Node> call() {
-                Session session = Session.getInstance();
-
-                return new CartFactory().getCartList(stage, session.getMapProducts().values());
-            }
-
-        };
-        loadProducts.setOnSucceeded((event) -> vBoxCart.getChildren().addAll(loadProducts.getValue()));
-        new Thread(loadProducts).start();
+        LoadTask loadTask = new LoadTask();
+        loadTask.setOnSucceeded((event) -> {
+            if (nodes != null)
+                vBoxCart.getChildren().removeAll(nodes);
+            this.nodes = loadTask.getValue();
+            vBoxCart.getChildren().addAll(this.nodes);
+        });
+        new Thread(loadTask).start();
+        Session.getInstance().getMapProducts()
+                .addListener((MapChangeListener<? super Integer, ? super Product>) change ->
+                        Platform.runLater(() -> {
+                            LoadTask task = new LoadTask();
+                            task.setOnSucceeded((event) -> {
+                                vBoxCart.getChildren().removeAll(nodes);
+                                this.nodes = task.getValue();
+                                vBoxCart.getChildren().addAll(this.nodes);
+                            });
+                            new Thread(task).start();
+                        })
+                );
     }
 
     public void setStage(Stage stage) {
@@ -64,7 +75,17 @@ public class CartController {
         CatalogController.showView(this.stage);
     }
 
-    public void handleConfirmationOrder(ActionEvent actionEvent) {
+    @FXML
+    public void handleConfirmationOrder() {
         CheckoutController.showView();
+    }
+
+    private class LoadTask extends Task<List<Node>> {
+        @Override
+        protected List<Node> call() {
+            Session session = Session.getInstance();
+            return new CartFactory().getCartList(stage, session.getMapProducts().values());
+        }
+
     }
 }

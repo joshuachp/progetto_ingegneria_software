@@ -103,7 +103,7 @@ public class CatalogController {
                         return new CatalogFactory().getCatalogList(stage, sectionMap,
                                 categoryList.size() > 0 ? categoryList.get(0) : "", searchBar.getText());
                     }
-                   
+
                     Objects.requireNonNull(response.body()).close();
                 }
 

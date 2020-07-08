@@ -1,12 +1,14 @@
 package org.example.client.utils;
 
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableMap;
 import org.example.client.models.FactoryUser;
 import org.example.client.models.Product;
 import org.example.client.models.User;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
-import java.util.Map;
 import java.util.prefs.Preferences;
 
 // XXX: NOT THREAD SAFE
@@ -18,7 +20,7 @@ public class Session {
 
     private static Session session = null;
     // Shopping cart
-    private final Map<Integer, Product> mapProducts = new HashMap<>();
+    private final ObservableMap<Integer, Product> mapProducts = FXCollections.observableMap(new HashMap<>());
     private final SimpleIntegerProperty cartQuantity = new SimpleIntegerProperty(this, "cartQuantity", 0);
     private User user;
     private boolean saveSession;
@@ -67,7 +69,7 @@ public class Session {
     }
 
     /**
-     * Add the product to the list of products if not present and increments its quantity by 1.
+     * Add the product to the list of products if not present and adds quantity.
      *
      * @param product The product to add.
      * @return The current product quantity
@@ -81,6 +83,19 @@ public class Session {
         this.cartQuantity.set(this.cartQuantity.get() + quantity);
 
         return product.getQuantity();
+    }
+
+    /**
+     * Change the quantity of a product
+     *
+     * @param productId The id of the product to change
+     */
+    public void setProductQuantity(Integer productId, Integer quantity) {
+        if (mapProducts.containsKey(productId)) {
+            Product product = mapProducts.get(productId);
+            this.cartQuantity.set(this.cartQuantity.get() + (quantity - product.getQuantity()));
+            product.setQuantity(quantity);
+        }
     }
 
     public User getUser() {
@@ -131,7 +146,7 @@ public class Session {
      *
      * @return List of products
      */
-    public Map<Integer, Product> getMapProducts() {
+    public ObservableMap<Integer, Product> getMapProducts() {
         return mapProducts;
     }
 
@@ -145,6 +160,18 @@ public class Session {
         if (this.saveSession) {
             Preferences preferences = Preferences.userNodeForPackage(Session.class);
             preferences.put(PREFERENCE_PAYMENT_DATA, paymentData);
+        }
+    }
+
+    /**
+     * Remove a product from the map
+     *
+     * @param productId Product to remove
+     */
+    public void removeProduct(@NotNull Integer productId) {
+        if (this.mapProducts.containsKey(productId)) {
+            Product product = this.mapProducts.remove(productId);
+            this.cartQuantity.set(this.cartQuantity.get() - product.getQuantity());
         }
     }
 }
