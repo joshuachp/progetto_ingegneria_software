@@ -1,6 +1,8 @@
 package org.example.client.utils;
 
+import javafx.stage.Stage;
 import okhttp3.*;
+import org.example.client.controllers.AuthController;
 import org.example.client.models.Client;
 import org.example.client.models.Manager;
 import org.example.client.models.User;
@@ -15,6 +17,7 @@ public class Utils {
     public static final String SERVER_URL = "http://localhost:8080";
     public static final String SERVER_URL_AUTH = "/api/user/authenticate";
     public static final String SERVER_URL_SESSION = "/api/user/session";
+    public static final String SERVER_URL_LOGOUT = "/api/user/logout";
     public static final String SERVER_URL_REGISTRATION = "/api/client/register";
     public static final String SERVER_URL_MANAGER_UPDATE = "/api/manager/update";
     public static final String SERVER_URL_CLIENT_UPDATE = "/api/client/update";
@@ -103,7 +106,7 @@ public class Utils {
      */
     public static int registerClient(String username, String password, String name, String surname,
                                      String address, Integer cap, String city,
-                                     String telephone, Integer payment, Integer cardNumber ) {
+                                     String telephone, Integer payment, Integer cardNumber) {
         OkHttpClient client = new OkHttpClient();
         RequestBody body = new FormBody.Builder()
                 .add("username", username)
@@ -224,6 +227,32 @@ public class Utils {
             e.printStackTrace();
         }
         return null;
+    }
+
+    /**
+     * Logout a user and return to authentication
+     *
+     * @param stage Main stage to redirect to auth
+     */
+    public static void logOut(Stage stage) {
+        Session session = Session.getInstance();
+        OkHttpClient client = new OkHttpClient();
+        RequestBody body = new FormBody.Builder()
+                .add("session", session.getUser().getSession())
+                .build();
+        Request request = new Request.Builder()
+                .url(SERVER_URL + SERVER_URL_LOGOUT)
+                .post(body)
+                .build();
+        try {
+            Response response = client.newCall(request).execute();
+            if (response.code() == 200) {
+                Session.destroyInstance();
+                AuthController.showView(stage);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }

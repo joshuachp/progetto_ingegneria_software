@@ -16,6 +16,7 @@ import org.example.client.components.CatalogFactory;
 import org.example.client.models.Product;
 import org.example.client.tasks.TaskCatalog;
 import org.example.client.utils.Session;
+import org.example.client.utils.Utils;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -98,6 +99,7 @@ public class CatalogController {
 
     @FXML
     public void handlerLogoutAction() {
+        Utils.logOut(this.stage);
     }
 
 
