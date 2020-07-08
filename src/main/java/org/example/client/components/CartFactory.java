@@ -11,6 +11,8 @@ import java.util.List;
 
 public class CartFactory {
 
+
+
     public List<Node> getCartList(Stage stage, Collection<Product> products) {
         ArrayList<Node> nodes = new ArrayList<>(products.size());
         for (Product product : products) {

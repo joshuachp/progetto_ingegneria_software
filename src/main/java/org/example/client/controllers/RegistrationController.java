@@ -6,10 +6,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import org.example.client.models.FactoryUser;
@@ -23,7 +20,7 @@ import java.io.IOException;
 import java.util.regex.Pattern;
 
 // TODO: Refactor validation and request should return response to show the server error
-public class RegistrazioneController {
+public class RegistrationController {
 
     @FXML
     public ComboBox<String> cbxPagamento;
@@ -34,7 +31,7 @@ public class RegistrazioneController {
     @FXML
     private PasswordField passwordRepeat;
     @FXML
-    private TextField rename;
+    private TextField email;
     @FXML
     private TextField name;
     @FXML
@@ -63,8 +60,8 @@ public class RegistrazioneController {
         }
         assert root != null;
 
-        RegistrazioneController registrazioneController = loader.getController();
-        registrazioneController.setStage(stage);
+        RegistrationController registrationController = loader.getController();
+        registrationController.setStage(stage);
 
         Scene scene = new Scene(root);
         stage.setScene(scene);
@@ -84,7 +81,6 @@ public class RegistrazioneController {
         this.stage = stage;
     }
 
-
     @FXML
     public void handlerSetPaymentAction() {
         this.paymentMethod = cbxPagamento.getSelectionModel().getSelectedIndex();
@@ -94,7 +90,6 @@ public class RegistrazioneController {
     public void handleBackAction() {
         AuthController.showView(this.stage);
     }
-
 
     public boolean passwordVerify(String password) {
         return Pattern.matches(Utils.REGEX_PASSWORD, password);
@@ -137,13 +132,11 @@ public class RegistrazioneController {
 
     @FXML
     public void handleConfirmAction() {
-        boolean error;
+        boolean error = false;
         resetErrorMessage();
 
-        if (name.getText().equals("")) {
-            error = true;
-            errorMessage("Il campo Nome è vuoto.", name);
-        }
+        if (name.getText().equals(""))
+            error = errorMessage("Il campo Nome è vuoto.", name);
 
         if (surname.getText().equals(""))
             error = errorMessage("Il campo Cognome è vuoto.", surname);
@@ -167,11 +160,12 @@ public class RegistrazioneController {
         } else
             error = errorMessage("Il campo Telefono è vuoto.", telephone);
 
-        if (rename.getText().equals(""))
-            if (!mailVerify(rename.getText())) {
-                error = errorMessage("La mail non è coretta.", rename);
-            }
-        error = errorMessage("Il campo E-mail è vuoto.", rename);
+        // verifica email
+        if (!email.getText().equals(""))
+            if(!mailVerify(email.getText()))
+                error = errorMessage("La mail non è coretta.", email);
+        else
+            error = errorMessage("Il campo email è vuoto.", email);
 
         // Verifica lunghezza password
         if (!password.getText().equals("")) {
@@ -187,14 +181,25 @@ public class RegistrazioneController {
         } else
             error = errorMessage("Il campo Ripeti password è vuoto.", passwordRepeat);
 
+        // inserimento card number solo se un numero
+        this.cardNumber.setTextFormatter(new TextFormatter<String>(change -> {
+            if (!change.isContentChange())
+                return change;
+            String text = change.getText();
+            if (text.isEmpty() || text.matches("^[\\d]*$")) {
+                return change;
+            }
+            return null;
+        }));
+
         if (!error) {
-            int statusCode = Utils.registerClient(rename.getText(), passwordRepeat.getText(), name.getText(),
+            int statusCode = Utils.registerClient(email.getText(), passwordRepeat.getText(), name.getText(),
                     surname.getText(), address.getText(), Integer.valueOf(cap.getText()), city.getText(),
-                    telephone.getText(), this.paymentMethod);
+                    telephone.getText(), this.paymentMethod, Integer.parseInt(this.cardNumber.getText()));
             if (statusCode == 200) {
                 errorMessage("Success" + statusCode, null);
 
-                User user = new FactoryUser().getUser(rename.getText(), passwordRepeat.getText());
+                User user = new FactoryUser().getUser(email.getText(), passwordRepeat.getText());
 
                 // Set user session
                 Session session = Session.getInstance();

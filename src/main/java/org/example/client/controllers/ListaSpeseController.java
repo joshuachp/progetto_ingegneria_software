@@ -197,6 +197,7 @@ public class ListaSpeseController {
 
         listaspesecontroller.setStage(stage);
 
+        /* // TEST
         Task<Void> task = new Task<>() {
             @Override
             protected Void call() throws Exception {
@@ -208,7 +209,7 @@ public class ListaSpeseController {
         };
 
         Thread th = new Thread(task);
-        th.start();
+        th.start();*/
 
     }
 

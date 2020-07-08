@@ -1,6 +1,7 @@
 package org.example.client.controllers;
 
 import javafx.concurrent.Task;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -20,6 +21,7 @@ public class CartController {
     public VBox vBoxCart;
 
     private Stage stage;
+
 
     public static void showView(Stage stage) {
         FXMLLoader loader = new FXMLLoader(CartController.class.getResource("/views/cart.fxml"));
@@ -44,6 +46,7 @@ public class CartController {
             @Override
             protected List<Node> call() {
                 Session session = Session.getInstance();
+
                 return new CartFactory().getCartList(stage, session.getMapProducts().values());
             }
 
@@ -59,5 +62,9 @@ public class CartController {
     @FXML
     public void handleBackAction() {
         CatalogController.showView(this.stage);
+    }
+
+    public void handleConfirmationOrder(ActionEvent actionEvent) {
+        CheckoutController.showView();
     }
 }

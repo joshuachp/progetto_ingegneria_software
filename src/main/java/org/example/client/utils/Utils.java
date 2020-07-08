@@ -103,7 +103,7 @@ public class Utils {
      */
     public static int registerClient(String username, String password, String name, String surname,
                                      String address, Integer cap, String city,
-                                     String telephone, Integer payment) {
+                                     String telephone, Integer payment, Integer cardNumber ) {
         OkHttpClient client = new OkHttpClient();
         RequestBody body = new FormBody.Builder()
                 .add("username", username)
@@ -115,6 +115,7 @@ public class Utils {
                 .add("city", city)
                 .add("telephone", telephone)
                 .add("payment", String.valueOf(payment))
+                .add("loyalty_card_number", cardNumber.toString())
                 .build();
         Request request = new Request.Builder()
                 .url(SERVER_URL + SERVER_URL_REGISTRATION)

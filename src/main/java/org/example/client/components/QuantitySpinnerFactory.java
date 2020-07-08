@@ -17,4 +17,15 @@ public class QuantitySpinnerFactory {
             spinnerValueFactory.setValue(max);
         return quantity;
     }
+
+    public Spinner<Integer> getCartSpinner(@NotNull Product product, @NotNull Spinner<Integer> quantity){
+        int max = product.getAvailability();
+        int min = 1;
+        SpinnerValueFactory<Integer> spinnerValueFactory =
+                new SpinnerValueFactory.IntegerSpinnerValueFactory(min, max);
+        quantity.setValueFactory(spinnerValueFactory);
+        if (quantity.getValue() > max)
+            spinnerValueFactory.setValue(product.getQuantity());
+        return quantity;
+    }
 }
