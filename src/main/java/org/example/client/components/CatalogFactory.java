@@ -38,8 +38,8 @@ public class CatalogFactory {
         // Check each product
         for (Product product : products) {
             if (newSearch.isEmpty() ||
-                    product.getName().contains(newSearch) ||
-                    product.getCharacteristics().contains(newSearch)) {
+                    product.getName().toLowerCase().contains(newSearch) ||
+                    product.getCharacteristics().toLowerCase().contains(newSearch)) {
                 nodes.add(CardController.generateCard(stage, product));
             }
         }
