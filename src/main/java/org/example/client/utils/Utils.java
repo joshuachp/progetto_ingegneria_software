@@ -1,5 +1,6 @@
 package org.example.client.utils;
 
+import javafx.collections.ObservableMap;
 import okhttp3.*;
 import org.example.client.models.Client;
 import org.example.client.models.Manager;
@@ -130,7 +131,6 @@ public class Utils {
         return -1;
     }
 
-
     /**
      * Update the user information on the server
      *
@@ -225,5 +225,7 @@ public class Utils {
         }
         return null;
     }
+
+
 
 }

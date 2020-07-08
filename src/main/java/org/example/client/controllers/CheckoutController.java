@@ -48,7 +48,7 @@ public class CheckoutController {
 
     public void confirmOrder(ActionEvent actionEvent) {
         Session session = Session.getInstance();
-        Map<Integer, Product> productsToOrder = session.getMapProducts();
+
 
     }
 
