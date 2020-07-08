@@ -2,6 +2,7 @@ package org.example.client.controllers;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -99,11 +100,20 @@ public class CatalogController {
 
     // Card builder
     public void refreshProducts() {
-        ObservableList<Node> list = this.flowPaneProducts.getChildren();
-        list.removeAll(this.catalogNodes);
-        this.catalogNodes = new CatalogFactory().getCatalogList(this.stage, this.sectionMap,
-                this.listCategory.getSelectionModel().getSelectedItem(), this.searchBar.getText(), this.sortOrder);
-        list.addAll(this.catalogNodes);
+        Task<List<Node>> task = new Task<>() {
+            @Override
+            protected List<Node> call() {
+                return new CatalogFactory().getCatalogList(stage, sectionMap,
+                        listCategory.getSelectionModel().getSelectedItem(), searchBar.getText(), sortOrder);
+            }
+        };
+        task.setOnSucceeded(event -> {
+            ObservableList<Node> list = this.flowPaneProducts.getChildren();
+            list.removeAll(this.catalogNodes);
+            this.catalogNodes = task.getValue();
+            list.addAll(this.catalogNodes);
+        });
+        new Thread(task).start();
     }
 
     public void setStage(Stage stage) {
