@@ -9,6 +9,7 @@ import okhttp3.Response;
 import org.example.client.components.CatalogFactory;
 import org.example.client.controllers.CatalogController;
 import org.example.client.models.Product;
+import org.example.client.models.SortOrder;
 import org.example.client.utils.Session;
 import org.example.client.utils.Utils;
 import org.json.JSONObject;
@@ -25,13 +26,15 @@ public class TaskCatalog extends Task<List<Node>> {
     private final Map<String, ArrayList<Product>> sectionMap;
     private final Stage stage;
     private final TextField searchBar;
+    private final SortOrder sortOrder;
 
     public TaskCatalog(Map<String, ArrayList<Product>> sectionMap, ObservableList<String> categoryList, Stage stage,
-                       TextField searchBar) {
+                       TextField searchBar, SortOrder sortOrder) {
         this.sectionMap = sectionMap;
         this.categoryList = categoryList;
         this.stage = stage;
         this.searchBar = searchBar;
+        this.sortOrder = sortOrder;
     }
 
     @Override
@@ -73,7 +76,7 @@ public class TaskCatalog extends Task<List<Node>> {
                 categoryList.addAll(sectionMap.keySet());
                 // The  section can not be null
                 return new CatalogFactory().getCatalogList(stage, sectionMap,
-                        categoryList.size() > 0 ? categoryList.get(0) : "", searchBar.getText());
+                        categoryList.size() > 0 ? categoryList.get(0) : "", searchBar.getText(), this.sortOrder);
             }
 
             Objects.requireNonNull(response.body()).close();

@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.FlowPane;
@@ -14,6 +15,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.example.client.components.CatalogFactory;
 import org.example.client.models.Product;
+import org.example.client.models.SortOrder;
 import org.example.client.tasks.TaskCatalog;
 import org.example.client.utils.Session;
 import org.example.client.utils.Utils;
@@ -39,9 +41,12 @@ public class CatalogController {
     public FlowPane flowPaneProducts;
     @FXML
     public Text textCartQuantity;
+    @FXML
+    public ComboBox<String> comboBoxSort;
 
     private Stage stage;
     private List<Node> catalogNodes;
+    private SortOrder sortOrder = SortOrder.ASCENDING;
 
     public static void showView(Stage stage) {
         FXMLLoader loader = new FXMLLoader(CatalogController.class.getResource("/views/catalog.fxml"));
@@ -62,11 +67,19 @@ public class CatalogController {
 
     @FXML
     public void initialize() {
+        comboBoxSort.setItems(FXCollections.observableList(SortOrder.getSortOrders()));
+        comboBoxSort.getSelectionModel().selectFirst();
+        comboBoxSort.valueProperty().addListener((observable, oldValue, newValue) -> {
+            this.sortOrder = SortOrder.values()[comboBoxSort.getSelectionModel().getSelectedIndex()];
+            refreshProducts();
+        });
+
         Session session = Session.getInstance();
         this.listCategory.setItems(this.categoryList);
         this.sectionMap.put(SECTION_ALL, new ArrayList<>());
 
-        TaskCatalog taskCatalog = new TaskCatalog(this.sectionMap, this.categoryList, this.stage, this.searchBar);
+        TaskCatalog taskCatalog = new TaskCatalog(this.sectionMap, this.categoryList, this.stage, this.searchBar,
+                sortOrder);
         taskCatalog.setOnSucceeded((event -> {
             // Set section map to the task value
             this.catalogNodes = taskCatalog.getValue();
@@ -89,7 +102,7 @@ public class CatalogController {
         ObservableList<Node> list = this.flowPaneProducts.getChildren();
         list.removeAll(this.catalogNodes);
         this.catalogNodes = new CatalogFactory().getCatalogList(this.stage, this.sectionMap,
-                this.listCategory.getSelectionModel().getSelectedItem(), this.searchBar.getText());
+                this.listCategory.getSelectionModel().getSelectedItem(), this.searchBar.getText(), this.sortOrder);
         list.addAll(this.catalogNodes);
     }
 

@@ -19,6 +19,6 @@ public enum Payment {
 
     @Override
     public String toString() {
-        return pagamento;
+        return this.pagamento;
     }
 }
