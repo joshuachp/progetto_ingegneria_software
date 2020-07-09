@@ -4,12 +4,14 @@ import javafx.collections.ObservableMap;
 import okhttp3.*;
 import org.example.client.models.Client;
 import org.example.client.models.Manager;
+import org.example.client.models.Payment;
 import org.example.client.models.User;
 import org.intellij.lang.annotations.RegExp;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
+import java.util.Date;
 
 public class Utils {
 
@@ -22,6 +24,7 @@ public class Utils {
     public static final String SERVER_URL_GET_ALL_PRODUCT = "/api/product/all";
     // Format for URL `/api/card/{cardNumber}`
     public static final String SERVER_URL_GET_LOYALTY_CARD = "/api/card/%d";
+    public static final String SERVER_URL_CREATE_ORDER = "/api/order/create";
 
     // REGEX String utils
     @RegExp
@@ -226,6 +229,24 @@ public class Utils {
         return null;
     }
 
+    public static @Nullable Response createOrder(Payment payment, Date deliveryStart, Date deliveryEnd, int state,
+                                                 int userID){
+        /*OkHttpClient client = new OkHttpClient();
+        RequestBody body = new FormBody.Builder()
+                .add("session", session)
+                .build();
+        Request request = new Request.Builder()
+                .url(String.format(SERVER_URL + SERVER_URL_CREATE_ORDER))
+                .post(body)
+                .build();
+        try {
+            return client.newCall(request).execute();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }*/
+        return null;
+
+    }
 
 
 }
