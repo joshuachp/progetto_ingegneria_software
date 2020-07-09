@@ -3,6 +3,9 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -10,32 +13,74 @@
 <?import javafx.scene.text.Text?>
 
 <AnchorPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.client.controllers.CheckoutController">
-   <children>
-      <VBox alignment="TOP_CENTER" layoutX="76.0" layoutY="66.0" prefHeight="200.0" prefWidth="500.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Sei sicuro di voler procedere all'acquisto?" textAlignment="CENTER">
-               <VBox.margin>
-                  <Insets top="56.0" />
-               </VBox.margin>
-               <font>
-                  <Font size="13.0" />
-               </font>
-            </Text>
-            <VBox prefHeight="32.0" />
-            <HBox alignment="CENTER" prefHeight="64.0" prefWidth="200.0">
-               <children>
-                  <Button mnemonicParsing="false" onAction="#confirmOrder" prefWidth="64.0" style="-fx-background-color: #0066FF;" text="Ok" textFill="WHITE">
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor></Button>
-                  <HBox prefWidth="32.0" />
-                  <Button mnemonicParsing="false" onAction="#cancelConfirmation" prefWidth="64.0" style="-fx-background-color: #DDDDDD;" text="Cancel">
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor></Button>
-               </children>
-            </HBox>
-         </children>
-      </VBox>
-   </children>
+    <children>
+        <VBox alignment="TOP_CENTER" layoutX="76.0" layoutY="66.0" prefHeight="232.0" prefWidth="500.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <children>
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Vuoi procedere all'acquisto? Seleziona un orario per la consegna" textAlignment="CENTER">
+                    <VBox.margin>
+                        <Insets bottom="16.0" top="32.0" />
+                    </VBox.margin>
+                    <font>
+                        <Font size="13.0" />
+                    </font>
+                </Text>
+                <VBox prefHeight="32.0">
+                    <children>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                            <children>
+                                <VBox alignment="CENTER">
+                                    <children>
+                                        <Text fill="#0000009b" strokeType="OUTSIDE" strokeWidth="0.0" text="Data di consegna">
+                                            <VBox.margin>
+                                                <Insets bottom="8.0" />
+                                            </VBox.margin>
+                                        </Text>
+                                        <DatePicker fx:id="datePicker">
+                                            <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                            </cursor>
+                                        </DatePicker>
+                                    </children>
+                                </VBox>
+                                <VBox alignment="CENTER">
+                                    <HBox.margin>
+                                        <Insets left="32.0" />
+                                    </HBox.margin>
+                                    <children>
+                                        <Text fill="#0000009b" strokeType="OUTSIDE" strokeWidth="0.0" text="Ora di consegna">
+                                            <VBox.margin>
+                                                <Insets bottom="8.0" />
+                                            </VBox.margin>
+                                        </Text>
+                                        <ComboBox fx:id="hourComboBox" prefWidth="150.0">
+                                            <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                            </cursor>
+                                        </ComboBox>
+                                    </children>
+                                </VBox>
+                            </children>
+                        </HBox>
+                    </children>
+                </VBox>
+                <VBox alignment="CENTER" VBox.vgrow="ALWAYS" />
+            <Label fx:id="label" textFill="RED" />
+                <HBox alignment="CENTER" prefHeight="64.0" prefWidth="200.0">
+                    <children>
+                        <Button mnemonicParsing="false" onAction="#confirmOrder" prefWidth="72.0" style="-fx-background-color: #0066FF;" text="Conferma" textFill="WHITE">
+                            <cursor>
+                                <Cursor fx:constant="HAND" />
+                            </cursor>
+                        </Button>
+                        <HBox prefWidth="32.0" />
+                        <Button mnemonicParsing="false" onAction="#cancelConfirmation" prefWidth="72.0" style="-fx-background-color: #DDDDDD;" text="Cancella">
+                            <cursor>
+                                <Cursor fx:constant="HAND" />
+                            </cursor>
+                        </Button>
+                    </children>
+                </HBox>
+            </children>
+        </VBox>
+    </children>
 </AnchorPane>

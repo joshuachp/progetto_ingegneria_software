@@ -1,10 +1,12 @@
 package org.example.client.utils;
 
+import javafx.collections.ObservableMap;
 import javafx.stage.Stage;
 import okhttp3.*;
 import org.example.client.controllers.AuthController;
 import org.example.client.models.Client;
 import org.example.client.models.Manager;
+import org.example.client.models.enums.Payment;
 import org.example.client.models.Order;
 import org.example.client.models.User;
 import org.intellij.lang.annotations.RegExp;
@@ -16,6 +18,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Date;
 import java.util.Objects;
 
 public class Utils {
@@ -31,6 +34,7 @@ public class Utils {
     public static final String SERVER_URL_GET_ALL_ORDERS = "/api/order/all";
     // Format for URL `/api/card/{cardNumber}`
     public static final String SERVER_URL_GET_LOYALTY_CARD = "/api/card/%d";
+    public static final String SERVER_URL_CREATE_ORDER = "/api/order/create";
 
     // REGEX String utils
     @RegExp
@@ -140,7 +144,6 @@ public class Utils {
         return -1;
     }
 
-
     /**
      * Update the user information on the server
      *
@@ -233,6 +236,25 @@ public class Utils {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public static @Nullable Response createOrder(Payment payment, Date deliveryStart, Date deliveryEnd, int state,
+                                                 int userID){
+        /*OkHttpClient client = new OkHttpClient();
+        RequestBody body = new FormBody.Builder()
+                .add("session", session)
+                .build();
+        Request request = new Request.Builder()
+                .url(String.format(SERVER_URL + SERVER_URL_CREATE_ORDER))
+                .post(body)
+                .build();
+        try {
+            return client.newCall(request).execute();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }*/
+        return null;
+
     }
 
     /**

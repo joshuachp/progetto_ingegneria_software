@@ -57,14 +57,13 @@ public class CartItemController {
             setImage(product.getImage());
         this.textProduct.setText(product.getName());
         this.textBrand.setText(product.getBrand());
-        this.textTotal.setText(String.format("€ %.2f", product.getQuantity() * product.getPrice()));
-
+        this.textTotal.setText(String.format("\u20ac %.2f", product.getQuantity() * product.getPrice()));
         // Set spinner
         SpinnerValueFactory<Integer> spinnerValueFactory = new QuantitySpinnerFactory().getCartSpinner(product);
         spinnerValueFactory.valueProperty().addListener((observable, oldValue, newValue) -> {
             Session session = Session.getInstance();
             session.setProductQuantity(this.product.getId(), newValue);
-            this.textTotal.setText(String.format("€ %.2f", this.product.getPrice() * this.product.getQuantity()));
+            this.textTotal.setText(String.format("\u20ac %.2f", this.product.getPrice() * this.product.getQuantity()));
         });
         this.spinnerQuantity.setValueFactory(spinnerValueFactory);
     }
