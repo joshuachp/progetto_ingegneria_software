@@ -17,7 +17,12 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import javafx.util.Callback;
+import jdk.jshell.execution.Util;
+import okhttp3.Response;
 import org.example.client.models.Product;
+import org.example.client.utils.Session;
+import org.example.client.utils.Utils;
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -30,10 +35,11 @@ public class ProductListController {
     public TableColumn<Product, Integer> IDCol;
     public TableColumn<Product, String> NameCol;
     public TableColumn<Product, String> QuantityCol;
+    public TableColumn<Product, Float> PriceCol;
+    public TableColumn<Product, String> BrandCol;
     public Button buttonimportproductlist;
     public Button buttonaddproduct;
-    public TableColumn<Product, Double> PriceCol;
-    public TableColumn<Product, String> BrandCol;
+
     private Stage stage;
 
     // View generation
@@ -51,17 +57,38 @@ public class ProductListController {
         stage.setScene(scene);
         stage.setTitle("Lista Prodotti");
         stage.show();
+
         ProductListController productListController = loader.getController();
+        productListController.setStage(stage);
+    }
+
+    public void initialize() throws IOException {
+
         // TODO: get products from server
+        String session = Session.getInstance().getUser().getSession();
+        Response response = Utils.getAllProducts(session);
+        ObservableList<Product> products = FXCollections.observableArrayList();
+        if (response != null) {
+            if (response.code() == 200 && response.body() != null) {
+                JSONObject json = new JSONObject(Objects.requireNonNull(response.body()).string());
+                Objects.requireNonNull(response.body()).close();
+                // Test for products array
+                assert json.has("products");
+                for (Object t : json.getJSONArray("products")) {
+                    JSONObject jsonProduct = (JSONObject) t;
+                    Product product = new Product((JSONObject)t);
+                    products.add(product);
+                }
+            }
+        }
         // Test products
-        ObservableList<Product> products = FXCollections.observableArrayList(
-                new Product(1, "Pasta n10", "Barilla", 1,
-                        1.72f, "C:\\Users\\david\\Pictures\\Saved Pictures\\34779.jpg", 1, "Pasta", "Alimneti"),
-                new Product(2, "Formaggio grattuggiato", "Parmiggiano Reggiano", 1,
-                        3.50f, "prova", 1, "Formaggi", "Alimneti"));
+        /*ObservableList<Product> products = FXCollections.observableArrayList(
+
+                new Product(123, "Prova", "Test", 2, (float) 12.50, null,
+                        3, "Vegan", "Verdura"));*/
 
         // Clickable link for ID column
-        productListController.IDCol.setCellFactory(new Callback<TableColumn<Product, Integer>,
+        this.IDCol.setCellFactory(new Callback<TableColumn<Product, Integer>,
                 TableCell<Product, Integer>>() {
             @Override
             public TableCell<Product, Integer> call(TableColumn<Product, Integer> col) {
@@ -97,16 +124,16 @@ public class ProductListController {
             }
         });
 
-        productListController.tableview.setEditable(true); // To allow modify quantity directly in tableview
+        this.tableview.setEditable(true); // To allow modify quantity directly in tableview
         // Columns initialization
-        productListController.IDCol.setCellValueFactory(new PropertyValueFactory<>("ID"));
-        productListController.NameCol.setCellValueFactory(new PropertyValueFactory<>("Name"));
-        productListController.BrandCol.setCellValueFactory(new PropertyValueFactory<>("Brand"));
-        productListController.PriceCol.setCellValueFactory(new PropertyValueFactory<>("Price"));
-        productListController.QuantityCol.setCellValueFactory(new PropertyValueFactory<>("Availability"));
-        productListController.QuantityCol.setCellFactory(TextFieldTableCell.forTableColumn());
-        productListController.QuantityCol.setEditable(true);
-        productListController.QuantityCol.setOnEditCommit(event -> {
+        this.IDCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+        this.NameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
+        this.BrandCol.setCellValueFactory(new PropertyValueFactory<>("brand"));
+        this.PriceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
+        this.QuantityCol.setCellValueFactory(new PropertyValueFactory<>("availability"));
+        this.QuantityCol.setCellFactory(TextFieldTableCell.forTableColumn());
+        this.QuantityCol.setEditable(true);
+        this.QuantityCol.setOnEditCommit(event -> {
             event.getRowValue().setAvailability(Integer.parseInt(event.getNewValue()));
             // TODO: implements server update on edit
             System.out.println(event.getRowValue().getAvailability());
@@ -120,29 +147,29 @@ public class ProductListController {
                 columnFilterEnum.PRICE.toString(),
                 columnFilterEnum.QUANTITY.toString());
 
-        productListController.CbxColumn.setItems(columnFilterString);
-        productListController.CbxColumn.setValue(ListaSpeseController.columnFilterEnum.ID.toString());
+        this.CbxColumn.setItems(columnFilterString);
+        this.CbxColumn.setValue(ListaSpeseController.columnFilterEnum.ID.toString());
 
         FilteredList<Product> flproducts = new FilteredList<>(products, p -> true);
 
-        productListController.Search.setOnKeyReleased(keyEvent ->
+        this.Search.setOnKeyReleased(keyEvent ->
         {
             // Switch on choiceBox value
-            switch (Objects.requireNonNull(ProductListController.columnFilterEnum.fromString(productListController.CbxColumn.getValue()))) {
+            switch (Objects.requireNonNull(columnFilterEnum.fromString(this.CbxColumn.getValue()))) {
                 case ID:
-                    flproducts.setPredicate(p -> p.getId().toString().contains(productListController.Search.getText().trim()));
+                    flproducts.setPredicate(p -> p.getId().toString().contains(this.Search.getText().trim()));
                     break;
                 case NAME:
-                    flproducts.setPredicate(p -> p.getName().toLowerCase().contains(productListController.Search.getText().toLowerCase().trim()));
+                    flproducts.setPredicate(p -> p.getName().toLowerCase().contains(this.Search.getText().toLowerCase().trim()));
                     break;
                 case BRAND:
-                    flproducts.setPredicate(p -> p.getBrand().toLowerCase().contains(productListController.Search.getText().toLowerCase().trim()));
+                    flproducts.setPredicate(p -> p.getBrand().toLowerCase().contains(this.Search.getText().toLowerCase().trim()));
                     break;
                 case PRICE:
-                    flproducts.setPredicate(p -> p.getPrice().toString().contains(productListController.Search.getText().trim()));
+                    flproducts.setPredicate(p -> p.getPrice().toString().contains(this.Search.getText().trim()));
                     break;
                 case QUANTITY:
-                    flproducts.setPredicate(p -> p.getAvailability().toString().contains(productListController.Search.getText().trim()));
+                    flproducts.setPredicate(p -> p.getAvailability().toString().contains(this.Search.getText().trim()));
                     break;
             }
         });
@@ -150,11 +177,12 @@ public class ProductListController {
         // Wrap the FilteredList in a SortedList.
         SortedList<Product> sortedData = new SortedList<>(flproducts);
         // Bind the SortedList comparator to the TableView comparator.
-        sortedData.comparatorProperty().bind(productListController.tableview.comparatorProperty());
+        sortedData.comparatorProperty().bind(this.tableview.comparatorProperty());
 
-        productListController.tableview.setItems(sortedData);
+        this.tableview.setItems(sortedData);
 
-        productListController.setStage(stage);
+        this.setStage(stage);
+
     }
 
     private static void handleModifyProduct(Product product, boolean modify) throws IOException {
