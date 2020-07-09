@@ -75,8 +75,7 @@ class SessionTest {
     @Test
     void addProduct() {
         Session session = Session.getInstance();
-        Product product = new Product(1, "Name", "Brand", 1, 1., null,
-                1, "", "Section");
+        Product product = new Product(1, "Name", "Brand", 1, 1.0f, null, 1, "", "Section");
 
         assertEquals(0, session.getCartQuantity().get());
         assertEquals(1, session.addProduct(product, 1));
@@ -84,7 +83,7 @@ class SessionTest {
         assertEquals(3, session.addProduct(product, 2));
         assertEquals(3, session.getCartQuantity().get());
 
-        product = new Product(2, "Name", "Brand", 1, 1., null,
+        product = new Product(2, "Name", "Brand", 1, 1.0f, null,
                 1, "", "Section");
 
         assertEquals(2, session.addProduct(product, 2));
@@ -172,8 +171,7 @@ class SessionTest {
     @Test
     void getMapProducts() {
         Session session = Session.getInstance();
-        Product product = new Product(1, "Name", "Brand", 1, 1., null,
-                1, "", "Section");
+        Product product = new Product(1, "Name", "Brand", 1, 1.0f, null, 1, "", "Section");
 
         assertEquals(1, session.addProduct(product, 1));
         assertEquals(2, session.addProduct(product, 1));

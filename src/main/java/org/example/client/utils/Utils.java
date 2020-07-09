@@ -14,9 +14,9 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 public class Utils {
 
@@ -261,7 +261,15 @@ public class Utils {
         }
     }
 
-    public static Set<Order> getAllOrders(String session) throws Exception {
+    /**
+     * Request all the orders of a user to the server.
+     *
+     * @param session User session
+     * @return List of the user orders
+     * @throws Exception {@link IOException} if request fails and {@link Exception} if the requests returns error
+     *                   code. Sets the request body as the exception message
+     */
+    public static @NotNull List<Order> getAllOrders(String session) throws Exception {
         OkHttpClient client = new OkHttpClient();
         RequestBody body = new FormBody.Builder()
                 .add("session", session)
@@ -279,7 +287,11 @@ public class Utils {
         JSONObject json = new JSONObject(Objects.requireNonNull(response.body()).string());
         Objects.requireNonNull(response.body()).close();
         JSONArray array = json.getJSONArray("orders");
-        return array.toList().stream().map(object -> new Order((JSONObject) object)).collect(Collectors.toSet());
+        ArrayList<Order> list = new ArrayList<>(array.length());
+        for (int i = 0; i < array.length(); i++) {
+            list.add(new Order(array.getJSONObject(i)));
+        }
+        return list;
     }
 
 }

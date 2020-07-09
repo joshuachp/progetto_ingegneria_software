@@ -16,7 +16,6 @@ public class Order {
     private final Date deliveryEnd;
     private final OrderSate state;
 
-
     public Order(Integer id, Float total, Payment payment, Date deliveryStart, Date deliveryEnd, OrderSate state) {
         this.id = id;
         this.total = total;
@@ -25,7 +24,6 @@ public class Order {
         this.deliveryEnd = deliveryEnd;
         this.state = state;
     }
-
     public Order(JSONObject json) {
         this(json.getInt("id"),
                 json.getFloat("total"),
@@ -33,5 +31,29 @@ public class Order {
                 new java.util.Date(json.getLong("deliveryStart")),
                 new java.util.Date(json.getLong("deliveryEnd")),
                 OrderSate.values()[json.getInt("state")]);
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public Float getTotal() {
+        return total;
+    }
+
+    public Payment getPayment() {
+        return payment;
+    }
+
+    public Date getDeliveryStart() {
+        return deliveryStart;
+    }
+
+    public Date getDeliveryEnd() {
+        return deliveryEnd;
+    }
+
+    public OrderSate getState() {
+        return state;
     }
 }
