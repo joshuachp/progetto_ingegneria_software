@@ -28,15 +28,14 @@ public class GestioneProdottiController {
     public TextField fieldQuantity;
     public Label resultLabel;
     public ImageView thumbnail;
-
+    Product product;
     private Stage stage = new Stage();
 
-    Product product;
-
-    public void showView(@Nullable Product product, boolean modify) throws IOException  {
+    public void showView(@Nullable Product product, boolean modify) throws IOException {
 
         //TODO: field charateristics and section
-        FXMLLoader loader = new FXMLLoader(GestioneProdottiController.class.getResource("/views/gestione-prodotti.fxml"));
+        FXMLLoader loader = new FXMLLoader(GestioneProdottiController.class.getResource("/views/gestione-prodotti" +
+                ".fxml"));
         Parent root = null;
         try {
             root = loader.load();
@@ -52,7 +51,7 @@ public class GestioneProdottiController {
 
         gestioneProdottiController.product = product;
 
-        if (modify){
+        if (modify) {
             assert product != null;
             stage.setTitle("Modifica prodotto " + product.getId());
             gestioneProdottiController.fieldBrand.setText(product.getBrand());
@@ -72,7 +71,7 @@ public class GestioneProdottiController {
         product.setBrand(fieldBrand.getText());
         product.setImage(thumbnail.getImage().getUrl());
         product.setAvailability(Integer.parseInt(fieldQuantity.getText()));
-        product.setPrice(Double.parseDouble(fieldPrice.getText()));
+        product.setPrice(Float.valueOf(fieldPrice.getText()));
         product.setName(fieldName.getText());
         product.setPackageSize(Integer.parseInt(fieldPackage.getText()));
         //product.setCharacteristics(fieldBrand.getText());
