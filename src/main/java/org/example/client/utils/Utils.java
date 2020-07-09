@@ -1,27 +1,37 @@
 package org.example.client.utils;
 
 import javafx.collections.ObservableMap;
+import javafx.stage.Stage;
 import okhttp3.*;
+import org.example.client.controllers.AuthController;
 import org.example.client.models.Client;
 import org.example.client.models.Manager;
 import org.example.client.models.Payment;
+import org.example.client.models.Order;
 import org.example.client.models.User;
 import org.intellij.lang.annotations.RegExp;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.Date;
+import java.util.Objects;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class Utils {
 
     public static final String SERVER_URL = "http://localhost:8080";
     public static final String SERVER_URL_AUTH = "/api/user/authenticate";
     public static final String SERVER_URL_SESSION = "/api/user/session";
+    public static final String SERVER_URL_LOGOUT = "/api/user/logout";
     public static final String SERVER_URL_REGISTRATION = "/api/client/register";
     public static final String SERVER_URL_MANAGER_UPDATE = "/api/manager/update";
     public static final String SERVER_URL_CLIENT_UPDATE = "/api/client/update";
     public static final String SERVER_URL_GET_ALL_PRODUCT = "/api/product/all";
+    public static final String SERVER_URL_GET_ALL_ORDERS = "/api/order/all";
     // Format for URL `/api/card/{cardNumber}`
     public static final String SERVER_URL_GET_LOYALTY_CARD = "/api/card/%d";
     public static final String SERVER_URL_CREATE_ORDER = "/api/order/create";
@@ -107,7 +117,7 @@ public class Utils {
      */
     public static int registerClient(String username, String password, String name, String surname,
                                      String address, Integer cap, String city,
-                                     String telephone, Integer payment, Integer cardNumber ) {
+                                     String telephone, Integer payment, Integer cardNumber) {
         OkHttpClient client = new OkHttpClient();
         RequestBody body = new FormBody.Builder()
                 .add("username", username)
@@ -171,7 +181,6 @@ public class Utils {
             body.add("telephone", client.getTelephone());
             body.add("payment", client.getPaymentInteger().toString());
             body.add("card_number", client.getCardNumber().toString());
-            // TODO: payment method
         }
         // Send request
         try {
@@ -248,5 +257,51 @@ public class Utils {
 
     }
 
+    /**
+     * Logout a user and return to authentication
+     *
+     * @param stage Main stage to redirect to auth
+     */
+    public static void logOut(Stage stage) {
+        Session session = Session.getInstance();
+        OkHttpClient client = new OkHttpClient();
+        RequestBody body = new FormBody.Builder()
+                .add("session", session.getUser().getSession())
+                .build();
+        Request request = new Request.Builder()
+                .url(SERVER_URL + SERVER_URL_LOGOUT)
+                .post(body)
+                .build();
+        try {
+            Response response = client.newCall(request).execute();
+            if (response.code() == 200) {
+                Session.destroyInstance();
+                AuthController.showView(stage);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static Set<Order> getAllOrders(String session) throws Exception {
+        OkHttpClient client = new OkHttpClient();
+        RequestBody body = new FormBody.Builder()
+                .add("session", session)
+                .build();
+        Request request = new Request.Builder()
+                .url(SERVER_URL + SERVER_URL_GET_ALL_ORDERS)
+                .post(body)
+                .build();
+        Response response = client.newCall(request).execute();
+        if (response.code() != 200) {
+            String error = Objects.requireNonNull(response.body()).string();
+            Objects.requireNonNull(response.body()).close();
+            throw new Exception(error);
+        }
+        JSONObject json = new JSONObject(Objects.requireNonNull(response.body()).string());
+        Objects.requireNonNull(response.body()).close();
+        JSONArray array = json.getJSONArray("orders");
+        return array.toList().stream().map(object -> new Order((JSONObject) object)).collect(Collectors.toSet());
+    }
 
 }

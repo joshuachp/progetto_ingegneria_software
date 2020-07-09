@@ -87,8 +87,8 @@ class UtilsTest {
     public void registerClient() {
         this.server.enqueue(new MockResponse()
                 .setBody("OK"));
-        assertEquals(200, (Utils.registerClient("username", "password", "Name", "Surname",
-                "Address", 33333, "City", "3334445555", 1)));
+        assertEquals(200, (Utils.registerClient("username", "password", "Name", "Surname", "Address", 33333, "City",
+                "3334445555", 1, 1234)));
     }
 
 

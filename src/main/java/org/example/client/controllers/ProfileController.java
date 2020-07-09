@@ -9,7 +9,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.example.client.models.Client;
 import org.example.client.models.LoyaltyCard;
-import org.example.client.models.Payment;
+import org.example.client.models.enums.Payment;
 import org.example.client.tasks.TaskCardPoints;
 import org.example.client.utils.Session;
 
@@ -128,5 +128,10 @@ public class ProfileController {
         Session session = Session.getInstance();
         Client client = (Client) session.getUser();
         client.redirect(stage);
+    }
+
+    @FXML
+    public void handleViewShoppingHistoryAction() {
+        ShoppingHistoryController.showView(this.stage);
     }
 }

@@ -12,7 +12,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import okhttp3.Response;
 import org.example.client.models.Client;
-import org.example.client.models.Payment;
+import org.example.client.models.enums.Payment;
 import org.example.client.utils.Session;
 import org.example.client.utils.Utils;
 

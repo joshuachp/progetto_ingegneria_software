@@ -56,9 +56,9 @@ public class ProductListController {
         // Test products
         ObservableList<Product> products = FXCollections.observableArrayList(
                 new Product(1, "Pasta n10", "Barilla", 1,
-                        1.72, "C:\\Users\\david\\Pictures\\Saved Pictures\\34779.jpg", 1, "Pasta", "Alimneti"),
+                        1.72f, "C:\\Users\\david\\Pictures\\Saved Pictures\\34779.jpg", 1, "Pasta", "Alimneti"),
                 new Product(2, "Formaggio grattuggiato", "Parmiggiano Reggiano", 1,
-                        3.50, "prova", 1, "Formaggi", "Alimneti"));
+                        3.50f, "prova", 1, "Formaggi", "Alimneti"));
 
         // Clickable link for ID column
         productListController.IDCol.setCellFactory(new Callback<TableColumn<Product, Integer>,

@@ -11,7 +11,7 @@ import javafx.scene.control.ToggleGroup;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import org.example.client.models.Payment;
+import org.example.client.models.enums.Payment;
 import org.example.client.utils.Session;
 
 import java.io.IOException;

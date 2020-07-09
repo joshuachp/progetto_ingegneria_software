@@ -27,8 +27,6 @@ public class CartItemController {
     @FXML
     public Text textBrand;
     @FXML
-    public Text textQuantity;
-    @FXML
     public Text textTotal;
     @FXML
     public Spinner<Integer> spinnerQuantity;
@@ -59,7 +57,6 @@ public class CartItemController {
             setImage(product.getImage());
         this.textProduct.setText(product.getName());
         this.textBrand.setText(product.getBrand());
-        this.textQuantity.setText(String.valueOf(product.getQuantity()));
         this.textTotal.setText(String.format("\u20ac %.2f", product.getQuantity() * product.getPrice()));
         // Set spinner
         SpinnerValueFactory<Integer> spinnerValueFactory = new QuantitySpinnerFactory().getCartSpinner(product);

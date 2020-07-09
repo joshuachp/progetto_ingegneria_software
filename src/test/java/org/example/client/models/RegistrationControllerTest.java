@@ -79,8 +79,8 @@ public class RegistrationControllerTest {
 
         this.server.enqueue(new MockResponse()
                 .setBody("OK"));
-        assertEquals(200, (Utils.registerClient(email, password, name, surname,
-                address, cap, city, phone, spesa)));
+        assertEquals(200, (Utils.registerClient(email, password, name, surname, address, cap, city, phone, spesa,
+                1234)));
 
     }
 }

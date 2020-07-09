@@ -1,6 +1,8 @@
 package org.example.client.models;
 
 import javafx.beans.property.*;
+import org.example.client.models.enums.Payment;
+import org.example.client.models.enums.StatoSpesa;
 
 
 public class Spesa {
