@@ -129,4 +129,9 @@ public class ProfileController {
         Client client = (Client) session.getUser();
         client.redirect(stage);
     }
+
+    @FXML
+    public void handleViewShoppingHistoryAction() {
+        ShoppingHistoryController.showView(this.stage);
+    }
 }

@@ -106,7 +106,7 @@
             <VBox.margin>
                 <Insets left="24.0" top="12.0"/>
             </VBox.margin>
-            <Text  fx:id="paymentText" fill="#212121" strokeType="OUTSIDE" strokeWidth="0.0" text="Credit card">
+            <Text fx:id="paymentText" fill="#212121" strokeType="OUTSIDE" strokeWidth="0.0" text="Credit card">
                 <font>
                     <Font size="12.0"/>
                 </font>
@@ -165,11 +165,34 @@
                 </HBox.margin>
             </Text>
         </HBox>
+        <Separator layoutX="34.0" layoutY="323.0" prefWidth="200.0">
+            <VBox.margin>
+                <Insets top="18.0"/>
+            </VBox.margin>
+        </Separator>
+        <Text fill="#616161" layoutX="34.0" layoutY="357.0" strokeType="OUTSIDE" strokeWidth="0.0"
+              text="Shopping History">
+            <font>
+                <Font size="18.0"/>
+            </font>
+            <VBox.margin>
+                <Insets top="12.0"/>
+            </VBox.margin>
+        </Text>
+        <Button onAction="#handleViewShoppingHistoryAction" mnemonicParsing="false"
+                style="-fx-background-color: #0066FF;" text="View Shopping History" textFill="#fafafa">
+            <VBox.margin>
+                <Insets left="12.0" top="12.0"/>
+            </VBox.margin>
+            <font>
+                <Font size="14.0"/>
+            </font>
+        </Button>
         <HBox alignment="BOTTOM_RIGHT" VBox.vgrow="ALWAYS">
             <VBox.margin>
                 <Insets top="24.0"/>
             </VBox.margin>
-            <Button onAction="#handleBackAction" mnemonicParsing="false" style="-fx-background-color: #BDBDBD;"
+            <Button mnemonicParsing="false" onAction="#handleBackAction" style="-fx-background-color: #BDBDBD;"
                     text="Back" textFill="#424242">
                 <font>
                     <Font name="System Bold" size="12.0"/>
