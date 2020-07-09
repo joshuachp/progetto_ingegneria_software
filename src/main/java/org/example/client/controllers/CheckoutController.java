@@ -9,10 +9,15 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import org.example.client.models.Product;
+import org.example.client.utils.Session;
+import org.example.client.utils.Utils;
 
 import java.io.IOException;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.*;
 
 public class CheckoutController {
     private static ObservableList<String> hour = FXCollections.observableArrayList
@@ -22,7 +27,7 @@ public class CheckoutController {
     @FXML
     public ComboBox hourComboBox;
     public Label label;
-    private LocalDate selectedDay;
+    private Date selectedDay;
     private Stage stage;
 
     public static void showView() {
@@ -66,12 +71,14 @@ public class CheckoutController {
     }
 
     public void confirmOrder(ActionEvent actionEvent) {
-        int startHour = 0;
-        int endHour = 0;
         LocalDate date = null;
+        Date deliveryStart = null;
+        Date deliveryEnd = new Date();
+        long time = 0;
 
         if (this.datePicker.getValue() != null) {
             date = this.datePicker.getValue();
+            deliveryStart = Date.from(date.atStartOfDay(ZoneId.systemDefault()).toInstant());
         } else {
             label.setText("Si prega di selezionare una data per la consegna.");
         }
@@ -80,29 +87,43 @@ public class CheckoutController {
             int hourSlot = hour.indexOf(hourComboBox.getValue());
             switch (hourSlot) {
                 case 0:
-                    startHour = 8;
-                    endHour = 12;
+                    assert deliveryStart != null;
+                    time = deliveryStart.getTime() + 8 * 3600 * 1000;
+                    deliveryStart.setTime(time);
+                    time += 4 * 3600 * 1000;
+                    deliveryEnd.setTime(time);
                     break;
                 default:
-                    startHour = 14;
-                    endHour = 18;
+                    time = deliveryStart.getTime() + 14 * 3600 * 1000;
+                    deliveryStart.setTime(time);
+                    time += 4 * 3600 * 1000;
+                    deliveryEnd.setTime(time);
                     break;
             }
 
         } else {
-            label.setText("Si prega di selezinare uno slot orario.");
+            label.setText("Si prega di selezionare uno slot orario.");
         }
+
+        Session session = Session.getInstance();
+        List<Product> products = new ArrayList<>(session.getMapProducts().values());
 
         // If delivery data has been inserted, confirm order
-        if (startHour != 0 && date != null && endHour != 0) {
-
+        if (deliveryStart != null) {
+            try {
+                Utils.createOrder(session.getUser().getSession(), products, deliveryStart, deliveryEnd);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Order sent");
-            alert.setContentText("You order is confirmed. \nWe deliver it on " + date + " between " + startHour +
+            alert.setContentText("You order is confirmed. \nWe deliver it on " + date + " between " + deliveryStart.getHours() +
                     ":00" +
-                    " and " + endHour + ":00.");
+                    " and " + deliveryEnd.getHours() + ":00.");
             alert.show();
         }
+
+        this.stage.close();
 
 
     }

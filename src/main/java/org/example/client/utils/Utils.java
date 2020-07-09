@@ -256,7 +256,7 @@ public class Utils {
         RequestBody body = RequestBody.create(json.toString(), MediaType.get("application/json; charset=utf-8"));
 
         Request request = new Request.Builder()
-                .url(SERVER_URL + SERVER_URL_GET_ALL_ORDERS)
+                .url(SERVER_URL + SERVER_URL_CREATE_ORDER)
                 .post(body)
                 .build();
         Response response = client.newCall(request).execute();
@@ -264,7 +264,6 @@ public class Utils {
             String error = Objects.requireNonNull(response.body()).string();
             Objects.requireNonNull(response.body()).close();
             throw new Exception(error);
-
         }
     }
 

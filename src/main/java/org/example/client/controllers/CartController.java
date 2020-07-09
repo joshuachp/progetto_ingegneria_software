@@ -8,6 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import org.example.client.components.CartFactory;
@@ -77,7 +78,18 @@ public class CartController {
 
     @FXML
     public void handleConfirmationOrder() {
-        CheckoutController.showView();
+        Session session= Session.getInstance();
+        if(!session.getMapProducts().values().isEmpty())
+            CheckoutController.showView();
+        else {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Cart is empty");
+            alert.setContentText("We're sorry, but your cart is empty.\nAdd some products to your cart with proceed " +
+                    "to " +
+                    "checkout." +
+                    " ");
+            alert.show();
+        }
     }
 
     private class LoadTask extends Task<List<Node>> {
