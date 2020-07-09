@@ -1,14 +1,13 @@
 package org.example.client.utils;
 
-import javafx.collections.ObservableMap;
 import javafx.stage.Stage;
 import okhttp3.*;
 import org.example.client.controllers.AuthController;
 import org.example.client.models.Client;
 import org.example.client.models.Manager;
-import org.example.client.models.enums.Payment;
 import org.example.client.models.Order;
 import org.example.client.models.User;
+import org.example.client.models.enums.Payment;
 import org.intellij.lang.annotations.RegExp;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -17,8 +16,8 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 public class Utils {
@@ -31,10 +30,10 @@ public class Utils {
     public static final String SERVER_URL_MANAGER_UPDATE = "/api/manager/update";
     public static final String SERVER_URL_CLIENT_UPDATE = "/api/client/update";
     public static final String SERVER_URL_GET_ALL_PRODUCT = "/api/product/all";
+    public static final String SERVER_URL_CREATE_ORDER = "/api/order/create";
     public static final String SERVER_URL_GET_ALL_ORDERS = "/api/order/all";
     // Format for URL `/api/card/{cardNumber}`
     public static final String SERVER_URL_GET_LOYALTY_CARD = "/api/card/%d";
-    public static final String SERVER_URL_CREATE_ORDER = "/api/order/create";
 
     // REGEX String utils
     @RegExp
@@ -239,7 +238,7 @@ public class Utils {
     }
 
     public static @Nullable Response createOrder(Payment payment, Date deliveryStart, Date deliveryEnd, int state,
-                                                 int userID){
+                                                 int userID) {
         /*OkHttpClient client = new OkHttpClient();
         RequestBody body = new FormBody.Builder()
                 .add("session", session)
