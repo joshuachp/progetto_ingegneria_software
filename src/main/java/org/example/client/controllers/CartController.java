@@ -78,14 +78,14 @@ public class CartController {
 
     @FXML
     public void handleConfirmationOrder() {
-        Session session= Session.getInstance();
-        if(!session.getMapProducts().values().isEmpty())
-            CheckoutController.showView();
+        Session session = Session.getInstance();
+        if (!session.getMapProducts().values().isEmpty())
+            CheckoutController.showView(this.stage);
         else {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Cart is empty");
-            alert.setContentText("We're sorry, but your cart is empty.\nAdd some products to your cart with proceed " +
-                    "to " +
+            alert.setContentText("We're sorry, but your cart is empty.\nAdd some products to your cart to proceed " +
+                    "with " +
                     "checkout." +
                     " ");
             alert.show();

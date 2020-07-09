@@ -29,8 +29,9 @@ public class CheckoutController {
     public Label label;
     private Date selectedDay;
     private Stage stage;
+    private Stage mainStage;
 
-    public static void showView() {
+    public static void showView(Stage mainStage) {
         FXMLLoader loader = new FXMLLoader(CheckoutController.class.getResource("/views/checkout.fxml"));
 
         Parent root = null;
@@ -46,6 +47,7 @@ public class CheckoutController {
         stage.setTitle("Checkout");
         CheckoutController checkoutController = loader.getController();
         checkoutController.setStage(stage);
+        checkoutController.setMainStage(mainStage);
         stage.show();
     }
 
@@ -57,7 +59,7 @@ public class CheckoutController {
                 LocalDate today = LocalDate.now();
 
                 setDisable(empty || (date.getDayOfWeek()).equals(DayOfWeek.SUNDAY) ||
-                        (date.getDayOfWeek()).equals(DayOfWeek.SATURDAY) || date.compareTo(today) < 0);
+                        (date.getDayOfWeek()).equals(DayOfWeek.SATURDAY) || date.compareTo(today) <= 0);
 
             }
         });
@@ -68,6 +70,10 @@ public class CheckoutController {
 
     private void setStage(Stage stage) {
         this.stage = stage;
+    }
+
+    private void setMainStage(Stage mainStage) {
+        this.mainStage = mainStage;
     }
 
     public void confirmOrder(ActionEvent actionEvent) {
@@ -108,6 +114,7 @@ public class CheckoutController {
         Session session = Session.getInstance();
         List<Product> products = new ArrayList<>(session.getMapProducts().values());
 
+        this.stage.close();
         // If delivery data has been inserted, confirm order
         if (deliveryStart != null) {
             try {
@@ -115,17 +122,18 @@ public class CheckoutController {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Order sent");
             alert.setContentText("You order is confirmed. \nWe deliver it on " + date + " between " + deliveryStart.getHours() +
                     ":00" +
                     " and " + deliveryEnd.getHours() + ":00.");
-            alert.show();
+            alert.showAndWait();
         }
 
-        this.stage.close();
+        session.removeAllProduct();
 
-
+        CatalogController.showView(mainStage);
     }
 
     public void cancelConfirmation(ActionEvent actionEvent) {

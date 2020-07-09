@@ -174,4 +174,11 @@ public class Session {
             this.cartQuantity.set(this.cartQuantity.get() - product.getQuantity());
         }
     }
+
+    public void removeAllProduct(){
+        if (!this.mapProducts.isEmpty()){
+            this.mapProducts.clear();
+        }
+    }
+
 }

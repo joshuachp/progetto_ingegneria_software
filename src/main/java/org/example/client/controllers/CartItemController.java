@@ -85,7 +85,6 @@ public class CartItemController {
         this.stage = stage;
     }
 
-
     @FXML
     public void deleteHandler() {
         Session session = Session.getInstance();
