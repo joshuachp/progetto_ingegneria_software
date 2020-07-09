@@ -30,9 +30,14 @@ public class CatalogFactory {
         // Generate an array list with a size for performances if there is no section
         ArrayList<Product> products = productMap.getOrDefault(section, new ArrayList<>());
         switch (sort) {
-            case ASCENDING -> products.sort(Comparator.comparing(Product::getPrice));
-            case DESCENDING -> products.sort(Comparator.comparing(Product::getPrice).reversed());
-            default -> products.sort(Comparator.comparing(Product::getBrand));
+            case ASCENDING:
+                products.sort(Comparator.comparing(Product::getPrice));
+                break;
+            case DESCENDING:
+                products.sort(Comparator.comparing(Product::getPrice).reversed());
+                break;
+            default:
+                products.sort(Comparator.comparing(Product::getBrand));
         }
         List<Node> nodes = new ArrayList<>(products.size());
         // Check each product

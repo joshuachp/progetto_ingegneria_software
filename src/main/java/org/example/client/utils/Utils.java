@@ -6,7 +6,7 @@ import okhttp3.*;
 import org.example.client.controllers.AuthController;
 import org.example.client.models.Client;
 import org.example.client.models.Manager;
-import org.example.client.models.Payment;
+import org.example.client.models.enums.Payment;
 import org.example.client.models.Order;
 import org.example.client.models.User;
 import org.intellij.lang.annotations.RegExp;
