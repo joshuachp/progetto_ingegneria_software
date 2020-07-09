@@ -2,6 +2,7 @@ package org.example.client.models;
 
 import javafx.stage.Stage;
 import org.example.client.controllers.CatalogController;
+import org.example.client.models.enums.Payment;
 
 /**
  * Cliente class

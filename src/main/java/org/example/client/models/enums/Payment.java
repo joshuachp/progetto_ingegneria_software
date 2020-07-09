@@ -1,4 +1,4 @@
-package org.example.client.models;
+package org.example.client.models.enums;
 
 import java.util.Arrays;
 import java.util.List;

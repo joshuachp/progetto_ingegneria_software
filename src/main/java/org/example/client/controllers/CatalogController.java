@@ -16,7 +16,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.example.client.components.CatalogFactory;
 import org.example.client.models.Product;
-import org.example.client.models.SortOrder;
+import org.example.client.models.enums.SortOrder;
 import org.example.client.tasks.TaskCatalog;
 import org.example.client.utils.Session;
 import org.example.client.utils.Utils;

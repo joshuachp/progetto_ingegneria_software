@@ -9,7 +9,7 @@ import okhttp3.Response;
 import org.example.client.components.CatalogFactory;
 import org.example.client.controllers.CatalogController;
 import org.example.client.models.Product;
-import org.example.client.models.SortOrder;
+import org.example.client.models.enums.SortOrder;
 import org.example.client.utils.Session;
 import org.example.client.utils.Utils;
 import org.json.JSONObject;

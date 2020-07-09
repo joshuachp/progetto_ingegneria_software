@@ -4,7 +4,7 @@ import javafx.scene.Node;
 import javafx.stage.Stage;
 import org.example.client.controllers.CardController;
 import org.example.client.models.Product;
-import org.example.client.models.SortOrder;
+import org.example.client.models.enums.SortOrder;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;

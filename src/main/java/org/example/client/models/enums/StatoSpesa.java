@@ -1,4 +1,4 @@
-package org.example.client.models;
+package org.example.client.models.enums;
 
 public enum StatoSpesa {
     CONFERMATA("Confermata"), INPREPARAZIONE("In preparazione"), CONSEGNATA("Consegnata");
