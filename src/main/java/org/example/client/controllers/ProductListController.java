@@ -187,7 +187,8 @@ public class ProductListController {
 
     private static void handleModifyProduct(Product product, boolean modify) throws IOException {
         GestioneProdottiController gestioneProdottiController = new GestioneProdottiController();
-        gestioneProdottiController.showView(product, modify);
+        Stage stage = new Stage();
+        gestioneProdottiController.showView(stage, product, modify);
     }
 
     private void setStage(Stage stage) {
@@ -195,7 +196,8 @@ public class ProductListController {
     }
 
     public void handlerAddProduct(ActionEvent actionEvent) throws IOException {
-        SceltaModalitaController.showView(this.stage);
+        Stage stage = new Stage();
+        GestioneProdottiController.showView(stage, null, false );
     }
 
     public void handleBackAction(ActionEvent actionEvent) throws IOException {
@@ -206,6 +208,13 @@ public class ProductListController {
     }
 
     public void handlerAddManagerAction(ActionEvent actionEvent) {
+    }
+
+    public void handleModifyQuantityProduct(TableColumn.CellEditEvent<Product, String> productStringCellEditEvent) {
+        // TODO: send product with
+        Product product =
+                productStringCellEditEvent.getRowValue().setAvailability(Integer.parseInt(productStringCellEditEvent.getNewValue()));
+
     }
 
     // Search filter enum

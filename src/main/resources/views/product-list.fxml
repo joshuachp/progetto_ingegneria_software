@@ -79,7 +79,7 @@
                 <TableColumn fx:id="NameCol" prefWidth="176.00006103515625" text="Nome Prodotto" />
                   <TableColumn fx:id="BrandCol" prefWidth="162.3999786376953" text="Brand" />
                   <TableColumn fx:id="PriceCol" prefWidth="96.0" text="Prezzo" />
-                <TableColumn fx:id="QuantityCol" editable="true" prefWidth="88.79998779296875" text="Quantità" />
+                <TableColumn fx:id="QuantityCol" editable="true" onEditCommit="#handleModifyQuantityProduct" prefWidth="88.79998779296875" text="Quantità" />
               </columns>
             </TableView>
             <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">

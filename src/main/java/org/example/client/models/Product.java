@@ -51,9 +51,6 @@ public class Product {
         return this.id;
     }
 
-    public void setId(Integer id){
-        id = this.id;
-    }
 
     public StringProperty nameProperty(){return new SimpleStringProperty(this.name);}
 
