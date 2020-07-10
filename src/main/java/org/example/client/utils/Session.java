@@ -7,6 +7,7 @@ import org.example.client.models.FactoryUser;
 import org.example.client.models.Product;
 import org.example.client.models.User;
 import org.jetbrains.annotations.NotNull;
+import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.prefs.Preferences;
@@ -173,5 +174,19 @@ public class Session {
             Product product = this.mapProducts.remove(productId);
             this.cartQuantity.set(this.cartQuantity.get() - product.getQuantity());
         }
+    }
+
+    /**
+     * Check if the json product is of a product that is already contained in the map, if its already contained it
+     * returns it else it creates a new Product instance from the json.
+     *
+     * @param jsonProduct JSON of a product data
+     * @return Reference to a product in the session or a new product instance
+     */
+    public Product checkProduct(@NotNull JSONObject jsonProduct) {
+        if (session.getMapProducts().containsKey(jsonProduct.getInt("id"))) {
+            return session.getMapProducts().get(jsonProduct.getInt("id"));
+        }
+        return new Product(jsonProduct);
     }
 }
