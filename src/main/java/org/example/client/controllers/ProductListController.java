@@ -17,7 +17,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import javafx.util.Callback;
-import jdk.jshell.execution.Util;
 import okhttp3.Response;
 import org.example.client.models.Product;
 import org.example.client.utils.Session;
@@ -62,6 +61,12 @@ public class ProductListController {
         productListController.setStage(stage);
     }
 
+    private static void handleModifyProduct(Product product, boolean modify) throws IOException {
+        GestioneProdottiController gestioneProdottiController = new GestioneProdottiController();
+        Stage stage = new Stage();
+        gestioneProdottiController.showView(stage, product, modify);
+    }
+
     public void initialize() throws IOException {
 
         // TODO: get products from server
@@ -76,7 +81,7 @@ public class ProductListController {
                 assert json.has("products");
                 for (Object t : json.getJSONArray("products")) {
                     JSONObject jsonProduct = (JSONObject) t;
-                    Product product = new Product((JSONObject)t);
+                    Product product = new Product((JSONObject) t);
                     products.add(product);
                 }
             }
@@ -148,7 +153,7 @@ public class ProductListController {
                 columnFilterEnum.QUANTITY.toString());
 
         this.CbxColumn.setItems(columnFilterString);
-        this.CbxColumn.setValue(ListaSpeseController.columnFilterEnum.ID.toString());
+        this.CbxColumn.setValue("");
 
         FilteredList<Product> flproducts = new FilteredList<>(products, p -> true);
 
@@ -185,19 +190,13 @@ public class ProductListController {
 
     }
 
-    private static void handleModifyProduct(Product product, boolean modify) throws IOException {
-        GestioneProdottiController gestioneProdottiController = new GestioneProdottiController();
-        Stage stage = new Stage();
-        gestioneProdottiController.showView(stage, product, modify);
-    }
-
     private void setStage(Stage stage) {
         this.stage = stage;
     }
 
     public void handlerAddProduct(ActionEvent actionEvent) throws IOException {
         Stage stage = new Stage();
-        GestioneProdottiController.showView(stage, null, false );
+        GestioneProdottiController.showView(stage, null, false);
     }
 
     public void handleBackAction(ActionEvent actionEvent) throws IOException {
@@ -212,8 +211,6 @@ public class ProductListController {
 
     public void handleModifyQuantityProduct(TableColumn.CellEditEvent<Product, String> productStringCellEditEvent) {
         // TODO: send product with
-        Product product =
-                productStringCellEditEvent.getRowValue().setAvailability(Integer.parseInt(productStringCellEditEvent.getNewValue()));
 
     }
 

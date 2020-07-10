@@ -1,13 +1,11 @@
 package org.example.client.controllers;
 
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import okhttp3.Response;
-import org.example.client.utils.Session;
-import org.example.client.utils.Utils;
 
 import java.io.IOException;
 
@@ -33,14 +31,11 @@ public class SceltaModalitaController {
         controller.setStage(stage);
     }
 
-    public void HandleActionVisualizzaSpese(ActionEvent actionEvent) {
-        ListaSpeseController listaSpese = new ListaSpeseController();
-        try {
-            listaSpese.showView(this.stage);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    @FXML
+    public void HandleActionVisualizzaSpese() {
+        ManageOrdersController.showView(this.stage);
     }
+
 
     public void setStage(Stage stage) {
         this.stage = stage;

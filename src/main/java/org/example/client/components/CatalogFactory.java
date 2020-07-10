@@ -2,7 +2,7 @@ package org.example.client.components;
 
 import javafx.scene.Node;
 import javafx.stage.Stage;
-import org.example.client.controllers.CardController;
+import org.example.client.controllers.CatalogItemController;
 import org.example.client.models.Product;
 import org.example.client.models.enums.SortOrder;
 import org.jetbrains.annotations.NotNull;
@@ -45,7 +45,7 @@ public class CatalogFactory {
             if (newSearch.isEmpty() ||
                     product.getName().toLowerCase().contains(newSearch) ||
                     product.getCharacteristics().toLowerCase().contains(newSearch)) {
-                nodes.add(CardController.generateCard(stage, product));
+                nodes.add(CatalogItemController.generateCard(stage, product));
             }
         }
         return nodes;
