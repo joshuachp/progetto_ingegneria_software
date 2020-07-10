@@ -1,5 +1,6 @@
 package org.example.client.models;
 
+import javafx.beans.property.*;
 import org.json.JSONObject;
 
 public class Product {
@@ -44,9 +45,17 @@ public class Product {
         this.availability = json.getInt("availability");
     }
 
+    public IntegerProperty idProperty(){return new SimpleIntegerProperty(this.id);}
+
     public Integer getId() {
         return this.id;
     }
+
+    public void setId(Integer id){
+        id = this.id;
+    }
+
+    public StringProperty nameProperty(){return new SimpleStringProperty(this.name);}
 
     public String getName() {
         return name;
@@ -55,6 +64,8 @@ public class Product {
     public void setName(String name) {
         this.name = name;
     }
+
+    public StringProperty brandProperty(){return new SimpleStringProperty(this.brand);}
 
     public String getBrand() {
         return brand;
@@ -72,6 +83,8 @@ public class Product {
         this.packageSize = packageSize;
     }
 
+    public  FloatProperty priceProperty(){return new SimpleFloatProperty(this.price);}
+
     public Float getPrice() {
         return price;
     }
@@ -87,6 +100,8 @@ public class Product {
     public void setImage(String path) {
         this.image = path;
     }
+
+    public StringProperty availabilityProperty(){return new SimpleStringProperty(this.availability.toString());}
 
     public Integer getAvailability() {
         return availability;

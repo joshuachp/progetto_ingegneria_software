@@ -189,4 +189,11 @@ public class Session {
         }
         return new Product(jsonProduct);
     }
+
+    public void removeAllProduct(){
+        if (!this.mapProducts.isEmpty()){
+            this.mapProducts.clear();
+        }
+    }
+
 }
