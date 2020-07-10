@@ -7,7 +7,8 @@ public enum OrderSate {
     // TODO: Better colors
     CONFIRMED("Confirmed", Color.YELLOWGREEN),
     IN_PREPARATION("In preparation", Color.AQUA),
-    CONSEGNATA("Delivered", Color.GREEN);
+    CONSEGNATA("Delivered", Color.GREEN),
+    CANCELLED("Cancelled", Color.RED);
 
     private final String label;
     private final Paint color;

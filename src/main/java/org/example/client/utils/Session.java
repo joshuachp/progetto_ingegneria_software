@@ -189,10 +189,14 @@ public class Session {
         return product;
     }
 
+    /**
+     * Remove all products from the cart
+     */
     public void removeAllProduct() {
         if (!this.mapProducts.isEmpty()) {
             this.mapProducts.clear();
         }
+        this.cartQuantity.set(0);
     }
 
 }

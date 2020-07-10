@@ -2,38 +2,42 @@ package org.example.client.controllers;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.example.client.models.Product;
+import org.example.client.models.enums.DeliveryHours;
 import org.example.client.utils.Session;
 import org.example.client.utils.Utils;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 
 public class CheckoutController {
-    private static ObservableList<String> hour = FXCollections.observableArrayList
-            ("8:00 - 12:00", "14:00 - 18:00");
+    private static final ObservableList<String> hour =
+            FXCollections.observableArrayList(DeliveryHours.getDeliveryHours());
     @FXML
     public DatePicker datePicker;
     @FXML
-    public ComboBox hourComboBox;
+    public ComboBox<String> hourComboBox;
+    @FXML
     public Label label;
-    private Date selectedDay;
+
     private Stage stage;
     private Stage mainStage;
 
     public static void showView(Stage mainStage) {
         FXMLLoader loader = new FXMLLoader(CheckoutController.class.getResource("/views/checkout.fxml"));
-
         Parent root = null;
         try {
             root = loader.load();
@@ -43,27 +47,32 @@ public class CheckoutController {
         assert root != null;
         Scene scene = new Scene(root);
         Stage stage = new Stage();
+
         stage.setScene(scene);
         stage.setTitle("Checkout");
+        stage.initOwner(mainStage);
+        stage.setAlwaysOnTop(true);
+        stage.initModality(Modality.APPLICATION_MODAL);
+
         CheckoutController checkoutController = loader.getController();
         checkoutController.setStage(stage);
         checkoutController.setMainStage(mainStage);
-        stage.show();
+
+        stage.showAndWait();
     }
 
     public void initialize() {
-        // Crate selectable cell only for day after today and weeksday
+        // Crate selectable cell only for day after today and working days
         this.datePicker.setDayCellFactory(picker -> new DateCell() {
             public void updateItem(LocalDate date, boolean empty) {
                 super.updateItem(date, empty);
                 LocalDate today = LocalDate.now();
-
-                setDisable(empty || (date.getDayOfWeek()).equals(DayOfWeek.SUNDAY) ||
-                        (date.getDayOfWeek()).equals(DayOfWeek.SATURDAY) || date.compareTo(today) <= 0);
-
+                setDisable(empty ||
+                        date.getDayOfWeek().equals(DayOfWeek.SATURDAY) ||
+                        date.getDayOfWeek().equals(DayOfWeek.SUNDAY) ||
+                        date.compareTo(today) <= 0);
             }
         });
-
         hourComboBox.setItems(hour);
 
     }
@@ -76,67 +85,70 @@ public class CheckoutController {
         this.mainStage = mainStage;
     }
 
-    public void confirmOrder(ActionEvent actionEvent) {
-        LocalDate date = null;
-        Date deliveryStart = null;
-        Date deliveryEnd = new Date();
-        long time = 0;
-
-        if (this.datePicker.getValue() != null) {
-            date = this.datePicker.getValue();
-            deliveryStart = Date.from(date.atStartOfDay(ZoneId.systemDefault()).toInstant());
-        } else {
+    @FXML
+    public void confirmOrder() {
+        // Validation
+        if (this.datePicker.getValue() == null) {
+            label.setVisible(true);
             label.setText("Si prega di selezionare una data per la consegna.");
+            return;
         }
 
-        if (hourComboBox.getValue() != null) {
-            int hourSlot = hour.indexOf(hourComboBox.getValue());
-            switch (hourSlot) {
-                case 0:
-                    assert deliveryStart != null;
-                    time = deliveryStart.getTime() + 8 * 3600 * 1000;
-                    deliveryStart.setTime(time);
-                    time += 4 * 3600 * 1000;
-                    deliveryEnd.setTime(time);
-                    break;
-                default:
-                    time = deliveryStart.getTime() + 14 * 3600 * 1000;
-                    deliveryStart.setTime(time);
-                    time += 4 * 3600 * 1000;
-                    deliveryEnd.setTime(time);
-                    break;
-            }
-
-        } else {
+        if (hourComboBox.getValue() == null) {
+            label.setVisible(true);
             label.setText("Si prega di selezionare uno slot orario.");
+            return;
         }
+        label.setVisible(false);
+
+        LocalDate date = this.datePicker.getValue();
+        DeliveryHours hour = DeliveryHours.values()[this.hourComboBox.getSelectionModel().getSelectedIndex()];
+
+        Calendar calendarStart = Calendar.getInstance();
+        Calendar calendarEnd = Calendar.getInstance();
+
+        //noinspection MagicConstant
+        calendarStart.set(date.getYear(), date.getMonth().getValue(), date.getDayOfMonth(), hour.getStartHour(), 0);
+        calendarEnd.setTime(calendarStart.getTime());
+        calendarEnd.set(Calendar.HOUR_OF_DAY, hour.getEndHour());
+
+        Date deliveryStart = calendarStart.getTime();
+        Date deliveryEnd = calendarEnd.getTime();
 
         Session session = Session.getInstance();
         List<Product> products = new ArrayList<>(session.getMapProducts().values());
 
-        this.stage.close();
         // If delivery data has been inserted, confirm order
-        if (deliveryStart != null) {
-            try {
-                Utils.createOrder(session.getUser().getSession(), products, deliveryStart, deliveryEnd);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+        try {
+            Utils.createOrder(session.getUser().getSession(), products, deliveryStart, deliveryEnd);
+        } catch (Exception e) {
+            e.printStackTrace();
 
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Order sent");
-            alert.setContentText("You order is confirmed. \nWe deliver it on " + date + " between " + deliveryStart.getHours() +
-                    ":00" +
-                    " and " + deliveryEnd.getHours() + ":00.");
-            alert.showAndWait();
+            // TODO error
         }
 
-        session.removeAllProduct();
+        SimpleDateFormat hourFormat = new SimpleDateFormat("hh:mm");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMMM");
 
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Order sent");
+        alert.setContentText(
+                String.format("You order is confirmed.\nWe deliver it on %s between %s and %s.",
+                        dateFormat.format(deliveryStart),
+                        hourFormat.format(deliveryStart),
+                        hourFormat.format(deliveryEnd)
+                )
+        );
+        alert.showAndWait();
+
+        this.stage.close();
+
+        session.removeAllProduct();
         CatalogController.showView(mainStage);
     }
 
-    public void cancelConfirmation(ActionEvent actionEvent) {
+    @FXML
+    public void cancelConfirmation() {
         stage.close();
     }
 
