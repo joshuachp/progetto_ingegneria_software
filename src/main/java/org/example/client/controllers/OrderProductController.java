@@ -51,7 +51,7 @@ public class OrderProductController {
 
         Session session = Session.getInstance();
         TaskOrderProduct task = new TaskOrderProduct(session.getUser().getSession(), orderItem.getProductId());
-        task.setOnSucceeded(event -> this.product = task.getValue());
+        task.setOnSucceeded(event -> this.product = session.checkProduct(task.getValue()));
         new Thread(task).start();
     }
 

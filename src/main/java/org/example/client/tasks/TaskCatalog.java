@@ -56,7 +56,7 @@ public class TaskCatalog extends Task<List<Node>> {
 
                     // Get a reference to an existing product in the cart or create a new one, because we need
                     // the current quantity of the product in the cart
-                    Product product = session.checkProduct(jsonProduct);
+                    Product product = session.checkProduct(new Product(jsonProduct));
 
                     // Create a new array if section doesn't exists
                     if (!sectionMap.containsKey(product.getSection())) {
