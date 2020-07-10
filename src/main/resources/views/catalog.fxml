@@ -34,24 +34,30 @@
                     <Font size="12.0"/>
                 </font>
             </Text>
-            <TextField fx:id="searchBar" onAction="#handleSearchAction" prefWidth="250.0" promptText="Search"
-                       VBox.vgrow="ALWAYS">
-                <padding>
-                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
-                </padding>
-                <tooltip>
-                    <Tooltip text="Ricerca product pen nome o caratteristica"/>
-                </tooltip>
+            <HBox VBox.vgrow="ALWAYS">
                 <VBox.margin>
                     <Insets top="2.0"/>
                 </VBox.margin>
-                <font>
-                    <Font size="12.0"/>
-                </font>
-            </TextField>
+                <TextField fx:id="searchBar" onAction="#handleSearchAction" prefWidth="250.0" promptText="Search">
+                    <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+                    </padding>
+                    <tooltip>
+                        <Tooltip text="Ricerca product pen nome o caratteristica"/>
+                    </tooltip>
+                    <font>
+                        <Font size="12.0"/>
+                    </font>
+                </TextField>
+                <ComboBox fx:id="comboBoxSort" prefWidth="150.0">
+                    <HBox.margin>
+                        <Insets left="24.0"/>
+                    </HBox.margin>
+                </ComboBox>
+            </HBox>
         </VBox>
         <HBox HBox.hgrow="ALWAYS"/>
-        <Button text="Profile" HBox.hgrow="never" onAction="#handleProfileAction"/>
+        <Button onAction="#handleProfileAction" text="Profile" HBox.hgrow="never"/>
         <VBox alignment="CENTER" minWidth="-Infinity" prefWidth="56.0" HBox.hgrow="NEVER">
             <HBox.margin>
                 <Insets/>

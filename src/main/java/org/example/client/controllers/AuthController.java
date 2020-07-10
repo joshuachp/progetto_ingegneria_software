@@ -94,7 +94,7 @@ public class AuthController {
     }
 
     public void handleActionRegistrati() {
-        RegistrazioneController.showView(this.stage);
+        RegistrationController.showView(this.stage);
     }
 
     public void handleRememberAction() {

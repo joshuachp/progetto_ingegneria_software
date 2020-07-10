@@ -1,6 +1,5 @@
 package org.example.client.controllers;
 
-import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -8,15 +7,13 @@ import javafx.scene.Scene;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import okhttp3.Response;
 import org.example.client.models.Client;
 import org.example.client.models.LoyaltyCard;
+import org.example.client.models.enums.Payment;
+import org.example.client.tasks.TaskCardPoints;
 import org.example.client.utils.Session;
-import org.example.client.utils.Utils;
-import org.json.JSONObject;
 
 import java.io.IOException;
-import java.util.Objects;
 
 public class ProfileController {
 
@@ -33,11 +30,15 @@ public class ProfileController {
     @FXML
     public Text emissionDate;
     @FXML
-    public Text points;
+    public Text pointsText;
     @FXML
     public Text cardText;
     @FXML
     public Text cardTextPoints;
+    @FXML
+    public Text paymentText;
+    @FXML
+    public Text paymentData;
 
     private Stage stage;
 
@@ -73,39 +74,46 @@ public class ProfileController {
         this.username.setText(client.getUsername());
         this.address.setText(String.format("%s, %d, %s", client.getAddress(), client.getCap(), client.getCity()));
         this.telephone.setText(client.getTelephone());
-        // TODO: Payment method
+        this.paymentText.setText(client.getPayment().toString());
+        // Set payment data if payment is different than cash
+        if (client.getPayment() != Payment.CASH) {
+            String data = session.getPaymentData();
+            if (data.length() > 4)
+                data = data.substring(data.length() - 4);
+            this.paymentData.setText(String.format("**** **** **** %s", data));
+        } else {
+            paymentData.setVisible(false);
+        }
+
         // Loyalty card
         if (client.getCardNumber() != null) {
             this.cardNumber.setText(String.format("Card n. %d", client.getCardNumber()));
+
             // Get card data.
-            Task<Void> getPoints = new Task<>() {
-                @Override
-                protected Void call() throws Exception {
-                    Response response = Utils.getLoyaltyCard(client.getSession(), client.getCardNumber());
-                    if (response != null && response.code() == 200 && response.body() != null) {
-                        LoyaltyCard loyaltyCard =
-                                new LoyaltyCard(new JSONObject(Objects.requireNonNull(response.body()).string()));
-                        // Sets the card information
-                        points.setText(String.valueOf(loyaltyCard.getPoints()));
-                        emissionDate.setText(loyaltyCard.getEmissionDate().toString());
-                    } else {
-                        if (response != null) {
-                            cardText.setText(Objects.requireNonNull(response.body()).string());
-                        } else {
-                            cardText.setText("Error in card information request.");
-                        }
-                        cardText.setFill(Color.RED);
-                        points.setVisible(false);
-                        emissionDate.setVisible(false);
-                        cardTextPoints.setVisible(false);
-                    }
-                    return null;
-                }
-            };
-            new Thread(getPoints).start();
+            TaskCardPoints cardTask = new TaskCardPoints(client);
+            // Success sets card information
+            cardTask.setOnSucceeded(event -> {
+                LoyaltyCard card = cardTask.getValue();
+                this.pointsText.setText(card.getPoints().toString());
+                emissionDate.setText(card.getEmissionDate().toString());
+            });
+            // Error remove card text and set error
+            cardTask.setOnFailed(event -> {
+                String error = cardTask.getMessage();
+
+                this.cardText.setText(error);
+                this.cardText.setFill(Color.RED);
+
+                this.pointsText.setVisible(false);
+                this.emissionDate.setVisible(false);
+                this.cardTextPoints.setVisible(false);
+            });
+
+            new Thread(cardTask).start();
+
         } else {
             cardText.setText("No loyalty card registered.");
-            points.setVisible(false);
+            pointsText.setVisible(false);
             emissionDate.setVisible(false);
             cardTextPoints.setVisible(false);
         }
@@ -115,4 +123,15 @@ public class ProfileController {
         this.stage = stage;
     }
 
+    @FXML
+    public void handleBackAction() {
+        Session session = Session.getInstance();
+        Client client = (Client) session.getUser();
+        client.redirect(stage);
+    }
+
+    @FXML
+    public void handleViewShoppingHistoryAction() {
+        OrderHistoryController.showView(this.stage);
+    }
 }

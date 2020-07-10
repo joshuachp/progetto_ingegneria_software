@@ -17,4 +17,11 @@ public class QuantitySpinnerFactory {
             spinnerValueFactory.setValue(max);
         return quantity;
     }
+
+    public SpinnerValueFactory<Integer> getCartSpinner(@NotNull Product product) {
+        SpinnerValueFactory<Integer> spinnerValueFactory =
+                new SpinnerValueFactory.IntegerSpinnerValueFactory(1, product.getAvailability());
+        spinnerValueFactory.setValue(product.getQuantity());
+        return spinnerValueFactory;
+    }
 }

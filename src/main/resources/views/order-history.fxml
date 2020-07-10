@@ -6,7 +6,7 @@
 <?import javafx.scene.text.Font?>
 <VBox xmlns:fx="http://javafx.com/fxml" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
       minWidth="-Infinity" prefHeight="700.0" prefWidth="950.0" xmlns="http://javafx.com/javafx"
-      fx:controller="org.example.client.controllers.CartController">
+      fx:controller="org.example.client.controllers.OrderHistoryController">
     <MenuBar VBox.vgrow="NEVER">
         <Menu mnemonicParsing="false" text="File">
             <MenuItem mnemonicParsing="false" text="Close"/>
@@ -29,7 +29,7 @@
             <VBox.margin>
                 <Insets left="56.0" right="56.0"/>
             </VBox.margin>
-            <VBox fx:id="vBoxCart"/>
+            <VBox fx:id="vBoxList"/>
         </ScrollPane>
         <ButtonBar>
             <buttons>
@@ -37,12 +37,6 @@
                         text="Back" textFill="#212121">
                     <font>
                         <Font size="13.0"/>
-                    </font>
-                </Button>
-                <Button mnemonicParsing="false" onAction="#handleConfirmationOrder"
-                        style="-fx-background-color: #0066FF;" text="Check out" textFill="#fafafa">
-                    <font>
-                        <Font name="System Bold" size="13.0"/>
                     </font>
                 </Button>
             </buttons>

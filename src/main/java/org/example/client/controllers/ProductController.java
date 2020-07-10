@@ -15,7 +15,7 @@ import javafx.stage.StageStyle;
 import org.example.client.components.QuantitySpinnerFactory;
 import org.example.client.models.Product;
 import org.example.client.utils.Session;
-import org.example.client.utils.TaskLoadImage;
+import org.example.client.tasks.TaskLoadImage;
 
 import java.io.IOException;
 

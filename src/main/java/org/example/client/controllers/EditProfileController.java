@@ -12,6 +12,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import okhttp3.Response;
 import org.example.client.models.Client;
+import org.example.client.models.enums.Payment;
 import org.example.client.utils.Session;
 import org.example.client.utils.Utils;
 
@@ -45,9 +46,14 @@ public class EditProfileController {
     public Text username;
     @FXML
     public Text error;
+    @FXML
+    public Text paymentText;
+    @FXML
+    public Text paymentData;
 
     private Stage stage;
     private Client client;
+    private Payment payment;
 
     /**
      * Shows the edit profile view.
@@ -141,16 +147,22 @@ public class EditProfileController {
         Session session = Session.getInstance();
         this.client = (Client) session.getUser();
 
-        this.username.setText(this.client.getUsername());
         // Set the client data
         this.name.setText(this.client.getName());
+        this.username.setText(this.client.getUsername());
         this.surname.setText(this.client.getSurname());
         this.address.setText(this.client.getAddress());
         this.cap.setText(this.client.getCap().toString());
         this.city.setText(this.client.getCity());
         this.telephone.setText(this.client.getTelephone());
-        // TODO: payment
-        this.cardNumber.setText(this.client.getCardNumber().toString());
+
+        this.payment = client.getPayment();
+
+        setPayment();
+
+        // Loyalty card
+        if (this.client.getCardNumber() != null)
+            this.cardNumber.setText(this.client.getCardNumber().toString());
 
         // Filter for only valid CAP. You can insert more than 5 digits copy and parting, we delegate this case to
         // the validation
@@ -220,6 +232,25 @@ public class EditProfileController {
         }));
     }
 
+    private void setPayment() {
+        Session session = Session.getInstance();
+
+        this.paymentText.setText(this.payment.toString());
+
+        // Set payment data if payment is different than cash
+        if (this.payment != Payment.CASH) {
+            // Reset visibility
+            this.paymentData.setVisible(true);
+
+            String data = session.getPaymentData();
+            if (data.length() > 4)
+                data = data.substring(data.length() - 4);
+            this.paymentData.setText(String.format("**** **** **** %s", data));
+        } else {
+            this.paymentData.setVisible(false);
+        }
+    }
+
 
     @FXML
     public void handleButtonCancelAction() {
@@ -250,7 +281,7 @@ public class EditProfileController {
         this.client.setCap(Integer.valueOf(this.cap.getText().trim()));
         this.client.setCity(this.city.getText().trim());
         this.client.setTelephone(this.telephone.getText());
-        // TODO payment
+        this.client.setPayment(this.payment);
         this.client.setCardNumber(Integer.valueOf(this.cardNumber.getText().trim()));
 
         // New password is set
@@ -261,22 +292,28 @@ public class EditProfileController {
         Response response = Utils.updateUser(this.client, pass);
         if (response == null) {
             this.error.setVisible(true);
-        } else if (response.code() == 200) {
-            // Update session
-            Session session = Session.getInstance();
-            session.setUser(this.client);
-
-            ProfileController.showView(this.stage);
         } else {
-            // Set response error
-            if (response.body() != null) {
-                try {
-                    error.setText(Objects.requireNonNull(response.body()).string());
-                } catch (IOException e) {
-                    e.printStackTrace();
+            if (response.code() == 200) {
+                // Update session
+                Session session = Session.getInstance();
+                session.setUser(this.client);
+
+                ProfileController.showView(this.stage);
+
+            } else {
+                // Set response error
+                if (response.body() != null) {
+                    try {
+                        error.setText(Objects.requireNonNull(response.body()).string());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
+                this.error.setVisible(true);
+
             }
-            this.error.setVisible(true);
+
+            Objects.requireNonNull(response.body()).close();
         }
     }
 
@@ -291,4 +328,11 @@ public class EditProfileController {
             updateProfile();
         }
     }
+
+    @FXML
+    public void handleChangePaymentAction() {
+        this.payment = PaymentController.showView(this.stage, this.payment);
+        setPayment();
+    }
+
 }

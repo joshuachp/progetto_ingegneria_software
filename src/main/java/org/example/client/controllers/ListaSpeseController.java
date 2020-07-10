@@ -4,7 +4,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
-import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -19,9 +18,9 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import javafx.util.Callback;
-import org.example.client.models.Payment;
+import org.example.client.models.enums.Payment;
 import org.example.client.models.Spesa;
-import org.example.client.models.StatoSpesa;
+import org.example.client.models.enums.StatoSpesa;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -197,6 +196,7 @@ public class ListaSpeseController {
 
         listaspesecontroller.setStage(stage);
 
+        /* // TEST
         Task<Void> task = new Task<>() {
             @Override
             protected Void call() throws Exception {
@@ -208,7 +208,7 @@ public class ListaSpeseController {
         };
 
         Thread th = new Thread(task);
-        th.start();
+        th.start();*/
 
     }
 

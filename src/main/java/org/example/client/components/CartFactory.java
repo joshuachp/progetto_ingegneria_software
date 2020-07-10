@@ -13,9 +13,7 @@ public class CartFactory {
 
     public List<Node> getCartList(Stage stage, Collection<Product> products) {
         ArrayList<Node> nodes = new ArrayList<>(products.size());
-        for (Product product : products) {
-            nodes.add(CartItemController.createView(stage, product));
-        }
+        products.forEach(product -> nodes.add(CartItemController.createView(stage, product)));
         return nodes;
     }
 

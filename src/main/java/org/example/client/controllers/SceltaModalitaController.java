@@ -5,6 +5,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import okhttp3.Response;
+import org.example.client.utils.Session;
+import org.example.client.utils.Utils;
 
 import java.io.IOException;
 
@@ -13,6 +16,7 @@ public class SceltaModalitaController {
     private Stage stage;
 
     public static void showView(Stage stage) {
+
         FXMLLoader loader = new FXMLLoader(SceltaModalitaController.class.getResource("/views/scelta-modalita.fxml"));
         Parent root = null;
         try {

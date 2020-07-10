@@ -1,5 +1,6 @@
 package org.example.client.models;
 
+import javafx.beans.property.*;
 import org.json.JSONObject;
 
 public class Product {
@@ -8,7 +9,7 @@ public class Product {
     private String name;
     private String brand;
     private Integer packageSize;
-    private Double price;
+    private Float price;
     private String image;
     private Integer availability;
     private String characteristics;
@@ -16,7 +17,7 @@ public class Product {
     // For shopping cart
     private Integer quantity = 0;
 
-    public Product(Integer id, String name, String brand, Integer packageSize, Double price, String image,
+    public Product(Integer id, String name, String brand, Integer packageSize, Float price, String image,
                    Integer availability, String characteristics, String section) {
         this.id = id;
         this.name = name;
@@ -34,7 +35,7 @@ public class Product {
         this.name = json.getString("name");
         this.brand = json.getString("brand");
         this.packageSize = json.getInt("package_size");
-        this.price = json.getDouble("price");
+        this.price = json.getFloat("price");
         if (json.has("image"))
             this.image = json.getString("image");
         else
@@ -44,9 +45,17 @@ public class Product {
         this.availability = json.getInt("availability");
     }
 
+    public IntegerProperty idProperty(){return new SimpleIntegerProperty(this.id);}
+
     public Integer getId() {
         return this.id;
     }
+
+    public void setId(Integer id){
+        id = this.id;
+    }
+
+    public StringProperty nameProperty(){return new SimpleStringProperty(this.name);}
 
     public String getName() {
         return name;
@@ -55,6 +64,8 @@ public class Product {
     public void setName(String name) {
         this.name = name;
     }
+
+    public StringProperty brandProperty(){return new SimpleStringProperty(this.brand);}
 
     public String getBrand() {
         return brand;
@@ -72,11 +83,13 @@ public class Product {
         this.packageSize = packageSize;
     }
 
-    public Double getPrice() {
+    public  FloatProperty priceProperty(){return new SimpleFloatProperty(this.price);}
+
+    public Float getPrice() {
         return price;
     }
 
-    public void setPrice(Double price) {
+    public void setPrice(Float price) {
         this.price = price;
     }
 
@@ -87,6 +100,8 @@ public class Product {
     public void setImage(String path) {
         this.image = path;
     }
+
+    public StringProperty availabilityProperty(){return new SimpleStringProperty(this.availability.toString());}
 
     public Integer getAvailability() {
         return availability;
