@@ -22,16 +22,19 @@ public class GestioneProdottiController {
 
     public TextField fieldName;
     public TextField fieldBrand;
-    public TextField fieldID;
+
     public TextField fieldPackage;
     public TextField fieldPrice;
     public TextField fieldQuantity;
     public Label resultLabel;
     public ImageView thumbnail;
+    public TextField fieldCharateristics;
+    public TextField fieldSection;
     Product product;
-    private Stage stage = new Stage();
+    private Stage stage;
+    private boolean modify;
 
-    public void showView(@Nullable Product product, boolean modify) throws IOException {
+    public static void showView(Stage stage, @Nullable Product product, boolean modify) throws IOException {
 
         //TODO: field charateristics and section
         FXMLLoader loader = new FXMLLoader(GestioneProdottiController.class.getResource("/views/gestione-prodotti" +
@@ -47,38 +50,61 @@ public class GestioneProdottiController {
 
         assert root != null;
         Scene scene = new Scene(root);
+
         stage.setScene(scene);
-
-        gestioneProdottiController.product = product;
-
-        if (modify) {
+        if(modify) {
             assert product != null;
             stage.setTitle("Modifica prodotto " + product.getId());
-            gestioneProdottiController.fieldBrand.setText(product.getBrand());
-            gestioneProdottiController.fieldName.setText(product.getName());
-            gestioneProdottiController.fieldID.setText(product.getId().toString());
-            gestioneProdottiController.fieldPackage.setText(product.getPackageSize().toString());
-            gestioneProdottiController.fieldPrice.setText(product.getPrice().toString());
-            gestioneProdottiController.fieldQuantity.setText(product.getAvailability().toString());
         } else {
-            stage.setTitle("Crea nuovo prodotto");
+            stage.setTitle("Crea nuovo prodotto ");
         }
+
+        stage.show();
+
+        gestioneProdottiController.product = product;
+        gestioneProdottiController.setStage(stage);
+        gestioneProdottiController.setModify(modify);
 
         stage.show();
     }
 
+    private void initialize(){
+        if (this.modify) {
+            assert product != null;
+            this.fieldBrand.setText(product.getBrand());
+            this.fieldName.setText(product.getName());
+            this.fieldPackage.setText(product.getPackageSize().toString());
+            this.fieldPrice.setText(product.getPrice().toString());
+            this.fieldQuantity.setText(product.getAvailability().toString());
+        }
+    }
+
+    private void setModify(boolean modify){ this.modify = modify;}
+
+    private void setStage(Stage stage){
+        this.stage = stage;
+    }
     public void handleConfirmAction(ActionEvent actionEvent) {
-        product.setBrand(fieldBrand.getText());
-        product.setImage(thumbnail.getImage().getUrl());
-        product.setAvailability(Integer.parseInt(fieldQuantity.getText()));
-        product.setPrice(Float.valueOf(fieldPrice.getText()));
-        product.setName(fieldName.getText());
-        product.setPackageSize(Integer.parseInt(fieldPackage.getText()));
-        //product.setCharacteristics(fieldBrand.getText());
-        //product.setCharacteristics(fieldBrand.getText());
+        if (!(fieldBrand.getText().equals("") || thumbnail.getImage().getUrl().equals("") ||
+        fieldPackage.getText().equals("") || fieldName.getText().equals("") ||
+        fieldPrice.getText().equals("")|| fieldQuantity.getText().equals("") ||
+        fieldCharateristics.getText().equals("")   || fieldSection.getText().equals(""))) {
+            product.setCharacteristics(fieldCharateristics.getText());
+            product.setSection(fieldSection.getText());
+            product.setBrand(fieldBrand.getText());
+            product.setImage(thumbnail.getImage().getUrl());
+            product.setAvailability(Integer.parseInt(fieldQuantity.getText()));
+            product.setPrice(Float.valueOf(fieldPrice.getText()));
+            product.setName(fieldName.getText());
+            product.setPackageSize(Integer.parseInt(fieldPackage.getText()));
+            stage.close();
+        } else {
+            resultLabel.setText("Si prega di riempire tutti i campi.");
+        }
+
         // TODO: POST product to server
         System.out.println(product);
-        stage.close();
+
     }
 
     public void handleUploadImage(ActionEvent actionEvent) throws FileNotFoundException {
