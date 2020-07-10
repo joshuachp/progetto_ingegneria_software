@@ -1,9 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.AnchorPane?>
-<AnchorPane xmlns:fx="http://javafx.com/fxml"
-            xmlns="http://javafx.com/javafx"
-            fx:controller="org.example.client.controllers.OrderProductController"
-            prefHeight="400.0" prefWidth="600.0">
 
-</AnchorPane>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Text?>
+<HBox onMouseClicked="#handleMouseClicked" xmlns:fx="http://javafx.com/fxml" maxHeight="-Infinity" maxWidth="-Infinity"
+      minHeight="-Infinity"
+      minWidth="-Infinity" prefWidth="700.0" spacing="58.0" style="-fx-background-color: #CDCDCD;"
+      xmlns="http://javafx.com/javafx" fx:controller="org.example.client.controllers.OrderProductController">
+    <cursor>
+        <Cursor fx:constant="HAND"/>
+    </cursor>
+    <padding>
+        <Insets bottom="24.0" left="48.0" right="48.0" top="24.0"/>
+    </padding>
+    <Text fx:id="textName" strokeType="OUTSIDE" strokeWidth="0.0" text="Name"/>
+    <HBox HBox.hgrow="ALWAYS"/>
+    <Text fx:id="textPrice" strokeType="OUTSIDE" strokeWidth="0.0" text="Price"/>
+    <Text fx:id="textQuantity" strokeType="OUTSIDE" strokeWidth="0.0" text="Quantity"/>
+    <Text fx:id="textTotal" strokeType="OUTSIDE" strokeWidth="0.0" text="Total"/>
+</HBox>

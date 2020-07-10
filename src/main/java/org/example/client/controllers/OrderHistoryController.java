@@ -47,7 +47,7 @@ public class OrderHistoryController {
                 Session session = Session.getInstance();
                 List<Order> list = Utils.getAllOrders(session.getUser().getSession());
                 OrderHistoryFactory factory = new OrderHistoryFactory();
-                return factory.getOrderHistoryList(list);
+                return factory.getOrderHistoryList(stage, list);
             }
         };
         loadOrders.setOnSucceeded(event -> {

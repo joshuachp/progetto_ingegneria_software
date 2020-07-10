@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import org.example.client.models.Order;
 import org.example.client.tasks.TaskOrderHistoryItem;
 import org.example.client.utils.Session;
@@ -27,11 +28,12 @@ public class OrderHistoryItemController {
     @FXML
     public VBox vBoxListOrderProducts;
 
+    private Stage stage;
     private Order order;
     private List<Node> nodes = new ArrayList<>();
     private boolean showList = false;
 
-    public static Node createView(Order order) {
+    public static Node createView(Stage stage, Order order) {
         FXMLLoader loader = new FXMLLoader(
                 OrderHistoryItemController.class.getResource("/views/order-history-item.fxml"));
         Node node = null;
@@ -42,6 +44,7 @@ public class OrderHistoryItemController {
         }
         assert node != null;
         OrderHistoryItemController controller = loader.getController();
+        controller.setStage(stage);
         controller.setOrder(order);
         return node;
     }
@@ -59,7 +62,8 @@ public class OrderHistoryItemController {
 
     private void getOrderItems() {
         Session session = Session.getInstance();
-        TaskOrderHistoryItem task = new TaskOrderHistoryItem(session.getUser().getSession(), this.order.getId());
+        TaskOrderHistoryItem task = new TaskOrderHistoryItem(this.stage, session.getUser().getSession(),
+                this.order.getId());
         task.setOnSucceeded(event -> this.nodes = task.getValue());
     }
 
@@ -73,5 +77,9 @@ public class OrderHistoryItemController {
             vBoxListOrderProducts.getChildren().addAll(nodes);
             showList = true;
         }
+    }
+
+    public void setStage(Stage stage) {
+        this.stage = stage;
     }
 }
