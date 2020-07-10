@@ -3,10 +3,7 @@ package org.example.client.utils;
 import javafx.stage.Stage;
 import okhttp3.*;
 import org.example.client.controllers.AuthController;
-import org.example.client.models.Client;
-import org.example.client.models.Manager;
-import org.example.client.models.Order;
-import org.example.client.models.User;
+import org.example.client.models.*;
 import org.example.client.models.enums.Payment;
 import org.intellij.lang.annotations.RegExp;
 import org.jetbrains.annotations.NotNull;
@@ -17,7 +14,6 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.Objects;
 
 public class Utils {
@@ -34,6 +30,8 @@ public class Utils {
     public static final String SERVER_URL_GET_ALL_ORDERS = "/api/order/all";
     // Format for URL `/api/card/{cardNumber}`
     public static final String SERVER_URL_GET_LOYALTY_CARD = "/api/card/%d";
+    // Format for URL `/api/order-item/all/{orderId}`
+    public static final String SERVER_URL_GET_ALL_ORDER_ITEMS = "/api/order-item/all/%d";
 
     // REGEX String utils
     @RegExp
@@ -290,7 +288,7 @@ public class Utils {
      * @throws Exception {@link IOException} if request fails and {@link Exception} if the requests returns error
      *                   code. Sets the request body as the exception message
      */
-    public static @NotNull List<Order> getAllOrders(String session) throws Exception {
+    public static @NotNull ArrayList<Order> getAllOrders(String session) throws Exception {
         OkHttpClient client = new OkHttpClient();
         RequestBody body = new FormBody.Builder()
                 .add("session", session)
@@ -311,6 +309,39 @@ public class Utils {
         ArrayList<Order> list = new ArrayList<>(array.length());
         for (int i = 0; i < array.length(); i++) {
             list.add(new Order(array.getJSONObject(i)));
+        }
+        return list;
+    }
+
+    /**
+     * Request all the order items of an order to the server.
+     *
+     * @param session User session
+     * @return List of the order items
+     * @throws Exception {@link IOException} if request fails and {@link Exception} if the requests returns error
+     *                   code. Sets the request body as the exception message
+     */
+    public static @NotNull ArrayList<OrderItem> getOrderItems(String session, Integer orderId) throws Exception {
+        OkHttpClient client = new OkHttpClient();
+        RequestBody body = new FormBody.Builder()
+                .add("session", session)
+                .build();
+        Request request = new Request.Builder()
+                .url(SERVER_URL + String.format(SERVER_URL_GET_ALL_ORDER_ITEMS, orderId))
+                .post(body)
+                .build();
+        Response response = client.newCall(request).execute();
+        if (response.code() != 200) {
+            String error = Objects.requireNonNull(response.body()).string();
+            Objects.requireNonNull(response.body()).close();
+            throw new Exception(error);
+        }
+        JSONObject json = new JSONObject(Objects.requireNonNull(response.body()).string());
+        Objects.requireNonNull(response.body()).close();
+        JSONArray array = json.getJSONArray("orders");
+        ArrayList<OrderItem> list = new ArrayList<>(array.length());
+        for (int i = 0; i < array.length(); i++) {
+            list.add(new OrderItem(array.getJSONObject(i)));
         }
         return list;
     }

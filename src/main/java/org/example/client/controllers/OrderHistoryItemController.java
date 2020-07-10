@@ -3,10 +3,16 @@ package org.example.client.controllers;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import org.example.client.models.Order;
+import org.example.client.tasks.TaskOrderHistoryItem;
+import org.example.client.utils.Session;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class OrderHistoryItemController {
 
@@ -18,8 +24,12 @@ public class OrderHistoryItemController {
     public Text textPayment;
     @FXML
     public Text textTotal;
+    @FXML
+    public VBox vBoxListOrderProducts;
 
     private Order order;
+    private List<Node> nodes = new ArrayList<>();
+    private boolean showList = false;
 
     public static Node createView(Order order) {
         FXMLLoader loader = new FXMLLoader(
@@ -36,17 +46,32 @@ public class OrderHistoryItemController {
         return node;
     }
 
-    public void setOrder(Order order) {
+    public void setOrder(@NotNull Order order) {
         this.order = order;
         this.textOrderId.setText(String.format("#%d", order.getId()));
         this.textStatus.setText(order.getState().toString());
         this.textStatus.setFill(order.getState().getColor());
         this.textPayment.setText(order.getPayment().toString());
         this.textTotal.setText(String.format("€ %.2f", order.getTotal()));
+
+        getOrderItems();
+    }
+
+    private void getOrderItems() {
+        Session session = Session.getInstance();
+        TaskOrderHistoryItem task = new TaskOrderHistoryItem(session.getUser().getSession(), this.order.getId());
+        task.setOnSucceeded(event -> this.nodes = task.getValue());
     }
 
 
     @FXML
     public void handleOnMouseClick() {
+        if (showList) {
+            vBoxListOrderProducts.getChildren().removeAll(this.nodes);
+            showList = false;
+        } else {
+            vBoxListOrderProducts.getChildren().addAll(nodes);
+            showList = true;
+        }
     }
 }
