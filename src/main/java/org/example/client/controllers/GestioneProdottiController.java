@@ -1,6 +1,7 @@
 package org.example.client.controllers;
 
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -59,8 +60,6 @@ public class GestioneProdottiController {
             stage.setTitle("Crea nuovo prodotto ");
         }
 
-        stage.show();
-
         gestioneProdottiController.product = product;
         gestioneProdottiController.setStage(stage);
         gestioneProdottiController.setModify(modify);
@@ -68,22 +67,25 @@ public class GestioneProdottiController {
         stage.show();
     }
 
-    private void initialize(){
-        if (this.modify) {
+    private void setModify(boolean modify){
+        if (modify) {
             assert product != null;
             this.fieldBrand.setText(product.getBrand());
             this.fieldName.setText(product.getName());
             this.fieldPackage.setText(product.getPackageSize().toString());
-            this.fieldPrice.setText(product.getPrice().toString());
+            this.fieldPrice.setText(String.format("%f.2", product.getPrice()));
             this.fieldQuantity.setText(product.getAvailability().toString());
+            this.fieldCharateristics.setText(product.getCharacteristics());
+            this.fieldSection.setText(product.getSection());
         }
+        this.modify = modify;
     }
-
-    private void setModify(boolean modify){ this.modify = modify;}
 
     private void setStage(Stage stage){
         this.stage = stage;
     }
+
+    @FXML
     public void handleConfirmAction(ActionEvent actionEvent) {
         if (!(fieldBrand.getText().equals("") || thumbnail.getImage().getUrl().equals("") ||
         fieldPackage.getText().equals("") || fieldName.getText().equals("") ||
@@ -107,6 +109,7 @@ public class GestioneProdottiController {
 
     }
 
+    @FXML
     public void handleUploadImage(ActionEvent actionEvent) throws FileNotFoundException {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Carica immagine");

@@ -113,7 +113,7 @@ public class ProductListController {
                             // TODO: view product form
                             System.out.println("double click on " + cell.getItem());
                             try {
-                                handleModifyProduct(cell.getTableRow().getItem(), true);
+                                handleModifyProduct(cell.getTableRow().getItem());
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }
@@ -185,10 +185,9 @@ public class ProductListController {
 
     }
 
-    private static void handleModifyProduct(Product product, boolean modify) throws IOException {
-        GestioneProdottiController gestioneProdottiController = new GestioneProdottiController();
+    private static void handleModifyProduct(Product product) throws IOException {
         Stage stage = new Stage();
-        gestioneProdottiController.showView(stage, product, modify);
+        GestioneProdottiController.showView(stage, product, true);
     }
 
     private void setStage(Stage stage) {
@@ -212,8 +211,8 @@ public class ProductListController {
 
     public void handleModifyQuantityProduct(TableColumn.CellEditEvent<Product, String> productStringCellEditEvent) {
         // TODO: send product with
-        Product product =
-                productStringCellEditEvent.getRowValue().setAvailability(Integer.parseInt(productStringCellEditEvent.getNewValue()));
+        Product product =  productStringCellEditEvent.getRowValue();
+        product.setAvailability(Integer.parseInt(productStringCellEditEvent.getNewValue()));
 
     }
 

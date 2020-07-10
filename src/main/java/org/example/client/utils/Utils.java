@@ -33,6 +33,8 @@ public class Utils {
     // Format for URL `/api/order-item/all/{orderId}`
     public static final String SERVER_URL_GET_ALL_ORDER_ITEMS = "/api/order-item/all/%d";
 
+    public static final String SERVER_URL_CREATE_PRODUCT = "/api/product/create";
+
     // REGEX String utils
     @RegExp
     public static final String REGEX_CAP = "^\\d{5}$";
@@ -390,4 +392,32 @@ public class Utils {
         response.close();
         return product;
     }
+/*
+    public static void createProduct(String name, String brand, Integer packageSize, ) throws Exception {
+
+        (product.getString("name"), product.getString("brand"), product.getInt(
+                "package_size"), product.getInt("price"),
+                product.isNull("image") ? null : product.getString("image"),
+                product.getInt("availability"), product.getString("characteristics"), sectionName)
+
+        JSONObject json = new JSONObject()
+                .put("name", session)
+                .put("products", productMap)
+                .put("deliveryStart", deliveryStart.getTime())
+                .put("deliveryEnd", deliveryEnd.getTime());
+
+        OkHttpClient client = new OkHttpClient();
+        RequestBody body = RequestBody.create(json.toString(), MediaType.get("application/json; charset=utf-8"));
+
+        Request request = new Request.Builder()
+                .url(SERVER_URL + SERVER_URL_CREATE_PRODUCT)
+                .post(body)
+                .build();
+        Response response = client.newCall(request).execute();
+        if (response.code() != 200) {
+            String error = Objects.requireNonNull(response.body()).string();
+            Objects.requireNonNull(response.body()).close();
+            throw new Exception(error);
+        }
+    }*/
 }
