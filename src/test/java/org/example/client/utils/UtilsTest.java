@@ -126,7 +126,7 @@ class UtilsTest {
         this.server.enqueue(new MockResponse()
                 .setBody(body.toString()));
 
-        List<Order> orders = Utils.getAllOrders("session");
+        List<Order> orders = Utils.getUserOrders("session");
         assertEquals(1, orders.size());
         Order order = orders.get(0);
         assertEquals(1, order.getId());

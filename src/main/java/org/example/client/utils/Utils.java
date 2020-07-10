@@ -27,6 +27,7 @@ public class Utils {
     public static final String SERVER_URL_GET_PRODUCT = "/api/product/%d";
     public static final String SERVER_URL_GET_ALL_PRODUCT = "/api/product/all";
     public static final String SERVER_URL_CREATE_ORDER = "/api/order/create";
+    public static final String SERVER_URL_GET_USER_ORDERS = "/api/order/user";
     public static final String SERVER_URL_GET_ALL_ORDERS = "/api/order/all";
     // Format for URL `/api/card/{cardNumber}`
     public static final String SERVER_URL_GET_LOYALTY_CARD = "/api/card/%d";
@@ -243,10 +244,10 @@ public class Utils {
      * @param products      Product
      * @param deliveryStart delivery start
      * @param deliveryEnd   Delivery end
-     * @throws Exception
+     * @throws Exception Exception
      */
-    public static void createOrder(String session, List<Product> products, Date deliveryStart, Date deliveryEnd) throws Exception {
-
+    public static void createOrder(String session, List<Product> products, Date deliveryStart,
+                                   Date deliveryEnd) throws Exception {
         Map<Integer, Integer> productMap = products.stream().collect(Collectors.toMap(Product::getId,
                 Product::getQuantity));
 
@@ -255,10 +256,8 @@ public class Utils {
                 .put("products", productMap)
                 .put("deliveryStart", deliveryStart.getTime())
                 .put("deliveryEnd", deliveryEnd.getTime());
-
         OkHttpClient client = new OkHttpClient();
         RequestBody body = RequestBody.create(json.toString(), MediaType.get("application/json; charset=utf-8"));
-
         Request request = new Request.Builder()
                 .url(SERVER_URL + SERVER_URL_CREATE_ORDER)
                 .post(body)
@@ -299,6 +298,39 @@ public class Utils {
 
     /**
      * Request all the orders of a user to the server.
+     *
+     * @param session User session
+     * @return List of the user orders
+     * @throws Exception {@link IOException} if request fails and {@link Exception} if the requests returns
+     *                   error code. Sets the request body as the exception message.
+     */
+    public static @NotNull ArrayList<Order> getUserOrders(String session) throws Exception {
+        OkHttpClient client = new OkHttpClient();
+        RequestBody body = new FormBody.Builder()
+                .add("session", session)
+                .build();
+        Request request = new Request.Builder()
+                .url(SERVER_URL + SERVER_URL_GET_USER_ORDERS)
+                .post(body)
+                .build();
+        Response response = client.newCall(request).execute();
+        if (response.code() != 200) {
+            String error = Objects.requireNonNull(response.body()).string();
+            Objects.requireNonNull(response.body()).close();
+            throw new Exception(error);
+        }
+        JSONObject json = new JSONObject(Objects.requireNonNull(response.body()).string());
+        Objects.requireNonNull(response.body()).close();
+        JSONArray array = json.getJSONArray("orders");
+        ArrayList<Order> list = new ArrayList<>(array.length());
+        for (int i = 0; i < array.length(); i++) {
+            list.add(new Order(array.getJSONObject(i)));
+        }
+        return list;
+    }
+
+    /**
+     * Request all the orders to the server
      *
      * @param session User session
      * @return List of the user orders
@@ -371,7 +403,7 @@ public class Utils {
      * @throws Exception {@link IOException} if request fails and {@link Exception} if the requests returns error
      *                   code. Sets the request body as the exception message
      */
-    public static Product getProduct(String session, Integer productId) throws Exception {
+    public static @NotNull Product getProduct(String session, Integer productId) throws Exception {
         OkHttpClient client = new OkHttpClient();
         RequestBody body = new FormBody.Builder()
                 .add("session", session)

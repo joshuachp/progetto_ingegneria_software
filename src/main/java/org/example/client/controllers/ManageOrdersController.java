@@ -3,6 +3,7 @@ package org.example.client.controllers;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -14,15 +15,12 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import org.example.client.components.TableCellOrderId;
 import org.example.client.models.Order;
-import org.example.client.models.enums.OrderSate;
-import org.example.client.models.enums.Payment;
+import org.example.client.tasks.TaskManageOrders;
+import org.example.client.utils.Session;
 import org.example.client.utils.Utils;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.Collections;
-import java.util.Date;
-import java.util.List;
 
 public class ManageOrdersController {
 
@@ -35,6 +33,8 @@ public class ManageOrdersController {
     public TableView<Order> tableView;
     @FXML
     public TableColumn<Order, Integer> id;
+    @FXML
+    public TableColumn<Order, String> state;
     @FXML
     public TableColumn<Order, String> payment;
     @FXML
@@ -65,18 +65,14 @@ public class ManageOrdersController {
     }
 
     public void initialize() {
-        // TODO: Task for load
-        List<Order> list =
-                Collections.singletonList(new Order(1, 5.30f, Payment.CASH, new Date(0), new Date(1),
-                        OrderSate.CONFIRMED));
-
+        tableView.setSelectionModel(null);
         // Id cell factory
         id.setCellFactory(cell -> {
             // TODO view list cell.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> this.stage);
             return new TableCellOrderId();
         });
         id.setCellValueFactory(param -> new SimpleObjectProperty<>(param.getValue().getId()));
-
+        state.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getState().toString()));
         payment.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getPayment().toString()));
         total.setCellValueFactory(param ->
                 new SimpleStringProperty(String.format("%.2f €", param.getValue().getTotal()))
@@ -88,8 +84,13 @@ public class ManageOrdersController {
                 new SimpleStringProperty(dateFormat.format(param.getValue().getDeliveryEnd()))
         );
 
-        tableView.setItems(FXCollections.observableList(list));
-
+        Session session = Session.getInstance();
+        TaskManageOrders task = new TaskManageOrders(session.getUser().getSession());
+        task.setOnSucceeded(event -> {
+            ObservableList<Order> list = FXCollections.observableList(task.getValue());
+            tableView.setItems(FXCollections.observableList(list));
+        });
+        new Thread(task).start();
     }
 
     private void setStage(Stage stage) {
