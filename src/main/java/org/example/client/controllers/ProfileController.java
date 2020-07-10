@@ -132,6 +132,6 @@ public class ProfileController {
 
     @FXML
     public void handleViewShoppingHistoryAction() {
-        ShoppingHistoryController.showView(this.stage);
+        OrderHistoryController.showView(this.stage);
     }
 }

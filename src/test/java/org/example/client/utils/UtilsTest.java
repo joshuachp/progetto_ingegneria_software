@@ -6,6 +6,7 @@ import org.example.client.MockUtils;
 import org.example.client.models.Client;
 import org.example.client.models.Manager;
 import org.example.client.models.Order;
+import org.example.client.models.OrderItem;
 import org.example.client.models.enums.OrderSate;
 import org.example.client.models.enums.Payment;
 import org.json.JSONObject;
@@ -134,5 +135,25 @@ class UtilsTest {
         assertEquals(new Date(0), order.getDeliveryStart());
         assertEquals(new Date(0), order.getDeliveryEnd());
         assertEquals(OrderSate.CONFIRMED, order.getState());
+    }
+
+    @Test
+    void getOrderItems() throws Exception {
+        JSONObject body = new JSONObject();
+        body.append("orderItems", new JSONObject()
+                .put("name", "Name")
+                .put("price", 1.0f)
+                .put("quantity", 1)
+                .put("productId", 1));
+        this.server.enqueue(new MockResponse()
+                .setBody(body.toString()));
+
+        List<OrderItem> list = Utils.getOrderItems("session", 1);
+        assertEquals(1, list.size());
+        OrderItem item = list.get(0);
+        assertEquals("Name", item.getName());
+        assertEquals(1.0f, item.getPrice());
+        assertEquals(1, item.getQuantity());
+        assertEquals(1, item.getProductId());
     }
 }

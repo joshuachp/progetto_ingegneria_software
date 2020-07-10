@@ -175,8 +175,22 @@ public class Session {
         }
     }
 
-    public void removeAllProduct(){
-        if (!this.mapProducts.isEmpty()){
+    /**
+     * Check if the json product is of a product that is already contained in the map, if its already contained it
+     * returns it else it returns the given product.
+     *
+     * @param product Product instance
+     * @return Reference to a product in the session or the product instance
+     */
+    public Product checkProduct(@NotNull Product product) {
+        if (session.getMapProducts().containsKey(product.getId())) {
+            return session.getMapProducts().get(product.getId());
+        }
+        return product;
+    }
+
+    public void removeAllProduct() {
+        if (!this.mapProducts.isEmpty()) {
             this.mapProducts.clear();
         }
     }

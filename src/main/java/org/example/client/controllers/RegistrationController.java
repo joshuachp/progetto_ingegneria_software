@@ -10,8 +10,8 @@ import javafx.scene.control.*;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import org.example.client.models.FactoryUser;
-import org.example.client.models.enums.Payment;
 import org.example.client.models.User;
+import org.example.client.models.enums.Payment;
 import org.example.client.utils.Session;
 import org.example.client.utils.Utils;
 import org.jetbrains.annotations.Nullable;
@@ -19,7 +19,6 @@ import org.jetbrains.annotations.Nullable;
 import java.io.IOException;
 import java.util.regex.Pattern;
 
-// TODO: Refactor validation and request should return response to show the server error
 public class RegistrationController {
 
     @FXML
@@ -162,10 +161,10 @@ public class RegistrationController {
 
         // verifica email
         if (!email.getText().equals(""))
-            if(!mailVerify(email.getText()))
+            if (!mailVerify(email.getText()))
                 error = errorMessage("La mail non è coretta.", email);
-        else
-            error = errorMessage("Il campo email è vuoto.", email);
+            else
+                error = errorMessage("Il campo email è vuoto.", email);
 
         // Verifica lunghezza password
         if (!password.getText().equals("")) {

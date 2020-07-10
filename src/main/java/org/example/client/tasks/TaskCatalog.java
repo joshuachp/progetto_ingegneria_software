@@ -51,17 +51,12 @@ public class TaskCatalog extends Task<List<Node>> {
                 assert json.has("products");
 
                 // For each product map it to section - array of products
-                for (Object t : json.getJSONArray("products")) {
+                json.getJSONArray("products").forEach(t -> {
                     JSONObject jsonProduct = (JSONObject) t;
 
                     // Get a reference to an existing product in the cart or create a new one, because we need
                     // the current quantity of the product in the cart
-                    Product product;
-                    if (session.getMapProducts().containsKey(jsonProduct.getInt("id"))) {
-                        product = session.getMapProducts().get(jsonProduct.getInt("id"));
-                    } else {
-                        product = new Product(jsonProduct);
-                    }
+                    Product product = session.checkProduct(new Product(jsonProduct));
 
                     // Create a new array if section doesn't exists
                     if (!sectionMap.containsKey(product.getSection())) {
@@ -70,7 +65,7 @@ public class TaskCatalog extends Task<List<Node>> {
                     sectionMap.get(product.getSection()).add(product);
                     // Add to section all
                     sectionMap.get(CatalogController.SECTION_ALL).add(product);
-                }
+                });
 
                 // Set category list (since doesn't change the view structure)
                 categoryList.addAll(sectionMap.keySet());

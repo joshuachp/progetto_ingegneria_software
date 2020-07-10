@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<VBox xmlns:fx="http://javafx.com/fxml" xmlns="http://javafx.com/javafx"
+      fx:controller="org.example.client.controllers.OrderHistoryItemController">
+    <HBox alignment="CENTER_LEFT" onMouseClicked="#handleOnMouseClick" prefWidth="700.0" VBox.vgrow="NEVER">
+        <cursor>
+            <Cursor fx:constant="HAND"/>
+        </cursor>
+        <Text fx:id="textOrderId" fill="#212121" strokeType="OUTSIDE" strokeWidth="0.0" text="#1">
+            <font>
+                <Font size="18.0"/>
+            </font>
+            <HBox.margin>
+                <Insets/>
+            </HBox.margin>
+        </Text>
+        <Text fill="#212121" layoutX="34.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Status">
+            <font>
+                <Font size="18.0"/>
+            </font>
+            <HBox.margin>
+                <Insets left="48.0"/>
+            </HBox.margin>
+        </Text>
+        <Text fx:id="textStatus" fill="#edff00" layoutX="493.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0"
+              text="Confirmed">
+            <font>
+                <Font size="14.0"/>
+            </font>
+            <HBox.margin>
+                <Insets left="24.0"/>
+            </HBox.margin>
+        </Text>
+        <HBox HBox.hgrow="ALWAYS"/>
+        <Text fx:id="textPayment" fill="#616161" strokeType="OUTSIDE" strokeWidth="0.0" text="Cash on delivery">
+            <HBox.margin>
+                <Insets right="48.0"/>
+            </HBox.margin>
+            <font>
+                <Font size="14.0"/>
+            </font>
+        </Text>
+        <Text fx:id="textTotal" fill="#212121" strokeType="OUTSIDE" strokeWidth="0.0" text="€ 100">
+            <HBox.margin>
+                <Insets/>
+            </HBox.margin>
+            <font>
+                <Font size="14.0"/>
+            </font>
+        </Text>
+        <padding>
+            <Insets bottom="24.0" left="24.0" right="24.0" top="24.0"/>
+        </padding>
+    </HBox>
+    <Separator prefWidth="200.0">
+        <VBox.margin>
+            <Insets left="12.0" right="12.0"/>
+        </VBox.margin>
+    </Separator>
+    <VBox fx:id="vBoxListOrderProducts" style="-fx-background-color: #CDCDCD;" VBox.vgrow="NEVER"/>
+</VBox>
