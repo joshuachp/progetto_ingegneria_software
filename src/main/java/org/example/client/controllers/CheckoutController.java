@@ -121,29 +121,34 @@ public class CheckoutController {
         // If delivery data has been inserted, confirm order
         try {
             Utils.createOrder(session.getUser().getSession(), products, deliveryStart, deliveryEnd);
+
+            SimpleDateFormat hourFormat = new SimpleDateFormat("hh:mm");
+            //noinspection SpellCheckingInspection
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMMM");
+
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Order sent");
+            alert.setContentText(
+                    String.format("You order is confirmed.\nWe deliver it on %s between %s and %s.",
+                            dateFormat.format(deliveryStart),
+                            hourFormat.format(deliveryStart),
+                            hourFormat.format(deliveryEnd)
+                    )
+            );
+
+            alert.showAndWait();
         } catch (Exception e) {
             e.printStackTrace();
 
-            // TODO error
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setContentText(e.getMessage());
+            alert.showAndWait();
         }
 
-        SimpleDateFormat hourFormat = new SimpleDateFormat("hh:mm");
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMMM");
-
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Order sent");
-        alert.setContentText(
-                String.format("You order is confirmed.\nWe deliver it on %s between %s and %s.",
-                        dateFormat.format(deliveryStart),
-                        hourFormat.format(deliveryStart),
-                        hourFormat.format(deliveryEnd)
-                )
-        );
-        alert.showAndWait();
+        session.removeAllProduct();
 
         this.stage.close();
-
-        session.removeAllProduct();
         CatalogController.showView(mainStage);
     }
 
