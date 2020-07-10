@@ -62,9 +62,10 @@ public class OrderHistoryItemController {
 
     private void getOrderItems() {
         Session session = Session.getInstance();
-        TaskOrderHistoryItem task = new TaskOrderHistoryItem(this.stage, session.getUser().getSession(),
-                this.order.getId());
+        TaskOrderHistoryItem task =
+                new TaskOrderHistoryItem(this.stage, session.getUser().getSession(), this.order.getId());
         task.setOnSucceeded(event -> this.nodes = task.getValue());
+        new Thread(task).start();
     }
 
 
