@@ -51,7 +51,7 @@ public class CheckoutController {
         stage.setScene(scene);
         stage.setTitle("Checkout");
         stage.initOwner(mainStage);
-        stage.setAlwaysOnTop(true);
+        //stage.setAlwaysOnTop(true);
         stage.initModality(Modality.APPLICATION_MODAL);
 
         CheckoutController checkoutController = loader.getController();
@@ -137,6 +137,7 @@ public class CheckoutController {
             );
 
             alert.showAndWait();
+
         } catch (Exception e) {
             e.printStackTrace();
 

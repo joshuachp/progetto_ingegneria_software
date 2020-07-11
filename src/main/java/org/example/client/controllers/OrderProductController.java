@@ -45,9 +45,9 @@ public class OrderProductController {
     public void setOrderItem(OrderItem orderItem) {
         this.orderItem = orderItem;
         this.textName.setText(orderItem.getName());
-        this.textPrice.setText(String.format("Price € %f.2", orderItem.getPrice()));
+        this.textPrice.setText(String.format("Price \u20ac %.2f", orderItem.getPrice()));
         this.textQuantity.setText(orderItem.getQuantity().toString());
-        this.textTotal.setText(String.format("€ %.2f", orderItem.getPrice() * orderItem.getQuantity()));
+        this.textTotal.setText(String.format("\u20ac %.2f", orderItem.getPrice() * orderItem.getQuantity()));
 
         Session session = Session.getInstance();
         TaskOrderProduct task = new TaskOrderProduct(session.getUser().getSession(), orderItem.getProductId());

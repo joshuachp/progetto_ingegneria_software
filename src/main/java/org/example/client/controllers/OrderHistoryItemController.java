@@ -55,7 +55,7 @@ public class OrderHistoryItemController {
         this.textStatus.setText(order.getState().toString());
         this.textStatus.setFill(order.getState().getColor());
         this.textPayment.setText(order.getPayment().toString());
-        this.textTotal.setText(String.format("€ %.2f", order.getTotal()));
+        this.textTotal.setText(String.format("\u20ac %.2f", order.getTotal()));
 
         getOrderItems();
     }

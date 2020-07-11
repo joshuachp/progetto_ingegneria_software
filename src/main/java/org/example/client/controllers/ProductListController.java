@@ -17,7 +17,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import javafx.util.Callback;
-import jdk.jshell.execution.Util;
 import okhttp3.Response;
 import org.example.client.models.Product;
 import org.example.client.utils.Session;
@@ -26,6 +25,7 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.Objects;
+import java.util.Optional;
 
 public class ProductListController {
 
@@ -76,7 +76,7 @@ public class ProductListController {
                 assert json.has("products");
                 for (Object t : json.getJSONArray("products")) {
                     JSONObject jsonProduct = (JSONObject) t;
-                    Product product = new Product((JSONObject)t);
+                    Product product = new Product((JSONObject) t);
                     products.add(product);
                 }
             }
@@ -106,6 +106,7 @@ public class ProductListController {
                         }
                     }
                 };
+
                 cell.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
                     @Override
                     public void handle(MouseEvent event) {
@@ -185,9 +186,8 @@ public class ProductListController {
 
     }
 
-    private static void handleModifyProduct(Product product) throws IOException {
-        Stage stage = new Stage();
-        GestioneProdottiController.showView(stage, product, true);
+    private void handleModifyProduct(Product product) throws IOException {
+        ManageProductController.showView(this.stage, product, true);
     }
 
     private void setStage(Stage stage) {
@@ -195,8 +195,8 @@ public class ProductListController {
     }
 
     public void handlerAddProduct(ActionEvent actionEvent) throws IOException {
-        Stage stage = new Stage();
-        GestioneProdottiController.showView(stage, null, false );
+
+        ManageProductController.showView(this.stage, null, false);
     }
 
     public void handleBackAction(ActionEvent actionEvent) throws IOException {
@@ -210,10 +210,47 @@ public class ProductListController {
     }
 
     public void handleModifyQuantityProduct(TableColumn.CellEditEvent<Product, String> productStringCellEditEvent) {
-        // TODO: send product with
-        Product product =  productStringCellEditEvent.getRowValue();
-        product.setAvailability(Integer.parseInt(productStringCellEditEvent.getNewValue()));
 
+        Product product = productStringCellEditEvent.getRowValue();
+        product.setAvailability(Integer.parseInt(productStringCellEditEvent.getNewValue()));
+        Session session = Session.getInstance();
+        try {
+            Utils.updateProduct(session.getUser().getSession(), product.getId());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public void handlerAddProductList(ActionEvent actionEvent) {
+    }
+
+    public void handleRemoveProducts(ActionEvent actionEvent) {
+        if (tableview.getSelectionModel().getSelectedItem() != null) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setContentText(String.format(
+                    "The operation is irreversible.\nAre you sure to delete product ID %d? ",
+                    tableview.getSelectionModel().getSelectedItem().getId())
+                    );
+            alert.setTitle("Remove products");
+
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.isPresent() && result.get() == ButtonType.OK) {
+                Session session = Session.getInstance();
+                try {
+                    Utils.removeProduct(session.getUser().getSession(),
+                            tableview.getSelectionModel().getSelectedItem().getId());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("No product selected");
+            alert.setContentText("Please, select product to remove.");
+            alert.showAndWait();
+        }
     }
 
     // Search filter enum
