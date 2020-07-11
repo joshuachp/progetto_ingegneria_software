@@ -446,7 +446,7 @@ public class Utils {
 
         JSONObject json = new JSONObject()
                 .put("session", session)
-                .put("products", productId);
+                .put("product_id", productId);
 
         OkHttpClient client = new OkHttpClient();
         RequestBody body = RequestBody.create(json.toString(), MediaType.get("application/json; charset=utf-8"));
