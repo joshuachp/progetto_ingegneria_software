@@ -222,7 +222,7 @@ public class ListaSpeseController {
     }
 
     public void handleBackAction(ActionEvent actionEvent) throws IOException {
-        SceltaModalitaController.showView(this.stage);
+        ChoiceModeController.showView(this.stage);
     }
 
     public void handlerAddManagerAction(ActionEvent actionEvent) {

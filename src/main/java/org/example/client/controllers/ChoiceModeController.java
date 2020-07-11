@@ -1,23 +1,22 @@
 package org.example.client.controllers;
 
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import okhttp3.Response;
-import org.example.client.utils.Session;
 import org.example.client.utils.Utils;
 
 import java.io.IOException;
 
-public class SceltaModalitaController {
+public class ChoiceModeController {
 
     private Stage stage;
 
     public static void showView(Stage stage) {
 
-        FXMLLoader loader = new FXMLLoader(SceltaModalitaController.class.getResource("/views/scelta-modalita.fxml"));
+        FXMLLoader loader = new FXMLLoader(ChoiceModeController.class.getResource("/views/choice-mode.fxml"));
         Parent root = null;
         try {
             root = loader.load();
@@ -29,7 +28,7 @@ public class SceltaModalitaController {
         stage.setScene(scene);
         stage.setTitle("Modalità");
         stage.show();
-        SceltaModalitaController controller = loader.getController();
+        ChoiceModeController controller = loader.getController();
         controller.setStage(stage);
     }
 
@@ -51,9 +50,13 @@ public class SceltaModalitaController {
         ProductListController.showView(this.stage);
     }
 
+    @FXML
     public void handlerLogutAction(ActionEvent actionEvent) {
+        Utils.logOut(this.stage);
     }
 
+    @FXML
     public void handlerAddManagerAction(ActionEvent actionEvent) {
+        RegistrationManagerController.showView(this.stage);
     }
 }

@@ -6,6 +6,7 @@ import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Cursor;
 import javafx.scene.Parent;
@@ -200,13 +201,17 @@ public class ProductListController {
     }
 
     public void handleBackAction(ActionEvent actionEvent) throws IOException {
-        SceltaModalitaController.showView(this.stage);
+        ChoiceModeController.showView(this.stage);
     }
 
+    @FXML
     public void handlerLogutAction(ActionEvent actionEvent) {
+        Utils.logOut(this.stage);
     }
 
+    @FXML
     public void handlerAddManagerAction(ActionEvent actionEvent) {
+        RegistrationManagerController.showView(this.stage);
     }
 
     public void handleModifyQuantityProduct(TableColumn.CellEditEvent<Product, String> productStringCellEditEvent) {
