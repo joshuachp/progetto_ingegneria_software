@@ -246,7 +246,7 @@ public class ProductListController {
             if (result.isPresent() && result.get() == ButtonType.OK) {
                 Session session = Session.getInstance();
                 try {
-                    Utils.removeProduct(session.getUser().getSession(),
+                    Utils.deleteProduct(session.getUser().getSession(),
                             tableview.getSelectionModel().getSelectedItem().getId());
                 } catch (Exception e) {
                     e.printStackTrace();

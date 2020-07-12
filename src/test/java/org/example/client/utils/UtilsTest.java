@@ -99,21 +99,6 @@ class UtilsTest {
 
 
     @Test
-    void getAllProducts() {
-        // TODO
-    }
-
-    @Test
-    void getLoyaltyCard() {
-        // TODO
-    }
-
-    @Test
-    void logOut() {
-        // TODO
-    }
-
-    @Test
     void getAllOrders() throws Exception {
         JSONObject body = new JSONObject();
         body.append("orders", new JSONObject()

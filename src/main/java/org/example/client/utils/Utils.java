@@ -121,8 +121,8 @@ public class Utils {
      * @return The response of the server or null on error
      */
     public static int registerClient(String username, String password, String name, String surname,
-                                     String address, Integer cap, String city,
-                                     String telephone, Integer payment, Integer cardNumber) {
+                                     String address, int cap, String city,
+                                     String telephone, int payment, int cardNumber) {
         OkHttpClient client = new OkHttpClient();
         RequestBody body = new FormBody.Builder()
                 .add("username", username)
@@ -134,7 +134,7 @@ public class Utils {
                 .add("city", city)
                 .add("telephone", telephone)
                 .add("payment", String.valueOf(payment))
-                .add("loyalty_card_number", cardNumber.toString())
+                .add("loyalty_card_number", String.valueOf(cardNumber))
                 .build();
         Request request = new Request.Builder()
                 .url(SERVER_URL + SERVER_URL_REGISTRATION)
@@ -184,7 +184,7 @@ public class Utils {
             body.add("cap", client.getCap().toString());
             body.add("city", client.getCity());
             body.add("telephone", client.getTelephone());
-            body.add("payment", client.getPaymentInteger().toString());
+            body.add("payment", String.valueOf(client.getPayment().ordinal()));
             body.add("card_number", client.getCardNumber().toString());
         }
         // Send request
@@ -226,7 +226,7 @@ public class Utils {
      * @param session User session
      * @return Server response null on error
      */
-    public static @Nullable Response getLoyaltyCard(String session, Integer cardNumber) {
+    public static @Nullable Response getLoyaltyCard(String session, int cardNumber) {
         OkHttpClient client = new OkHttpClient();
         RequestBody body = new FormBody.Builder()
                 .add("session", session)
@@ -377,7 +377,7 @@ public class Utils {
      * @throws Exception {@link IOException} if request fails and {@link Exception} if the requests returns error
      *                   code. Sets the request body as the exception message
      */
-    public static @NotNull ArrayList<OrderItem> getOrderItems(String session, Integer orderId) throws Exception {
+    public static @NotNull ArrayList<OrderItem> getOrderItems(String session, int orderId) throws Exception {
         OkHttpClient client = new OkHttpClient();
         RequestBody body = new FormBody.Builder()
                 .add("session", session)
@@ -410,7 +410,7 @@ public class Utils {
      * @throws Exception {@link IOException} if request fails and {@link Exception} if the requests returns error
      *                   code. Sets the request body as the exception message
      */
-    public static @NotNull Product getProduct(String session, Integer productId) throws Exception {
+    public static @NotNull Product getProduct(String session, int productId) throws Exception {
         OkHttpClient client = new OkHttpClient();
         RequestBody body = new FormBody.Builder()
                 .add("session", session)
@@ -456,7 +456,7 @@ public class Utils {
         }
     }
 
-    public static void updateProduct(String session, Integer productId) throws Exception {
+    public static void updateProduct(String session, int productId) throws Exception {
 
         JSONObject json = new JSONObject()
                 .put("session", session)
@@ -477,13 +477,20 @@ public class Utils {
         }
     }
 
-    // TODO: do as form
-    public static void removeProduct(String session, Integer productId) throws Exception {
-        JSONObject json = new JSONObject()
-                .put("session", session)
-                .put("product_id", productId);
+    /**
+     * Request the server to delete a product
+     *
+     * @param session   User session
+     * @param productId Product id
+     * @throws Exception {@link IOException} if request fails and {@link Exception} if the requests returns error
+     *                   code. Sets the request body as the exception message
+     */
+    public static void deleteProduct(String session, int productId) throws Exception {
         OkHttpClient client = new OkHttpClient();
-        RequestBody body = RequestBody.create(json.toString(), MediaType.get("application/json; charset=utf-8"));
+        RequestBody body = new FormBody.Builder()
+                .add("session", session)
+                .add("productId", String.valueOf(productId))
+                .build();
         Request request = new Request.Builder()
                 .url(SERVER_URL + SERVER_URL_REMOVE_PRODUCT)
                 .post(body)
@@ -506,7 +513,7 @@ public class Utils {
      * @throws Exception {@link IOException} if request fails and {@link Exception} if the requests returns error
      *                   code. Sets the request body as the exception message
      */
-    public static void updateOrderState(String session, Integer orderId, OrderSate newState) throws Exception {
+    public static void updateOrderState(String session, int orderId, @NotNull OrderSate newState) throws Exception {
         OkHttpClient client = new OkHttpClient();
         RequestBody body = new FormBody.Builder()
                 .add("session", session)

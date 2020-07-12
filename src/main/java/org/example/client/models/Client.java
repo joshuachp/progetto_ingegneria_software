@@ -17,7 +17,6 @@ public class Client extends User {
     private String telephone;
     private Payment payment;
     private Integer cardNumber;
-    // TODO: payment method
 
     public Client(String username, String session, String name, String surname, String address,
                   Integer cap, String city, String telephone, Integer payment, Integer cardNumber) {
@@ -101,7 +100,4 @@ public class Client extends User {
         this.payment = payment;
     }
 
-    public Integer getPaymentInteger() {
-        return payment.ordinal();
-    }
 }

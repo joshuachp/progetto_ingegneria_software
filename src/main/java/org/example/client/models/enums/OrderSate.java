@@ -8,8 +8,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public enum OrderSate {
-    // TODO: Better colors
-    CONFIRMED("Confirmed", Color.YELLOWGREEN),
+    CONFIRMED("Confirmed", Color.BLACK),
     IN_PREPARATION("In preparation", Color.AQUA),
     CONSEGNATA("Delivered", Color.GREEN),
     CANCELLED("Cancelled", Color.RED);
