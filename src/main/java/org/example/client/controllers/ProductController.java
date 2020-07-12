@@ -68,7 +68,7 @@ public class ProductController {
         stage.setScene(scene);
         stage.initOwner(patentStage);
         stage.initModality(Modality.APPLICATION_MODAL);
-        stage.initStyle(StageStyle.UTILITY);
+        //stage.initStyle(StageStyle.UTILITY);
         stage.setAlwaysOnTop(true);
 
         controller.setProduct(product);

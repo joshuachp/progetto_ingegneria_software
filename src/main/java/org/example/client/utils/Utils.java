@@ -34,6 +34,10 @@ public class Utils {
     // Format for URL `/api/order-item/all/{orderId}`
     public static final String SERVER_URL_GET_ALL_ORDER_ITEMS = "/api/order-item/all/%d";
 
+    public static final String SERVER_URL_CREATE_PRODUCT = "/api/product/create";
+    public static final String SERVER_URL_UPDATE_PRODUCT = "/api/product/update";
+    public static final String SERVER_URL_REMOVE_PRODUCT = "/api/product/remove";
+
     // REGEX String utils
     @RegExp
     public static final String REGEX_CAP = "^\\d{5}$";
@@ -421,5 +425,73 @@ public class Utils {
         Product product = new Product(new JSONObject(Objects.requireNonNull(response.body()).string()));
         response.close();
         return product;
+    }
+
+    public static void createProduct(String session, List<Product> products) throws Exception {
+
+        JSONArray jsonProducts = new JSONArray();
+        for(Product x : products){
+            jsonProducts.put(x.toJSON());
+        }
+
+        JSONObject json = new JSONObject()
+                .put("session", session)
+                .put("products", jsonProducts);
+
+        OkHttpClient client = new OkHttpClient();
+        RequestBody body = RequestBody.create(json.toString(), MediaType.get("application/json; charset=utf-8"));
+
+        Request request = new Request.Builder()
+                .url(SERVER_URL + SERVER_URL_CREATE_PRODUCT)
+                .post(body)
+                .build();
+        Response response = client.newCall(request).execute();
+        if (response.code() != 200) {
+            String error = Objects.requireNonNull(response.body()).string();
+            Objects.requireNonNull(response.body()).close();
+            throw new Exception(error);
+        }
+    }
+
+    public static void updateProduct(String session, Integer productId) throws Exception {
+
+        JSONObject json = new JSONObject()
+                .put("session", session)
+                .put("products", productId);
+
+        OkHttpClient client = new OkHttpClient();
+        RequestBody body = RequestBody.create(json.toString(), MediaType.get("application/json; charset=utf-8"));
+
+        Request request = new Request.Builder()
+                .url(SERVER_URL + SERVER_URL_UPDATE_PRODUCT)
+                .post(body)
+                .build();
+        Response response = client.newCall(request).execute();
+        if (response.code() != 200) {
+            String error = Objects.requireNonNull(response.body()).string();
+            Objects.requireNonNull(response.body()).close();
+            throw new Exception(error);
+        }
+    }
+
+    public static void removeProduct(String session, Integer productId) throws Exception {
+
+        JSONObject json = new JSONObject()
+                .put("session", session)
+                .put("product_id", productId);
+
+        OkHttpClient client = new OkHttpClient();
+        RequestBody body = RequestBody.create(json.toString(), MediaType.get("application/json; charset=utf-8"));
+
+        Request request = new Request.Builder()
+                .url(SERVER_URL + SERVER_URL_REMOVE_PRODUCT)
+                .post(body)
+                .build();
+        Response response = client.newCall(request).execute();
+        if (response.code() != 200) {
+            String error = Objects.requireNonNull(response.body()).string();
+            Objects.requireNonNull(response.body()).close();
+            throw new Exception(error);
+        }
     }
 }

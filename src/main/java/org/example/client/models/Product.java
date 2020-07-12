@@ -45,6 +45,20 @@ public class Product {
         this.availability = json.getInt("availability");
     }
 
+    // Product to create
+    public Product( String name, String brand, Integer packageSize, Float price, String image,
+                   Integer availability, String characteristics, String section) {
+        this.id = null;
+        this.name = name;
+        this.brand = brand;
+        this.packageSize = packageSize;
+        this.price = price;
+        this.image = image;
+        this.availability = availability;
+        this.characteristics = characteristics;
+        this.section = section;
+    }
+
     public IntegerProperty idProperty(){return new SimpleIntegerProperty(this.id);}
 
     public Integer getId() {
@@ -142,5 +156,19 @@ public class Product {
 
     public void setQuantity(Integer quantity) {
         this.quantity = quantity;
+    }
+
+    public JSONObject toJSON() {
+        JSONObject json = new JSONObject()
+                .put("name", this.name)
+                .put("brand", this.brand)
+                .put("package_size", this.packageSize)
+                .put("price", this.price)
+                .put("availability", this.availability)
+                .put("characteristics", this.characteristics)
+                .put("section", this.section);
+        if (this.image != null)
+            json.put("image", this.image);
+        return json;
     }
 }

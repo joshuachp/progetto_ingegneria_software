@@ -11,7 +11,7 @@ public class OrderProductListController {
     Stage stage = new Stage();
 
     public void showView(Integer orderID) throws IOException {
-        FXMLLoader loader = new FXMLLoader(SceltaModalitaController.class.getResource("/views/order-product-list" +
+        FXMLLoader loader = new FXMLLoader(ChoiceModeController.class.getResource("/views/order-product-list" +
                 ".fxml"));
         Parent root = null;
         try {

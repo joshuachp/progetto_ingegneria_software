@@ -1,7 +1,5 @@
 package org.example.client.controllers;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -9,28 +7,20 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
-import org.example.client.models.FactoryUser;
-import org.example.client.models.User;
-import org.example.client.models.enums.Payment;
-import org.example.client.utils.Session;
 import org.example.client.utils.Utils;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
 import java.util.regex.Pattern;
 
-public class RegistrationController {
+public class RegistrationManagerController {
 
-    @FXML
-    public ComboBox<String> cbxPagamento;
     @FXML
     public TextField telephone;
     @FXML
     private PasswordField password;
     @FXML
     private PasswordField passwordRepeat;
-    @FXML
-    private TextField email;
     @FXML
     private TextField name;
     @FXML
@@ -47,10 +37,11 @@ public class RegistrationController {
     private Label resultLabel;
 
     private Stage stage;
-    private Integer paymentMethod = 0;
+
 
     public static void showView(Stage stage) {
-        FXMLLoader loader = new FXMLLoader(ChoiceModeController.class.getResource("/views/registration.fxml"));
+        FXMLLoader loader = new FXMLLoader(ChoiceModeController.class.getResource("/views/registration-manager" +
+                ".fxml"));
         Parent root = null;
         try {
             root = loader.load();
@@ -59,8 +50,8 @@ public class RegistrationController {
         }
         assert root != null;
 
-        RegistrationController registrationController = loader.getController();
-        registrationController.setStage(stage);
+        RegistrationManagerController registrationManagerControllerController = loader.getController();
+        registrationManagerControllerController.setStage(stage);
 
         Scene scene = new Scene(root);
         stage.setScene(scene);
@@ -68,26 +59,13 @@ public class RegistrationController {
         stage.show();
     }
 
-    @FXML
-    public void initialize() {
-        // Initialize ComboBox with all payments
-        ObservableList<String> payments = FXCollections.observableArrayList(Payment.getPayments());
-        this.cbxPagamento.setItems(payments);
-        this.cbxPagamento.getSelectionModel().selectFirst();
-    }
-
     public void setStage(Stage stage) {
         this.stage = stage;
     }
 
     @FXML
-    public void handlerSetPaymentAction() {
-        this.paymentMethod = cbxPagamento.getSelectionModel().getSelectedIndex();
-    }
-
-    @FXML
     public void handleBackAction() {
-        AuthController.showView(this.stage);
+        ProductListController.showView(this.stage);
     }
 
     public boolean passwordVerify(String password) {
@@ -96,10 +74,6 @@ public class RegistrationController {
 
     public boolean passwordVerifyEquals(String password, String passwordRepeat) {
         return password.equals(passwordRepeat);
-    }
-
-    public boolean mailVerify(String email) {
-        return (Pattern.matches(Utils.REGEX_MAIL, email));
     }
 
     public boolean capVerify(String cap) {
@@ -159,13 +133,6 @@ public class RegistrationController {
         } else
             error = errorMessage("Il campo Telefono è vuoto.", telephone);
 
-        // verifica email
-        if (!email.getText().equals(""))
-            if (!mailVerify(email.getText()))
-                error = errorMessage("La mail non è coretta.", email);
-            else
-                error = errorMessage("Il campo email è vuoto.", email);
-
         // Verifica lunghezza password
         if (!password.getText().equals("")) {
             if (!passwordVerify(password.getText()))
@@ -192,7 +159,7 @@ public class RegistrationController {
         }));
 
         if (!error) {
-            int statusCode = Utils.registerClient(email.getText(), passwordRepeat.getText(), name.getText(),
+            /*int statusCode = Utils.registerManager( passwordRepeat.getText(), name.getText(),
                     surname.getText(), address.getText(), Integer.valueOf(cap.getText()), city.getText(),
                     telephone.getText(), this.paymentMethod, Integer.parseInt(this.cardNumber.getText()));
             if (statusCode == 200) {
@@ -207,7 +174,7 @@ public class RegistrationController {
                 CatalogController.showView(this.stage);
             } else {
                 errorMessage("Error" + statusCode, null);
-            }
+            }*/
         }
 
     }
