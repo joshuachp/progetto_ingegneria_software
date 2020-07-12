@@ -203,7 +203,7 @@ public class Utils {
      * @param session User session
      * @return Server response null on error
      */
-    public static @Nullable Response getAllProducts(String session) {
+    public static JSONObject getAllProducts(String session) throws Exception {
         OkHttpClient client = new OkHttpClient();
         RequestBody body = new FormBody.Builder()
                 .add("session", session)
@@ -212,12 +212,21 @@ public class Utils {
                 .url(SERVER_URL + SERVER_URL_GET_ALL_PRODUCT)
                 .post(body)
                 .build();
-        try {
-            return client.newCall(request).execute();
-        } catch (Exception e) {
-            e.printStackTrace();
+
+        Response response = client.newCall(request).execute();
+
+        if (response.code() != 200) {
+            String error = Objects.requireNonNull(response.body()).string();
+            Objects.requireNonNull(response.body()).close();
+            throw new Exception(error);
         }
-        return null;
+
+        JSONObject json = new JSONObject(Objects.requireNonNull(response.body()).string());
+
+        Objects.requireNonNull(response.body()).close();
+
+        return json;
+
     }
 
 

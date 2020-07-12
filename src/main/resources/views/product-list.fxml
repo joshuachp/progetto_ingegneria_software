@@ -19,7 +19,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.client.controllers.ProductListController">
+<AnchorPane prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.client.controllers.ProductListController">
    <children>
       <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -73,18 +73,18 @@
                   </Button>
                </children>
             </GridPane>
-            <TableView fx:id="tableview">
+            <TableView fx:id="tableview" VBox.vgrow="ALWAYS">
               <columns>
-                  <TableColumn fx:id="IDCol" prefWidth="77.60003358125687" text="ID Prodotto" />
-                <TableColumn fx:id="NameCol" prefWidth="176.00006103515625" text="Nome Prodotto" />
-                  <TableColumn fx:id="BrandCol" prefWidth="162.3999786376953" text="Brand" />
-                  <TableColumn fx:id="PriceCol" prefWidth="96.0" text="Prezzo" />
-                <TableColumn fx:id="QuantityCol" editable="true" onEditCommit="#handleModifyQuantityProduct" prefWidth="88.79998779296875" text="Quantità" />
+                  <TableColumn fx:id="IDCol" maxWidth="1.7976931348623157E308" minWidth="100.0" prefWidth="200.0" text="ID Prodotto" />
+                <TableColumn fx:id="NameCol" maxWidth="1.7976931348623157E308" minWidth="100.0" prefWidth="200.0" text="Nome Prodotto" />
+                  <TableColumn fx:id="BrandCol" maxWidth="1.7976931348623157E308" minWidth="100.0" prefWidth="200.0" text="Brand" />
+                  <TableColumn fx:id="PriceCol" maxWidth="1.7976931348623157E308" minWidth="100.0" prefWidth="200.0" text="Prezzo" />
+                <TableColumn fx:id="QuantityCol" editable="true" maxWidth="1.7976931348623157E308" minWidth="100.0" onEditCommit="#handleModifyQuantityProduct" prefWidth="200.0" text="Quantità" />
               </columns>
             </TableView>
             <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Button fx:id="buttonimportproductlist1" alignment="CENTER" layoutX="331.0" layoutY="32.0" mnemonicParsing="false" onAction="#handleRemoveProducts" style="-fx-background-color: #DDDDDD;" text="Rimuovi prodotti selezionati">
+                  <Button fx:id="buttonimportproductlist1" alignment="CENTER" layoutX="331.0" layoutY="32.0" mnemonicParsing="false" onAction="#handleRemoveProducts" style="-fx-background-color: #DDDDDD;" text="Rimuovi prodotto selezionato">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
