@@ -115,7 +115,8 @@ public class ManageOrdersController {
                             order.getState().toString().toLowerCase().contains(search) ||
                             order.getPayment().toString().toLowerCase().contains(search) ||
                             dateFormat.format(order.getDeliveryStart()).toLowerCase().contains(search) ||
-                            dateFormat.format(order.getDeliveryEnd()).toLowerCase().contains(search);
+                            dateFormat.format(order.getDeliveryEnd()).toLowerCase().contains(search) ||
+                            order.getAddress().toLowerCase().contains(search);
                 }));
         // Make the table sortable
         SortedList<Order> sortedList = new SortedList<>(filteredList);
