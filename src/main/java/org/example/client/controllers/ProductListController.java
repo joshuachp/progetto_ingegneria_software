@@ -63,10 +63,9 @@ public class ProductListController {
         productListController.setStage(stage);
     }
 
-    private static void handleModifyProduct(Product product, boolean modify) throws IOException {
-        GestioneProdottiController gestioneProdottiController = new GestioneProdottiController();
-        Stage stage = new Stage();
-        gestioneProdottiController.showView(stage, product, modify);
+    @FXML
+    private void handleModifyProduct(Product product, boolean modify) throws IOException {
+        ManageProductController.showView(this.stage, product, modify);
     }
 
     public void initialize() throws IOException {
@@ -240,7 +239,7 @@ public class ProductListController {
             alert.setContentText(String.format(
                     "The operation is irreversible.\nAre you sure to delete product ID %d? ",
                     tableview.getSelectionModel().getSelectedItem().getId())
-                    );
+            );
             alert.setTitle("Remove products");
 
             Optional<ButtonType> result = alert.showAndWait();

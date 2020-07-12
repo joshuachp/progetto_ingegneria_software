@@ -33,7 +33,6 @@
             </graphic>
         </Button>
         <HBox HBox.hgrow="ALWAYS"/>
-        <ChoiceBox fx:id="choiceBox" prefWidth="150.0"/>
         <TextField fx:id="searchField" promptText="Search">
             <padding>
                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
@@ -46,7 +45,7 @@
             <TableColumn fx:id="state" prefWidth="178.4000244140625" text="State"/>
             <TableColumn fx:id="payment" editable="false" prefWidth="135.20001220703125" text="Payment"/>
             <TableColumn fx:id="total" editable="false" prefWidth="124.0" text="Total"/>
-            <TableColumn fx:id="deliveryStart" editable="false" prefWidth="103.99992370605469" text="Dlivery start"/>
+            <TableColumn fx:id="deliveryStart" editable="false" prefWidth="103.99992370605469" text="Delivery start"/>
             <TableColumn fx:id="deliveryEnd" editable="false" prefWidth="103.99992370605469" text="Delivery end"/>
         </columns>
         <columnResizePolicy>

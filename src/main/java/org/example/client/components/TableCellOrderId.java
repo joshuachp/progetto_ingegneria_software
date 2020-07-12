@@ -10,7 +10,9 @@ public class TableCellOrderId extends TableCell<Order, Integer> {
 
     @Override
     protected void updateItem(Integer item, boolean empty) {
-        if (!empty) {
+        if (empty) {
+            setText("");
+        } else {
             setText(item.toString());
             setAlignment(Pos.CENTER);
             setCursor(Cursor.HAND);
