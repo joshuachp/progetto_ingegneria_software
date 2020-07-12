@@ -40,6 +40,7 @@ public class ProductListController {
     public TableColumn<Product, String> BrandCol;
     public Button buttonimportproductlist;
     public Button buttonaddproduct;
+    private ObservableList<Product> products = FXCollections.observableArrayList();
 
     private Stage stage;
 
@@ -65,28 +66,8 @@ public class ProductListController {
 
     public void initialize() throws IOException {
 
-        // TODO: get products from server
-        String session = Session.getInstance().getUser().getSession();
-        Response response = Utils.getAllProducts(session);
-        ObservableList<Product> products = FXCollections.observableArrayList();
-        if (response != null) {
-            if (response.code() == 200 && response.body() != null) {
-                JSONObject json = new JSONObject(Objects.requireNonNull(response.body()).string());
-                Objects.requireNonNull(response.body()).close();
-                // Test for products array
-                assert json.has("products");
-                for (Object t : json.getJSONArray("products")) {
-                    JSONObject jsonProduct = (JSONObject) t;
-                    Product product = new Product((JSONObject) t);
-                    products.add(product);
-                }
-            }
-        }
-        // Test products
-        /*ObservableList<Product> products = FXCollections.observableArrayList(
+        refresh();
 
-                new Product(123, "Prova", "Test", 2, (float) 12.50, null,
-                        3, "Vegan", "Verdura"));*/
 
         // Clickable link for ID column
         this.IDCol.setCellFactory(new Callback<TableColumn<Product, Integer>,
@@ -141,6 +122,7 @@ public class ProductListController {
             System.out.println(event.getRowValue().getAvailability());
         });
 
+
         // Setting-up filter search
         ObservableList<String> columnFilterString = FXCollections.observableArrayList(
                 columnFilterEnum.ID.toString(),
@@ -182,10 +164,8 @@ public class ProductListController {
         sortedData.comparatorProperty().bind(this.tableview.comparatorProperty());
 
         this.tableview.setItems(sortedData);
-
-        this.setStage(stage);
-
     }
+
 
     private void handleModifyProduct(Product product) throws IOException {
         ManageProductController.showView(this.stage, product, true);
@@ -214,6 +194,7 @@ public class ProductListController {
         RegistrationManagerController.showView(this.stage);
     }
 
+    @FXML
     public void handleModifyQuantityProduct(TableColumn.CellEditEvent<Product, String> productStringCellEditEvent) {
 
         Product product = productStringCellEditEvent.getRowValue();
@@ -227,16 +208,13 @@ public class ProductListController {
 
     }
 
-    public void handlerAddProductList(ActionEvent actionEvent) {
-    }
-
     public void handleRemoveProducts(ActionEvent actionEvent) {
         if (tableview.getSelectionModel().getSelectedItem() != null) {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setContentText(String.format(
                     "The operation is irreversible.\nAre you sure to delete product ID %d? ",
                     tableview.getSelectionModel().getSelectedItem().getId())
-                    );
+            );
             alert.setTitle("Remove products");
 
             Optional<ButtonType> result = alert.showAndWait();
@@ -256,6 +234,38 @@ public class ProductListController {
             alert.setContentText("Please, select product to remove.");
             alert.showAndWait();
         }
+
+        try {
+            refresh();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void refresh() throws IOException {
+
+        String session = Session.getInstance().getUser().getSession();
+        Response response = Utils.getAllProducts(session);
+        if (!products.isEmpty())
+            this.products.clear();
+
+        if (response != null) {
+            if (response.code() == 200 && response.body() != null) {
+                JSONObject json = new JSONObject(Objects.requireNonNull(response.body()).string());
+                Objects.requireNonNull(response.body()).close();
+                // Test for products array
+                assert json.has("products");
+                if(!json.getJSONArray("products").isEmpty()) {
+                    for (Object t : json.getJSONArray("products")) {
+                        Product product = new Product((JSONObject) t);
+                        products.add(product);
+                    }
+                }
+            }
+        }
+    }
+
+    public void handlerAddProductList(ActionEvent actionEvent) {
     }
 
     // Search filter enum
