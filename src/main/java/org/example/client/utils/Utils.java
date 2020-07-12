@@ -510,7 +510,7 @@ public class Utils {
         OkHttpClient client = new OkHttpClient();
         RequestBody body = new FormBody.Builder()
                 .add("session", session)
-                .add("newState", newState.toString())
+                .add("newState", String.valueOf(newState.ordinal()))
                 .build();
         Request request = new Request.Builder()
                 .url(SERVER_URL + String.format(SERVER_URL_ORDER_STATE_UPDATE, orderId))
