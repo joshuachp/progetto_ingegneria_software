@@ -94,7 +94,7 @@ public class Product {
         this.packageSize = packageSize;
     }
 
-    public  FloatProperty priceProperty(){return new SimpleFloatProperty(this.price);}
+    public  StringProperty priceProperty(){return new SimpleStringProperty(String.format("\u20ac %.2f", this.price));}
 
     public Float getPrice() {
         return price;

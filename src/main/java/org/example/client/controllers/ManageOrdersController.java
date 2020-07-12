@@ -90,7 +90,7 @@ public class ManageOrdersController {
 
         id.setCellValueFactory(param -> new SimpleObjectProperty<>(param.getValue().getId()));
         total.setCellValueFactory(param ->
-                new SimpleStringProperty(String.format("%.2f €", param.getValue().getTotal()))
+                new SimpleStringProperty(String.format("%.2f \u20ac", param.getValue().getTotal()))
         );
         payment.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getPayment().toString()));
         deliveryStart.setCellValueFactory(param ->

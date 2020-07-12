@@ -96,7 +96,7 @@ public class ManageOrdersListController {
                 startFormat.format(order.getDeliveryStart()),
                 endFormat.format(order.getDeliveryEnd())
         ));
-        this.totalText.setText(String.format("€ %.2f", order.getTotal()));
+        this.totalText.setText(String.format("\u20ac %.2f", order.getTotal()));
         this.stateChoiceBox.getSelectionModel().select(order.getState().ordinal());
         Task<List<Node>> task = new Task<>() {
             @Override

@@ -1,17 +1,22 @@
 package org.example.client.controllers;
 
+import javafx.application.Platform;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextFormatter;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.paint.Paint;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.example.client.models.Product;
+import org.example.client.tasks.TaskLoadImage;
 import org.example.client.utils.Session;
 import org.example.client.utils.Utils;
 import org.jetbrains.annotations.Nullable;
@@ -20,6 +25,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 public class ManageProductController {
 
@@ -36,9 +42,12 @@ public class ManageProductController {
 
     private Product product;
     private Stage stage;
+    private boolean modify;
+    private ObservableList<Product> products;
 
-    public static void showView(Stage parentStage, @Nullable Product product, boolean modify) {
-        //TODO: field characteristics and section
+    public static void showView(Stage parentStage, @Nullable Product product, boolean modify,
+                                ObservableList<Product> products) {
+
         FXMLLoader loader =
                 new FXMLLoader(ManageProductController.class.getResource("/views/manage-product.fxml"));
         Parent root = null;
@@ -64,6 +73,7 @@ public class ManageProductController {
         gestioneProdottiController.setStage(stage);
         gestioneProdottiController.setProduct(product);
         gestioneProdottiController.setModify(modify);
+        gestioneProdottiController.setProducts(products);
         stage.initOwner(parentStage);
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setAlwaysOnTop(true);
@@ -80,39 +90,120 @@ public class ManageProductController {
             this.fieldQuantity.setText(product.getAvailability().toString());
             this.fieldCharacteristics.setText(product.getCharacteristics());
             this.fieldSection.setText(product.getSection());
+            Image image = new Image(product.getImage());
+            this.thumbnail.setImage(image);
+
         }
+        this.modify = modify;
 
     }
+
+    private void setProducts(ObservableList<Product> products){this.products = products;}
 
     private void setStage(Stage stage) {
         this.stage = stage;
     }
 
+
+    public boolean errorMessage(String message, @Nullable TextField field) {
+        resultLabel.setText(message);
+        resultLabel.setTextFill(Paint.valueOf("red"));
+        if (field != null)
+            field.setStyle("-fx-border-color: red");
+        return true;
+    }
+
+    private void resetErrorMessage() {
+        fieldName.setStyle(null);
+        fieldBrand.setStyle(null);
+        fieldPrice.setStyle(null);
+        fieldQuantity.setStyle(null);
+        fieldCharacteristics.setStyle(null);
+        fieldPackage.setStyle(null);
+        fieldSection.setStyle(null);
+    }
+
     @FXML
     public void handleConfirmAction() {
-        if (!(fieldBrand.getText().equals("") || thumbnail.getImage().getUrl().equals("") ||
-                fieldPackage.getText().equals("") || fieldName.getText().equals("") ||
-                fieldPrice.getText().equals("") || fieldQuantity.getText().equals("") ||
-                fieldCharacteristics.getText().equals("") || fieldSection.getText().equals(""))) {
+        boolean error = false;
+        resetErrorMessage();
 
+        if (fieldName.getText().equals(""))
+            error = errorMessage("Il campo Nome è vuoto.", fieldName);
+
+        if (fieldBrand.getText().equals(""))
+            error = errorMessage("Il campo Brand è vuoto.", fieldBrand);
+
+        if (fieldPrice.getText().equals(""))
+            error = errorMessage("Il campo Prezzo è vuoto.", fieldPrice);
+        else {
+            try {
+                Double.valueOf(fieldPrice.getText().replace(",","."));
+            } catch(NumberFormatException e){
+                error = errorMessage("Inserire il prezzo in modo corretto (es. 12,99).", fieldPrice);
+            }
+        }
+
+        if (fieldQuantity.getText().equals(""))
+            error = errorMessage("Il campo Prezzo è vuoto.", fieldQuantity);
+        else {
+            try {
+                Integer.valueOf(fieldQuantity.getText());
+            } catch(NumberFormatException e){
+                error = errorMessage("La quantità non è corretta.", fieldQuantity);
+            }
+        }
+
+        if (fieldPackage.getText().equals(""))
+            error = errorMessage("Il campo Package è vuoto.", fieldPackage);
+        else {
+            try {
+                Integer.valueOf(fieldPackage.getText());
+            } catch(NumberFormatException e){
+                error = errorMessage("La quantità della confezione singola non è corretta.", fieldPackage);
+            }
+        }
+
+        if (fieldCharacteristics.getText().equals(""))
+            error = errorMessage("Il campo Caratteristiche è vuoto.", fieldCharacteristics);
+
+        if(thumbnail.getImage().getUrl().equals(""))
+            error = true;
+
+        if (fieldSection.getText().equals(""))
+            error = errorMessage("Il campo Sezione è vuoto.", fieldSection);
+
+        if (!error) {
             Product product = new Product(fieldName.getText(),
                     fieldBrand.getText(), Integer.parseInt(fieldPackage.getText()),
                     Float.parseFloat(fieldPrice.getText().replace(",", ".")),
                     thumbnail.getImage().getUrl(), Integer.parseInt(fieldQuantity.getText()),
                     fieldCharacteristics.getText(), fieldSection.getText());
             Session session = Session.getInstance();
-            List<Product> products = new ArrayList<>();
-            products.add(product);
-            System.out.println(product);
+            if(!this.modify) {
+                List<Product> products = new ArrayList<>();
+                products.add(product);
+                System.out.println(product);
+                try {
+                    Utils.createProduct(session.getUser().getSession(), products);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    //TODO: Error Alert
+                }
+            } else {
+                try {
+                    Utils.updateProduct(session.getUser().getSession(), this.product.getId(), product);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    //TODO: Error Alert
+                }
+            }
             try {
-                Utils.createProduct(session.getUser().getSession(), products);
+                ProductListController.refresh(products);
             } catch (Exception e) {
                 e.printStackTrace();
-                //TODO: Error Alert
             }
             stage.close();
-        } else {
-            resultLabel.setText("Si prega di riempire tutti i campi.");
         }
 
     }
@@ -130,6 +221,7 @@ public class ManageProductController {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
     }
 
     public void setProduct(Product product) {

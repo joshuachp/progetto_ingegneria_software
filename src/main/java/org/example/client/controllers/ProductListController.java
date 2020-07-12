@@ -35,7 +35,7 @@ public class ProductListController {
     public TableColumn<Product, Integer> IDCol;
     public TableColumn<Product, String> NameCol;
     public TableColumn<Product, String> QuantityCol;
-    public TableColumn<Product, Float> PriceCol;
+    public TableColumn<Product, String> PriceCol;
     public TableColumn<Product, String> BrandCol;
     public Button buttonimportproductlist;
     public Button buttonaddproduct;
@@ -65,13 +65,13 @@ public class ProductListController {
 
     @FXML
     private void handleModifyProduct(Product product, boolean modify) throws IOException {
-        ManageProductController.showView(this.stage, product, modify);
+        ManageProductController.showView(this.stage, product, modify, this.products);
     }
 
     public void initialize() throws IOException {
 
         try {
-            refresh();
+            refresh(this.products);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -101,8 +101,6 @@ public class ProductListController {
                     @Override
                     public void handle(MouseEvent event) {
                         if (event.getClickCount() > 0) {
-                            // TODO: view product form
-                            System.out.println("double click on " + cell.getItem());
                             try {
                                 handleModifyProduct(cell.getTableRow().getItem());
                             } catch (IOException e) {
@@ -125,11 +123,17 @@ public class ProductListController {
         this.QuantityCol.setCellFactory(TextFieldTableCell.forTableColumn());
         this.QuantityCol.setEditable(true);
         this.QuantityCol.setOnEditCommit(event -> {
-            event.getRowValue().setAvailability(Integer.parseInt(event.getNewValue()));
-            // TODO: implements server update on edit
-            System.out.println(event.getRowValue().getAvailability());
-        });
+            Product product = event.getRowValue();
+            Session session = Session.getInstance();
+            product.setAvailability(Integer.parseInt(event.getNewValue()));
+            try {
+                Utils.updateProduct(session.getUser().getSession(), product.getId(), product);
 
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        });
 
         // Setting-up filter search
         ObservableList<String> columnFilterString = FXCollections.observableArrayList(
@@ -176,17 +180,19 @@ public class ProductListController {
 
 
     private void handleModifyProduct(Product product) throws IOException {
-        ManageProductController.showView(this.stage, product, true);
+        ManageProductController.showView(this.stage, product, true, this.products);
     }
 
     private void setStage(Stage stage) {
         this.stage = stage;
     }
 
+    @FXML
     public void handlerAddProduct(ActionEvent actionEvent) throws IOException {
-        ManageProductController.showView(this.stage, null, false);
+        ManageProductController.showView(this.stage, null, false, this.products);
     }
 
+    @FXML
     public void handleBackAction(ActionEvent actionEvent) throws IOException {
         ChoiceModeController.showView(this.stage);
     }
@@ -202,18 +208,6 @@ public class ProductListController {
     }
 
     @FXML
-    public void handleModifyQuantityProduct(TableColumn.CellEditEvent<Product, String> productStringCellEditEvent) {
-        Product product = productStringCellEditEvent.getRowValue();
-        product.setAvailability(Integer.parseInt(productStringCellEditEvent.getNewValue()));
-        Session session = Session.getInstance();
-        try {
-            Utils.updateProduct(session.getUser().getSession(), product.getId());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-    }
-
     public void handleRemoveProducts(ActionEvent actionEvent) {
         if (tableview.getSelectionModel().getSelectedItem() != null) {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -242,18 +236,18 @@ public class ProductListController {
         }
 
         try {
-            refresh();
+            refresh(this.products);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public void refresh() throws Exception {
+    public static void refresh(ObservableList<Product> products) throws Exception {
 
         String session = Session.getInstance().getUser().getSession();
         JSONObject json = Utils.getAllProducts(session);
 
-        this.products.clear();
+        products.clear();
 
         // Test for products array
         if(json.has("products")) {
@@ -262,8 +256,6 @@ public class ProductListController {
                 products.add(product);
             }
         }
-
-
     }
 
     public void handlerAddProductList(ActionEvent actionEvent) {

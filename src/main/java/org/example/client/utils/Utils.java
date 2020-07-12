@@ -56,6 +56,7 @@ public class Utils {
             "36[680]|" +
             "33[3-90]|" +
             "32[89])" +
+            "0[0-999]"+
             "\\d{7}$";
 
     /**
@@ -466,17 +467,24 @@ public class Utils {
         }
     }
 
-    public static void updateProduct(String session, Integer productId) throws Exception {
+    public static void updateProduct(String session, Integer productId, Product product) throws Exception {
 
         JSONObject json = new JSONObject()
                 .put("session", session)
-                .put("products", productId);
+                .put("name", product.getName())
+                .put("brand", product.getBrand())
+                .put("package_size", product.getPackageSize())
+                .put("price", product.getPrice())
+                .put("image", product.getImage())
+                .put("availability", product.getAvailability())
+                .put("characteristics", product.getCharacteristics())
+                .put("section", product.getSection());
 
         OkHttpClient client = new OkHttpClient();
         RequestBody body = RequestBody.create(json.toString(), MediaType.get("application/json; charset=utf-8"));
 
         Request request = new Request.Builder()
-                .url(SERVER_URL + SERVER_URL_UPDATE_PRODUCT)
+                .url(SERVER_URL + String.format(SERVER_URL_UPDATE_PRODUCT, productId))
                 .post(body)
                 .build();
         Response response = client.newCall(request).execute();
@@ -485,6 +493,7 @@ public class Utils {
             Objects.requireNonNull(response.body()).close();
             throw new Exception(error);
         }
+        response.close();
     }
 
     /**

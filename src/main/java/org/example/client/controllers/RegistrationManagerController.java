@@ -136,7 +136,9 @@ public class RegistrationManagerController {
         // Verifica lunghezza password
         if (!password.getText().equals("")) {
             if (!passwordVerify(password.getText()))
-                error = errorMessage("La lunghezza della password deve essere di almeno 8 caratteri.", password);
+                error = errorMessage("La password deve essere di almeno 8 caratteri e contere almeno una lettera " +
+                                "maiuscola.",
+                        password);
         } else
             error = errorMessage("Il campo password è vuoto.", password);
 
