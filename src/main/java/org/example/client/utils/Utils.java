@@ -26,6 +26,9 @@ public class Utils {
     public static final String SERVER_URL_CLIENT_UPDATE = "/api/client/update";
     // Format for URL `/api/product/{productId}`
     public static final String SERVER_URL_GET_PRODUCT = "/api/product/%d";
+    public static final String SERVER_URL_CREATE_PRODUCT = "/api/product/create";
+    public static final String SERVER_URL_DELETE_PRODUCT = "/api/product/%d/delete";
+    public static final String SERVER_URL_UPDATE_PRODUCT = "/api/product/%d/update";
     public static final String SERVER_URL_GET_ALL_PRODUCT = "/api/product/all";
     public static final String SERVER_URL_CREATE_ORDER = "/api/order/create";
     public static final String SERVER_URL_GET_USER_ORDERS = "/api/order/user";
@@ -36,10 +39,6 @@ public class Utils {
     public static final String SERVER_URL_GET_LOYALTY_CARD = "/api/card/%d";
     // Format for URL `/api/order-item/all/{orderId}`
     public static final String SERVER_URL_GET_ALL_ORDER_ITEMS = "/api/order-item/all/%d";
-
-    public static final String SERVER_URL_CREATE_PRODUCT = "/api/product/create";
-    public static final String SERVER_URL_UPDATE_PRODUCT = "/api/product/update";
-    public static final String SERVER_URL_REMOVE_PRODUCT = "/api/product/remove";
 
     // REGEX String utils
     @RegExp
@@ -489,10 +488,9 @@ public class Utils {
         OkHttpClient client = new OkHttpClient();
         RequestBody body = new FormBody.Builder()
                 .add("session", session)
-                .add("productId", String.valueOf(productId))
                 .build();
         Request request = new Request.Builder()
-                .url(SERVER_URL + SERVER_URL_REMOVE_PRODUCT)
+                .url(SERVER_URL + String.format(SERVER_URL_DELETE_PRODUCT, productId))
                 .post(body)
                 .build();
         Response response = client.newCall(request).execute();
@@ -501,6 +499,8 @@ public class Utils {
             Objects.requireNonNull(response.body()).close();
             throw new Exception(error);
         }
+
+
     }
 
 
