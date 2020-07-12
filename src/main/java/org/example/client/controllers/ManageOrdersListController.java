@@ -41,6 +41,7 @@ public class ManageOrdersListController {
 
 
     private Stage stage;
+    private Order order;
 
     public static void showView(Stage stage, Order order) {
         FXMLLoader loader = new FXMLLoader(ManageOrdersListController.class.getResource("/views/manage-orders-list" +
@@ -76,10 +77,20 @@ public class ManageOrdersListController {
 
     @FXML
     public void handleSaveAction() {
-
+        int stateIndex = this.stateChoiceBox.getSelectionModel().getSelectedIndex();
+        if (stateIndex != this.order.getState().ordinal()) {
+            Session session = Session.getInstance();
+            try {
+                Utils.updateOrderState(session.getUser().getSession(), order.getId(), OrderSate.values()[stateIndex]);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        ManageOrdersController.showView(this.stage);
     }
 
     public void setOrder(@NotNull Order order) {
+        this.order = order;
         // TODO: address
         this.deliveryText.setText(String.format("%s-%s",
                 startFormat.format(order.getDeliveryStart()),

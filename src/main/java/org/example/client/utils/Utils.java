@@ -4,6 +4,7 @@ import javafx.stage.Stage;
 import okhttp3.*;
 import org.example.client.controllers.AuthController;
 import org.example.client.models.*;
+import org.example.client.models.enums.OrderSate;
 import org.intellij.lang.annotations.RegExp;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -29,6 +30,8 @@ public class Utils {
     public static final String SERVER_URL_CREATE_ORDER = "/api/order/create";
     public static final String SERVER_URL_GET_USER_ORDERS = "/api/order/user";
     public static final String SERVER_URL_GET_ALL_ORDERS = "/api/order/all";
+    // Format for URL `/api/order/{orderId}/update`
+    public static final String SERVER_URL_ORDER_STATE_UPDATE = "/api/order/%d/update";
     // Format for URL `/api/card/{cardNumber}`
     public static final String SERVER_URL_GET_LOYALTY_CARD = "/api/card/%d";
     // Format for URL `/api/order-item/all/{orderId}`
@@ -430,7 +433,7 @@ public class Utils {
     public static void createProduct(String session, List<Product> products) throws Exception {
 
         JSONArray jsonProducts = new JSONArray();
-        for(Product x : products){
+        for (Product x : products) {
             jsonProducts.put(x.toJSON());
         }
 
@@ -474,17 +477,43 @@ public class Utils {
         }
     }
 
+    // TODO: do as form
     public static void removeProduct(String session, Integer productId) throws Exception {
-
         JSONObject json = new JSONObject()
                 .put("session", session)
                 .put("product_id", productId);
-
         OkHttpClient client = new OkHttpClient();
         RequestBody body = RequestBody.create(json.toString(), MediaType.get("application/json; charset=utf-8"));
-
         Request request = new Request.Builder()
                 .url(SERVER_URL + SERVER_URL_REMOVE_PRODUCT)
+                .post(body)
+                .build();
+        Response response = client.newCall(request).execute();
+        if (response.code() != 200) {
+            String error = Objects.requireNonNull(response.body()).string();
+            Objects.requireNonNull(response.body()).close();
+            throw new Exception(error);
+        }
+    }
+
+
+    /**
+     * Request the server to update a order state, throw the order id
+     *
+     * @param session  User session
+     * @param orderId  Order id
+     * @param newState New order state
+     * @throws Exception {@link IOException} if request fails and {@link Exception} if the requests returns error
+     *                   code. Sets the request body as the exception message
+     */
+    public static void updateOrderState(String session, Integer orderId, OrderSate newState) throws Exception {
+        OkHttpClient client = new OkHttpClient();
+        RequestBody body = new FormBody.Builder()
+                .add("session", session)
+                .add("newState", newState.toString())
+                .build();
+        Request request = new Request.Builder()
+                .url(SERVER_URL + String.format(SERVER_URL_ORDER_STATE_UPDATE, orderId))
                 .post(body)
                 .build();
         Response response = client.newCall(request).execute();
