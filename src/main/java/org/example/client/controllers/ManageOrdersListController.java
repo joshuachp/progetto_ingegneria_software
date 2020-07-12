@@ -91,7 +91,7 @@ public class ManageOrdersListController {
 
     public void setOrder(@NotNull Order order) {
         this.order = order;
-        // TODO: address
+        this.addressText.setText(order.getAddress());
         this.deliveryText.setText(String.format("%s-%s",
                 startFormat.format(order.getDeliveryStart()),
                 endFormat.format(order.getDeliveryEnd())

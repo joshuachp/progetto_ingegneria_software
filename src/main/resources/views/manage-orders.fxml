@@ -42,11 +42,12 @@
     <TableView fx:id="tableView" editable="true" fixedCellSize="0.0" VBox.vgrow="ALWAYS">
         <columns>
             <TableColumn fx:id="id" editable="false" prefWidth="146.39999121427536" text="ID"/>
-            <TableColumn fx:id="state" prefWidth="178.4000244140625" text="State"/>
-            <TableColumn fx:id="payment" editable="false" prefWidth="135.20001220703125" text="Payment"/>
             <TableColumn fx:id="total" editable="false" prefWidth="124.0" text="Total"/>
+            <TableColumn fx:id="payment" editable="false" prefWidth="135.20001220703125" text="Payment"/>
             <TableColumn fx:id="deliveryStart" editable="false" prefWidth="103.99992370605469" text="Delivery start"/>
             <TableColumn fx:id="deliveryEnd" editable="false" prefWidth="103.99992370605469" text="Delivery end"/>
+            <TableColumn fx:id="state" prefWidth="178.4000244140625" text="State"/>
+            <TableColumn fx:id="address" editable="false" prefWidth="103.99992370605469" text="Address"/>
         </columns>
         <columnResizePolicy>
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>

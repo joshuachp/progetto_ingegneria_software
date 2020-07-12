@@ -7,8 +7,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import org.example.client.models.Client;
 import org.example.client.models.Product;
 import org.example.client.models.enums.DeliveryHours;
 import org.example.client.utils.Session;
@@ -32,6 +34,8 @@ public class CheckoutController {
     public ComboBox<String> hourComboBox;
     @FXML
     public Label label;
+    @FXML
+    public Text addressText;
 
     private Stage stage;
     private Stage mainStage;
@@ -62,6 +66,10 @@ public class CheckoutController {
     }
 
     public void initialize() {
+        Session session = Session.getInstance();
+        Client client = (Client) session.getUser();
+        this.addressText.setText(String.format("%s, %d, %s", client.getAddress(), client.getCap(), client.getCity()));
+
         // Crate selectable cell only for day after today and working days
         this.datePicker.setDayCellFactory(picker -> new DateCell() {
             public void updateItem(LocalDate date, boolean empty) {
@@ -116,6 +124,7 @@ public class CheckoutController {
         Date deliveryEnd = calendarEnd.getTime();
 
         Session session = Session.getInstance();
+        Client client = (Client) session.getUser();
         List<Product> products = new ArrayList<>(session.getMapProducts().values());
 
         // If delivery data has been inserted, confirm order
@@ -126,13 +135,17 @@ public class CheckoutController {
             //noinspection SpellCheckingInspection
             SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMMM");
 
+
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Order sent");
             alert.setContentText(
-                    String.format("You order is confirmed.\nWe deliver it on %s between %s and %s.",
+                    String.format("You order is confirmed.\nWe deliver it on %s between %s and %s at %s, %d, %s.",
                             dateFormat.format(deliveryStart),
                             hourFormat.format(deliveryStart),
-                            hourFormat.format(deliveryEnd)
+                            hourFormat.format(deliveryEnd),
+                            client.getAddress(),
+                            client.getCap(),
+                            client.getCity()
                     )
             );
 

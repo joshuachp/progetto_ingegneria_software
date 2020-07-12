@@ -47,7 +47,8 @@ public class ManageOrdersController {
     public TableColumn<Order, String> deliveryStart;
     @FXML
     public TableColumn<Order, String> deliveryEnd;
-    // TODO: address
+    @FXML
+    public TableColumn<Order, String> address;
 
     private Stage stage;
 
@@ -88,17 +89,18 @@ public class ManageOrdersController {
         });
 
         id.setCellValueFactory(param -> new SimpleObjectProperty<>(param.getValue().getId()));
-        state.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getState().toString()));
-        payment.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getPayment().toString()));
         total.setCellValueFactory(param ->
                 new SimpleStringProperty(String.format("%.2f €", param.getValue().getTotal()))
         );
+        payment.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getPayment().toString()));
         deliveryStart.setCellValueFactory(param ->
                 new SimpleStringProperty(dateFormat.format(param.getValue().getDeliveryStart()))
         );
         deliveryEnd.setCellValueFactory(param ->
                 new SimpleStringProperty(dateFormat.format(param.getValue().getDeliveryEnd()))
         );
+        state.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getState().toString()));
+        address.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getAddress()));
 
         // Make the table searchable
         FilteredList<Order> filteredList = new FilteredList<>(this.list, p -> true);

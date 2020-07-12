@@ -1,74 +1,103 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
+
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
-<AnchorPane xmlns:fx="http://javafx.com/fxml" xmlns="http://javafx.com/javafx"
-            fx:controller="org.example.client.controllers.CheckoutController">
-    <VBox alignment="TOP_CENTER" layoutX="76.0" layoutY="66.0" prefHeight="232.0" prefWidth="500.0"
-          AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
-          AnchorPane.topAnchor="0.0">
-        <Text strokeType="OUTSIDE" strokeWidth="0.0"
-              text="Vuoi procedere all'acquisto? Seleziona un orario per la consegna" textAlignment="CENTER">
-            <VBox.margin>
-                <Insets bottom="16.0" top="32.0"/>
-            </VBox.margin>
+<?import javafx.scene.text.*?>
+<VBox xmlns:fx="http://javafx.com/fxml" alignment="TOP_CENTER" prefHeight="232.0" prefWidth="500.0"
+      xmlns="http://javafx.com/javafx" fx:controller="org.example.client.controllers.CheckoutController">
+    <HBox>
+        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Address">
             <font>
-                <Font size="13.0"/>
+                <Font size="18.0"/>
             </font>
         </Text>
-        <VBox prefHeight="32.0">
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-                <VBox alignment="CENTER">
-                    <Text fill="#0000009b" strokeType="OUTSIDE" strokeWidth="0.0"
-                          text="Data di consegna">
-                        <VBox.margin>
-                            <Insets bottom="8.0"/>
-                        </VBox.margin>
-                    </Text>
-                    <DatePicker fx:id="datePicker">
-                        <cursor>
-                            <Cursor fx:constant="HAND"/>
-                        </cursor>
-                    </DatePicker>
-                </VBox>
-                <VBox alignment="CENTER">
-                    <HBox.margin>
-                        <Insets left="32.0"/>
-                    </HBox.margin>
-                    <Text fill="#0000009b" strokeType="OUTSIDE" strokeWidth="0.0"
-                          text="Ora di consegna">
-                        <VBox.margin>
-                            <Insets bottom="8.0"/>
-                        </VBox.margin>
-                    </Text>
-                    <ComboBox fx:id="hourComboBox" prefWidth="150.0">
-                        <cursor>
-                            <Cursor fx:constant="HAND"/>
-                        </cursor>
-                    </ComboBox>
-                </VBox>
-            </HBox>
-        </VBox>
-        <VBox alignment="CENTER" VBox.vgrow="ALWAYS"/>
-        <Label fx:id="label" textFill="RED"/>
-        <HBox alignment="CENTER" prefHeight="64.0" prefWidth="200.0">
-            <Button mnemonicParsing="false" onAction="#confirmOrder" prefWidth="72.0"
-                    style="-fx-background-color: #0066FF;" text="Conferma" textFill="WHITE">
-                <cursor>
-                    <Cursor fx:constant="HAND"/>
-                </cursor>
-            </Button>
-            <HBox prefWidth="32.0"/>
-            <Button mnemonicParsing="false" onAction="#cancelConfirmation" prefWidth="72.0"
-                    style="-fx-background-color: #DDDDDD;" text="Cancella">
-                <cursor>
-                    <Cursor fx:constant="HAND"/>
-                </cursor>
-            </Button>
+    </HBox>
+    <HBox>
+        <VBox.margin>
+            <Insets top="12.0"/>
+        </VBox.margin>
+        <Text fx:id="addressText" strokeType="OUTSIDE" strokeWidth="0.0" text="Via Viale 1, 33333, City">
+            <HBox.margin>
+                <Insets left="24.0"/>
+            </HBox.margin>
+        </Text>
+    </HBox>
+    <HBox layoutX="34.0" layoutY="34.0">
+        <VBox.margin>
+            <Insets top="24.0"/>
+        </VBox.margin>
+        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Delivery">
+            <font>
+                <Font size="18.0"/>
+            </font>
+            <HBox.margin>
+                <Insets/>
+            </HBox.margin>
+        </Text>
+    </HBox>
+    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Vuoi procedere all'acquisto? Seleziona un orario per la consegna"
+          textAlignment="CENTER">
+        <VBox.margin>
+            <Insets top="12.0"/>
+        </VBox.margin>
+        <font>
+            <Font size="13.0"/>
+        </font>
+    </Text>
+    <VBox prefHeight="32.0">
+        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+            <VBox alignment="CENTER">
+                <Text fill="#0000009b" strokeType="OUTSIDE" strokeWidth="0.0" text="Data di consegna">
+                    <VBox.margin>
+                        <Insets bottom="8.0"/>
+                    </VBox.margin>
+                </Text>
+                <DatePicker fx:id="datePicker">
+                    <cursor>
+                        <Cursor fx:constant="HAND"/>
+                    </cursor>
+                </DatePicker>
+            </VBox>
+            <VBox alignment="CENTER">
+                <HBox.margin>
+                    <Insets left="32.0"/>
+                </HBox.margin>
+                <Text fill="#0000009b" strokeType="OUTSIDE" strokeWidth="0.0" text="Ora di consegna">
+                    <VBox.margin>
+                        <Insets bottom="8.0"/>
+                    </VBox.margin>
+                </Text>
+                <ComboBox fx:id="hourComboBox" prefWidth="150.0">
+                    <cursor>
+                        <Cursor fx:constant="HAND"/>
+                    </cursor>
+                </ComboBox>
+            </VBox>
+            <VBox.margin>
+                <Insets top="12.0"/>
+            </VBox.margin>
         </HBox>
     </VBox>
-</AnchorPane>
+    <VBox alignment="CENTER" VBox.vgrow="ALWAYS"/>
+    <Label fx:id="label" textFill="RED"/>
+    <HBox alignment="CENTER_RIGHT" prefHeight="64.0" prefWidth="200.0" spacing="12.0">
+        <Button mnemonicParsing="false" onAction="#cancelConfirmation" prefWidth="72.0"
+                style="-fx-background-color: #DDDDDD;" text="Cancel">
+            <cursor>
+                <Cursor fx:constant="HAND"/>
+            </cursor>
+        </Button>
+        <Button mnemonicParsing="false" onAction="#confirmOrder" prefWidth="72.0" style="-fx-background-color: #0066FF;"
+                text="Confirm" textFill="WHITE">
+            <cursor>
+                <Cursor fx:constant="HAND"/>
+            </cursor>
+        </Button>
+    </HBox>
+    <padding>
+        <Insets bottom="24.0" left="24.0" right="24.0" top="24.0"/>
+    </padding>
+</VBox>
