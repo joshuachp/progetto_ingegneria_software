@@ -18,7 +18,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import javafx.util.Callback;
-import okhttp3.Response;
 import org.example.client.models.Product;
 import org.example.client.utils.Session;
 import org.example.client.utils.Utils;
@@ -71,7 +70,11 @@ public class ProductListController {
 
     public void initialize() throws IOException {
 
-        refresh();
+        try {
+            refresh();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
 
         // Clickable link for ID column
@@ -240,32 +243,27 @@ public class ProductListController {
 
         try {
             refresh();
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public void refresh() throws IOException {
+    public void refresh() throws Exception {
 
         String session = Session.getInstance().getUser().getSession();
-        Response response = Utils.getAllProducts(session);
-        if (!products.isEmpty())
-            this.products.clear();
+        JSONObject json = Utils.getAllProducts(session);
 
-        if (response != null) {
-            if (response.code() == 200 && response.body() != null) {
-                JSONObject json = new JSONObject(Objects.requireNonNull(response.body()).string());
-                Objects.requireNonNull(response.body()).close();
-                // Test for products array
-                assert json.has("products");
-                if(!json.getJSONArray("products").isEmpty()) {
-                    for (Object t : json.getJSONArray("products")) {
-                        Product product = new Product((JSONObject) t);
-                        products.add(product);
-                    }
-                }
+        this.products.clear();
+
+        // Test for products array
+        if(json.has("products")) {
+            for (Object t : json.getJSONArray("products")) {
+                Product product = new Product((JSONObject) t);
+                products.add(product);
             }
         }
+
+
     }
 
     public void handlerAddProductList(ActionEvent actionEvent) {

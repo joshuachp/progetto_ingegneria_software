@@ -40,6 +40,7 @@ public class RegistrationManagerController {
 
 
     public static void showView(Stage stage) {
+
         FXMLLoader loader = new FXMLLoader(ChoiceModeController.class.getResource("/views/registration-manager" +
                 ".fxml"));
         Parent root = null;
@@ -62,10 +63,9 @@ public class RegistrationManagerController {
     public void setStage(Stage stage) {
         this.stage = stage;
     }
-
     @FXML
     public void handleBackAction() {
-        ProductListController.showView(this.stage);
+       ChoiceModeController.showView(stage);
     }
 
     public boolean passwordVerify(String password) {
