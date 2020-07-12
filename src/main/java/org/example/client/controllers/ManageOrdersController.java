@@ -43,7 +43,9 @@ public class ManageOrdersController {
     public TableColumn<Order, String> deliveryStart;
     @FXML
     public TableColumn<Order, String> deliveryEnd;
+
     private Stage stage;
+    private ObservableList<Order> list = FXCollections.observableArrayList();
 
     public static void showView(Stage stage) {
         FXMLLoader loader = new FXMLLoader(ManageOrdersController.class.getResource("/views/manage-orders.fxml"));
@@ -84,13 +86,16 @@ public class ManageOrdersController {
                 new SimpleStringProperty(dateFormat.format(param.getValue().getDeliveryEnd()))
         );
 
+        tableView.setItems(this.list);
+
         Session session = Session.getInstance();
         TaskManageOrders task = new TaskManageOrders(session.getUser().getSession());
-        task.setOnSucceeded(event -> {
-            ObservableList<Order> list = FXCollections.observableList(task.getValue());
-            tableView.setItems(FXCollections.observableList(list));
-        });
+        task.setOnSucceeded(event -> this.list.addAll(task.getValue()));
         new Thread(task).start();
+
+        this.searchField.textProperty().addListener((observable, oldValue, newValue) -> {
+            this.list.filtered(order -> order)
+        });
     }
 
     private void setStage(Stage stage) {
