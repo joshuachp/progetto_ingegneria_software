@@ -1,6 +1,5 @@
 package org.example.client.controllers;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -18,8 +17,6 @@ import org.example.client.utils.Utils;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,16 +31,16 @@ public class ManageProductController {
     public TextField fieldQuantity;
     public Label resultLabel;
     public ImageView thumbnail;
-    public TextField fieldCharateristics;
+    public TextField fieldCharacteristics;
     public TextField fieldSection;
-    Product product;
+
+    private Product product;
     private Stage stage;
 
-    public static void showView(Stage parentStage, @Nullable Product product, boolean modify) throws IOException {
-
-        //TODO: field charateristics and section
-        FXMLLoader loader = new FXMLLoader(ManageProductController.class.getResource("/views/manage-product" +
-                ".fxml"));
+    public static void showView(Stage parentStage, @Nullable Product product, boolean modify) {
+        //TODO: field characteristics and section
+        FXMLLoader loader =
+                new FXMLLoader(ManageProductController.class.getResource("/views/manage-product.fxml"));
         Parent root = null;
         try {
             root = loader.load();
@@ -57,15 +54,15 @@ public class ManageProductController {
         Scene scene = new Scene(root);
 
         stage.setScene(scene);
-        if(modify) {
+        if (modify) {
             assert product != null;
             stage.setTitle("Modifica prodotto " + product.getId());
         } else {
             stage.setTitle("Crea nuovo prodotto ");
         }
 
-        gestioneProdottiController.product = product;
         gestioneProdottiController.setStage(stage);
+        gestioneProdottiController.setProduct(product);
         gestioneProdottiController.setModify(modify);
         stage.initOwner(parentStage);
         stage.initModality(Modality.APPLICATION_MODAL);
@@ -73,7 +70,7 @@ public class ManageProductController {
         stage.show();
     }
 
-    private void setModify(boolean modify){
+    private void setModify(boolean modify) {
         if (modify) {
             assert product != null;
             this.fieldBrand.setText(product.getBrand());
@@ -81,34 +78,34 @@ public class ManageProductController {
             this.fieldPackage.setText(product.getPackageSize().toString());
             this.fieldPrice.setText(String.format("%.2f", product.getPrice()));
             this.fieldQuantity.setText(product.getAvailability().toString());
-            this.fieldCharateristics.setText(product.getCharacteristics());
+            this.fieldCharacteristics.setText(product.getCharacteristics());
             this.fieldSection.setText(product.getSection());
         }
 
     }
 
-    private void setStage(Stage stage){
+    private void setStage(Stage stage) {
         this.stage = stage;
     }
 
     @FXML
-    public void handleConfirmAction(ActionEvent actionEvent) {
+    public void handleConfirmAction() {
         if (!(fieldBrand.getText().equals("") || thumbnail.getImage().getUrl().equals("") ||
-        fieldPackage.getText().equals("") || fieldName.getText().equals("") ||
-        fieldPrice.getText().equals("")|| fieldQuantity.getText().equals("") ||
-        fieldCharateristics.getText().equals("")   || fieldSection.getText().equals(""))) {
+                fieldPackage.getText().equals("") || fieldName.getText().equals("") ||
+                fieldPrice.getText().equals("") || fieldQuantity.getText().equals("") ||
+                fieldCharacteristics.getText().equals("") || fieldSection.getText().equals(""))) {
 
             Product product = new Product(fieldName.getText(),
                     fieldBrand.getText(), Integer.parseInt(fieldPackage.getText()),
-                    Float.parseFloat(fieldPrice.getText().replace(",",".")),
+                    Float.parseFloat(fieldPrice.getText().replace(",", ".")),
                     thumbnail.getImage().getUrl(), Integer.parseInt(fieldQuantity.getText()),
-                    fieldCharateristics.getText(), fieldSection.getText());
+                    fieldCharacteristics.getText(), fieldSection.getText());
             Session session = Session.getInstance();
-            List<Product> products= new ArrayList<>();
+            List<Product> products = new ArrayList<>();
             products.add(product);
             System.out.println(product);
             try {
-                Utils.createProduct(session.getUser().getSession(),products);
+                Utils.createProduct(session.getUser().getSession(), products);
             } catch (Exception e) {
                 e.printStackTrace();
                 //TODO: Error Alert
@@ -121,15 +118,21 @@ public class ManageProductController {
     }
 
     @FXML
-    public void handleUploadImage(ActionEvent actionEvent) throws FileNotFoundException {
+    public void handleUploadImage() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Carica immagine");
         File file = fileChooser.showOpenDialog(stage);
-        System.out.println(file.getPath());
-        product.setImage(file.getPath());
-        FileInputStream inputStream = new FileInputStream(product.getImage());
-        Image image = new Image(inputStream);
-        thumbnail.setImage(image);
+        Session session = Session.getInstance();
+        try {
+            String imageLink = Utils.uploadProductImage(session.getUser().getSession(), file);
+            Image image = new Image(imageLink);
+            this.thumbnail.setImage(image);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
+    public void setProduct(Product product) {
+        this.product = product;
     }
 }

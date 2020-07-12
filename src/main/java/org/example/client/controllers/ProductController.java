@@ -14,8 +14,8 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import org.example.client.components.QuantitySpinnerFactory;
 import org.example.client.models.Product;
-import org.example.client.utils.Session;
 import org.example.client.tasks.TaskLoadImage;
+import org.example.client.utils.Session;
 
 import java.io.IOException;
 
@@ -68,7 +68,7 @@ public class ProductController {
         stage.setScene(scene);
         stage.initOwner(patentStage);
         stage.initModality(Modality.APPLICATION_MODAL);
-        //stage.initStyle(StageStyle.UTILITY);
+        stage.initStyle(StageStyle.UTILITY);
         stage.setAlwaysOnTop(true);
 
         controller.setProduct(product);

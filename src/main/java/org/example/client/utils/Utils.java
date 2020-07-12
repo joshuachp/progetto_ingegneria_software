@@ -11,6 +11,7 @@ import org.jetbrains.annotations.Nullable;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -28,6 +29,7 @@ public class Utils {
     public static final String SERVER_URL_GET_PRODUCT = "/api/product/%d";
     public static final String SERVER_URL_CREATE_PRODUCT = "/api/product/create";
     public static final String SERVER_URL_DELETE_PRODUCT = "/api/product/%d/delete";
+    public static final String SERVER_URL_UPLOAD_IMAGE_PRODUCT = "/api/product/image/upload";
     public static final String SERVER_URL_UPDATE_PRODUCT = "/api/product/%d/update";
     public static final String SERVER_URL_GET_ALL_PRODUCT = "/api/product/all";
     public static final String SERVER_URL_CREATE_ORDER = "/api/order/create";
@@ -529,5 +531,36 @@ public class Utils {
             Objects.requireNonNull(response.body()).close();
             throw new Exception(error);
         }
+    }
+
+
+    /**
+     * Upload an image to the server, it will return the link to the image
+     *
+     * @param session User session
+     * @param file    Image file
+     * @return The image link
+     * @throws Exception {@link IOException} if request fails and {@link Exception} if the requests returns error
+     *                   code. Sets the request body as the exception message
+     */
+    public static String uploadProductImage(String session, @NotNull File file) throws Exception {
+        OkHttpClient client = new OkHttpClient();
+        MultipartBody body = new MultipartBody.Builder()
+                .addFormDataPart("session", session)
+                .addFormDataPart("image", file.getName(), RequestBody.create(file, MediaType.get("image/jpg")))
+                .build();
+        Request request = new Request.Builder()
+                .url(SERVER_URL + SERVER_URL_UPLOAD_IMAGE_PRODUCT)
+                .post(body)
+                .build();
+        Response response = client.newCall(request).execute();
+        if (response.code() != 200) {
+            String error = Objects.requireNonNull(response.body()).string();
+            Objects.requireNonNull(response.body()).close();
+            throw new Exception(error);
+        }
+        String name = Objects.requireNonNull(response.body()).string();
+        Objects.requireNonNull(response.body()).close();
+        return String.format("%s/images/%s", SERVER_URL, name);
     }
 }
