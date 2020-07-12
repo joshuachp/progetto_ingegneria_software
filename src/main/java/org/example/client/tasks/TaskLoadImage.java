@@ -6,6 +6,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
+import java.io.IOException;
 import java.util.Objects;
 
 /**
@@ -23,10 +24,17 @@ public class TaskLoadImage extends Task<Image> {
     }
 
     @Override
-    protected Image call() throws Exception {
+    protected Image call() {
         OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder().url(this.imageUrl).build();
-        Response response = client.newCall(request).execute();
+        Response response = null;
+        try {
+            response = client.newCall(request).execute();
+        } catch (IOException e) {
+            e.printStackTrace();
+            failed();
+            return null;
+        }
         if (response.code() == 200 && response.body() != null &&
                 Objects.requireNonNull(response.body()).contentLength() > 0) {
             return new Image(Objects.requireNonNull(response.body()).byteStream());

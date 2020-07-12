@@ -12,8 +12,10 @@ import org.example.client.utils.Session;
 
 import java.io.IOException;
 
-public class OrderProductController {
+public class ManageOrdersItemController {
 
+    @FXML
+    public Text textId;
     @FXML
     public Text textName;
     @FXML
@@ -23,11 +25,12 @@ public class OrderProductController {
     @FXML
     public Text textTotal;
 
-    private Product product = null;
     private Stage stage;
+    private Product product;
 
     public static Node createView(Stage stage, OrderItem orderItem) {
-        FXMLLoader loader = new FXMLLoader(OrderProductController.class.getResource("/views/order-product.fxml"));
+        FXMLLoader loader =
+                new FXMLLoader(OrderProductController.class.getResource("/views/manage-orders-item.fxml"));
         Node node = null;
         try {
             node = loader.load();
@@ -35,13 +38,14 @@ public class OrderProductController {
             e.printStackTrace();
         }
         assert node != null;
-        OrderProductController controller = loader.getController();
+        ManageOrdersItemController controller = loader.getController();
         controller.setStage(stage);
         controller.setOrderItem(orderItem);
         return node;
     }
 
     public void setOrderItem(OrderItem orderItem) {
+        this.textId.setText(orderItem.getProductId().toString());
         this.textName.setText(orderItem.getName());
         this.textPrice.setText(String.format("Price \u20ac %.2f", orderItem.getPrice()));
         this.textQuantity.setText(orderItem.getQuantity().toString());
@@ -55,8 +59,7 @@ public class OrderProductController {
 
     @FXML
     public void handleMouseClicked() {
-        if (product != null)
-            ProductController.showView(this.stage, this.product);
+        ProductController.showView(this.stage, this.product);
     }
 
     public void setStage(Stage stage) {

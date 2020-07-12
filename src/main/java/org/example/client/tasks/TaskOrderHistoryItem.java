@@ -22,8 +22,15 @@ public class TaskOrderHistoryItem extends Task<List<Node>> {
     }
 
     @Override
-    protected List<Node> call() throws Exception {
-        List<OrderItem> list = Utils.getOrderItems(this.session, this.orderId);
+    protected List<Node> call() {
+        List<OrderItem> list;
+        try {
+            list = Utils.getOrderItems(this.session, this.orderId);
+        } catch (Exception e) {
+            e.printStackTrace();
+            failed();
+            return null;
+        }
         return new OrderProductFactory().getOrderProductList(stage, list);
     }
 

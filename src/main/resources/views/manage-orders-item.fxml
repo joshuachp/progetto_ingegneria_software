@@ -1,19 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.text.Text?>
-<HBox xmlns:fx="http://javafx.com/fxml" onMouseClicked="#handleMouseClicked" maxHeight="-Infinity" maxWidth="-Infinity"
-      minHeight="-Infinity" minWidth="-Infinity" prefWidth="700.0" spacing="58.0" style="-fx-background-color: #CDCDCD;"
-      xmlns="http://javafx.com/javafx" fx:controller="org.example.client.controllers.OrderProductController">
+<?import javafx.scene.text.*?>
+<HBox xmlns:fx="http://javafx.com/fxml" alignment="CENTER_LEFT" onMouseClicked="#handleMouseClicked" spacing="58.0"
+      xmlns="http://javafx.com/javafx" fx:controller="org.example.client.controllers.ManageOrdersItemController">
     <cursor>
         <Cursor fx:constant="HAND"/>
     </cursor>
     <padding>
         <Insets bottom="24.0" left="48.0" right="48.0" top="24.0"/>
     </padding>
+    <Text fx:id="textId" strokeType="OUTSIDE" strokeWidth="0.0" text="Id"/>
     <Text fx:id="textName" strokeType="OUTSIDE" strokeWidth="0.0" text="Name"/>
     <HBox HBox.hgrow="ALWAYS"/>
     <Text fx:id="textPrice" strokeType="OUTSIDE" strokeWidth="0.0" text="Price"/>

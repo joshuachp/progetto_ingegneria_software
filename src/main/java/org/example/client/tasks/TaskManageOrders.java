@@ -14,7 +14,13 @@ public class TaskManageOrders extends Task<List<Order>> {
     }
 
     @Override
-    protected List<Order> call() throws Exception {
-        return Utils.getAllOrders(this.session);
+    protected List<Order> call() {
+        try {
+            return Utils.getAllOrders(this.session);
+        } catch (Exception e) {
+            e.printStackTrace();
+            failed();
+        }
+        return null;
     }
 }

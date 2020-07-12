@@ -7,18 +7,18 @@ import java.util.stream.Collectors;
 public enum Payment {
     CASH("Cash on delivery"), CREDIT_CARD("Credit card"), PAY_PAL("PayPal");
 
-    private final String pagamento;
+    private final String label;
 
-    Payment(String pagamento) {
-        this.pagamento = pagamento;
+    Payment(String label) {
+        this.label = label;
     }
 
-    public static List<String> getPayments() {
+    public static List<String> getLabels() {
         return Arrays.stream(Payment.values()).map(Payment::toString).collect(Collectors.toList());
     }
 
     @Override
     public String toString() {
-        return this.pagamento;
+        return this.label;
     }
 }

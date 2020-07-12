@@ -3,6 +3,7 @@ package org.example.client.controllers;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
@@ -10,9 +11,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import org.example.client.components.TableCellOrderId;
 import org.example.client.models.Order;
@@ -44,6 +47,7 @@ public class ManageOrdersController {
     public TableColumn<Order, String> deliveryStart;
     @FXML
     public TableColumn<Order, String> deliveryEnd;
+    // TODO: address
 
     private Stage stage;
 
@@ -67,12 +71,22 @@ public class ManageOrdersController {
     }
 
     public void initialize() {
-        tableView.setSelectionModel(null);
+        tableView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+        tableView.getSelectionModel().getSelectedItems().addListener((ListChangeListener<Order>) c -> {
+            if (!c.getList().isEmpty()) {
+                Order order = c.getList().get(0);
+                ManageOrdersListController.showView(this.stage, order);
+            }
+        });
+
         // Id cell factory
         id.setCellFactory(cell -> {
-            // TODO view list cell.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> this.stage);
-            return new TableCellOrderId();
+            TableCellOrderId tableCellOrderId = new TableCellOrderId();
+            tableCellOrderId.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+            });
+            return tableCellOrderId;
         });
+
         id.setCellValueFactory(param -> new SimpleObjectProperty<>(param.getValue().getId()));
         state.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getState().toString()));
         payment.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getPayment().toString()));
