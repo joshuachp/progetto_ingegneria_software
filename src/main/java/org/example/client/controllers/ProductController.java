@@ -102,7 +102,6 @@ public class ProductController {
         new Thread(task).start();
     }
 
-
     @FXML
     public void handleAddToCartAction() {
         if (quantitySpinner.getValue() > 0) {

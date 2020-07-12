@@ -37,10 +37,10 @@ public class RegistrationManagerController {
     private Label resultLabel;
 
     private Stage stage;
-    private Stage prevStage;
+
 
     public static void showView(Stage stage) {
-        Stage prevStage = stage;
+
         FXMLLoader loader = new FXMLLoader(ChoiceModeController.class.getResource("/views/registration-manager" +
                 ".fxml"));
         Parent root = null;
@@ -53,7 +53,6 @@ public class RegistrationManagerController {
 
         RegistrationManagerController registrationManagerControllerController = loader.getController();
         registrationManagerControllerController.setStage(stage);
-        registrationManagerControllerController.setPrevStage(prevStage);
 
         Scene scene = new Scene(root);
         stage.setScene(scene);
@@ -64,11 +63,9 @@ public class RegistrationManagerController {
     public void setStage(Stage stage) {
         this.stage = stage;
     }
-    public void setPrevStage(Stage stage) {this.prevStage = stage;}
     @FXML
     public void handleBackAction() {
-        stage.close();
-        prevStage.show();
+       ChoiceModeController.showView(stage);
     }
 
     public boolean passwordVerify(String password) {
