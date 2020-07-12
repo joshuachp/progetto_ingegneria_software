@@ -32,14 +32,11 @@ public class ChoiceModeController {
         controller.setStage(stage);
     }
 
-    public void HandleActionVisualizzaSpese(ActionEvent actionEvent) {
-        ListaSpeseController listaSpese = new ListaSpeseController();
-        try {
-            listaSpese.showView(this.stage);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    @FXML
+    public void HandleActionVisualizzaSpese() {
+        ManageOrdersController.showView(this.stage);
     }
+
 
     public void setStage(Stage stage) {
         this.stage = stage;

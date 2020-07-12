@@ -17,7 +17,7 @@ import org.example.client.tasks.TaskLoadImage;
 import java.io.IOException;
 
 
-public class CardController {
+public class CatalogItemController {
 
     private final QuantitySpinnerFactory spinnerFactory = new QuantitySpinnerFactory();
     @FXML
@@ -36,14 +36,14 @@ public class CardController {
     private Stage stage;
 
     public static VBox generateCard(Stage stage, Product product) {
-        FXMLLoader loader = new FXMLLoader(CardController.class.getResource("/views/card.fxml"));
+        FXMLLoader loader = new FXMLLoader(CatalogItemController.class.getResource("/views/catalog-item.fxml"));
         VBox card = null;
         try {
             card = loader.load();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        CardController controller = loader.getController();
+        CatalogItemController controller = loader.getController();
         // Set product for controller
         controller.setProduct(product);
         controller.setStage(stage);

@@ -71,7 +71,7 @@ public class RegistrationController {
     @FXML
     public void initialize() {
         // Initialize ComboBox with all payments
-        ObservableList<String> payments = FXCollections.observableArrayList(Payment.getPayments());
+        ObservableList<String> payments = FXCollections.observableArrayList(Payment.getLabels());
         this.cbxPagamento.setItems(payments);
         this.cbxPagamento.getSelectionModel().selectFirst();
     }

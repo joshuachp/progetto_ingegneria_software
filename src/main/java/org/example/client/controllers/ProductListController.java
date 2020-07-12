@@ -64,6 +64,11 @@ public class ProductListController {
         productListController.setStage(stage);
     }
 
+    @FXML
+    private void handleModifyProduct(Product product, boolean modify) throws IOException {
+        ManageProductController.showView(this.stage, product, modify);
+    }
+
     public void initialize() throws IOException {
 
         refresh();
@@ -132,7 +137,7 @@ public class ProductListController {
                 columnFilterEnum.QUANTITY.toString());
 
         this.CbxColumn.setItems(columnFilterString);
-        this.CbxColumn.setValue(ListaSpeseController.columnFilterEnum.ID.toString());
+        this.CbxColumn.setValue("");
 
         FilteredList<Product> flproducts = new FilteredList<>(products, p -> true);
 
@@ -176,7 +181,6 @@ public class ProductListController {
     }
 
     public void handlerAddProduct(ActionEvent actionEvent) throws IOException {
-
         ManageProductController.showView(this.stage, null, false);
     }
 
@@ -196,7 +200,6 @@ public class ProductListController {
 
     @FXML
     public void handleModifyQuantityProduct(TableColumn.CellEditEvent<Product, String> productStringCellEditEvent) {
-
         Product product = productStringCellEditEvent.getRowValue();
         product.setAvailability(Integer.parseInt(productStringCellEditEvent.getNewValue()));
         Session session = Session.getInstance();

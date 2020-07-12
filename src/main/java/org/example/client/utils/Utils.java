@@ -4,6 +4,7 @@ import javafx.stage.Stage;
 import okhttp3.*;
 import org.example.client.controllers.AuthController;
 import org.example.client.models.*;
+import org.example.client.models.enums.OrderSate;
 import org.intellij.lang.annotations.RegExp;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -29,7 +30,10 @@ public class Utils {
     public static final String SERVER_URL_UPDATE_PRODUCT = "/api/product/%d/update";
     public static final String SERVER_URL_GET_ALL_PRODUCT = "/api/product/all";
     public static final String SERVER_URL_CREATE_ORDER = "/api/order/create";
+    public static final String SERVER_URL_GET_USER_ORDERS = "/api/order/user";
     public static final String SERVER_URL_GET_ALL_ORDERS = "/api/order/all";
+    // Format for URL `/api/order/{orderId}/update`
+    public static final String SERVER_URL_ORDER_STATE_UPDATE = "/api/order/%d/update";
     // Format for URL `/api/card/{cardNumber}`
     public static final String SERVER_URL_GET_LOYALTY_CARD = "/api/card/%d";
     // Format for URL `/api/order-item/all/{orderId}`
@@ -249,10 +253,10 @@ public class Utils {
      * @param products      Product
      * @param deliveryStart delivery start
      * @param deliveryEnd   Delivery end
-     * @throws Exception
+     * @throws Exception Exception
      */
-    public static void createOrder(String session, List<Product> products, Date deliveryStart, Date deliveryEnd) throws Exception {
-
+    public static void createOrder(String session, List<Product> products, Date deliveryStart,
+                                   Date deliveryEnd) throws Exception {
         Map<Integer, Integer> productMap = products.stream().collect(Collectors.toMap(Product::getId,
                 Product::getQuantity));
 
@@ -261,10 +265,8 @@ public class Utils {
                 .put("products", productMap)
                 .put("deliveryStart", deliveryStart.getTime())
                 .put("deliveryEnd", deliveryEnd.getTime());
-
         OkHttpClient client = new OkHttpClient();
         RequestBody body = RequestBody.create(json.toString(), MediaType.get("application/json; charset=utf-8"));
-
         Request request = new Request.Builder()
                 .url(SERVER_URL + SERVER_URL_CREATE_ORDER)
                 .post(body)
@@ -305,6 +307,39 @@ public class Utils {
 
     /**
      * Request all the orders of a user to the server.
+     *
+     * @param session User session
+     * @return List of the user orders
+     * @throws Exception {@link IOException} if request fails and {@link Exception} if the requests returns
+     *                   error code. Sets the request body as the exception message.
+     */
+    public static @NotNull ArrayList<Order> getUserOrders(String session) throws Exception {
+        OkHttpClient client = new OkHttpClient();
+        RequestBody body = new FormBody.Builder()
+                .add("session", session)
+                .build();
+        Request request = new Request.Builder()
+                .url(SERVER_URL + SERVER_URL_GET_USER_ORDERS)
+                .post(body)
+                .build();
+        Response response = client.newCall(request).execute();
+        if (response.code() != 200) {
+            String error = Objects.requireNonNull(response.body()).string();
+            Objects.requireNonNull(response.body()).close();
+            throw new Exception(error);
+        }
+        JSONObject json = new JSONObject(Objects.requireNonNull(response.body()).string());
+        Objects.requireNonNull(response.body()).close();
+        JSONArray array = json.getJSONArray("orders");
+        ArrayList<Order> list = new ArrayList<>(array.length());
+        for (int i = 0; i < array.length(); i++) {
+            list.add(new Order(array.getJSONObject(i)));
+        }
+        return list;
+    }
+
+    /**
+     * Request all the orders to the server
      *
      * @param session User session
      * @return List of the user orders
@@ -377,7 +412,7 @@ public class Utils {
      * @throws Exception {@link IOException} if request fails and {@link Exception} if the requests returns error
      *                   code. Sets the request body as the exception message
      */
-    public static Product getProduct(String session, Integer productId) throws Exception {
+    public static @NotNull Product getProduct(String session, Integer productId) throws Exception {
         OkHttpClient client = new OkHttpClient();
         RequestBody body = new FormBody.Builder()
                 .add("session", session)
@@ -400,7 +435,7 @@ public class Utils {
     public static void createProduct(String session, List<Product> products) throws Exception {
 
         JSONArray jsonProducts = new JSONArray();
-        for(Product x : products){
+        for (Product x : products) {
             jsonProducts.put(x.toJSON());
         }
 
@@ -444,6 +479,7 @@ public class Utils {
         }
     }
 
+    // TODO: do as form
     public static void removeProduct(String session, Integer productId) throws Exception {
 
         OkHttpClient client = new OkHttpClient();
@@ -462,5 +498,33 @@ public class Utils {
         }
 
 
+    }
+
+
+    /**
+     * Request the server to update a order state, throw the order id
+     *
+     * @param session  User session
+     * @param orderId  Order id
+     * @param newState New order state
+     * @throws Exception {@link IOException} if request fails and {@link Exception} if the requests returns error
+     *                   code. Sets the request body as the exception message
+     */
+    public static void updateOrderState(String session, Integer orderId, OrderSate newState) throws Exception {
+        OkHttpClient client = new OkHttpClient();
+        RequestBody body = new FormBody.Builder()
+                .add("session", session)
+                .add("newState", String.valueOf(newState.ordinal()))
+                .build();
+        Request request = new Request.Builder()
+                .url(SERVER_URL + String.format(SERVER_URL_ORDER_STATE_UPDATE, orderId))
+                .post(body)
+                .build();
+        Response response = client.newCall(request).execute();
+        if (response.code() != 200) {
+            String error = Objects.requireNonNull(response.body()).string();
+            Objects.requireNonNull(response.body()).close();
+            throw new Exception(error);
+        }
     }
 }

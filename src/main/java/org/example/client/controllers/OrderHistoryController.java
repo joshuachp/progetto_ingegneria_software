@@ -45,7 +45,7 @@ public class OrderHistoryController {
             @Override
             protected List<Node> call() throws Exception {
                 Session session = Session.getInstance();
-                List<Order> list = Utils.getAllOrders(session.getUser().getSession());
+                List<Order> list = Utils.getUserOrders(session.getUser().getSession());
                 OrderHistoryFactory factory = new OrderHistoryFactory();
                 return factory.getOrderHistoryList(stage, list);
             }

@@ -16,7 +16,13 @@ public class TaskOrderProduct extends Task<Product> {
 
 
     @Override
-    protected Product call() throws Exception {
-        return Utils.getProduct(this.session, this.productId);
+    protected Product call() {
+        try {
+            return Utils.getProduct(this.session, this.productId);
+        } catch (Exception e) {
+            e.printStackTrace();
+            failed();
+            return null;
+        }
     }
 }

@@ -13,7 +13,7 @@
 <VBox xmlns:fx="http://javafx.com/fxml" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity"
       minHeight="-Infinity" minWidth="-Infinity" prefHeight="328.0" prefWidth="220.0"
       style="-fx-background-color: #FFFFFF; -fx-border-radius: 15;" xmlns="http://javafx.com/javafx"
-      fx:controller="org.example.client.controllers.CardController">
+      fx:controller="org.example.client.controllers.CatalogItemController">
     <padding>
         <Insets bottom="15.0" left="15.0" right="15.0" top="15.0"/>
     </padding>

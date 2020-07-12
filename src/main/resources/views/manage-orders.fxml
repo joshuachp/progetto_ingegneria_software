@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+<VBox xmlns:fx="http://javafx.com/fxml" prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx"
+      fx:controller="org.example.client.controllers.ManageOrdersController">
+    <opaqueInsets>
+        <Insets/>
+    </opaqueInsets>
+    <MenuBar>
+        <Menu mnemonicParsing="false" text="Account">
+            <MenuItem mnemonicParsing="false" onAction="#handlerAddManagerAction" text="Aggiungi Responsabile"/>
+            <MenuItem mnemonicParsing="false" onAction="#handlerLogoutAction" text="Logout"/>
+        </Menu>
+    </MenuBar>
+    <HBox alignment="CENTER_LEFT" spacing="24.0" VBox.vgrow="NEVER">
+        <padding>
+            <Insets bottom="8.0" left="8.0" right="24.0" top="8.0"/>
+        </padding>
+        <Button mnemonicParsing="false" onAction="#handleBackAction" style="-fx-background-color: null;">
+            <graphic>
+                <ImageView cache="true" fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                    <cursor>
+                        <Cursor fx:constant="HAND"/>
+                    </cursor>
+                    <Image url="@../images/back-arrow.png"/>
+                </ImageView>
+            </graphic>
+        </Button>
+        <HBox HBox.hgrow="ALWAYS"/>
+        <TextField fx:id="searchField" promptText="Search">
+            <padding>
+                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+            </padding>
+        </TextField>
+    </HBox>
+    <TableView fx:id="tableView" editable="true" fixedCellSize="0.0" VBox.vgrow="ALWAYS">
+        <columns>
+            <TableColumn fx:id="id" editable="false" prefWidth="146.39999121427536" text="ID"/>
+            <TableColumn fx:id="state" prefWidth="178.4000244140625" text="State"/>
+            <TableColumn fx:id="payment" editable="false" prefWidth="135.20001220703125" text="Payment"/>
+            <TableColumn fx:id="total" editable="false" prefWidth="124.0" text="Total"/>
+            <TableColumn fx:id="deliveryStart" editable="false" prefWidth="103.99992370605469" text="Delivery start"/>
+            <TableColumn fx:id="deliveryEnd" editable="false" prefWidth="103.99992370605469" text="Delivery end"/>
+        </columns>
+        <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
+        </columnResizePolicy>
+    </TableView>
+</VBox>

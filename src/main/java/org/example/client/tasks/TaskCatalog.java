@@ -14,6 +14,7 @@ import org.example.client.utils.Session;
 import org.example.client.utils.Utils;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -38,7 +39,7 @@ public class TaskCatalog extends Task<List<Node>> {
     }
 
     @Override
-    protected List<Node> call() throws Exception {
+    protected List<Node> call() throws IOException {
         Session session = Session.getInstance();
         // Request all products
         Response response = Utils.getAllProducts(session.getUser().getSession());
