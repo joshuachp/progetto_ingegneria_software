@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 public enum OrderSate {
     CONFIRMED("Confirmed", Color.BLACK),
     IN_PREPARATION("In preparation", Color.AQUA),
-    CONSEGNATA("Delivered", Color.GREEN),
+    DELIVERED("Delivered", Color.GREEN),
     CANCELLED("Cancelled", Color.RED);
 
     private final String label;

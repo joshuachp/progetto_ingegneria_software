@@ -14,7 +14,7 @@ public enum SortOrder {
         this.label = label;
     }
 
-    public static List<String> getSortOrders() {
+    public static List<String> getLabels() {
         return Arrays.stream(SortOrder.values()).map(SortOrder::toString).collect(Collectors.toList());
     }
 

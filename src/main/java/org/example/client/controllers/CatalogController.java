@@ -68,7 +68,7 @@ public class CatalogController {
 
     @FXML
     public void initialize() {
-        comboBoxSort.setItems(FXCollections.observableList(SortOrder.getSortOrders()));
+        comboBoxSort.setItems(FXCollections.observableList(SortOrder.getLabels()));
         comboBoxSort.getSelectionModel().selectFirst();
         comboBoxSort.valueProperty().addListener((observable, oldValue, newValue) -> {
             this.sortOrder = SortOrder.values()[comboBoxSort.getSelectionModel().getSelectedIndex()];
