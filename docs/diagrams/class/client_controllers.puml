@@ -291,36 +291,103 @@ class ProductController {
 }
 
 class ProductListController {
-  - stage: Stage 
-  - products : ObservableList<Product> 
-  + cbxColumn : ChoiceBox<String> 
-  + search: TextField 
-  + tableView : TableView<Product> 
-  + idCol : TableColumn<Product, Integer> 
-  + nameCol : TableColumn<Product, String> 
-  + quantityCol : TableColumn<Product, String> 
-  + priceCol : TableColumn<Product, String> 
-  + brandCol : TableColumn<Product, String> 
-  + buttonImportProductList: Button 
-  + buttonAddProduct: Button 
-  + {static} showView(Stage stage) : void 
-  + {static} refresh(ObservableList<Product>) throws Exception : void 
-  private setStage(Stage stage) : void 
-  private handleModifyProduct(Product) : void 
-  public initialize() : void 
-  public handlerAddProduct() : void 
-  public handleBackAction() : void 
-  public handlerLogoutAction() : void 
-  public handleRemoveProducts() : void 
+    - stage: Stage 
+    - products : ObservableList<Product> 
+    + searchField: TextField 
+    + tableView : TableView<Product> 
+    + idCol : TableColumn<Product, Integer> 
+    + nameCol : TableColumn<Product, String> 
+    + brandCol : TableColumn<Product, String> 
+    + characteristicsCol : TableColumn<Product, String> 
+    + priceCol : TableColumn<Product, String> 
+    + availabilityCol : TableColumn<Product, Integer> 
+    + buttonAddProduct: Button 
+    + {static} showView(Stage) : void 
+    - setStage(Stage stage) : void 
+    - handleModifyProduct(Product) : void 
+    + refresh() : void 
+    + initialize() : void 
+    + handlerAddProduct() : void 
+    + handleBackAction() : void 
+    + handlerLogoutAction() : void 
+    + handleRemoveProducts() : void 
 }
 
 class ProfileController {
+  - stage: Stage 
+  + nameSurname: Text 
+  + username: Text 
+  + address: Text 
+  + telephone: Text 
+  + cardNumber: Text 
+  + emissionDate: Text 
+  + pointsText: Text 
+  + cardText: Text 
+  + cardTextPoints: Text 
+  + paymentText: Text 
+  + paymentData: Text 
+  + {static} showView(Stage stage) : void 
+  - setStage(Stage stage) : void 
+  - handleButtonEditAction() : void 
+  + initialize() : void 
+  + handleBackAction() : void 
+  + handleViewShoppingHistoryAction() : void 
 }
 
 class RegistrationController {
+  + cbxPagamento : ComboBox<tring> 
+  + telephone: TextField 
+  + password: PasswordField 
+  + passwordRepeat: PasswordField 
+  - email: TextField 
+  - name: TextField 
+  - surname: TextField 
+  - address: TextField 
+  - cap: TextField 
+  - city: TextField 
+  - cardNumber: TextField 
+  - resultLabel: Label 
+  - stage: Stage 
+  - paymentMethod = 0: Integer 
+  + {static} showView(Stage) : void 
+  + initialize() : void 
+  + setStage(Stage stage) : void 
+  + handlerSetPaymentAction() : void 
+  + handleBackAction() : void 
+  + passwordVerify(String) : boolean 
+  + passwordVerifyEquals(String, String) : boolean 
+  + mailVerify(String) : boolean 
+  + capVerify(String) : boolean 
+  + phoneVerify(String) : boolean 
+  + errorMessage(String, TextField) : boolean 
+  - resetErrorMessage() : void 
+  + handleConfirmAction() : void 
 }
 
 class RegistrationManagerController {
+  + telephone: TextField 
+  - password: PasswordField 
+  - passwordRepeat: PasswordField 
+  - name: TextField 
+  - surname: TextField 
+  - address: TextField 
+  - cap: TextField 
+  - city: TextField 
+  - badgeNumber: TextField 
+  - resultLabel: Label 
+  - roleField: TextField 
+  - stage: Stage 
+  + {static} showView(Stage stage) : void 
+  + initialize(): void 
+  + setStage(Stage stage) : void 
+  + handleBackAction() : void 
+  + passwordVerify(String) : boolean 
+  + passwordVerifyEquals(String, String) : boolean 
+  + capVerify(String) : boolean 
+  + phoneVerify(String) : boolean 
+  + errorMessage(String, TextField) : boolean 
+  - resetErrorMessage() : void 
+  + handleConfirmAction() : void 
 }
 
 
