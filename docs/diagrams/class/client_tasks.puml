@@ -9,7 +9,6 @@ class TaskCardPoints extends Task{
 
 }
 
-
 class TaskCart extends Task{
     - stage : Stage
     
