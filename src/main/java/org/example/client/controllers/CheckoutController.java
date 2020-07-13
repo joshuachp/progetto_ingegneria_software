@@ -160,7 +160,7 @@ public class CheckoutController {
             alert.showAndWait();
         }
 
-        session.removeAllProduct();
+        session.removeAllProducts();
 
         this.stage.close();
         CatalogController.showView(mainStage);

@@ -1,0 +1,10 @@
+\contentsline {section}{\numberline {0.1}Introduzione}{1}%
+\contentsline {section}{\numberline {0.2}Use cases}{1}%
+\contentsline {subsection}{\numberline {0.2.1}Sequence diagram}{1}%
+\contentsline {section}{\numberline {0.3}Activity diagram}{1}%
+\contentsline {section}{\numberline {0.4}Class diagram}{1}%
+\contentsline {subsection}{\numberline {0.4.1}Sequence diagram}{1}%
+\contentsline {section}{\numberline {0.5}Test suite}{1}%
+\contentsline {section}{\numberline {0.6}Discussione design patterns}{1}%
+\contentsline {subsection}{\numberline {0.6.1}Pattern architetturali}{1}%
+\contentsline {subsection}{\numberline {0.6.2}Design patterns}{1}%
