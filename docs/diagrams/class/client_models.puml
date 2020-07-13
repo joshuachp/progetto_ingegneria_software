@@ -56,8 +56,8 @@ class User{
     + getSession() : String
 }
 
-User --|> Manager
-class Manager {
+
+class Manager extends User {
     - badge : String
     - name : String
     - surname : String
@@ -117,7 +117,7 @@ class OrderItem{
     + getProductId() : Integer
 }
 
-class abstractProduct{
+class AbstractProduct{
     # id : Integer 
     # name : String
     # brand : String 
@@ -146,14 +146,15 @@ class abstractProduct{
 
 }
 
-ROProduct --|> abstractProduct
-class ROProduct{
+
+class ROProduct extends AbstractProduct{
+
     + ROProduct(...)
     + ROProduct(JSONObject json)
+
 }
 
-Product --|> ROProduct
-class Product{
+class Product extends ROProduct{
     
     + Product(...)
     + Product(JSONObject json)

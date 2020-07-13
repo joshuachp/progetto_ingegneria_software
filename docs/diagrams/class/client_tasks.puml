@@ -1,0 +1,67 @@
+@startuml
+class TaskCardPoints extends Task{
+
+    - client : Client
+
+    + TaskCardPoints(client : Client)
+
+    # call() : LoyaltyCard 
+
+}
+
+
+class TaskCart extends Task{
+    - stage : Stage
+    
+    + TaskCart(stage : Stage )
+    
+    # call() : List<Node> 
+}
+
+class TaskCatalog extends Task{
+    - categoryList : ObservableList<String>
+    - sectionMap : Map<String, ArrayList<ROProduct>>
+    - stage Stage
+    - searchBar TextField 
+    - sortOrder SortOrder 
+
+    + TaskCatalog(...)
+    
+    # call() : List<Node> 
+}
+
+class TaskLoadImage extends Task{
+    - imageUrl : String
+    
+    + TaskLoadImage(imageUrl : String)
+    
+    # call() : Image 
+}
+
+class TaskManagerOrders extends Task{
+    - session : String
+
+    + TaskManageOrders(session : String)
+    
+    # call() : List<Order>
+}
+
+class TaskOrderHistoryItem extends Task {
+    - stage : Stage
+    - session : String
+    - orderId : Integer
+
+    + TaskOrderHistoryItem(...)
+
+    # call() List<Node>
+}
+
+class TaskOrderProduct extends Task {
+    - session : String
+    - productId : Integer
+    
+    + TaskOrderProduct(session String, productId : Integer)
+    
+    # call() : Product
+
+@enduml
