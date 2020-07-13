@@ -11,7 +11,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.example.client.components.QuantitySpinnerFactory;
-import org.example.client.models.Product;
 import org.example.client.models.ROProduct;
 import org.example.client.tasks.TaskLoadImage;
 import org.example.client.utils.Session;
@@ -52,7 +51,7 @@ public class CartItemController {
         return node;
     }
 
-    protected void setProduct(ROProduct product) {
+    private void setProduct(@NotNull ROProduct product) {
         this.product = product;
         if (product.getImage() != null)
             setImage(product.getImage());
@@ -82,7 +81,7 @@ public class CartItemController {
         ProductController.showView(this.stage, this.product);
     }
 
-    public void setStage(Stage stage) {
+    private void setStage(Stage stage) {
         this.stage = stage;
     }
 

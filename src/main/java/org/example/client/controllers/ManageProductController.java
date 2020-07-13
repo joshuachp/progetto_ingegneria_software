@@ -39,10 +39,8 @@ public class ManageProductController {
     private Product product;
     private Stage stage;
     private boolean modify;
-    private ObservableList<Product> products;
 
-    public static void showView(Stage parentStage, @Nullable Product product, boolean modify,
-                                ObservableList<Product> products) {
+    public static void showView(Stage parentStage, @Nullable Product product, boolean modify) {
 
         FXMLLoader loader =
                 new FXMLLoader(ManageProductController.class.getResource("/views/manage-product.fxml"));
@@ -69,11 +67,11 @@ public class ManageProductController {
         gestioneProdottiController.setStage(stage);
         gestioneProdottiController.setProduct(product);
         gestioneProdottiController.setModify(modify);
-        gestioneProdottiController.setProducts(products);
+        gestioneProdottiController.setProducts();
         stage.initOwner(parentStage);
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setAlwaysOnTop(true);
-        stage.show();
+        stage.showAndWait();
     }
 
     private void setModify(boolean modify) {
@@ -94,8 +92,7 @@ public class ManageProductController {
 
     }
 
-    private void setProducts(ObservableList<Product> products) {
-        this.products = products;
+    private void setProducts() {
     }
 
     private void setStage(Stage stage) {
@@ -103,7 +100,7 @@ public class ManageProductController {
     }
 
 
-    public boolean errorMessage(String message, @Nullable TextField field) {
+    private boolean errorMessage(String message, @Nullable TextField field) {
         resultLabel.setText(message);
         resultLabel.setTextFill(Paint.valueOf("red"));
         if (field != null)
@@ -195,11 +192,6 @@ public class ManageProductController {
                     //TODO: Error Alert
                 }
             }
-            try {
-                ProductListController.refresh(products);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
             stage.close();
         }
 
@@ -221,7 +213,7 @@ public class ManageProductController {
 
     }
 
-    public void setProduct(Product product) {
+    private void setProduct(Product product) {
         this.product = product;
     }
 }

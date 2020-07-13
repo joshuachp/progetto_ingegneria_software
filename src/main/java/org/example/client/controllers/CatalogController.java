@@ -99,7 +99,7 @@ public class CatalogController {
     }
 
     // Card builder
-    public void refreshProducts() {
+    private void refreshProducts() {
         Task<List<Node>> task = new Task<>() {
             @Override
             protected List<Node> call() {
@@ -116,7 +116,7 @@ public class CatalogController {
         new Thread(task).start();
     }
 
-    public void setStage(Stage stage) {
+    private void setStage(Stage stage) {
         this.stage = stage;
     }
 

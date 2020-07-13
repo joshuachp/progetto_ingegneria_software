@@ -15,57 +15,303 @@ class AuthController {
 }
 
 class CartController {
+  - stage: Stage 
+  - nodes : List<Node>
+  + vBoxCart: VBox 
+  + void showView(Stage stage) : static 
+  + initialize() : void 
+  + setStage(Stage) : void 
+  + handleBackAction() : void 
+  + handleConfirmationOrder() : void 
 }
 
 class CartItemController {
+  - stage: Stage 
+  - product: ROProduct 
+  + imageView: ImageView 
+  + textProduct: Text 
+  + textBrand: Text 
+  + textTotal: Text 
+  + spinnerQuantity: Spinner<Integer>
+  + {static} createView(Stage, ROProduct) : Node 
+  - setProduct(ROProduct product) : void 
+  - setImage(String image) : void 
+  - setStage(Stage stage) : void 
+  + handleOnMouseClick() : void 
+  + deleteHandler() : void 
 }
 
 class CatalogController {
+  + {static} SECTION_AL : String 
+  - stage: Stage 
+  - catalogNodes: List<Node> 
+  - sortOrder : SortOrder 
+  - sectionMap: Map<String, ArrayList<ROProduct>>
+  + categoryList: ObservableList<String> 
+  + listCategory: ListView<String> 
+  + searchBar: TextField 
+  + flowPaneProducts: FlowPane 
+  + textCartQuantity: Text 
+  + comboBoxSort: ComboBox<String> 
+  + {static} showView(Stage) : void 
+  - refreshProducts() : void 
+  - setStage(Stage) : void 
+  + initialize() : void 
+  + handlerLogoutAction() : void 
+  + handleSearchAction() : void 
+  + changeCategoryHandler() : void 
+  + handleCartAction() : void 
+  + handleProfileAction() : void 
 }
 
 class CatalogItemController {
+  - product: ROProduct 
+  - stage: Stage 
+  - spinnerFactory: QuantitySpinnerFactory 
+  + thumbnail: ImageView 
+  + title: Text 
+  + price: Text 
+  + quantity: Spinner<Integer>
+  + cartImage: ImageView 
+  + cartButton: Button 
+  + {static} createView(Stage, ROProduct) : VBox 
+  - setStage(Stage) : void 
+  - setImage(String) : void 
+  + handleAddToCartAction() : void 
+  + setProduct(ROProduct) : void 
+  + handleImageMouseClicked() : void 
 }
 
 class CheckoutController {
+  - stage: Stage 
+  - mainStage: Stage 
+  + datePicker: DatePicker 
+  + hourComboBox: ComboBox<String> 
+  + label: Label 
+  + addressText: Text 
+  + {static} showView(Stage mainStage) : void 
+  - setStage(Stage stage) : void 
+  - setMainStage(Stage mainStage) : void 
+  + initialize() : void 
+  + confirmOrder() : void 
+  + cancelConfirmation() : void 
 }
 
 class ChoiceModeController {
+  - stage: Stage 
+  + {static} showView(Stage) : void 
+  + setStage(Stage) : void 
+  + handleActionVisualizzaSpese() : void 
+  + handleActionManageProduct() : void 
+  + handlerLogoutAction() : void 
+  + handlerAddManagerAction() : void 
 }
 
 class EditProfileController {
+  - stage: Stage 
+  - client: Client 
+  - payment: Payment 
+  + name: TextField 
+  + surname: TextField 
+  + address: TextField 
+  + cap: TextField 
+  + city: TextField 
+  + telephone: TextField 
+  + cardNumber: TextField 
+  + password: TextField 
+  + confirmPassword: TextField 
+  + username: Text 
+  + error: Text 
+  + paymentText: Text 
+  + paymentData: Text 
+  + {static} showView(Stage stage) : void 
+  - setStage(Stage stage) : void 
+  - setPayment() : void 
+  - validateTelephone() : boolean 
+  - validateCap() : boolean 
+  - validatePassword() : boolean 
+  - validateConfirmPassword() : boolean 
+  - updateProfile() : void 
+  - showAlert() : void 
+  + initialize() : void 
+  + handleButtonCancelAction() : void 
+  + handleButtonSaveAction() : void 
+  + handleChangePaymentAction() : void 
 }
 
 class ManageOrdersController {
+  - stage: Stage
+  - dateFormat: SimpleDateFormat
+  - list: ObservableList<Order>
+  + searchField: TextField
+  + tableView : TableView<Order>
+  + id : TableColumn<Order, Integer>
+  + state : TableColumn<Order, String>
+  + payment : TableColumn<Order, String>
+  + total : TableColumn<Order, String>
+  + deliveryStart : TableColumn<Order, String>
+  + deliveryEnd : TableColumn<Order, String>
+  + address : TableColumn<Order, String>
+  + {static} showView(Stage) : void
+  - setStage(Stage) : void
+  + initialize() : void
+  + handleBackAction() : void
+  + handlerAddManagerAction() : void
+  + handlerLogoutAction() : void
 }
 
 class ManageOrdersItemController {
+  + textId: Text 
+  + textName: Text 
+  + textPrice: Text 
+  + textQuantity: Text 
+  + textTotal: Text 
+  - stage: Stage 
+  - product: ROProduct 
+  + {static} createView(Stage, OrderItem) : Node 
+  + setOrderItem(OrderItem orderItem) : void 
+  + handleMouseClicked() : void 
+  + setStage(Stage stage) : void 
 }
 
 class ManageOrdersListController {
+  - startFormat: SimpleDateFormat 
+  - endFormat: SimpleDateFormat 
+  - stage: Stage 
+  - order: Order 
+  + vBoxList: VBox 
+  + addressText: Text 
+  + deliveryText: Text 
+  + totalText: Text 
+  + stateChoiceBox: ChoiceBox<String> 
+  + {static} showView(Stage, Order) : void 
+  + initialize() : void 
+  + setStage(Stage stage) : void 
+  + handleBackAction() : void 
+  + handleSaveAction() : void 
+  + setOrder(Order) : void 
 }
 
 class ManageProductController {
+  + fieldName: TextField 
+  + fieldBrand: TextField 
+  + fieldPackage: TextField 
+  + fieldPrice: TextField 
+  + fieldQuantity: TextField 
+  + resultLabel: Label 
+  + thumbnail: ImageView 
+  + fieldCharacteristics: TextField 
+  + fieldSection: TextField 
+  - product: Product 
+  - stage: Stage 
+  - modify: boolean 
+  - products: ObservableList<Product> 
+  + {static} showView(Stage, Product, boolean, ObservableList<Product>) : void 
+  - setProduct(Product) : void 
+  - setModify(boolean) : void 
+  - setProducts(ObservableList<Product>) : void 
+  - setStage(Stage) : void 
+  - errorMessage(String, TextField) : boolean 
+  - resetErrorMessage() : void 
+  + handleConfirmAction() : void 
+  + handleUploadImage() : void 
 }
 
 class OrderHistoryController {
+  - stage: Stage 
+  + vBoxList: VBox 
+  + {static} showView(Stage) : void 
+  - setStage(Stage) : void 
+  + initialize() : void 
+  + handleBackAction() : void 
 }
 
 class OrderHistoryItemController {
+  public orderIdText: Text 
+  public statusText: Text 
+  public addressText: Text 
+  public paymentText: Text 
+  public totalText: Text 
+  public vBoxListOrderProducts: VBox 
+  private stage: Stage 
+  private order: Order 
+  private nodes: List<Node> 
+  private showList: boolean 
+  public {static} createView(Stage, Order) : Node 
+  public setOrder(Order order) : void 
+  private getOrderItems() : void 
+  public handleOnMouseClick() : void 
+  private setStage(Stage) : void 
 }
 
 class OrderProductController {
-}
-
-class OrderProductListController {
+  - product: ROProduct 
+  - stage: Stage 
+  + textName: Text 
+  + textPrice: Text 
+  + textQuantity: Text 
+  + textTotal: Text 
+  + {static} createView(Stage stage, OrderItem orderItem) : Node 
+  - setStage(Stage stage) : void 
+  + setOrderItem(OrderItem orderItem) : void 
+  + handleMouseClicked() : void 
 }
 
 class PaymentController {
+  - stage: Stage 
+  - payment: Payment 
+  + paymentMethod: ToggleGroup 
+  + paymentDataTextField: TextField 
+  + {static} showView(Stage, Payment) : Payment
+  + getPayment() : Payment 
+  + setPayment(Payment) : void 
+  + setStage(Stage) : void 
+  + handleCancelAction() : void 
+  + handleChangeAction() : void 
 }
 
 class ProductController {
+  - stage: Stage 
+  - product: ROProduct 
+  - spinnerFactory: QuantitySpinnerFactory 
+  + nameText: Text 
+  + brandText: Text 
+  + characteristicsText: Text 
+  + packageSizeText: Text 
+  + priceText: Text 
+  + imageView: ImageView 
+  + quantitySpinner: Spinner<Integer> 
+  + cartButton: Button 
+  + {static} showView(Stage, ROProduct) : void 
+  - setStage(Stage) : void 
+  - setImage(String) : void 
+  + setProduct(ROProduct) : void 
+  + handleAddToCartAction() : void 
+  + handleCloseAction() : void 
 }
 
 class ProductListController {
+  - stage: Stage 
+  - products : ObservableList<Product> 
+  + cbxColumn : ChoiceBox<String> 
+  + search: TextField 
+  + tableView : TableView<Product> 
+  + idCol : TableColumn<Product, Integer> 
+  + nameCol : TableColumn<Product, String> 
+  + quantityCol : TableColumn<Product, String> 
+  + priceCol : TableColumn<Product, String> 
+  + brandCol : TableColumn<Product, String> 
+  + buttonImportProductList: Button 
+  + buttonAddProduct: Button 
+  + {static} showView(Stage stage) : void 
+  + {static} refresh(ObservableList<Product>) throws Exception : void 
+  private setStage(Stage stage) : void 
+  private handleModifyProduct(Product) : void 
+  public initialize() : void 
+  public handlerAddProduct() : void 
+  public handleBackAction() : void 
+  public handlerLogoutAction() : void 
+  public handleRemoveProducts() : void 
 }
 
 class ProfileController {

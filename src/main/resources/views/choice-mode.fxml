@@ -18,14 +18,14 @@
          <menus>
             <Menu mnemonicParsing="false" text="Account">
                <items>
-                  <MenuItem mnemonicParsing="false" onAction="#handlerLogutAction" text="Logout" />
+                  <MenuItem mnemonicParsing="false" onAction="#handlerLogoutAction" text="Logout" />
                </items>
             </Menu>
          </menus>
       </MenuBar>
       <HBox alignment="TOP_CENTER">
          <children>
-            <Button alignment="CENTER" contentDisplay="TOP" mnemonicParsing="false" onAction="#HandleActionManageProduct" prefHeight="90.0" prefWidth="190.0" text="Gestione prodotti" textAlignment="CENTER" textFill="#393939">
+            <Button alignment="CENTER" contentDisplay="TOP" mnemonicParsing="false" onAction="#handleActionManageProduct" prefHeight="90.0" prefWidth="190.0" text="Gestione prodotti" textAlignment="CENTER" textFill="#393939">
                <padding>
                   <Insets bottom="10.0" top="10.0" />
                </padding>
@@ -43,7 +43,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button alignment="CENTER" contentDisplay="TOP" mnemonicParsing="false" onAction="#HandleActionVisualizzaSpese" prefHeight="90.0" prefWidth="190.0" text="Visualizza spese" textFill="#393939">
+            <Button alignment="CENTER" contentDisplay="TOP" mnemonicParsing="false" onAction="#handleActionVisualizzaSpese" prefHeight="90.0" prefWidth="190.0" text="Visualizza spese" textFill="#393939">
                <padding>
                   <Insets bottom="10.0" top="10.0" />
                </padding>

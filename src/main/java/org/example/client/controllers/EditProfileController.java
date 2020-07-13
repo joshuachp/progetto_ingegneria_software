@@ -69,12 +69,12 @@ public class EditProfileController {
             e.printStackTrace();
         }
         assert root != null;
+        EditProfileController controller = loader.getController();
+        controller.setStage(stage);
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.setTitle("Edit Profile");
         stage.show();
-        EditProfileController controller = loader.getController();
-        controller.setStage(stage);
     }
 
     /**
@@ -257,7 +257,7 @@ public class EditProfileController {
         ProfileController.showView(this.stage);
     }
 
-    protected void setStage(Stage stage) {
+    private void setStage(Stage stage) {
         this.stage = stage;
     }
 
