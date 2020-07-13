@@ -7,6 +7,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.example.client.models.OrderItem;
 import org.example.client.models.Product;
+import org.example.client.models.ROProduct;
 import org.example.client.tasks.TaskOrderProduct;
 import org.example.client.utils.Session;
 
@@ -26,7 +27,7 @@ public class ManageOrdersItemController {
     public Text textTotal;
 
     private Stage stage;
-    private Product product;
+    private ROProduct product;
 
     public static Node createView(Stage stage, OrderItem orderItem) {
         FXMLLoader loader =
@@ -53,7 +54,7 @@ public class ManageOrdersItemController {
 
         Session session = Session.getInstance();
         TaskOrderProduct task = new TaskOrderProduct(session.getUser().getSession(), orderItem.getProductId());
-        task.setOnSucceeded(event -> this.product = session.checkProduct(task.getValue()));
+        task.setOnSucceeded(event -> this.product = session.getProductReference(task.getValue()));
         new Thread(task).start();
     }
 

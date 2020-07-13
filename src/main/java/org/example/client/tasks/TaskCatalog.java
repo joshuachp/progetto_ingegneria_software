@@ -8,6 +8,7 @@ import javafx.stage.Stage;
 import org.example.client.components.CatalogFactory;
 import org.example.client.controllers.CatalogController;
 import org.example.client.models.Product;
+import org.example.client.models.ROProduct;
 import org.example.client.models.enums.SortOrder;
 import org.example.client.utils.Session;
 import org.example.client.utils.Utils;
@@ -21,12 +22,12 @@ import java.util.Map;
 public class TaskCatalog extends Task<List<Node>> {
 
     private final ObservableList<String> categoryList;
-    private final Map<String, ArrayList<Product>> sectionMap;
+    private final Map<String, ArrayList<ROProduct>> sectionMap;
     private final Stage stage;
     private final TextField searchBar;
     private final SortOrder sortOrder;
 
-    public TaskCatalog(Map<String, ArrayList<Product>> sectionMap, ObservableList<String> categoryList, Stage stage,
+    public TaskCatalog(Map<String, ArrayList<ROProduct>> sectionMap, ObservableList<String> categoryList, Stage stage,
                        TextField searchBar, SortOrder sortOrder) {
         this.sectionMap = sectionMap;
         this.categoryList = categoryList;
@@ -42,14 +43,14 @@ public class TaskCatalog extends Task<List<Node>> {
 
         JSONObject json = Utils.getAllProducts(session.getUser().getSession());
 
-        if(json.has("products")) {
+        if (json.has("products")) {
             // For each product map it to section - array of products
             json.getJSONArray("products").forEach(t -> {
                 JSONObject jsonProduct = (JSONObject) t;
 
                 // Get a reference to an existing product in the cart or create a new one, because we need
                 // the current quantity of the product in the cart
-                Product product = session.checkProduct(new Product(jsonProduct));
+                ROProduct product = session.getProductReference(new Product(jsonProduct));
 
                 // Create a new array if section doesn't exists
                 if (!sectionMap.containsKey(product.getSection())) {

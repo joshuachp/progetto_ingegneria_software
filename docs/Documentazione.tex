@@ -1,23 +1,61 @@
-\documentclass[12pt, a4paper]{article}
+\documentclass[12pt, a4paper]{report}
+
+%package
 \usepackage[utf8]{inputenc}
+\usepackage{amsmath} %For both in-line and equation mode
+\numberwithin{equation}{section} %Numbering of our equations per section
+\usepackage{algorithm}
+\usepackage{algorithmic} %Algorithm styles, need to be nested for the example shown
+\usepackage{fancyhdr} %For our headers
+\usepackage{graphicx} %Inserting images
+\usepackage{lipsum}  %Blank text fill, delete me when finished
+\usepackage{setspace} %Spacing on the front page for crest and titles
+\usepackage[]{fncychap} % Styles can be Sonny, Lenny, Glenn, Conny, Rejne, Bjarne and Bjornstrup
+\usepackage[hyphens]{url} %Deals with hyphens in urls to make them clickable
+\usepackage{xcolor} %Great if you want coloured text
+\usepackage{tabularx}
+\usepackage{appendix} %Take a wild guess slick
+
+\fancyhf{}
+\pagestyle{fancy}
+
 \title{Progetto Ingegneria del Software}
-\author{
-  Davide Bleggi
-  \and
-  Joshua Chapman
-}
-\date{Maggio 2020}
+\author{Davide Bleggi \and Joshua Chapman}
+\date{Giugno 2020}
+
 
 \begin{document}
 \begin{titlepage}
   \maketitle
 \end{titlepage}
 
+% Table of content
+\tableofcontents
+\newpage
+
 \begin{abstract}
-  Progetto per la creazione di un sistema per la spesa online.
+  Progetto per la creazione di un sistema informatico per la gestire il servizio
+  di spesa on-line di un supermercato.
 \end{abstract}
 
-\section{Introduction}
-Hello World!
+\section{Introduzione}
+
+\section{Use cases}
+
+\subsection{Sequence diagram}
+
+\section{Activity diagram}
+
+\section{Class diagram}
+
+\subsection{Sequence diagram}
+
+\section{Test suite}
+
+\section{Discussione design patterns}
+
+\subsection{Pattern architetturali}
+
+\subsection{Design patterns}
 
 \end{document}

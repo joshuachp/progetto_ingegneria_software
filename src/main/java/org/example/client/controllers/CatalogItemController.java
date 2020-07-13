@@ -11,6 +11,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.example.client.components.QuantitySpinnerFactory;
 import org.example.client.models.Product;
+import org.example.client.models.ROProduct;
 import org.example.client.utils.Session;
 import org.example.client.tasks.TaskLoadImage;
 
@@ -32,10 +33,10 @@ public class CatalogItemController {
     public ImageView cartImage;
     @FXML
     public Button cartButton;
-    private Product product;
+    private ROProduct product;
     private Stage stage;
 
-    public static VBox generateCard(Stage stage, Product product) {
+    public static VBox generateCard(Stage stage, ROProduct product) {
         FXMLLoader loader = new FXMLLoader(CatalogItemController.class.getResource("/views/catalog-item.fxml"));
         VBox card = null;
         try {
@@ -68,7 +69,7 @@ public class CatalogItemController {
         }
     }
 
-    public void setProduct(Product product) {
+    public void setProduct(ROProduct product) {
         this.product = product;
 
         price.setText(String.format("\u20ac %.2f", this.product.getPrice()));

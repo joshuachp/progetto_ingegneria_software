@@ -1,6 +1,5 @@
 package org.example.client.controllers;
 
-import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -8,7 +7,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.control.TextFormatter;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Paint;
@@ -16,7 +14,6 @@ import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.example.client.models.Product;
-import org.example.client.tasks.TaskLoadImage;
 import org.example.client.utils.Session;
 import org.example.client.utils.Utils;
 import org.jetbrains.annotations.Nullable;
@@ -25,7 +22,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Pattern;
 
 public class ManageProductController {
 
@@ -98,7 +94,9 @@ public class ManageProductController {
 
     }
 
-    private void setProducts(ObservableList<Product> products){this.products = products;}
+    private void setProducts(ObservableList<Product> products) {
+        this.products = products;
+    }
 
     private void setStage(Stage stage) {
         this.stage = stage;
@@ -138,8 +136,8 @@ public class ManageProductController {
             error = errorMessage("Il campo Prezzo è vuoto.", fieldPrice);
         else {
             try {
-                Double.valueOf(fieldPrice.getText().replace(",","."));
-            } catch(NumberFormatException e){
+                Double.valueOf(fieldPrice.getText().replace(",", "."));
+            } catch (NumberFormatException e) {
                 error = errorMessage("Inserire il prezzo in modo corretto (es. 12,99).", fieldPrice);
             }
         }
@@ -149,7 +147,7 @@ public class ManageProductController {
         else {
             try {
                 Integer.valueOf(fieldQuantity.getText());
-            } catch(NumberFormatException e){
+            } catch (NumberFormatException e) {
                 error = errorMessage("La quantità non è corretta.", fieldQuantity);
             }
         }
@@ -159,7 +157,7 @@ public class ManageProductController {
         else {
             try {
                 Integer.valueOf(fieldPackage.getText());
-            } catch(NumberFormatException e){
+            } catch (NumberFormatException e) {
                 error = errorMessage("La quantità della confezione singola non è corretta.", fieldPackage);
             }
         }
@@ -167,20 +165,19 @@ public class ManageProductController {
         if (fieldCharacteristics.getText().equals(""))
             error = errorMessage("Il campo Caratteristiche è vuoto.", fieldCharacteristics);
 
-        if(thumbnail.getImage().getUrl().equals(""))
+        if (thumbnail.getImage().getUrl().equals(""))
             error = true;
 
         if (fieldSection.getText().equals(""))
             error = errorMessage("Il campo Sezione è vuoto.", fieldSection);
 
         if (!error) {
-            Product product = new Product(fieldName.getText(),
-                    fieldBrand.getText(), Integer.parseInt(fieldPackage.getText()),
-                    Float.parseFloat(fieldPrice.getText().replace(",", ".")),
-                    thumbnail.getImage().getUrl(), Integer.parseInt(fieldQuantity.getText()),
-                    fieldCharacteristics.getText(), fieldSection.getText());
+            Product product = new Product(null, fieldName.getText(), fieldBrand.getText(),
+                    Integer.parseInt(fieldPackage.getText()),
+                    Float.parseFloat(fieldPrice.getText().replace(",", ".")), thumbnail.getImage().getUrl(),
+                    Integer.parseInt(fieldQuantity.getText()), fieldCharacteristics.getText(), fieldSection.getText());
             Session session = Session.getInstance();
-            if(!this.modify) {
+            if (!this.modify) {
                 List<Product> products = new ArrayList<>();
                 products.add(product);
                 System.out.println(product);
