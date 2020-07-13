@@ -23,6 +23,7 @@ public class Utils {
     public static final String SERVER_URL_SESSION = "/api/user/session";
     public static final String SERVER_URL_LOGOUT = "/api/user/logout";
     public static final String SERVER_URL_REGISTRATION = "/api/client/register";
+    public static final String SERVER_URL_REGISTRATION_MANAGER = "/api/manager/register";
     public static final String SERVER_URL_MANAGER_UPDATE = "/api/manager/update";
     public static final String SERVER_URL_CLIENT_UPDATE = "/api/client/update";
     // Format for URL `/api/product/{productId}`
@@ -46,18 +47,18 @@ public class Utils {
     @RegExp
     public static final String REGEX_CAP = "^\\d{5}$";
     @RegExp
-    public static final String REGEX_MAIL = "^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,}$";
+    public static final String REGEX_MAIL = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0," +
+            "61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$";
     @RegExp
     public static final String REGEX_PASSWORD = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[\\W_]).{8,}$";
     @RegExp
-    public static final String REGEX_TELEPHONE = "^(\\((00|\\+)39\\)|(00|\\+)39)?" +
-            "(38[890]|" +
-            "34[6-90]|" +
-            "36[680]|" +
-            "33[3-90]|" +
-            "32[89])" +
-            "0[0-999]"+
+    public static final String REGEX_TELEPHONE = "^(\\((00|\\+)39\\)|(00|\\+)39)?" + 
+            "(\\ )?" +
+            "(38[890]|34[6-90]|36[680]|33[3-90]|32[89]|0[0-9]{2,3})"+
+            "(\\ )?"+
             "\\d{7}$";
+    @RegExp
+    public static final String REGEX_BADGE = "^[A-Z0-9]+$";
 
     /**
      * Authenticate with the server authentication with username and password
@@ -140,6 +141,35 @@ public class Utils {
                 .build();
         Request request = new Request.Builder()
                 .url(SERVER_URL + SERVER_URL_REGISTRATION)
+                .post(body)
+                .build();
+        try {
+            Response response = client.newCall(request).execute();
+            return response.code();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return -1;
+    }
+
+    public static int registerManager(String username, String password, String badge, String name, String surname,
+                                     String address, Integer cap, String city,
+                                     String telephone, String role) {
+        OkHttpClient client = new OkHttpClient();
+        RequestBody body = new FormBody.Builder()
+                .add("username", username)
+                .add("password", password)
+                .add("name", name)
+                .add("surname", surname)
+                .add("address", address)
+                .add("cap", String.valueOf(cap))
+                .add("city", city)
+                .add("telephone", telephone)
+                .add("badge", badge)
+                .add("role", role)
+                .build();
+        Request request = new Request.Builder()
+                .url(SERVER_URL + SERVER_URL_REGISTRATION_MANAGER)
                 .post(body)
                 .build();
         try {

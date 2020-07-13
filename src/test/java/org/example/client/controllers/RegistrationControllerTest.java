@@ -1,4 +1,4 @@
-package org.example.client.models;
+package org.example.client.controllers;
 
 import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
@@ -35,10 +35,10 @@ public class RegistrationControllerTest {
         RegistrationController registrationController = new RegistrationController();
         assertNotNull(registrationController);
         assertTrue(registrationController.phoneVerify("+393461650042"));
-        //TODO: ignore white spaces
-        //assertTrue(registrazioneController.phoneVerify("+39 346 1650042"));
+        assertTrue(registrationController.phoneVerify("+39 346 1650042"));
         assertFalse(registrationController.phoneVerify("+3934616500425"));
         assertTrue(registrationController.phoneVerify("3461650042"));
+        assertTrue(registrationController.phoneVerify("0457551859"));
     }
 
     @Test
@@ -55,6 +55,14 @@ public class RegistrationControllerTest {
         assertNotNull(registrationController);
         assertFalse(registrationController.passwordVerify("asdse"));
         assertTrue(registrationController.passwordVerify("Ax?34c20&@"));
+    }
+
+    @Test
+    public void testMailVerify() {
+        RegistrationController registrationController = new RegistrationController();
+        assertNotNull(registrationController);
+        assertTrue(registrationController.mailVerify("test@gmail.com"));
+        assertFalse(registrationController.mailVerify("test.it"));
     }
 
     @Test

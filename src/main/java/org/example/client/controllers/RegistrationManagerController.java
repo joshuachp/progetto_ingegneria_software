@@ -7,6 +7,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
+import org.example.client.models.FactoryUser;
+import org.example.client.models.User;
+import org.example.client.utils.Session;
 import org.example.client.utils.Utils;
 import org.jetbrains.annotations.Nullable;
 
@@ -32,9 +35,11 @@ public class RegistrationManagerController {
     @FXML
     private TextField city;
     @FXML
-    private TextField cardNumber;
+    private TextField badgeNumber;
     @FXML
     private Label resultLabel;
+    @FXML
+    private TextField roleField;
 
     private Stage stage;
 
@@ -58,6 +63,19 @@ public class RegistrationManagerController {
         stage.setScene(scene);
         stage.setTitle("Registrazione");
         stage.show();
+    }
+
+    public void initialize(){
+        // inserimento card number solo se un numero
+        this.badgeNumber.setTextFormatter(new TextFormatter<String>(change -> {
+            if (!change.isContentChange())
+                return change;
+            String text = change.getText();
+            if (text.isEmpty() || text.matches(Utils.REGEX_BADGE)) {
+                return change;
+            }
+            return null;
+        }));
     }
 
     public void setStage(Stage stage) {
@@ -149,34 +167,31 @@ public class RegistrationManagerController {
         } else
             error = errorMessage("Il campo Ripeti password è vuoto.", passwordRepeat);
 
-        // inserimento card number solo se un numero
-        this.cardNumber.setTextFormatter(new TextFormatter<String>(change -> {
-            if (!change.isContentChange())
-                return change;
-            String text = change.getText();
-            if (text.isEmpty() || text.matches("^[\\d]*$")) {
-                return change;
-            }
-            return null;
-        }));
+        if (roleField.getText().isEmpty())
+            error = errorMessage("Il campo Ruolo è vuoto,", roleField);
+
+        if (badgeNumber.getText().isEmpty()){
+            error = errorMessage("Il campo Basge è vuoto,", badgeNumber);
+        }
 
         if (!error) {
-            /*int statusCode = Utils.registerManager( passwordRepeat.getText(), name.getText(),
+            int statusCode = Utils.registerManager( badgeNumber.getText(), passwordRepeat.getText(),
+                    badgeNumber.getText(), name.getText(),
                     surname.getText(), address.getText(), Integer.valueOf(cap.getText()), city.getText(),
-                    telephone.getText(), this.paymentMethod, Integer.parseInt(this.cardNumber.getText()));
+                    telephone.getText(), roleField.getText());
             if (statusCode == 200) {
                 errorMessage("Success" + statusCode, null);
 
-                User user = new FactoryUser().getUser(email.getText(), passwordRepeat.getText());
+                User user = new FactoryUser().getUser(badgeNumber.getText(), passwordRepeat.getText());
 
                 // Set user session
                 Session session = Session.getInstance();
                 session.setUser(user);
 
-                CatalogController.showView(this.stage);
+                ChoiceModeController.showView(this.stage);
             } else {
                 errorMessage("Error" + statusCode, null);
-            }*/
+            }
         }
 
     }
