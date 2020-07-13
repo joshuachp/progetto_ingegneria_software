@@ -1,0 +1,81 @@
+@startuml
+
+class AuthController {
+  - stage: Stage 
+  + usernameField: TextField 
+  + passwordField: PasswordField 
+  + resultLabel: Label 
+  + rememberCheckBox: CheckBox 
+  + {static} showView(Stage)  : void 
+  + initialize() : void 
+  + handleAuthAction() : void 
+  + setStage(Stage) : void 
+  + handleActionRegistrati() : void 
+  + handleRememberAction() : void 
+}
+
+class CartController {
+}
+
+class CartItemController {
+}
+
+class CatalogController {
+}
+
+class CatalogItemController {
+}
+
+class CheckoutController {
+}
+
+class ChoiceModeController {
+}
+
+class EditProfileController {
+}
+
+class ManageOrdersController {
+}
+
+class ManageOrdersItemController {
+}
+
+class ManageOrdersListController {
+}
+
+class ManageProductController {
+}
+
+class OrderHistoryController {
+}
+
+class OrderHistoryItemController {
+}
+
+class OrderProductController {
+}
+
+class OrderProductListController {
+}
+
+class PaymentController {
+}
+
+class ProductController {
+}
+
+class ProductListController {
+}
+
+class ProfileController {
+}
+
+class RegistrationController {
+}
+
+class RegistrationManagerController {
+}
+
+
+@enduml
