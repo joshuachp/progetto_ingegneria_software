@@ -25,12 +25,7 @@
             <rowConstraints>
                 <RowConstraints vgrow="SOMETIMES"/>
             </rowConstraints>
-            <ChoiceBox fx:id="cbxColumn" prefWidth="150.0" GridPane.columnIndex="1">
-                <GridPane.margin>
-                    <Insets/>
-                </GridPane.margin>
-            </ChoiceBox>
-            <TextField fx:id="search" promptText="Ricerca" GridPane.columnIndex="2">
+            <TextField fx:id="searchField" promptText="Ricerca" GridPane.columnIndex="2">
                 <GridPane.margin>
                     <Insets bottom="15.0" left="15.0" right="15.0" top="15.0"/>
                 </GridPane.margin>
@@ -56,14 +51,16 @@
         <TableView fx:id="tableView" VBox.vgrow="ALWAYS">
             <columns>
                 <TableColumn fx:id="idCol" editable="false" minWidth="100.0" prefWidth="200.0"
-                             text="ID Prodotto"/>
+                             text="ID"/>
                 <TableColumn fx:id="nameCol" editable="false" minWidth="100.0" prefWidth="200.0"
-                             text="Nome Prodotto"/>
+                             text="Name"/>
                 <TableColumn fx:id="brandCol" editable="false" minWidth="100.0" prefWidth="200.0" text="Brand"/>
+                <TableColumn fx:id="characteristicsCol" editable="false" minWidth="100.0" prefWidth="200.0"
+                             text="Characteristics"/>
                 <TableColumn fx:id="priceCol" editable="false" minWidth="100.0" prefWidth="200.0"
-                             text="Prezzo"/>
+                             text="Price"/>
                 <TableColumn fx:id="availabilityCol" minWidth="100.0" prefWidth="200.0"
-                             text="Quantità"/>
+                             text="Availability"/>
             </columns>
             <columnResizePolicy>
                 <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>

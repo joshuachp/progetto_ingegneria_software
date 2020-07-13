@@ -27,21 +27,21 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 public class ProductListController {
 
     private final ObservableList<Product> products = FXCollections.observableArrayList();
-    public ChoiceBox<String> cbxColumn;
-    public TextField search;
+    public TextField searchField;
     public TableView<Product> tableView;
     public TableColumn<Product, Integer> idCol;
     public TableColumn<Product, String> nameCol;
-    public TableColumn<Product, Integer> availabilityCol;
-    public TableColumn<Product, String> priceCol;
     public TableColumn<Product, String> brandCol;
+    public TableColumn<Product, String> characteristicsCol;
+    public TableColumn<Product, String> priceCol;
+    public TableColumn<Product, Integer> availabilityCol;
     public Button buttonAddProduct;
+    @FXML
     private Stage stage;
 
     // View generation
@@ -132,6 +132,9 @@ public class ProductListController {
         this.idCol.setCellValueFactory(param -> new SimpleObjectProperty<>(param.getValue().getId()));
         this.nameCol.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getName()));
         this.brandCol.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getBrand()));
+        this.characteristicsCol.setCellValueFactory(param ->
+                new SimpleStringProperty(param.getValue().getCharacteristics())
+        );
         this.priceCol.setCellValueFactory(
                 param -> new SimpleStringProperty(String.format("€ %.2f", param.getValue().getPrice()))
         );
@@ -151,49 +154,23 @@ public class ProductListController {
             }
         });
 
-        // Setting-up filter search
-        ObservableList<String> columnFilterString = FXCollections.observableArrayList(
-                columnFilterEnum.ID.toString(),
-                columnFilterEnum.NAME.toString(),
-                columnFilterEnum.BRAND.toString(),
-                columnFilterEnum.PRICE.toString(),
-                columnFilterEnum.QUANTITY.toString());
-
-        this.cbxColumn.setItems(columnFilterString);
-        this.cbxColumn.setValue("");
-
-        FilteredList<Product> filteredProducts = new FilteredList<>(products, p -> true);
-
-        this.search.setOnKeyReleased(keyEvent ->
-        {
-            // Switch on choiceBox value
-            switch (Objects.requireNonNull(columnFilterEnum.fromString(this.cbxColumn.getValue()))) {
-                case ID:
-                    filteredProducts.setPredicate(p -> p.getId().toString().contains(this.search.getText().trim()));
-                    break;
-                case NAME:
-                    filteredProducts.setPredicate(p ->
-                            p.getName().toLowerCase().contains(this.search.getText().toLowerCase().trim())
-                    );
-                    break;
-                case BRAND:
-                    filteredProducts.setPredicate(p ->
-                            p.getBrand().toLowerCase().contains(this.search.getText().toLowerCase().trim())
-                    );
-                    break;
-                case PRICE:
-                    filteredProducts.setPredicate(p -> p.getPrice().toString().contains(this.search.getText().trim()));
-                    break;
-                case QUANTITY:
-                    filteredProducts.setPredicate(p ->
-                            p.getAvailability().toString().contains(this.search.getText().trim())
-                    );
-                    break;
-            }
-        });
+        FilteredList<Product> filteredList = new FilteredList<>(products, p -> true);
+        this.searchField.textProperty().addListener((observable, oldValue, newValue) ->
+                filteredList.setPredicate(value -> {
+                    if (newValue == null || newValue.isEmpty()) {
+                        return true;
+                    }
+                    String search = newValue.toLowerCase().trim();
+                    return value.getId().toString().contains(search) ||
+                            value.getName().toLowerCase().contains(search) ||
+                            value.getPrice().toString().contains(search) ||
+                            value.getBrand().toLowerCase().contains(search) ||
+                            value.getSection().toLowerCase().contains(search) ||
+                            value.getCharacteristics().toLowerCase().contains(search);
+                }));
 
         // Wrap the FilteredList in a SortedList.
-        SortedList<Product> sortedData = new SortedList<>(filteredProducts);
+        SortedList<Product> sortedData = new SortedList<>(filteredList);
         // Bind the SortedList comparator to the TableView comparator.
         sortedData.comparatorProperty().bind(this.tableView.comparatorProperty());
 
@@ -256,27 +233,4 @@ public class ProductListController {
         refresh();
     }
 
-    // Search filter enum
-    public enum columnFilterEnum {
-        ID("Id"), NAME("Nome prodotto"), BRAND("Nome brand"), PRICE("Prezzo"), QUANTITY("Quantità");
-
-        private final String column;
-
-        columnFilterEnum(final String column) {
-            this.column = column;
-        }
-
-        public static ProductListController.columnFilterEnum fromString(String text) {
-            for (ProductListController.columnFilterEnum x : ProductListController.columnFilterEnum.values()) {
-                if (x.column.equalsIgnoreCase(text)) {
-                    return x;
-                }
-            }
-            return null;
-        }
-
-        public String toString() {
-            return column;
-        }
-    }
 }
