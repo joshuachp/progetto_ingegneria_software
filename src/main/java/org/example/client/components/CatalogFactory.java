@@ -45,7 +45,7 @@ public class CatalogFactory {
             if (newSearch.isEmpty() ||
                     product.getName().toLowerCase().contains(newSearch) ||
                     product.getCharacteristics().toLowerCase().contains(newSearch)) {
-                nodes.add(CatalogItemController.generateCard(stage, product));
+                nodes.add(CatalogItemController.createCard(stage, product));
             }
         }
         return nodes;

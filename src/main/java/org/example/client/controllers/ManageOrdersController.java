@@ -140,10 +140,6 @@ public class ManageOrdersController {
     }
 
     @FXML
-    public void handlerAddManagerAction() {
-    }
-
-    @FXML
     public void handlerLogoutAction() {
         Utils.logOut(this.stage);
     }

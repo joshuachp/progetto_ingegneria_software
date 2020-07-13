@@ -1,6 +1,5 @@
 package org.example.client.controllers;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -15,7 +14,6 @@ public class ChoiceModeController {
     private Stage stage;
 
     public static void showView(Stage stage) {
-
         FXMLLoader loader = new FXMLLoader(ChoiceModeController.class.getResource("/views/choice-mode.fxml"));
         Parent root = null;
         try {
@@ -24,36 +22,35 @@ public class ChoiceModeController {
             e.printStackTrace();
         }
         assert root != null;
+        ChoiceModeController controller = loader.getController();
+        controller.setStage(stage);
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.setTitle("Modalità");
         stage.show();
-        ChoiceModeController controller = loader.getController();
-        controller.setStage(stage);
     }
-
-    @FXML
-    public void HandleActionVisualizzaSpese() {
-        ManageOrdersController.showView(this.stage);
-    }
-
 
     public void setStage(Stage stage) {
         this.stage = stage;
     }
 
-    public void HandleActionManageProduct(ActionEvent actionEvent) {
-        ProductListController productlistcontroller = new ProductListController();
+    @FXML
+    public void handleActionVisualizzaSpese() {
+        ManageOrdersController.showView(this.stage);
+    }
+
+    @FXML
+    public void handleActionManageProduct() {
         ProductListController.showView(this.stage);
     }
 
     @FXML
-    public void handlerLogutAction(ActionEvent actionEvent) {
+    public void handlerLogoutAction() {
         Utils.logOut(this.stage);
     }
 
     @FXML
-    public void handlerAddManagerAction(ActionEvent actionEvent) {
+    public void handlerAddManagerAction() {
         RegistrationManagerController.showView(this.stage);
     }
 }

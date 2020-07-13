@@ -10,10 +10,9 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.example.client.components.QuantitySpinnerFactory;
-import org.example.client.models.Product;
 import org.example.client.models.ROProduct;
-import org.example.client.utils.Session;
 import org.example.client.tasks.TaskLoadImage;
+import org.example.client.utils.Session;
 
 import java.io.IOException;
 
@@ -36,7 +35,7 @@ public class CatalogItemController {
     private ROProduct product;
     private Stage stage;
 
-    public static VBox generateCard(Stage stage, ROProduct product) {
+    public static VBox createCard(Stage stage, ROProduct product) {
         FXMLLoader loader = new FXMLLoader(CatalogItemController.class.getResource("/views/catalog-item.fxml"));
         VBox card = null;
         try {

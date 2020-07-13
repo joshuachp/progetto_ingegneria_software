@@ -6,7 +6,6 @@ import javafx.scene.Node;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.example.client.models.OrderItem;
-import org.example.client.models.Product;
 import org.example.client.models.ROProduct;
 import org.example.client.tasks.TaskOrderProduct;
 import org.example.client.utils.Session;
@@ -60,7 +59,7 @@ public class OrderProductController {
             ProductController.showView(this.stage, this.product);
     }
 
-    public void setStage(Stage stage) {
+    private void setStage(Stage stage) {
         this.stage = stage;
     }
 }

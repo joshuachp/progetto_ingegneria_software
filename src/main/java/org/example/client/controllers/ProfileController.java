@@ -119,7 +119,7 @@ public class ProfileController {
         }
     }
 
-    protected void setStage(Stage stage) {
+    private void setStage(Stage stage) {
         this.stage = stage;
     }
 

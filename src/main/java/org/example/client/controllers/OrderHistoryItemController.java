@@ -83,7 +83,7 @@ public class OrderHistoryItemController {
         }
     }
 
-    public void setStage(Stage stage) {
+    private void setStage(Stage stage) {
         this.stage = stage;
     }
 }

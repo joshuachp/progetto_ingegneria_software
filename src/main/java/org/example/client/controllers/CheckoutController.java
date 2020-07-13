@@ -1,7 +1,6 @@
 package org.example.client.controllers;
 
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -26,8 +25,7 @@ import java.util.Date;
 import java.util.List;
 
 public class CheckoutController {
-    private static final ObservableList<String> hour =
-            FXCollections.observableArrayList(DeliveryHours.getLabels());
+
     @FXML
     public DatePicker datePicker;
     @FXML
@@ -81,7 +79,7 @@ public class CheckoutController {
                         date.compareTo(today) <= 0);
             }
         });
-        hourComboBox.setItems(hour);
+        hourComboBox.setItems(FXCollections.observableArrayList(DeliveryHours.getLabels()));
 
     }
 
