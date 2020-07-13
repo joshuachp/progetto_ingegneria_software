@@ -2,7 +2,6 @@ package org.example.client.controllers;
 
 import javafx.application.Platform;
 import javafx.collections.MapChangeListener;
-import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -11,8 +10,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import org.example.client.components.CartFactory;
 import org.example.client.models.Product;
+import org.example.client.tasks.TaskCart;
 import org.example.client.utils.Session;
 
 import java.io.IOException;
@@ -45,7 +44,7 @@ public class CartController {
 
     @FXML
     public void initialize() {
-        LoadTask loadTask = new LoadTask();
+        TaskCart loadTask = new TaskCart(this.stage);
         loadTask.setOnSucceeded((event) -> {
             if (nodes != null)
                 vBoxCart.getChildren().removeAll(nodes);
@@ -56,7 +55,7 @@ public class CartController {
         Session.getInstance().getMapProducts()
                 .addListener((MapChangeListener<? super Integer, ? super Product>) change ->
                         Platform.runLater(() -> {
-                            LoadTask task = new LoadTask();
+                            TaskCart task = new TaskCart(this.stage);
                             task.setOnSucceeded((event) -> {
                                 vBoxCart.getChildren().removeAll(nodes);
                                 this.nodes = task.getValue();
@@ -92,12 +91,5 @@ public class CartController {
         }
     }
 
-    private class LoadTask extends Task<List<Node>> {
-        @Override
-        protected List<Node> call() {
-            Session session = Session.getInstance();
-            return new CartFactory().getCartList(stage, session.getMapProducts().values());
-        }
 
-    }
 }

@@ -27,7 +27,7 @@ import java.util.List;
 
 public class CheckoutController {
     private static final ObservableList<String> hour =
-            FXCollections.observableArrayList(DeliveryHours.getDeliveryHours());
+            FXCollections.observableArrayList(DeliveryHours.getLabels());
     @FXML
     public DatePicker datePicker;
     @FXML

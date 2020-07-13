@@ -17,7 +17,7 @@ public enum DeliveryHours {
         this.endHour = endHour;
     }
 
-    public static List<String> getDeliveryHours() {
+    public static List<String> getLabels() {
         return Arrays.stream(DeliveryHours.values()).map(DeliveryHours::toString).collect(Collectors.toList());
     }
 
