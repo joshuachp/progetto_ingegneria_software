@@ -1,7 +1,10 @@
-package org.example.client.models;
+package org.example.client.components;
 
 
 import okhttp3.Response;
+import org.example.client.models.Client;
+import org.example.client.models.Manager;
+import org.example.client.models.User;
 import org.example.client.utils.Utils;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;

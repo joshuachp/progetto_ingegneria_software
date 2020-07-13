@@ -9,7 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
-import org.example.client.models.FactoryUser;
+import org.example.client.components.FactoryUser;
 import org.example.client.models.User;
 import org.example.client.models.enums.Payment;
 import org.example.client.utils.Session;

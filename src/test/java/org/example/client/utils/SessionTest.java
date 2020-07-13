@@ -3,7 +3,7 @@ package org.example.client.utils;
 import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
 import org.example.client.MockUtils;
-import org.example.client.models.FactoryUser;
+import org.example.client.components.FactoryUser;
 import org.example.client.models.Manager;
 import org.example.client.models.Product;
 import org.example.client.models.ROProduct;

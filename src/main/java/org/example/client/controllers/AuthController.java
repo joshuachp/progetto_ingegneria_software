@@ -10,7 +10,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import org.example.client.models.FactoryUser;
+import org.example.client.components.FactoryUser;
 import org.example.client.models.User;
 import org.example.client.utils.Session;
 

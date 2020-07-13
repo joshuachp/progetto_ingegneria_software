@@ -3,6 +3,7 @@ package org.example.client.utils;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableMap;
+import org.example.client.components.FactoryUser;
 import org.example.client.models.*;
 import org.jetbrains.annotations.NotNull;
 
