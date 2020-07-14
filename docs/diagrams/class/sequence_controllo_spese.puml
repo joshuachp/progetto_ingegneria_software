@@ -29,7 +29,12 @@ Responsabile_Reparto -> ManageOrderListController : Seleziona lo stato spesa
 Responsabile_Reparto -> ManageOrderListController : Click su save
 activate ManageOrderListController
 ManageOrderListController->Server : updateOrderState()
+activate Server
 Server->Database : updateOrderState()
+activate Database
+return
+return
+deactivate ManageOrderListController
 
 end opt
 

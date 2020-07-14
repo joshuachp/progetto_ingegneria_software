@@ -2,17 +2,28 @@
 actor Cliente
 skinparam Style strictuml
 participant CatalogController
-
-CatalogController -> CatalogController : showView()
-activate CatalogController
-Cliente -> CatalogController : Click su una Sezione
-CatalogController -> CatalogItemController **: showView()
-activate CatalogItemController
-' Manca l'aggiornamento dei prodotti in base alla sezione
-
-opt ordina
-' manca il sorting dei prodotti
+Cliente -> CatalogController : showView()
+opt Selezione sezione
+Cliente -> CatalogController : Selezione sezione
 end opt
+opt Selezione ordinamento
+Cliente -> CatalogController : Selezione ordinamento
+end opt
+activate CatalogController
+CatalogController->CatalogController : refresh()
+activate CatalogController
+CatalogController->FactoryCatalog : getCatalogList()
+activate FactoryCatalog
+loop Numero di prodotti
+FactoryCatalog -> CatalogItemController **: createCatalogItem()
+activate CatalogItemController
+return Node
+end loop
+return List<Node>
+deactivate CatalogController
+
+activate CatalogItemController
+
 opt Aggiungi al carrello da catalogo
 Cliente -> CatalogItemController : Selezione quantità
  

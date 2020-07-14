@@ -35,7 +35,7 @@ public class CatalogItemController {
     private ROProduct product;
     private Stage stage;
 
-    public static VBox createCard(Stage stage, ROProduct product) {
+    public static VBox createCatalogItem(Stage stage, ROProduct product) {
         FXMLLoader loader = new FXMLLoader(CatalogItemController.class.getResource("/views/catalog-item.fxml"));
         VBox card = null;
         try {
