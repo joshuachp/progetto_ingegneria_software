@@ -8,13 +8,13 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import org.example.client.components.OrderHistoryFactory;
 import org.example.client.models.Order;
 import org.example.client.utils.Session;
 import org.example.client.utils.Utils;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class OrderHistoryController {
 
@@ -46,8 +46,9 @@ public class OrderHistoryController {
             protected List<Node> call() throws Exception {
                 Session session = Session.getInstance();
                 List<Order> list = Utils.getUserOrders(session.getUser().getSession());
-                OrderHistoryFactory factory = new OrderHistoryFactory();
-                return factory.getOrderHistoryList(stage, list);
+                return list.stream()
+                        .map(order -> OrderHistoryItemController.createView(stage, order))
+                        .collect(Collectors.toList());
             }
         };
         loadOrders.setOnSucceeded(event -> {

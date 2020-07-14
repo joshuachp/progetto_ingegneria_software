@@ -1,7 +1,5 @@
 @startuml
 
-'== ENUMS ======================================================================
-
 enum DeliveryHours {
   MORNING
   AFTERNOON

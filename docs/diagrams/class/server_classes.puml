@@ -1,6 +1,5 @@
 @startuml
 
-'== Database ===================================================================
 
 class Database {
   - {static} DATABASE_URL : String
@@ -11,8 +10,6 @@ class Database {
   - getConnection() : Connection 
   # setConnection(Connection) : void
 }
-
-'== Models =====================================================================
 
 class Client {
   - id : Integer 
@@ -201,8 +198,6 @@ class User {
   + setManager(boolean) : void 
 }
 
-'== Routes =====================================================================
-
 class Router {
   - userSessions : Map<String, User>
   - storageService: StorageService 
@@ -228,8 +223,6 @@ class Router {
   + updateOrderState(Integer, String, Integer) : String 
   + productImageUpload(String, MultipartFile) : String 
 }
-
-'== Storage ====================================================================
 
 class FileSystemStorageService implements StorageService {
 }
@@ -259,8 +252,6 @@ interface StorageService {
   deleteAll() : void
 
 }
-
-'== Utils =====================================================================
 
 class Utils {
   + {static}  BCRYPT_ROUND : int 

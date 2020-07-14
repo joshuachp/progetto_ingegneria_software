@@ -1,0 +1,60 @@
+@startuml
+skinparam Style strictuml
+actor Client
+create ProfileController
+Client->ProfileController : showView()
+Client->ProfileController : handleViewShoppingHistoryAction()
+activate ProfileController
+create OrderHistoryController
+ProfileController->OrderHistoryController : showView()
+deactivate ProfileController
+create Task
+OrderHistoryController->Task : call()
+Task->Server : getUserOrders()
+activate Server
+activate Task
+Server->Database : getOrders()
+activate Database
+return orders
+return orders
+loop orders
+  create OrderHistoryItemController
+  Task->OrderHistoryItemController  : createView()
+  activate OrderHistoryItemController
+  return node
+  deactivate Task
+  create TaskOrderHistoryItem
+  OrderHistoryItemController->TaskOrderHistoryItem : call()
+  TaskOrderHistoryItem->Server : getOrderItems()
+  activate TaskOrderHistoryItem
+  Server->Database : getOrderItems
+  activate Database
+  return orderItems
+  return orderItems
+  loop orderItems
+    create OrderProductController
+    TaskOrderHistoryItem->OrderProductController : createView()
+    activate OrderProductController
+    return node
+    deactivate TaskOrderHistoryItem
+    OrderProductController->Server : getProduct()
+    activate OrderProductController
+    activate Server
+    Server->Database : getProduct
+    activate Database
+    return product
+    return product
+    deactivate OrderProductController
+  end loop
+  TaskOrderHistoryItem-->OrderHistoryItemController : onSucceeded()
+  destroy TaskOrderHistoryItem
+end loop
+Task->OrderHistoryController : onSucceeded()
+destroy Task
+
+
+box Server
+  participant Server
+  database Database
+end box
+@enduml
