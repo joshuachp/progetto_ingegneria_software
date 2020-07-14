@@ -1,0 +1,54 @@
+@startuml
+skinparam Style strictuml
+actor Cliente
+participant CartController
+participant CartItemController
+participant "session : Session"
+participant CheckOutController
+participant Server
+Database Database
+activate CartController
+CartController -> CartController : showView()
+CartController -> CartItemController **: showView()
+opt Modifica quantità
+Cliente -> CartItemController : Modifica quantità
+activate CartItemController
+CartItemController -> "session : Session" ** : getIstance()
+CartItemController -> "session : Session" : setProductQuantity()
+
+end opt
+opt Rimuovi prodotto
+Cliente -> CartItemController : Click su rimuovi
+CartItemController->CartItemController: deleteHandler()
+activate CartItemController
+CartItemController -> "session : Session" **: getIstance()
+CartItemController -> "session : Session" : removeProduct()
+
+end opt
+Cliente -> CartController : Click su conferma ordine
+CartController->CartController : handleConfirmationOrder()
+activate CartController
+alt lista prodotti piena
+    CartController->CheckOutController ** : showView()
+    activate CheckOutController
+    Cliente->CheckOutController : Inserisce informazioni
+    CheckOutController -> "session : Session" **: getIstance()
+    CheckOutController -> "session : Session" : getMapProducts()
+    activate "session : Session"
+    return ObservableMap <Integer,Product>
+    CheckOutController -> Server : createOrder()
+    activate Server
+    Server -> Database : createOrder()
+    activate Database
+    return
+    return
+
+
+else lista prodotti vuota
+    CartController -> CartController: Warning Alert
+    activate CartController
+    deactivate CartController
+end alt
+
+
+@enduml
