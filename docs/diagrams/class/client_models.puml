@@ -1,6 +1,6 @@
 @startuml Class Client
 
-class Client{
+class Client extends User{
     - name : String
     - surname : String
     - address : String
