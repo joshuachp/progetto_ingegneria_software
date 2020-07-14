@@ -4,12 +4,14 @@ import javafx.stage.Stage;
 import okhttp3.*;
 import org.example.client.controllers.AuthController;
 import org.example.client.models.*;
+import org.example.client.models.enums.OrderSate;
 import org.intellij.lang.annotations.RegExp;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -21,13 +23,21 @@ public class Utils {
     public static final String SERVER_URL_SESSION = "/api/user/session";
     public static final String SERVER_URL_LOGOUT = "/api/user/logout";
     public static final String SERVER_URL_REGISTRATION = "/api/client/register";
+    public static final String SERVER_URL_REGISTRATION_MANAGER = "/api/manager/register";
     public static final String SERVER_URL_MANAGER_UPDATE = "/api/manager/update";
     public static final String SERVER_URL_CLIENT_UPDATE = "/api/client/update";
     // Format for URL `/api/product/{productId}`
     public static final String SERVER_URL_GET_PRODUCT = "/api/product/%d";
+    public static final String SERVER_URL_CREATE_PRODUCT = "/api/product/create";
+    public static final String SERVER_URL_DELETE_PRODUCT = "/api/product/%d/delete";
+    public static final String SERVER_URL_UPLOAD_IMAGE_PRODUCT = "/api/product/image/upload";
+    public static final String SERVER_URL_UPDATE_PRODUCT = "/api/product/%d/update";
     public static final String SERVER_URL_GET_ALL_PRODUCT = "/api/product/all";
     public static final String SERVER_URL_CREATE_ORDER = "/api/order/create";
+    public static final String SERVER_URL_GET_USER_ORDERS = "/api/order/user";
     public static final String SERVER_URL_GET_ALL_ORDERS = "/api/order/all";
+    // Format for URL `/api/order/{orderId}/update`
+    public static final String SERVER_URL_ORDER_STATE_UPDATE = "/api/order/%d/update";
     // Format for URL `/api/card/{cardNumber}`
     public static final String SERVER_URL_GET_LOYALTY_CARD = "/api/card/%d";
     // Format for URL `/api/order-item/all/{orderId}`
@@ -37,17 +47,18 @@ public class Utils {
     @RegExp
     public static final String REGEX_CAP = "^\\d{5}$";
     @RegExp
-    public static final String REGEX_MAIL = "^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,}$";
+    public static final String REGEX_MAIL = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0," +
+            "61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$";
     @RegExp
     public static final String REGEX_PASSWORD = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[\\W_]).{8,}$";
     @RegExp
-    public static final String REGEX_TELEPHONE = "^(\\((00|\\+)39\\)|(00|\\+)39)?" +
-            "(38[890]|" +
-            "34[6-90]|" +
-            "36[680]|" +
-            "33[3-90]|" +
-            "32[89])" +
+    public static final String REGEX_TELEPHONE = "^(\\((00|\\+)39\\)|(00|\\+)39)?" + 
+            "(\\ )?" +
+            "(38[890]|34[6-90]|36[680]|33[3-90]|32[89]|0[0-9]{2,3})"+
+            "(\\ )?"+
             "\\d{7}$";
+    @RegExp
+    public static final String REGEX_BADGE = "^[A-Z0-9]+$";
 
     /**
      * Authenticate with the server authentication with username and password
@@ -126,10 +137,39 @@ public class Utils {
                 .add("city", city)
                 .add("telephone", telephone)
                 .add("payment", String.valueOf(payment))
-                .add("loyalty_card_number", cardNumber.toString())
+                .add("loyalty_card_number", String.valueOf(cardNumber))
                 .build();
         Request request = new Request.Builder()
                 .url(SERVER_URL + SERVER_URL_REGISTRATION)
+                .post(body)
+                .build();
+        try {
+            Response response = client.newCall(request).execute();
+            return response.code();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return -1;
+    }
+
+    public static int registerManager(String username, String password, String badge, String name, String surname,
+                                     String address, Integer cap, String city,
+                                     String telephone, String role) {
+        OkHttpClient client = new OkHttpClient();
+        RequestBody body = new FormBody.Builder()
+                .add("username", username)
+                .add("password", password)
+                .add("name", name)
+                .add("surname", surname)
+                .add("address", address)
+                .add("cap", String.valueOf(cap))
+                .add("city", city)
+                .add("telephone", telephone)
+                .add("badge", badge)
+                .add("role", role)
+                .build();
+        Request request = new Request.Builder()
+                .url(SERVER_URL + SERVER_URL_REGISTRATION_MANAGER)
                 .post(body)
                 .build();
         try {
@@ -176,7 +216,7 @@ public class Utils {
             body.add("cap", client.getCap().toString());
             body.add("city", client.getCity());
             body.add("telephone", client.getTelephone());
-            body.add("payment", client.getPaymentInteger().toString());
+            body.add("payment", String.valueOf(client.getPayment().ordinal()));
             body.add("card_number", client.getCardNumber().toString());
         }
         // Send request
@@ -194,7 +234,7 @@ public class Utils {
      * @param session User session
      * @return Server response null on error
      */
-    public static @Nullable Response getAllProducts(String session) {
+    public static JSONObject getAllProducts(String session) throws Exception {
         OkHttpClient client = new OkHttpClient();
         RequestBody body = new FormBody.Builder()
                 .add("session", session)
@@ -203,12 +243,21 @@ public class Utils {
                 .url(SERVER_URL + SERVER_URL_GET_ALL_PRODUCT)
                 .post(body)
                 .build();
-        try {
-            return client.newCall(request).execute();
-        } catch (Exception e) {
-            e.printStackTrace();
+
+        Response response = client.newCall(request).execute();
+
+        if (response.code() != 200) {
+            String error = Objects.requireNonNull(response.body()).string();
+            Objects.requireNonNull(response.body()).close();
+            throw new Exception(error);
         }
-        return null;
+
+        JSONObject json = new JSONObject(Objects.requireNonNull(response.body()).string());
+
+        Objects.requireNonNull(response.body()).close();
+
+        return json;
+
     }
 
 
@@ -243,10 +292,10 @@ public class Utils {
      * @param products      Product
      * @param deliveryStart delivery start
      * @param deliveryEnd   Delivery end
-     * @throws Exception
+     * @throws Exception Exception
      */
-    public static void createOrder(String session, List<Product> products, Date deliveryStart, Date deliveryEnd) throws Exception {
-
+    public static void createOrder(String session, List<Product> products, Date deliveryStart,
+                                   Date deliveryEnd) throws Exception {
         Map<Integer, Integer> productMap = products.stream().collect(Collectors.toMap(Product::getId,
                 Product::getQuantity));
 
@@ -255,10 +304,8 @@ public class Utils {
                 .put("products", productMap)
                 .put("deliveryStart", deliveryStart.getTime())
                 .put("deliveryEnd", deliveryEnd.getTime());
-
         OkHttpClient client = new OkHttpClient();
         RequestBody body = RequestBody.create(json.toString(), MediaType.get("application/json; charset=utf-8"));
-
         Request request = new Request.Builder()
                 .url(SERVER_URL + SERVER_URL_CREATE_ORDER)
                 .post(body)
@@ -299,6 +346,39 @@ public class Utils {
 
     /**
      * Request all the orders of a user to the server.
+     *
+     * @param session User session
+     * @return List of the user orders
+     * @throws Exception {@link IOException} if request fails and {@link Exception} if the requests returns
+     *                   error code. Sets the request body as the exception message.
+     */
+    public static @NotNull ArrayList<Order> getUserOrders(String session) throws Exception {
+        OkHttpClient client = new OkHttpClient();
+        RequestBody body = new FormBody.Builder()
+                .add("session", session)
+                .build();
+        Request request = new Request.Builder()
+                .url(SERVER_URL + SERVER_URL_GET_USER_ORDERS)
+                .post(body)
+                .build();
+        Response response = client.newCall(request).execute();
+        if (response.code() != 200) {
+            String error = Objects.requireNonNull(response.body()).string();
+            Objects.requireNonNull(response.body()).close();
+            throw new Exception(error);
+        }
+        JSONObject json = new JSONObject(Objects.requireNonNull(response.body()).string());
+        Objects.requireNonNull(response.body()).close();
+        JSONArray array = json.getJSONArray("orders");
+        ArrayList<Order> list = new ArrayList<>(array.length());
+        for (int i = 0; i < array.length(); i++) {
+            list.add(new Order(array.getJSONObject(i)));
+        }
+        return list;
+    }
+
+    /**
+     * Request all the orders to the server
      *
      * @param session User session
      * @return List of the user orders
@@ -371,7 +451,7 @@ public class Utils {
      * @throws Exception {@link IOException} if request fails and {@link Exception} if the requests returns error
      *                   code. Sets the request body as the exception message
      */
-    public static Product getProduct(String session, Integer productId) throws Exception {
+    public static @NotNull Product getProduct(String session, Integer productId) throws Exception {
         OkHttpClient client = new OkHttpClient();
         RequestBody body = new FormBody.Builder()
                 .add("session", session)
@@ -389,5 +469,146 @@ public class Utils {
         Product product = new Product(new JSONObject(Objects.requireNonNull(response.body()).string()));
         response.close();
         return product;
+    }
+
+    public static void createProduct(String session, List<Product> products) throws Exception {
+
+        JSONArray jsonProducts = new JSONArray();
+        for (Product x : products) {
+            jsonProducts.put(x.toJSON());
+        }
+
+        JSONObject json = new JSONObject()
+                .put("session", session)
+                .put("products", jsonProducts);
+
+        OkHttpClient client = new OkHttpClient();
+        RequestBody body = RequestBody.create(json.toString(), MediaType.get("application/json; charset=utf-8"));
+
+        Request request = new Request.Builder()
+                .url(SERVER_URL + SERVER_URL_CREATE_PRODUCT)
+                .post(body)
+                .build();
+        Response response = client.newCall(request).execute();
+        if (response.code() != 200) {
+            String error = Objects.requireNonNull(response.body()).string();
+            Objects.requireNonNull(response.body()).close();
+            throw new Exception(error);
+        }
+    }
+
+    public static void updateProduct(String session, Integer productId, Product product) throws Exception {
+
+        JSONObject json = new JSONObject()
+                .put("session", session)
+                .put("name", product.getName())
+                .put("brand", product.getBrand())
+                .put("package_size", product.getPackageSize())
+                .put("price", product.getPrice())
+                .put("image", product.getImage())
+                .put("availability", product.getAvailability())
+                .put("characteristics", product.getCharacteristics())
+                .put("section", product.getSection());
+
+        OkHttpClient client = new OkHttpClient();
+        RequestBody body = RequestBody.create(json.toString(), MediaType.get("application/json; charset=utf-8"));
+
+        Request request = new Request.Builder()
+                .url(SERVER_URL + String.format(SERVER_URL_UPDATE_PRODUCT, productId))
+                .post(body)
+                .build();
+        Response response = client.newCall(request).execute();
+        if (response.code() != 200) {
+            String error = Objects.requireNonNull(response.body()).string();
+            Objects.requireNonNull(response.body()).close();
+            throw new Exception(error);
+        }
+        response.close();
+    }
+
+    /**
+     * Request the server to delete a product
+     *
+     * @param session   User session
+     * @param productId Product id
+     * @throws Exception {@link IOException} if request fails and {@link Exception} if the requests returns error
+     *                   code. Sets the request body as the exception message
+     */
+    public static void deleteProduct(String session, Integer productId) throws Exception {
+        OkHttpClient client = new OkHttpClient();
+        RequestBody body = new FormBody.Builder()
+                .add("session", session)
+                .build();
+        Request request = new Request.Builder()
+                .url(SERVER_URL + String.format(SERVER_URL_DELETE_PRODUCT, productId))
+                .post(body)
+                .build();
+        Response response = client.newCall(request).execute();
+        if (response.code() != 200) {
+            String error = Objects.requireNonNull(response.body()).string();
+            Objects.requireNonNull(response.body()).close();
+            throw new Exception(error);
+        }
+
+
+    }
+
+
+    /**
+     * Request the server to update a order state, throw the order id
+     *
+     * @param session  User session
+     * @param orderId  Order id
+     * @param newState New order state
+     * @throws Exception {@link IOException} if request fails and {@link Exception} if the requests returns error
+     *                   code. Sets the request body as the exception message
+     */
+    public static void updateOrderState(String session, Integer orderId, @NotNull OrderSate newState) throws Exception {
+        OkHttpClient client = new OkHttpClient();
+        RequestBody body = new FormBody.Builder()
+                .add("session", session)
+                .add("newState", String.valueOf(newState.ordinal()))
+                .build();
+        Request request = new Request.Builder()
+                .url(SERVER_URL + String.format(SERVER_URL_ORDER_STATE_UPDATE, orderId))
+                .post(body)
+                .build();
+        Response response = client.newCall(request).execute();
+        if (response.code() != 200) {
+            String error = Objects.requireNonNull(response.body()).string();
+            Objects.requireNonNull(response.body()).close();
+            throw new Exception(error);
+        }
+    }
+
+
+    /**
+     * Upload an image to the server, it will return the link to the image
+     *
+     * @param session User session
+     * @param file    Image file
+     * @return The image link
+     * @throws Exception {@link IOException} if request fails and {@link Exception} if the requests returns error
+     *                   code. Sets the request body as the exception message
+     */
+    public static String uploadProductImage(String session, @NotNull File file) throws Exception {
+        OkHttpClient client = new OkHttpClient();
+        MultipartBody body = new MultipartBody.Builder()
+                .addFormDataPart("session", session)
+                .addFormDataPart("image", file.getName(), RequestBody.create(file, MediaType.get("image/jpg")))
+                .build();
+        Request request = new Request.Builder()
+                .url(SERVER_URL + SERVER_URL_UPLOAD_IMAGE_PRODUCT)
+                .post(body)
+                .build();
+        Response response = client.newCall(request).execute();
+        if (response.code() != 200) {
+            String error = Objects.requireNonNull(response.body()).string();
+            Objects.requireNonNull(response.body()).close();
+            throw new Exception(error);
+        }
+        String name = Objects.requireNonNull(response.body()).string();
+        Objects.requireNonNull(response.body()).close();
+        return String.format("%s/images/%s", SERVER_URL, name);
     }
 }

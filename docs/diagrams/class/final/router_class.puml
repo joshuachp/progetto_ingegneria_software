@@ -1,0 +1,86 @@
+@startuml
+
+class Router {
+  - userSessions : Map<String, User>
+  - storageService: StorageService 
+  + Router(StorageService storageService) {
+  + authUser(String,  String) : String 
+  + autenticateUser(String) : String 
+  + logoutUser(String) : String 
+  + updateClient(...): String 
+  + registerClient(...): String 
+  + registerManager(...): String 
+  + updateManager(...)
+  + createProducts(String body) : String 
+  + removeProduct(Integer, String) : String 
+  + updateProduct(Integer, String) : String 
+  + getAllProducts(String) : String 
+  + getProduct(Integer, String) : String 
+  + getAllSections(String) : String 
+  + getLoyaltyCard(Integer, String) : String 
+  + createOrder(String) : String 
+  + getUserOrders(String) : String 
+  + getAllOrders(String) : String 
+  + getOrderItems(Integer, String) : String 
+  + updateOrderState(Integer, String, Integer) : String 
+  + productImageUpload(String, MultipartFile) : String 
+}
+
+class FileSystemStorageService {
+}
+
+class FileNotFoundException {
+  + FileNotFoundException(String)
+  + FileNotFoundException(String, Throwable)
+}
+
+class StorageProperties {
+  - location: String 
+  + getLocation() : String 
+  + setLocation(String) : void 
+}
+
+class StorageException {
+  + StorageException(String)
+  + StorageException(String, Throwable)
+}
+
+interface StorageService {
+  void init()
+  store(MultipartFile) : String
+  loadAll() : Stream<Path>
+  load(String) : Path
+  loadAsResource(String) : Resource
+  deleteAll() : void
+
+}
+
+class Utils {
+  + {static}  BCRYPT_ROUND : int 
+  + {static} checkPassword(String, String) : boolean 
+  + {static} hashPassword(String) : String 
+  + {static} createSession() : String 
+  + {static} convertToIntegerMap(Map<String, Object>) : Map<Integer, Integer>
+}
+
+class Database {
+  - {static} DATABASE_URL : String
+  - {static} database : Database
+  - connection : Connection 
+  - Database()
+  - {static} getInstance() : Database
+  - getConnection() : Connection 
+  # setConnection(Connection) : void
+}
+
+left to right direction
+Router -> Utils : uses
+Router --> Database : uses
+Router -- StorageProperties : config
+Router --> FileSystemStorageService : uses
+FileSystemStorageService ..|> StorageService
+StorageService --> StorageException : throws
+StorageService --> FileNotFoundException : throws
+FileNotFoundException -|> StorageException
+StorageException -|> RuntimeException 
+@enduml

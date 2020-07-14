@@ -11,7 +11,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.example.client.components.QuantitySpinnerFactory;
-import org.example.client.models.Product;
+import org.example.client.models.ROProduct;
 import org.example.client.tasks.TaskLoadImage;
 import org.example.client.utils.Session;
 import org.jetbrains.annotations.NotNull;
@@ -32,9 +32,9 @@ public class CartItemController {
     public Spinner<Integer> spinnerQuantity;
 
     private Stage stage;
-    private Product product;
+    private ROProduct product;
 
-    public static Node createView(Stage stage, Product product) {
+    public static Node createView(Stage stage, ROProduct product) {
         FXMLLoader loader = new FXMLLoader(CartItemController.class.getResource("/views/cart-item.fxml"));
         Node node = null;
         try {
@@ -51,7 +51,7 @@ public class CartItemController {
         return node;
     }
 
-    protected void setProduct(@NotNull Product product) {
+    private void setProduct(@NotNull ROProduct product) {
         this.product = product;
         if (product.getImage() != null)
             setImage(product.getImage());
@@ -81,7 +81,7 @@ public class CartItemController {
         ProductController.showView(this.stage, this.product);
     }
 
-    public void setStage(Stage stage) {
+    private void setStage(Stage stage) {
         this.stage = stage;
     }
 

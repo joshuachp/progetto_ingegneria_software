@@ -2,8 +2,8 @@ package org.example.client.components;
 
 import javafx.scene.Node;
 import javafx.stage.Stage;
-import org.example.client.controllers.CardController;
-import org.example.client.models.Product;
+import org.example.client.controllers.CatalogItemController;
+import org.example.client.models.ROProduct;
 import org.example.client.models.enums.SortOrder;
 import org.jetbrains.annotations.NotNull;
 
@@ -22,30 +22,30 @@ public class CatalogFactory {
      * @param search     Search
      * @return List of nodes
      */
-    public List<Node> getCatalogList(Stage stage, @NotNull Map<String, ArrayList<Product>> productMap,
+    public List<Node> getCatalogList(Stage stage, @NotNull Map<String, ArrayList<ROProduct>> productMap,
                                      @NotNull String section, @NotNull String search, SortOrder sort) {
         // Format the search string
         String newSearch = search.trim().toLowerCase();
 
         // Generate an array list with a size for performances if there is no section
-        ArrayList<Product> products = productMap.getOrDefault(section, new ArrayList<>());
+        ArrayList<ROProduct> products = productMap.getOrDefault(section, new ArrayList<>());
         switch (sort) {
             case ASCENDING:
-                products.sort(Comparator.comparing(Product::getPrice));
+                products.sort(Comparator.comparing(ROProduct::getPrice));
                 break;
             case DESCENDING:
-                products.sort(Comparator.comparing(Product::getPrice).reversed());
+                products.sort(Comparator.comparing(ROProduct::getPrice).reversed());
                 break;
             default:
-                products.sort(Comparator.comparing(Product::getBrand));
+                products.sort(Comparator.comparing(ROProduct::getBrand));
         }
         List<Node> nodes = new ArrayList<>(products.size());
         // Check each product
-        for (Product product : products) {
+        for (ROProduct product : products) {
             if (newSearch.isEmpty() ||
                     product.getName().toLowerCase().contains(newSearch) ||
                     product.getCharacteristics().toLowerCase().contains(newSearch)) {
-                nodes.add(CardController.generateCard(stage, product));
+                nodes.add(CatalogItemController.createCatalogItem(stage, product));
             }
         }
         return nodes;

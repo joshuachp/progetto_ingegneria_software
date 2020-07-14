@@ -1,0 +1,132 @@
+@startuml
+skinparam Style strictuml
+actor Responsabile_Reparto
+participant ProductListController
+participant ManageProductController
+participant "product : Product"
+participant Server
+database Database
+
+Responsabile_Reparto -> ProductListController: Click su aggiungi prodotto
+activate ProductListController
+ProductListController -> ManageProductController **: handleAddProduct()
+activate ManageProductController
+ManageProductController -> ManageProductController: showView()
+note left
+Over del frame nuovo prodotto
+endnote
+Responsabile_Reparto -> ManageProductController: Inserimento informazioni
+ManageProductController -> ManageProductController: handleConfirmAction()
+note left
+check dei dati inseriti
+endnote
+activate ManageProductController
+ManageProductController-> "product : Product" ** : Product()
+ManageProductController -> Server: createProduct()
+activate Server
+Server -> Database : createProduct()
+activate Database
+return
+return
+deactivate ManageProductController
+destroy "product : Product"
+return continue
+destroy ManageProductController
+ProductListController -> ProductListController : refresh()
+activate ProductListController
+note left
+ricarica i prodotto della lista
+prendendoli dal server
+endnote
+ProductListController -> Server: getAllProducts()
+activate Server
+Server->Database: getAll()
+activate Database
+return ArrayList <Product>
+return JsonObject
+return ObservableList <Product>
+note left
+Lista di prodotti aggiornata
+end note
+
+alt rimuovi
+    Responsabile_Reparto -> ProductListController : Seleziona Prodotto
+    Responsabile_Reparto -> ProductListController : Click su rimuovi prodotto
+    ProductListController -> ProductListController : handleRemoveProduct()
+    activate ProductListController
+    alt Prodotto selezionato
+        ProductListController -> Server : deleteProduct(ProductID)
+        activate Server
+        note left
+        productID = id prodotto selezionato in tabella
+        endnote
+        Server -> Database : removeProduct(ProductID)
+        activate Database
+        return
+        return
+        ProductListController -> ProductListController : refresh()
+        activate ProductListController
+        note left
+        ricarica i prodotto della lista
+        prendendoli dal server
+        endnote
+        ProductListController -> Server: getAllProducts()
+        activate Server
+        Server->Database: getAll()
+        activate Database
+        return ArrayList <Product>
+        return JsonObject
+        return ObservableList <Product>
+        note left
+        Lista di prodotti aggiornata
+        end note
+
+    else Nessun prodotto selezionato 
+        return Error Alert
+    end
+else modifica
+    Responsabile_Reparto -> ProductListController : Click su id del prodotto
+    ProductListController -> ManageProductController **: handleModifyProduct()
+    activate ManageProductController
+    ManageProductController -> ManageProductController: showView()
+    note left
+    Over del frame del prodotto da modificare
+    con campi presettati con i valori attuali
+    endnote
+    Responsabile_Reparto -> ManageProductController: Inserimento modifiche
+    ManageProductController -> ManageProductController: handleConfirmAction()
+    note left
+    check dei dati inseriti
+    endnote
+    activate ManageProductController
+    ManageProductController-> "product : Product" ** : Product()
+    ManageProductController -> Server: updateProduct()
+    activate Server
+    Server -> Database : updateProduct()
+    activate Database
+    return
+    return
+    return chiudi finestra
+    destroy "product : Product"
+    return continue
+    destroy ManageProductController
+    ProductListController -> ProductListController : refresh()
+    activate ProductListController
+    note left
+    ricarica i prodotto della lista
+    prendendoli dal server
+    endnote
+    ProductListController -> Server: getAllProducts()
+    activate Server
+    Server->Database: getAll()
+    activate Database
+    return ArrayList <Product>
+    return JsonObject
+    return ObservableList <Product>
+    note left
+    Lista di prodotti aggiornata
+    end note
+
+end
+
+@enduml

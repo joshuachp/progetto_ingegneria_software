@@ -3,9 +3,8 @@ package org.example.client.utils;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableMap;
-import org.example.client.models.FactoryUser;
-import org.example.client.models.Product;
-import org.example.client.models.User;
+import org.example.client.components.FactoryUser;
+import org.example.client.models.*;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
@@ -74,8 +73,8 @@ public class Session {
      * @param product The product to add.
      * @return The current product quantity
      */
-    public Integer addProduct(Product product, Integer quantity) {
-        mapProducts.putIfAbsent(product.getId(), product);
+    public Integer addProduct(AbstractProduct product, Integer quantity) {
+        mapProducts.putIfAbsent(product.getId(), (Product) product);
         Product prod = mapProducts.get(product.getId());
         prod.setQuantity(prod.getQuantity() + quantity);
 
@@ -177,22 +176,27 @@ public class Session {
 
     /**
      * Check if the json product is of a product that is already contained in the map, if its already contained it
-     * returns it else it returns the given product.
+     * returns it else it returns the given product reference. It return's the read only product since the session
+     * should the only one to change the product data.
      *
      * @param product Product instance
      * @return Reference to a product in the session or the product instance
      */
-    public Product checkProduct(@NotNull Product product) {
+    public ROProduct getProductReference(@NotNull Product product) {
         if (session.getMapProducts().containsKey(product.getId())) {
             return session.getMapProducts().get(product.getId());
         }
         return product;
     }
 
-    public void removeAllProduct() {
+    /**
+     * Remove all products from the cart
+     */
+    public void removeAllProducts() {
         if (!this.mapProducts.isEmpty()) {
             this.mapProducts.clear();
         }
+        this.cartQuantity.set(0);
     }
 
 }

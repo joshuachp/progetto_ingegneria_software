@@ -1,0 +1,41 @@
+@startuml
+
+skinparam Style strictuml
+actor Responsabile_Reparto
+participant ManageOrderController
+participant ManageOrderListController
+participant Server
+Database Database
+
+ManageOrderController->ManageOrderController : showView()
+activate ManageOrderController
+ManageOrderController -> Server : getAllOrders()
+activate Server
+Server -> Database : getAllOrders()
+activate Database
+return List<Order>
+return String
+
+Responsabile_Reparto -> ManageOrderController : Click sull'ordine
+
+ManageOrderController -> ManageOrderListController : showView()
+note left
+Visualizzza la lista di prodotti
+end note
+destroy ManageOrderController
+activate ManageOrderListController
+opt Cambio-stato-ordine
+Responsabile_Reparto -> ManageOrderListController : Seleziona lo stato spesa
+Responsabile_Reparto -> ManageOrderListController : Click su save
+activate ManageOrderListController
+ManageOrderListController->Server : updateOrderState()
+activate Server
+Server->Database : updateOrderState()
+activate Database
+return
+return
+deactivate ManageOrderListController
+
+end opt
+
+@enduml

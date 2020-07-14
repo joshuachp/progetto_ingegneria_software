@@ -1,0 +1,71 @@
+@startuml
+skinparam Style strictuml
+' Utente
+actor Utente
+'   Autenticazione
+Utente -> AuthenticationController : login
+activate AuthenticationController
+AuthenticationController -> FactoryUser : getUser()
+activate FactoryUser
+
+box Session
+  participant User
+end box
+
+FactoryUser -> Server : authUser()
+activate Server
+
+box Server
+  participant Server
+  database Database
+end box
+
+Server -> Database : getUser()
+activate Database
+return password
+
+  Server -> Server : checkPassword()
+  activate Server
+
+alt success
+  Server --> Server : true
+
+  Server --> FactoryUser : userSession
+  create User
+  FactoryUser -> User : User()
+  activate User
+  FactoryUser --> AuthenticationController : user
+
+  AuthenticationController --> Utente : redirect()
+
+  Utente -> User : getUser()
+  activate User
+  return user
+
+  Utente --> User : logOut()
+  User -> AuthenticationController : showView()
+  destroy User
+
+else unauthorized
+
+  Server --> Server : false
+  deactivate Server
+
+  Server --> FactoryUser : unauthorized
+  deactivate Server
+  FactoryUser --> AuthenticationController : null
+  deactivate FactoryUser
+  AuthenticationController --> Utente : showError()
+  deactivate AuthenticationController
+end
+' Responsabile Reparto
+'   Gestione Prodotti
+'   Controllo Spese
+' Cliente
+'   Registrazione
+'   Effettua spesa
+'     Seleziona prodotti
+'     Conferma spesa
+'   Gestione profilo
+'     Storico spese
+@enduml

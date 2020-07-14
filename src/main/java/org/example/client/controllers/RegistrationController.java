@@ -9,7 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
-import org.example.client.models.FactoryUser;
+import org.example.client.components.FactoryUser;
 import org.example.client.models.User;
 import org.example.client.models.enums.Payment;
 import org.example.client.utils.Session;
@@ -50,7 +50,7 @@ public class RegistrationController {
     private Integer paymentMethod = 0;
 
     public static void showView(Stage stage) {
-        FXMLLoader loader = new FXMLLoader(SceltaModalitaController.class.getResource("/views/registration.fxml"));
+        FXMLLoader loader = new FXMLLoader(ChoiceModeController.class.getResource("/views/registration.fxml"));
         Parent root = null;
         try {
             root = loader.load();
@@ -71,7 +71,7 @@ public class RegistrationController {
     @FXML
     public void initialize() {
         // Initialize ComboBox with all payments
-        ObservableList<String> payments = FXCollections.observableArrayList(Payment.getPayments());
+        ObservableList<String> payments = FXCollections.observableArrayList(Payment.getLabels());
         this.cbxPagamento.setItems(payments);
         this.cbxPagamento.getSelectionModel().selectFirst();
     }
@@ -114,19 +114,19 @@ public class RegistrationController {
         resultLabel.setText(message);
         resultLabel.setTextFill(Paint.valueOf("red"));
         if (field != null)
-            field.setStyle("-fx-border-color: red");
+            field.getStyleClass().add("error");
         return true;
     }
 
     private void resetErrorMessage() {
-        name.setStyle(null);
-        surname.setStyle(null);
-        telephone.setStyle(null);
-        password.setStyle(null);
-        passwordRepeat.setStyle(null);
-        cap.setStyle(null);
-        city.setStyle(null);
-        address.setStyle(null);
+        name.getStyleClass().remove("error");
+        surname.getStyleClass().remove("error");
+        telephone.getStyleClass().remove("error");
+        password.getStyleClass().remove("error");
+        passwordRepeat.getStyleClass().remove("error");
+        cap.getStyleClass().remove("error");
+        city.getStyleClass().remove("error");
+        address.getStyleClass().remove("error");
     }
 
     @FXML
@@ -134,47 +134,50 @@ public class RegistrationController {
         boolean error = false;
         resetErrorMessage();
 
-        if (name.getText().equals(""))
+        if (name.getText().isEmpty())
             error = errorMessage("Il campo Nome è vuoto.", name);
 
-        if (surname.getText().equals(""))
+        if (surname.getText().isEmpty())
             error = errorMessage("Il campo Cognome è vuoto.", surname);
 
-        if (address.getText().equals(""))
+        if (address.getText().isEmpty())
             error = errorMessage("Il campo Indirizzo è vuoto.", address);
 
         // Verifica CAP
-        if (!cap.getText().equals("")) {
+        if (!cap.getText().isEmpty()) {
             if (!capVerify(cap.getText()))
                 error = errorMessage("Il CAP deve essere di 5 cifre.", cap);
         } else
             error = errorMessage("Il campo CAP è vuoto.", cap);
 
-        if (city.getText().equals(""))
+        if (city.getText().isEmpty())
             error = errorMessage("Il campo Città è vuoto.", city);
 
-        if (!telephone.getText().equals("")) {
+        if (!telephone.getText().isEmpty()) {
             if (!phoneVerify(telephone.getText()))
                 error = errorMessage("Il numero di telefono dato non è valido.", telephone);
-        } else
+        } else {
             error = errorMessage("Il campo Telefono è vuoto.", telephone);
+        }
 
         // verifica email
-        if (!email.getText().equals(""))
+        if (!email.getText().isEmpty()) {
             if (!mailVerify(email.getText()))
                 error = errorMessage("La mail non è coretta.", email);
-            else
-                error = errorMessage("Il campo email è vuoto.", email);
+        } else {
+            error = errorMessage("Il campo email è vuoto.", email);
+        }
 
         // Verifica lunghezza password
-        if (!password.getText().equals("")) {
+        if (!password.getText().isEmpty()) {
             if (!passwordVerify(password.getText()))
-                error = errorMessage("La lunghezza della password deve essere di almeno 8 caratteri.", password);
+                error = errorMessage("La lunghezza della password deve essere di almeno 8 caratteri, una lettera " +
+                        "maiuscola e una minuscola.", password);
         } else
             error = errorMessage("Il campo password è vuoto.", password);
 
         // Verifica uguaglianza password
-        if (!passwordRepeat.getText().equals("")) {
+        if (!passwordRepeat.getText().isEmpty()) {
             if (!passwordVerifyEquals(password.getText(), passwordRepeat.getText()))
                 error = errorMessage("Le password devono coincidere.", passwordRepeat);
         } else

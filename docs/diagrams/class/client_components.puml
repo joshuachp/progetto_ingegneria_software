@@ -1,0 +1,34 @@
+@startuml
+
+class CartFactory{
+    + getCartList(stage : Stage , products : Collection<Product>) : List<Node> 
+}
+
+class CatalogFactory{
+    + getCatalogList(...) : List<Node>
+}
+
+class FactoryUses{
+    + getUser(username : String, password : String) : User
+    + getUser(session : String) : User
+    - createUtente(@json : JSONObject ) : User
+}
+
+class OrderHistoryFactory{
+    + getOrderHistoryList(stage : Stage, orders : List<Order>) : List<Node>
+}
+
+class OrdersProductFactory{
+    + getOrderProductList(stage : Stage, list : List<OrderItem>) :  List<Node> 
+    + getManageOrdersItemList(stage : Stage, list : List<OrderItem> ) : List<Node>
+}
+
+class QuantitySpinnerFactory{
+    + getSpinner(product : ROProduct, quantity : Spinner<Integer> ) :  Spinner<Integer>
+    + getCartSpinner(product : ROProduct) : SpinnerValueFactory<Integer>
+}
+
+class TableCellOrdereId{
+    # updateItem(item : Integer, empty : boolean) : void
+}
+@enduml

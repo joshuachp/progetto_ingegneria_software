@@ -1,45 +1,47 @@
 package org.example.client.controllers;
 
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
+import javafx.concurrent.Task;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Cursor;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import javafx.util.Callback;
-import jdk.jshell.execution.Util;
-import okhttp3.Response;
+import javafx.util.converter.IntegerStringConverter;
 import org.example.client.models.Product;
 import org.example.client.utils.Session;
 import org.example.client.utils.Utils;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.util.Objects;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 public class ProductListController {
 
-    public ChoiceBox<String> CbxColumn;
-    public TextField Search;
-    public TableView<Product> tableview;
-    public TableColumn<Product, Integer> IDCol;
-    public TableColumn<Product, String> NameCol;
-    public TableColumn<Product, String> QuantityCol;
-    public TableColumn<Product, Float> PriceCol;
-    public TableColumn<Product, String> BrandCol;
-    public Button buttonimportproductlist;
-    public Button buttonaddproduct;
-
+    private final ObservableList<Product> products = FXCollections.observableArrayList();
+    public TextField searchField;
+    public TableView<Product> tableView;
+    public TableColumn<Product, Integer> idCol;
+    public TableColumn<Product, String> nameCol;
+    public TableColumn<Product, String> brandCol;
+    public TableColumn<Product, String> characteristicsCol;
+    public TableColumn<Product, String> priceCol;
+    public TableColumn<Product, Integer> availabilityCol;
+    public Button buttonAddProduct;
+    @FXML
     private Stage stage;
 
     // View generation
@@ -62,34 +64,43 @@ public class ProductListController {
         productListController.setStage(stage);
     }
 
-    public void initialize() throws IOException {
-
-        // TODO: get products from server
+    public void refresh() {
         String session = Session.getInstance().getUser().getSession();
-        Response response = Utils.getAllProducts(session);
-        ObservableList<Product> products = FXCollections.observableArrayList();
-        if (response != null) {
-            if (response.code() == 200 && response.body() != null) {
-                JSONObject json = new JSONObject(Objects.requireNonNull(response.body()).string());
-                Objects.requireNonNull(response.body()).close();
-                // Test for products array
-                assert json.has("products");
-                for (Object t : json.getJSONArray("products")) {
-                    JSONObject jsonProduct = (JSONObject) t;
-                    Product product = new Product((JSONObject)t);
-                    products.add(product);
+        Task<List<Product>> task = new Task<>() {
+            @Override
+            protected List<Product> call() {
+                JSONObject json;
+                try {
+                    json = Utils.getAllProducts(session);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    failed();
+                    return null;
                 }
+                ArrayList<Product> list = new ArrayList<>();
+                // Test for products array
+                if (json.has("products")) {
+                    for (Object t : json.getJSONArray("products")) {
+                        list.add(new Product((JSONObject) t));
+                    }
+                }
+                return list;
             }
-        }
-        // Test products
-        /*ObservableList<Product> products = FXCollections.observableArrayList(
+        };
+        task.setOnSucceeded(event -> {
+            this.products.clear();
+            this.products.addAll(task.getValue());
+        });
+        new Thread(task).start();
 
-                new Product(123, "Prova", "Test", 2, (float) 12.50, null,
-                        3, "Vegan", "Verdura"));*/
+        products.clear();
+    }
+
+    public void initialize() {
+        refresh();
 
         // Clickable link for ID column
-        this.IDCol.setCellFactory(new Callback<TableColumn<Product, Integer>,
-                TableCell<Product, Integer>>() {
+        this.idCol.setCellFactory(new Callback<>() {
             @Override
             public TableCell<Product, Integer> call(TableColumn<Product, Integer> col) {
                 final TableCell<Product, Integer> cell = new TableCell<>() {
@@ -106,129 +117,120 @@ public class ProductListController {
                         }
                     }
                 };
-                cell.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-                    @Override
-                    public void handle(MouseEvent event) {
-                        if (event.getClickCount() > 0) {
-                            // TODO: view product form
-                            System.out.println("double click on " + cell.getItem());
-                            try {
-                                handleModifyProduct(cell.getTableRow().getItem(), true);
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
-                        }
+
+                cell.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+                    if (event.getClickCount() > 0) {
+                        handleModifyProduct(cell.getTableRow().getItem());
                     }
                 });
                 return cell;
             }
         });
 
-        this.tableview.setEditable(true); // To allow modify quantity directly in tableview
+        this.tableView.setEditable(true); // To allow modify quantity directly in tableView
         // Columns initialization
-        this.IDCol.setCellValueFactory(new PropertyValueFactory<>("id"));
-        this.NameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
-        this.BrandCol.setCellValueFactory(new PropertyValueFactory<>("brand"));
-        this.PriceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
-        this.QuantityCol.setCellValueFactory(new PropertyValueFactory<>("availability"));
-        this.QuantityCol.setCellFactory(TextFieldTableCell.forTableColumn());
-        this.QuantityCol.setEditable(true);
-        this.QuantityCol.setOnEditCommit(event -> {
-            event.getRowValue().setAvailability(Integer.parseInt(event.getNewValue()));
-            // TODO: implements server update on edit
-            System.out.println(event.getRowValue().getAvailability());
-        });
-
-        // Setting-up filter search
-        ObservableList<String> columnFilterString = FXCollections.observableArrayList(
-                columnFilterEnum.ID.toString(),
-                columnFilterEnum.NAME.toString(),
-                columnFilterEnum.BRAND.toString(),
-                columnFilterEnum.PRICE.toString(),
-                columnFilterEnum.QUANTITY.toString());
-
-        this.CbxColumn.setItems(columnFilterString);
-        this.CbxColumn.setValue(ListaSpeseController.columnFilterEnum.ID.toString());
-
-        FilteredList<Product> flproducts = new FilteredList<>(products, p -> true);
-
-        this.Search.setOnKeyReleased(keyEvent ->
-        {
-            // Switch on choiceBox value
-            switch (Objects.requireNonNull(columnFilterEnum.fromString(this.CbxColumn.getValue()))) {
-                case ID:
-                    flproducts.setPredicate(p -> p.getId().toString().contains(this.Search.getText().trim()));
-                    break;
-                case NAME:
-                    flproducts.setPredicate(p -> p.getName().toLowerCase().contains(this.Search.getText().toLowerCase().trim()));
-                    break;
-                case BRAND:
-                    flproducts.setPredicate(p -> p.getBrand().toLowerCase().contains(this.Search.getText().toLowerCase().trim()));
-                    break;
-                case PRICE:
-                    flproducts.setPredicate(p -> p.getPrice().toString().contains(this.Search.getText().trim()));
-                    break;
-                case QUANTITY:
-                    flproducts.setPredicate(p -> p.getAvailability().toString().contains(this.Search.getText().trim()));
-                    break;
+        this.idCol.setCellValueFactory(param -> new SimpleObjectProperty<>(param.getValue().getId()));
+        this.nameCol.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getName()));
+        this.brandCol.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getBrand()));
+        this.characteristicsCol.setCellValueFactory(param ->
+                new SimpleStringProperty(param.getValue().getCharacteristics())
+        );
+        this.priceCol.setCellValueFactory(
+                param -> new SimpleStringProperty(String.format("€ %.2f", param.getValue().getPrice()))
+        );
+        this.availabilityCol.setCellValueFactory(
+                param -> new SimpleObjectProperty<>(param.getValue().getAvailability())
+        );
+        this.availabilityCol.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
+        this.availabilityCol.setEditable(true);
+        this.availabilityCol.setOnEditCommit(event -> {
+            Product product = event.getRowValue();
+            Session session = Session.getInstance();
+            product.setAvailability(event.getNewValue());
+            try {
+                Utils.updateProduct(session.getUser().getSession(), product.getId(), product);
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         });
 
+        FilteredList<Product> filteredList = new FilteredList<>(products, p -> true);
+        this.searchField.textProperty().addListener((observable, oldValue, newValue) ->
+                filteredList.setPredicate(value -> {
+                    if (newValue == null || newValue.isEmpty()) {
+                        return true;
+                    }
+                    String search = newValue.toLowerCase().trim();
+                    return value.getId().toString().contains(search) ||
+                            value.getName().toLowerCase().contains(search) ||
+                            value.getPrice().toString().contains(search) ||
+                            value.getBrand().toLowerCase().contains(search) ||
+                            value.getSection().toLowerCase().contains(search) ||
+                            value.getCharacteristics().toLowerCase().contains(search);
+                }));
+
         // Wrap the FilteredList in a SortedList.
-        SortedList<Product> sortedData = new SortedList<>(flproducts);
+        SortedList<Product> sortedData = new SortedList<>(filteredList);
         // Bind the SortedList comparator to the TableView comparator.
-        sortedData.comparatorProperty().bind(this.tableview.comparatorProperty());
+        sortedData.comparatorProperty().bind(this.tableView.comparatorProperty());
 
-        this.tableview.setItems(sortedData);
-
-        this.setStage(stage);
-
+        this.tableView.setItems(sortedData);
     }
 
-    private static void handleModifyProduct(Product product, boolean modify) throws IOException {
-        GestioneProdottiController gestioneProdottiController = new GestioneProdottiController();
-        gestioneProdottiController.showView(product, modify);
+    private void handleModifyProduct(Product product) {
+        ManageProductController.showView(this.stage, product, true);
+        refresh();
     }
 
     private void setStage(Stage stage) {
         this.stage = stage;
     }
 
-    public void handlerAddProduct(ActionEvent actionEvent) throws IOException {
-        SceltaModalitaController.showView(this.stage);
+    @FXML
+    public void handlerAddProduct() {
+        ManageProductController.showView(this.stage, null, false);
+        refresh();
     }
 
-    public void handleBackAction(ActionEvent actionEvent) throws IOException {
-        SceltaModalitaController.showView(this.stage);
+    @FXML
+    public void handleBackAction() {
+        ChoiceModeController.showView(this.stage);
     }
 
-    public void handlerLogutAction(ActionEvent actionEvent) {
+    @FXML
+    public void handlerLogoutAction() {
+        Utils.logOut(this.stage);
     }
 
-    public void handlerAddManagerAction(ActionEvent actionEvent) {
-    }
+    @FXML
+    public void handleRemoveProducts() {
+        if (tableView.getSelectionModel().getSelectedItem() != null) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setContentText(String.format(
+                    "The operation is irreversible.\nAre you sure to delete product ID %d? ",
+                    tableView.getSelectionModel().getSelectedItem().getId())
+            );
+            alert.setTitle("Remove products");
 
-    // Search filter enum
-    public enum columnFilterEnum {
-        ID("Id"), NAME("Nome prodotto"), BRAND("Nome brand"), PRICE("Prezzo"), QUANTITY("Quantità");
-
-        private final String column;
-
-        columnFilterEnum(final String column) {
-            this.column = column;
-        }
-
-        public static ProductListController.columnFilterEnum fromString(String text) {
-            for (ProductListController.columnFilterEnum x : ProductListController.columnFilterEnum.values()) {
-                if (x.column.equalsIgnoreCase(text)) {
-                    return x;
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.isPresent() && result.get() == ButtonType.OK) {
+                Session session = Session.getInstance();
+                try {
+                    Utils.deleteProduct(session.getUser().getSession(),
+                            tableView.getSelectionModel().getSelectedItem().getId());
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
             }
-            return null;
+
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("No product selected");
+            alert.setContentText("Please, select product to remove.");
+            alert.showAndWait();
         }
 
-        public String toString() {
-            return column;
-        }
+        refresh();
     }
+
 }

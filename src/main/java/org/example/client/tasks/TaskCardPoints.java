@@ -7,6 +7,7 @@ import org.example.client.models.LoyaltyCard;
 import org.example.client.utils.Utils;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.util.Objects;
 
 public class TaskCardPoints extends Task<LoyaltyCard> {
@@ -18,7 +19,7 @@ public class TaskCardPoints extends Task<LoyaltyCard> {
     }
 
     @Override
-    protected LoyaltyCard call() throws Exception {
+    protected LoyaltyCard call() throws IOException {
         Response response = Utils.getLoyaltyCard(client.getSession(), client.getCardNumber());
         if (response != null && response.body() != null) {
             if (response.code() == 200) {

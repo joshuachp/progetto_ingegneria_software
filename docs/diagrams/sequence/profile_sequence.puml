@@ -1,0 +1,59 @@
+@startuml
+skinparam Style strictuml
+actor Cliente
+create ProfileController
+Cliente->ProfileController : showView()
+Cliente->ProfileController : handleButtonEditAction()
+activate ProfileController
+create EditProfileController
+ProfileController->EditProfileController : showView()
+deactivate ProfileController
+Cliente->EditProfileController : input data
+activate EditProfileController
+EditProfileController->EditProfileController : validate()
+activate EditProfileController
+alt valid
+  EditProfileController-->EditProfileController : true
+else error
+  EditProfileController-->EditProfileController : false
+  deactivate EditProfileController
+  EditProfileController-->Cliente : error
+  deactivate EditProfileController
+end
+opt Payment
+  Cliente->EditProfileController : handleChangePaymentAction()
+  activate EditProfileController
+  create PaymentController
+  EditProfileController->PaymentController : showView()
+  Cliente-->PaymentController : input data
+  alt change
+    Cliente->PaymentController : handleChangeAction()
+    activate PaymentController
+    PaymentController-->Session : setPaymentData()
+    PaymentController-->EditProfileController : setPayment()
+    destroy PaymentController
+  else cancel
+    Cliente->PaymentController : handleCancelAction()
+    activate PaymentController
+    PaymentController-->EditProfileController : setPayment()
+    destroy PaymentController
+    deactivate EditProfileController
+  end
+end
+Cliente->EditProfileController : hndleSaveAction()
+activate EditProfileController
+EditProfileController->EditProfileController : showAllert()
+EditProfileController->Server : updateClient()
+activate Server
+box Server
+  participant Server
+  database Database
+end box
+Server->Database : updateClient()
+activate Database
+return
+Server-->EditProfileController : Ok
+deactivate Server
+EditProfileController-->ProfileController : showView()
+destroy EditProfileController
+@enduml

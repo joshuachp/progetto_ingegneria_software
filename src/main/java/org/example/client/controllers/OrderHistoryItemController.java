@@ -18,13 +18,15 @@ import java.util.List;
 public class OrderHistoryItemController {
 
     @FXML
-    public Text textOrderId;
+    public Text orderIdText;
     @FXML
-    public Text textStatus;
+    public Text statusText;
     @FXML
-    public Text textPayment;
+    public Text addressText;
     @FXML
-    public Text textTotal;
+    public Text paymentText;
+    @FXML
+    public Text totalText;
     @FXML
     public VBox vBoxListOrderProducts;
 
@@ -51,11 +53,12 @@ public class OrderHistoryItemController {
 
     public void setOrder(@NotNull Order order) {
         this.order = order;
-        this.textOrderId.setText(String.format("#%d", order.getId()));
-        this.textStatus.setText(order.getState().toString());
-        this.textStatus.setFill(order.getState().getColor());
-        this.textPayment.setText(order.getPayment().toString());
-        this.textTotal.setText(String.format("€ %.2f", order.getTotal()));
+        this.orderIdText.setText(String.format("#%d", order.getId()));
+        this.statusText.setText(order.getState().toString());
+        this.statusText.setFill(order.getState().getColor());
+        this.addressText.setText(order.getAddress());
+        this.paymentText.setText(order.getPayment().toString());
+        this.totalText.setText(String.format("\u20ac %.2f", order.getTotal()));
 
         getOrderItems();
     }
@@ -80,7 +83,7 @@ public class OrderHistoryItemController {
         }
     }
 
-    public void setStage(Stage stage) {
+    private void setStage(Stage stage) {
         this.stage = stage;
     }
 }

@@ -1,0 +1,218 @@
+@startuml
+
+class Client extends User{
+    - name : String
+    - surname : String
+    - address : String
+    - cap : Integer
+    - city : String 
+    - telephone : String
+    - payment : Payment 
+    - cardNumber : Integer 
+
+    + Client(...)
+    
+    + redirect(stage : Stage) : void
+    + getName() : String
+    + setName(name : String) : void
+    + getSurname() : String
+    + setSurname(surname : String) : void
+    + getAddress() : String
+    + setAddress(address : String) : void
+    + getCap() : Integer
+    + setCap(cap : Integer) : void
+    + getCity() : String
+    + setCity(city : String) : void
+    + getTelephone() : String
+    + setTelephone(String telephone) : void
+    + Integer getCardNumber() 
+    + setCardNumber(cardNumber : Integer) : void
+    + getPayment() : Payment
+    + setPayment(payment : Payment) : void
+}
+
+class LoyaltyCard{
+    - cardNumber : Integer
+    - emissionDate : Date
+    - points : Integer
+    
+    + LoyaltyCard(json : JSONObject) 
+    
+    + getCardNumber() : Integer
+    + getEmissionDate() : Date
+    + getPoints() : Integer
+}
+
+class User{
+    + {abstract} redirect(stage : Stage) : void
+    - username : String
+    - session : String
+    - responsabile : boolean
+    
+    + User(String username, String session, boolean responsabile)
+
+    + getUsername() : String
+    + isResponsabile() : boolean
+    + getSession() : String
+}
+
+
+class Manager extends User {
+    - badge : String
+    - name : String
+    - surname : String
+    - address : String
+    - cap : Integer
+    - city : String
+    - telephone : String
+    - role : String
+    
+    + Manager(...)
+    
+    + getBadge() : String
+    + getName() : String 
+    + getSurname() : String
+    + getAddress() : String
+    + getCap() : Integer
+    + getCity() : String
+    + getTelephone() : String
+    + getRole() : String
+    + redirect(stage : Stage) : void
+}
+
+class Order{
+    - id : Integer
+    - total : Float
+    - payment : Payment
+    - deliveryStart : Date
+    - deliveryEnd : Date
+    - state : OrderSate
+    - address : String
+    
+    + Order(...)
+    + Order(JSONObject json) 
+    
+    + getId() : Integer
+    + getTotal() : Float
+    + getPayment() : Payment
+    + getDeliveryStart() : Date
+    + getDeliveryEnd() : Date
+    + getState() : OrderSate
+    + getAddress() : String
+
+}
+
+class OrderItem{
+    - name : String
+    - price : Float
+    - quantity : Integer
+    - productId : Integer
+    
+    + OrderItem(...) 
+    + OrderItem(@NotNull JSONObject json) 
+    
+    + getName() : String
+    + getPrice() : Float
+    + getQuantity() : Integer
+    + getProductId() : Integer
+}
+
+class AbstractProduct{
+    # id : Integer 
+    # name : String
+    # brand : String 
+    # packageSize : Integer
+    # price : Float
+    # image : String
+    # availability : Integer
+    # characteristics : String
+    # section : String
+    # quantity : Integer
+
+    + AbstractProduct (...)   
+    + AbstractProduct (json : JSONObject)
+    
+    + toJSON() : JSONObject
+    + getId() : Integer
+    + getName() : String
+    + getBrand() : String
+    + getPackageSize() : Integer
+    + getPrice() : Float
+    + getImage() : String
+    + getAvailability() : Integer
+    + getCharacteristics() : String
+    + getSection() : String
+    + getQuantity() : Integer
+
+}
+
+
+class ROProduct extends AbstractProduct{
+
+    + ROProduct(...)
+    + ROProduct(JSONObject json)
+
+}
+
+class Product extends ROProduct{
+    
+    + Product(...)
+    + Product(JSONObject json)
+    
+    + setName(name : String) : void
+    + setBrand(brand : String) : void
+    + setPackageSize(packageSize : Integer) : void
+    + setPrice(price : Float) : void 
+    + setImage(image : String) : void
+    + setAvailability(availability : Integer) : void
+    + setCharacteristics(characteristics : String) : void 
+    + setSection(section : String) : void 
+    + setQuantity(quantity : Integer) : void
+}
+
+enum DeliveryHours {
+  MORNING
+  AFTERNOON
+  - DeliveryHours(String, Integer, Integer)
+  - label : String 
+  - startHour : Integer 
+  - endHour : Integer 
+  + getLabels() : List<String>
+  + toString() : String
+  + getStartHour() : Integer
+  + getEndHour() : Integer
+}
+
+enum OrderSate {
+  CONFIRMED
+  IN_PREPARATION
+  CONSEGNATA
+  CANCELLED
+  - OrderSate(String, Paint)
+  - label : String
+  - color : Paint 
+  + getLabels(String, String) : List<String>
+  + toString() : String
+  + getColor() : Paint
+}
+
+enum Payment {
+  CASH
+  CREDIT_CARD
+  PAY_PAL
+  - Payment(String)
+  - label : String
+  + getLabels(String, String) : List<String>
+  + toString() : String
+}
+
+
+
+Payment --  Client : saves
+Client -- "0..1" LoyaltyCard : possiede
+Order *-- OrderItem
+DeliveryHours --o Order
+OrderSate --o Order
+Payment --o Order
+
+@enduml

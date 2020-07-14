@@ -14,8 +14,9 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import org.example.client.components.QuantitySpinnerFactory;
 import org.example.client.models.Product;
-import org.example.client.utils.Session;
+import org.example.client.models.ROProduct;
 import org.example.client.tasks.TaskLoadImage;
+import org.example.client.utils.Session;
 
 import java.io.IOException;
 
@@ -40,7 +41,7 @@ public class ProductController {
     public Button cartButton;
 
     // Instance of Product or a reference to a product in the session cart products
-    private Product product;
+    private ROProduct product;
     private Stage stage;
 
     /**
@@ -49,7 +50,7 @@ public class ProductController {
      * @param patentStage The parent stage owning this view
      * @param product     The product to view
      */
-    public static void showView(Stage patentStage, Product product) {
+    public static void showView(Stage patentStage, ROProduct product) {
         FXMLLoader loader = new FXMLLoader(ProductController.class.getResource("/views/product.fxml"));
 
         Parent root = null;
@@ -76,7 +77,7 @@ public class ProductController {
         stage.showAndWait();
     }
 
-    public void setProduct(Product product) {
+    public void setProduct(ROProduct product) {
         this.product = product;
         if (product.getImage() != null) {
             setImage(product.getImage());
@@ -101,7 +102,6 @@ public class ProductController {
         }));
         new Thread(task).start();
     }
-
 
     @FXML
     public void handleAddToCartAction() {

@@ -11,7 +11,7 @@
         <cursor>
             <Cursor fx:constant="HAND"/>
         </cursor>
-        <Text fx:id="textOrderId" fill="#212121" strokeType="OUTSIDE" strokeWidth="0.0" text="#1">
+        <Text fx:id="orderIdText" fill="#212121" strokeType="OUTSIDE" strokeWidth="0.0" text="#1">
             <font>
                 <Font size="18.0"/>
             </font>
@@ -27,7 +27,7 @@
                 <Insets left="48.0"/>
             </HBox.margin>
         </Text>
-        <Text fx:id="textStatus" fill="#edff00" layoutX="493.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0"
+        <Text fx:id="statusText" fill="#edff00" layoutX="493.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0"
               text="Confirmed">
             <font>
                 <Font size="14.0"/>
@@ -36,8 +36,13 @@
                 <Insets left="24.0"/>
             </HBox.margin>
         </Text>
-        <HBox HBox.hgrow="ALWAYS"/>
-        <Text fx:id="textPayment" fill="#616161" strokeType="OUTSIDE" strokeWidth="0.0" text="Cash on delivery">
+        <HBox alignment="CENTER" HBox.hgrow="ALWAYS">
+            <HBox.margin>
+                <Insets left="24.0" right="24.0"/>
+            </HBox.margin>
+            <Text fx:id="addressText" strokeType="OUTSIDE" strokeWidth="0.0" text="Address"/>
+        </HBox>
+        <Text fx:id="paymentText" fill="#616161" strokeType="OUTSIDE" strokeWidth="0.0" text="Cash on delivery">
             <HBox.margin>
                 <Insets right="48.0"/>
             </HBox.margin>
@@ -45,7 +50,7 @@
                 <Font size="14.0"/>
             </font>
         </Text>
-        <Text fx:id="textTotal" fill="#212121" strokeType="OUTSIDE" strokeWidth="0.0" text="€ 100">
+        <Text fx:id="totalText" fill="#212121" strokeType="OUTSIDE" strokeWidth="0.0" text="€ 100">
             <HBox.margin>
                 <Insets/>
             </HBox.margin>
@@ -62,5 +67,6 @@
             <Insets left="12.0" right="12.0"/>
         </VBox.margin>
     </Separator>
-    <VBox fx:id="vBoxListOrderProducts" style="-fx-background-color: #CDCDCD;" VBox.vgrow="NEVER"/>
+    <VBox fx:id="vBoxListOrderProducts" alignment="TOP_CENTER" style="-fx-background-color: #CDCDCD;"
+          VBox.vgrow="NEVER"/>
 </VBox>

@@ -43,7 +43,7 @@ public class ProfileController {
     private Stage stage;
 
     public static void showView(Stage stage) {
-        FXMLLoader loader = new FXMLLoader(SceltaModalitaController.class.getResource("/views/profile.fxml"));
+        FXMLLoader loader = new FXMLLoader(ChoiceModeController.class.getResource("/views/profile.fxml"));
         Parent root = null;
         try {
             root = loader.load();
@@ -119,7 +119,7 @@ public class ProfileController {
         }
     }
 
-    protected void setStage(Stage stage) {
+    private void setStage(Stage stage) {
         this.stage = stage;
     }
 

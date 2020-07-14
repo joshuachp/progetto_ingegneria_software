@@ -1,0 +1,49 @@
+@startuml
+
+enum DeliveryHours {
+  MORNING
+  AFTERNOON
+  - DeliveryHours(String, Integer, Integer)
+  - label : String 
+  - startHour : Integer 
+  - endHour : Integer 
+  + getLabels() : List<String>
+  + toString() : String
+  + getStartHour() : Integer
+  + getEndHour() : Integer
+}
+
+enum SortOrder {
+  ASCENDING
+  DESCENDING
+  ALPHABETICAL
+  - SortOrder(String)
+  - label : String
+  + getLabels(String, String) : List<String>
+  + toString() : String
+}
+
+enum OrderSate {
+  CONFIRMED
+  IN_PREPARATION
+  CONSEGNATA
+  CANCELLED
+  - OrderSate(String, Paint)
+  - label : String
+  - color : Paint 
+  + getLabels(String, String) : List<String>
+  + toString() : String
+  + getColor() : Paint
+}
+
+enum Payment {
+  CASH
+  CREDIT_CARD
+  PAY_PAL
+  - Payment(String)
+  - label : String
+  + getLabels(String, String) : List<String>
+  + toString() : String
+}
+
+@enduml

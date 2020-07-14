@@ -61,7 +61,7 @@ public class EditProfileController {
      * @param stage Stage to show the scene in
      */
     public static void showView(Stage stage) {
-        FXMLLoader loader = new FXMLLoader(SceltaModalitaController.class.getResource("/views/edit-profile.fxml"));
+        FXMLLoader loader = new FXMLLoader(ChoiceModeController.class.getResource("/views/edit-profile.fxml"));
         Parent root = null;
         try {
             root = loader.load();
@@ -69,12 +69,12 @@ public class EditProfileController {
             e.printStackTrace();
         }
         assert root != null;
+        EditProfileController controller = loader.getController();
+        controller.setStage(stage);
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.setTitle("Edit Profile");
         stage.show();
-        EditProfileController controller = loader.getController();
-        controller.setStage(stage);
     }
 
     /**
@@ -257,7 +257,7 @@ public class EditProfileController {
         ProfileController.showView(this.stage);
     }
 
-    protected void setStage(Stage stage) {
+    private void setStage(Stage stage) {
         this.stage = stage;
     }
 

@@ -3,6 +3,7 @@ package org.example.client.models;
 import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
 import org.example.client.MockUtils;
+import org.example.client.components.FactoryUser;
 import org.json.JSONObject;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;

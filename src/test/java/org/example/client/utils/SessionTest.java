@@ -3,9 +3,10 @@ package org.example.client.utils;
 import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
 import org.example.client.MockUtils;
-import org.example.client.models.FactoryUser;
+import org.example.client.components.FactoryUser;
 import org.example.client.models.Manager;
 import org.example.client.models.Product;
+import org.example.client.models.ROProduct;
 import org.json.JSONObject;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -75,7 +76,7 @@ class SessionTest {
     @Test
     void addProduct() {
         Session session = Session.getInstance();
-        Product product = new Product(1, "Name", "Brand", 1, 1.0f, null, 1, "", "Section");
+        ROProduct product = new Product(1, "Name", "Brand", 1, 1.0f, null, 1, "", "Section");
 
         assertEquals(0, session.getCartQuantity().get());
         assertEquals(1, session.addProduct(product, 1));
@@ -171,7 +172,7 @@ class SessionTest {
     @Test
     void getMapProducts() {
         Session session = Session.getInstance();
-        Product product = new Product(1, "Name", "Brand", 1, 1.0f, null, 1, "", "Section");
+        ROProduct product = new Product(1, "Name", "Brand", 1, 1.0f, null, 1, "", "Section");
 
         assertEquals(1, session.addProduct(product, 1));
         assertEquals(2, session.addProduct(product, 1));

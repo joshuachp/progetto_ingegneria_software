@@ -99,21 +99,6 @@ class UtilsTest {
 
 
     @Test
-    void getAllProducts() {
-        // TODO
-    }
-
-    @Test
-    void getLoyaltyCard() {
-        // TODO
-    }
-
-    @Test
-    void logOut() {
-        // TODO
-    }
-
-    @Test
     void getAllOrders() throws Exception {
         JSONObject body = new JSONObject();
         body.append("orders", new JSONObject()
@@ -122,11 +107,12 @@ class UtilsTest {
                 .put("payment", 0)
                 .put("deliveryStart", 0)
                 .put("deliveryEnd", 0)
-                .put("state", 0));
+                .put("state", 0)
+                .put("address", "Via Viale 1, 33333, City"));
         this.server.enqueue(new MockResponse()
                 .setBody(body.toString()));
 
-        List<Order> orders = Utils.getAllOrders("session");
+        List<Order> orders = Utils.getUserOrders("session");
         assertEquals(1, orders.size());
         Order order = orders.get(0);
         assertEquals(1, order.getId());
@@ -135,6 +121,7 @@ class UtilsTest {
         assertEquals(new Date(0), order.getDeliveryStart());
         assertEquals(new Date(0), order.getDeliveryEnd());
         assertEquals(OrderSate.CONFIRMED, order.getState());
+        assertEquals("Via Viale 1, 33333, City", order.getAddress());
     }
 
     @Test

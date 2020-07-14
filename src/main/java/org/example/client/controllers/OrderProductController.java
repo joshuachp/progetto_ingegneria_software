@@ -6,7 +6,7 @@ import javafx.scene.Node;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.example.client.models.OrderItem;
-import org.example.client.models.Product;
+import org.example.client.models.ROProduct;
 import org.example.client.tasks.TaskOrderProduct;
 import org.example.client.utils.Session;
 
@@ -23,8 +23,7 @@ public class OrderProductController {
     @FXML
     public Text textTotal;
 
-    private OrderItem orderItem;
-    private Product product = null;
+    private ROProduct product = null;
     private Stage stage;
 
     public static Node createView(Stage stage, OrderItem orderItem) {
@@ -43,15 +42,14 @@ public class OrderProductController {
     }
 
     public void setOrderItem(OrderItem orderItem) {
-        this.orderItem = orderItem;
         this.textName.setText(orderItem.getName());
-        this.textPrice.setText(String.format("Price € %f.2", orderItem.getPrice()));
+        this.textPrice.setText(String.format("Price \u20ac %.2f", orderItem.getPrice()));
         this.textQuantity.setText(orderItem.getQuantity().toString());
-        this.textTotal.setText(String.format("€ %.2f", orderItem.getPrice() * orderItem.getQuantity()));
+        this.textTotal.setText(String.format("\u20ac %.2f", orderItem.getPrice() * orderItem.getQuantity()));
 
         Session session = Session.getInstance();
         TaskOrderProduct task = new TaskOrderProduct(session.getUser().getSession(), orderItem.getProductId());
-        task.setOnSucceeded(event -> this.product = session.checkProduct(task.getValue()));
+        task.setOnSucceeded(event -> this.product = session.getProductReference(task.getValue()));
         new Thread(task).start();
     }
 
@@ -61,7 +59,7 @@ public class OrderProductController {
             ProductController.showView(this.stage, this.product);
     }
 
-    public void setStage(Stage stage) {
+    private void setStage(Stage stage) {
         this.stage = stage;
     }
 }

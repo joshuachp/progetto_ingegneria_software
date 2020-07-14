@@ -1,0 +1,264 @@
+@startuml
+
+
+class Database {
+  - {static} DATABASE_URL : String
+  - {static} database : Database
+  - connection : Connection 
+  - Database()
+  - {static} getInstance() : Database
+  - getConnection() : Connection 
+  # setConnection(Connection) : void
+}
+
+class Client {
+  - id : Integer 
+  - user_id : Integer 
+  - name : String 
+  - surname : String 
+  - address : String 
+  - cap : Integer 
+  - city : String 
+  - telephone : String 
+  - payment : Integer 
+  - loyalty_card_number : Integer 
+  + Client(...)
+  + {static} getClient(Integer) : Client 
+  + {static} createClient(...) : Client 
+  + getId() : Integer 
+  + updateClient() : boolean 
+  + getName() : String 
+  + setName(String) : void 
+  + getSurname() : String 
+  + setSurname(String) : void 
+  + getAddress() : String 
+  + setAddress(String) : void 
+  + getCap() : Integer 
+  + setCap(Integer) : void 
+  + getCity() : String 
+  + setCity(String) : void 
+  + getTelephone() : String 
+  + setTelephone(String) : void 
+  + getUserId() : Integer 
+  + getPayment() : Integer 
+  + setPayment(Integer) : void 
+  + getLoyaltyCardNumber() : Integer 
+  + setLoyaltyCardNumber(Integer) : void 
+}
+
+class LoyaltyCard {
+  - id : Integer 
+  - card_number : Integer 
+  - emission_date : Date 
+  - points : Integer 
+  - LoyaltyCard(Integer, Integer, Date, Integer)
+  - {static} getLoyaltyCard(Integer) : LoyaltyCard 
+  - getId() : Integer 
+  - getCardNumber() : Integer 
+  - getEmissionDate() : Date 
+  - getPoints() : Integer 
+  - toJSON() : JSONObject 
+}
+
+class Manager {
+  - id: Integer 
+  - Integer user_id: final 
+  - badge: String 
+  - name: String 
+  - surname: String 
+  - address: String 
+  - cap: Integer 
+  - city: String 
+  - telephone: String 
+  - role: String 
+  + Manager(...)
+  + {static} getManager(Integer) : Manager 
+  + {static} createManager(...): Manager 
+  + updateManager() : boolean 
+  + getId() : Integer 
+  + getBadge() : String 
+  + setBadge(String) : void 
+  + getName() : String 
+  + setName(String) : void 
+  + getSurname() : String 
+  + setSurname(String) : void 
+  + getAddress() : String 
+  + setAddress(String) : void 
+  + getCap() : Integer 
+  + setCap(Integer) : void 
+  + getCity() : String 
+  + setCity(String) : void 
+  + getTelephone() : String 
+  + setTelephone(String) : void 
+  + getRole() : String 
+  + setRole(String) : void 
+  + getUserId() : Integer 
+}
+
+class Order {
+  - id: Integer 
+  - total: Float 
+  - payment: Integer 
+  - delivery_start: Date 
+  - delivery_end: Date 
+  - state: Integer 
+  - address: String 
+  - user_id: Integer 
+  + Order(...)
+  + {static} createOrder( : Integer 
+  + {static} getOrder(Integer) : Order 
+  + {static} getOrders(Integer) : ArrayList<Order>
+  + {static} getAllOrders() : List<Order>
+  + {static} updateOrderState(int, int) : boolean 
+  + getId() : Integer 
+  + getTotal() : Float 
+  + getPayment() : Integer 
+  + getDeliveryStart() : Date 
+  + getDeliveryEnd() : Date 
+  + getState() : Integer 
+  + getAddress() : String 
+  + getUserId() : Integer 
+  + toJson() : JSONObject 
+}
+
+class OrderItem {
+  - Integer id;
+  - String name;
+  - Float price;
+  - Integer quantity;
+  - Integer product_id;
+  - Integer order_id;
+  - OrderItem(...)
+  - {static} createOrderItem(Integer, Integer, Integer) : boolean 
+  - {static} batchCreateOrderItems(Integer, Map<Integer, Integer>) : boolean 
+  - {static} getOrderItems(Integer orderId) : ArrayList<OrderItem>
+  - getId() : Integer 
+  - getName() : String 
+  - getPrice() : Float 
+  - getProductId() : Integer 
+  - getOrderId() : Integer 
+  - getQuantity() : Integer 
+  - toJson() : JSONObject 
+}
+
+class Product {
+  - id: Integer 
+  - name: String 
+  - brand: String 
+  - package_size: Integer 
+  - price: Float 
+  - image: String 
+  - availability: Integer 
+  - characteristics: String 
+  - section: String 
+  - Product()
+  - {static} getAll() : ArrayList<Product> 
+  - {static} createProduct(...) : Integer 
+  - {static} getProduct(Integer id) : Product 
+  - {static} removeProduct(Integer id) : boolean 
+  - {static} updateProduct(...) : boolean 
+  - getName() : String 
+  - getBrand() : String 
+  - getPackageSize() : Integer 
+  - getPrice() : Float 
+  - getImage() : String 
+  - getAvailability() : Integer 
+  - getCharacteristics() : String 
+  - getSection() : String 
+  - getId() : Integer 
+  - toJSON() : JSONObject 
+}
+
+class Section {
+  - Integer id;
+  - String name;
+  + Section(Integer, String)
+  + {static} getAll() : ArrayList<Section> 
+  + {static} getSection(String) : Section
+  + {static} createSection(String name) : Integer 
+  + getName() : String 
+  + getId() : Integer 
+}
+
+class User {
+  - Integer : id
+  - username: String 
+  - password: String 
+  - manager: boolean 
+  - User(Integer, String, String, boolean)
+  + {static} getUser(String) : User 
+  + {static} createUser(String, String, boolean) : User 
+  + updateUser() : boolean 
+  + getId() : Integer 
+  + getUsername() : String 
+  + setUsername(String) : void 
+  + getPassword() : String 
+  + setPassword(String) : void 
+  + isManager() : boolean 
+  + setManager(boolean) : void 
+}
+
+class Router {
+  - userSessions : Map<String, User>
+  - storageService: StorageService 
+  + Router(StorageService storageService) {
+  + authUser(String,  String) : String 
+  + autenticateUser(String) : String 
+  + logoutUser(String) : String 
+  + updateClient(...): String 
+  + registerClient(...): String 
+  + registerManager(...): String 
+  + updateManager(...)
+  + createProducts(String body) : String 
+  + removeProduct(Integer, String) : String 
+  + updateProduct(Integer, String) : String 
+  + getAllProducts(String) : String 
+  + getProduct(Integer, String) : String 
+  + getAllSections(String) : String 
+  + getLoyaltyCard(Integer, String) : String 
+  + createOrder(String) : String 
+  + getUserOrders(String) : String 
+  + getAllOrders(String) : String 
+  + getOrderItems(Integer, String) : String 
+  + updateOrderState(Integer, String, Integer) : String 
+  + productImageUpload(String, MultipartFile) : String 
+}
+
+class FileSystemStorageService implements StorageService {
+}
+
+class FileNotFoundException extends StorageException {
+  + FileNotFoundException(String)
+  + FileNotFoundException(String, Throwable)
+}
+
+class StorageProperties {
+  - location: String 
+  + getLocation() : String 
+  + setLocation(String) : void 
+}
+
+class StorageException extends RuntimeException {
+  + StorageException(String)
+  + StorageException(String, Throwable)
+}
+
+interface StorageService {
+  void init()
+  store(MultipartFile) : String
+  loadAll() : Stream<Path>
+  load(String) : Path
+  loadAsResource(String) : Resource
+  deleteAll() : void
+
+}
+
+class Utils {
+  + {static}  BCRYPT_ROUND : int 
+  + {static} checkPassword(String, String) : boolean 
+  + {static} hashPassword(String) : String 
+  + {static} createSession() : String 
+  + {static} convertToIntegerMap(Map<String, Object>) : Map<Integer, Integer>
+}
+
+@enduml

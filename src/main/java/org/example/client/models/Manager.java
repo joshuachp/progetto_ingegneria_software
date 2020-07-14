@@ -1,7 +1,7 @@
 package org.example.client.models;
 
 import javafx.stage.Stage;
-import org.example.client.controllers.SceltaModalitaController;
+import org.example.client.controllers.ChoiceModeController;
 
 public class Manager extends User {
 
@@ -61,6 +61,6 @@ public class Manager extends User {
 
     @Override
     public void redirect(Stage stage) {
-        SceltaModalitaController.showView(stage);
+        ChoiceModeController.showView(stage);
     }
 }

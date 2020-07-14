@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<VBox xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+      minWidth="-Infinity"
+      prefHeight="700.0" prefWidth="950.0" xmlns="http://javafx.com/javafx/11.0.1"
+      fx:controller="org.example.client.controllers.ManageOrdersListController">
+    <MenuBar VBox.vgrow="NEVER">
+        <Menu mnemonicParsing="false" text="File">
+            <MenuItem mnemonicParsing="false" text="Close"/>
+        </Menu>
+        <Menu mnemonicParsing="false" text="Edit">
+            <MenuItem mnemonicParsing="false" text="Delete"/>
+        </Menu>
+        <Menu mnemonicParsing="false" text="Help">
+            <MenuItem mnemonicParsing="false" text="About"/>
+        </Menu>
+    </MenuBar>
+    <VBox VBox.vgrow="ALWAYS">
+        <VBox.margin>
+            <Insets/>
+        </VBox.margin>
+        <padding>
+            <Insets bottom="24.0" left="24.0" right="24.0" top="24.0"/>
+        </padding>
+        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Order #1">
+            <VBox.margin>
+                <Insets left="56.0" right="56.0"/>
+            </VBox.margin>
+            <font>
+                <Font size="18.0"/>
+            </font>
+        </Text>
+        <HBox alignment="CENTER_LEFT" spacing="24.0">
+            <VBox.margin>
+                <Insets left="56.0" right="56.0"/>
+            </VBox.margin>
+            <padding>
+                <Insets bottom="12.0" left="12.0" right="12.0" top="12.0"/>
+            </padding>
+            <HBox alignment="CENTER">
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Address: ">
+                    <font>
+                        <Font name="System Bold" size="13.0"/>
+                    </font>
+                </Text>
+                <Text fx:id="addressText" strokeType="OUTSIDE" strokeWidth="0.0" text="Via Viale 15, 33333, City"/>
+            </HBox>
+            <HBox alignment="CENTER">
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Delivery: ">
+                    <font>
+                        <Font name="System Bold" size="13.0"/>
+                    </font>
+                </Text>
+                <Text fx:id="deliveryText" strokeType="OUTSIDE" strokeWidth="0.0" text="01/01/70 00:00 - 00:00"/>
+            </HBox>
+            <HBox alignment="CENTER">
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Total: ">
+                    <font>
+                        <Font name="System Bold" size="13.0"/>
+                    </font>
+                </Text>
+                <Text fx:id="totalText" strokeType="OUTSIDE" strokeWidth="0.0" text="€1"/>
+            </HBox>
+            <HBox HBox.hgrow="ALWAYS"/>
+            <ChoiceBox fx:id="stateChoiceBox" prefWidth="150.0"/>
+        </HBox>
+        <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" VBox.vgrow="ALWAYS">
+            <VBox.margin>
+                <Insets left="56.0" right="56.0"/>
+            </VBox.margin>
+            <VBox fx:id="vBoxList"/>
+        </ScrollPane>
+        <ButtonBar>
+            <buttons>
+                <Button mnemonicParsing="false" onAction="#handleBackAction" style="-fx-background-color: #DDDDDD;"
+                        text="Back" textFill="#212121">
+                    <font>
+                        <Font size="13.0"/>
+                    </font>
+                </Button>
+                <Button mnemonicParsing="false" onAction="#handleSaveAction" style="-fx-background-color: #0066FF;"
+                        text="Save" textFill="#fafafa">
+                    <font>
+                        <Font name="System Bold" size="13.0"/>
+                    </font>
+                </Button>
+            </buttons>
+            <VBox.margin>
+                <Insets top="24.0"/>
+            </VBox.margin>
+        </ButtonBar>
+    </VBox>
+</VBox>

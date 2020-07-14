@@ -15,7 +15,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.example.client.components.CatalogFactory;
-import org.example.client.models.Product;
+import org.example.client.models.ROProduct;
 import org.example.client.models.enums.SortOrder;
 import org.example.client.tasks.TaskCatalog;
 import org.example.client.utils.Session;
@@ -31,7 +31,7 @@ public class CatalogController {
 
     public final static String SECTION_ALL = "All";
 
-    private final Map<String, ArrayList<Product>> sectionMap = new HashMap<>();
+    private final Map<String, ArrayList<ROProduct>> sectionMap = new HashMap<>();
 
     public ObservableList<String> categoryList = FXCollections.observableArrayList();
     public ListView<String> listCategory;
@@ -68,7 +68,7 @@ public class CatalogController {
 
     @FXML
     public void initialize() {
-        comboBoxSort.setItems(FXCollections.observableList(SortOrder.getSortOrders()));
+        comboBoxSort.setItems(FXCollections.observableList(SortOrder.getLabels()));
         comboBoxSort.getSelectionModel().selectFirst();
         comboBoxSort.valueProperty().addListener((observable, oldValue, newValue) -> {
             this.sortOrder = SortOrder.values()[comboBoxSort.getSelectionModel().getSelectedIndex()];
@@ -99,7 +99,7 @@ public class CatalogController {
     }
 
     // Card builder
-    public void refreshProducts() {
+    private void refreshProducts() {
         Task<List<Node>> task = new Task<>() {
             @Override
             protected List<Node> call() {
@@ -116,7 +116,7 @@ public class CatalogController {
         new Thread(task).start();
     }
 
-    public void setStage(Stage stage) {
+    private void setStage(Stage stage) {
         this.stage = stage;
     }
 
