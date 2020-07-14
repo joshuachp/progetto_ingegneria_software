@@ -36,14 +36,6 @@
   di spesa on-line di un supermercato.
 \end{abstract}
 
-<<<<<<< HEAD
-% Table of content
-\tableofcontents
-\newpage
-
-\section{Introduzione}
-=======
->>>>>>> dev
 
 % Table of content
 \tableofcontents
@@ -210,9 +202,85 @@ Le seguenti sono gli use case del cliente con i corrispettivi sequence diagrams.
 \caption{Sequence diagram registrazione}
 \end{figure}
 
-\section{Activity diagram}
-
+\section{Activity Diagram}
 % Activity diagram e spiegazione
+\subsection{Autenticazione}
+\begin{figure}[h]
+\centering
+\includegraphics{Use Case Model!Autenticazione!ActivityAutenticazione!ActivityDiagramAutenticazione_8.png}
+\caption{Activity diagram autenticazione}
+\end{figure}
+
+Il \textbf{cliente o il responsabile del reparto} inseriscono le credenziali username e password.
+Il sistema le controlla e ritorna un messaggio di errore se queste sono scorrette, altrimenti crea una sessione che si occuperà della deautenticazione nel caso di Logout.\break
+\emph{NOTA: Nell'implementazione finale è stato aggiunto un salvataggio della sessione, quindi con la chiusura dell'applicazione non si giungierà necessarriamente alla deautenticazione e quindi alla conclusione dell'Activity Diagram}.
+
+\subsection{Conferma Spesa}
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{Use Case Model!Conferma spesa!ActivityConfermSpesa!ActivityDiagramConfermaSpesa_14.png}
+\caption{Activity diagram Conferma Spesa}
+\end{figure}
+
+Il \textbf{cliente} registrato un Visualizza il proprio carrello. 
+Una volta all'interno del carrello può Modificare le quantità, rimuovere il prodotto o confermare la spesa. 
+Se modifica le quantità bisogna tener in considerazione la quantità di prodotti disponibili. 
+Altrimenti se conferma bisognerà richiedere le informazioni per la consegna.
+\emph{NOTA: Il metodo di pagamento viene ottenuto direttamente dalla session dell'utente}
+
+\subsection{Visualizza Spesa}
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{Use Case Model!Controllo spese!ActivityControlloSpese!ActivityDiagramControlloSpese_12.png}
+\caption{Activity diagram Visualizza Spese}
+\end{figure}
+
+Il \textbf{responsabile di reparto} una volta autenticato e all'interno della visualizzazione della spesa, il responsabile può visualizzarne i prodotti di una spesa o aggiornarne lo stato.
+
+\subsection{Effettua Spesa}
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{Use Case Model!Effettua spesa!ActivityeffettuaSpesa!ActivityDiagramEffettuaSpesa_4.png}
+\caption{Activity diagram Effettua Spesa}
+\end{figure}
+
+Il \textbf{cliente} una volta autenticato e all'interno del catalogo potrà selezionare un reparto (di default preselezionato su All, contente tutti i prodotti a catalogo) e potrà aggiungiere prodotti al carrello sia dalla lista del catalogo direttamente sia cliccando sul item corrispondente e aggiungiendolo al carrello una volta aperta la scheda del prodotto corrispondente.
+Prima dell'aggiunta il sistema controlla la disponibilità del prodotto e se è disponibile lo aggiungie al carrello.
+
+
+\subsection{Modifica/Aggiungi Prodotto}
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{Use Case Model!Gestione prodotti!ActivityGestioneProdotti!ActivityDiagramGestioneProdotti_10.png}
+\caption{Activity diagram Modifica o Aggiungi}
+\end{figure}
+
+Il \textbf{responsabile del reparto } una volta autenticato ed entrato nella gestione dei prodotti potrà decidere se creare un nuovo prodotto o selezionarne uno da catalogo per procedere alla modifica o alla rimozione.
+Nel caso di creazione del prodotto inserisce le informazioni del prodotto che vengono controllate dal sistema prima dell'aggiunta nel catalogo.
+Nel caso di modifica della quantità o modifica del prodotto sarà possibile selezionare il prodotto dalla lista. Una volta superati i controlli del sistema il prodotto  verrà aggiornato con le nuove informazioni.
+\emph{NOTA: Nell'implementazione è stata aggiunta la à di rimuovere il prodotto selezionandolo dalla lista}
+
+
+\subsection{Gestione Profilo}
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{Use Case Model!Gestione profilo!Activity1!ActivityDiagramRegistrazione_6.png}
+\caption{Activity diagram Visualizza Prodotto}
+\end{figure}
+
+Il \textbf{cliente} una volta autenticato e aver acceduto al proprio profilo può mdoifcare i propri dati o visualizzare lo stato delle proprie spese.
+Nel caso di modifica dei dati il sistema provvederà alla verifica dei dati inseriti. Se i dati risultano corretti allora i salva.
+
+
+\subsection{Registrazione}
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{Use Case Model!Registrazione!ActivityRegistrazione!ActivityDiagramRegistrazione_2.png}
+\caption{Activity diagram Registrazione}
+\end{figure}
+
+Il \textbf{cliente} prima di autenticarsi entra in registrazione ed inserisce i propri dati e se vuole la propria tessera fedeltà. 
+Quindi il sistema verifica i dati inseriti, se sono corretti registra il nuovo utente altrimenti segnala un errore nella compilazione dei campi.
 
 \section{Pattern architetturali}
 
