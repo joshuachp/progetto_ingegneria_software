@@ -2,9 +2,9 @@
 
 :Responsabile Reparto: --> (Gestione Prodotti)
 :Responsabile Reparto: --> (Controllo Spese)
-:Responsabile Reparto: --> Utente
+:Responsabile Reparto: --|> Utente
 Utente --> (Autenticazione)
-Cliente --> Utente
+Cliente --|> Utente
 Cliente --> (Registrazione)
 Cliente --> (Effettua spesa)
 (Effettua spesa) ..> (Seleziona prodotti) : include
