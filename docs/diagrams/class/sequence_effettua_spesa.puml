@@ -1,0 +1,42 @@
+@startuml
+actor Cliente
+skinparam Style strictuml
+participant CatalogController
+
+CatalogController -> CatalogController : showView()
+activate CatalogController
+Cliente -> CatalogController : Click su una Sezione
+CatalogController -> CatalogItemController **: showView()
+activate CatalogItemController
+' Manca l'aggiornamento dei prodotti in base alla sezione
+
+opt ordina
+' manca il sorting dei prodotti
+end opt
+opt Aggiungi al carrello da catalogo
+Cliente -> CatalogItemController : Selezione quantità
+ 
+Cliente -> CatalogItemController : Click carrello
+
+CatalogItemController -> CatalogItemController : handleAddToCartAction() 
+activate CatalogItemController
+CatalogItemController -> "session : Session" ** : getIstance()
+CatalogItemController -> "session : Session" : addProduct()
+deactivate CatalogItemController
+end opt 
+
+Cliente -> CatalogItemController : Click su immagine
+CatalogItemController -> ProductController **: showView()
+activate ProductController
+opt Aggiungi al carrello da catalogo
+Cliente -> ProductController : Selezione quantità
+ 
+Cliente -> ProductController : Click carrello
+
+ProductController -> ProductController : handleAddToCartAction() 
+activate ProductController
+ProductController -> "session : Session" ** : getIstance()
+ProductController -> "session : Session" : addProduct()
+
+
+@enduml

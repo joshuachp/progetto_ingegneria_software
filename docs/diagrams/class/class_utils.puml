@@ -1,0 +1,79 @@
+@startuml
+
+class Session {
+    + {{static}} PREFERENCE_SAVE_SESSION : String
+    + {{static}} PREFERENCE_PAYMENT_DATA : String
+    - {{static}} session : Session 
+    - mapProducts : ObservableMap<Integer, Product>
+    - cartQuantity : SimpleIntegerProperty
+    - user : User
+    - saveSession : boolean
+    - paymentData : String
+    
+    - Session()
+    
+    + {{static}} getInstance() : Session
+    + {{static}} destroyInstance() : void
+    + addProduct(product : AbstractProduct, quantity : Integer) : Integer
+    + setProductQuantity(productId : Integer, quantity : Integer) : void
+    + getUser() : User
+    + setUser(User user) : void
+    + isSaveSession() : boolean
+    + setSaveSession(boolean saveSession) : void
+    + isAuth() : boolean
+    + getCartQuantity() : SimpleIntegerProperty
+    + getMapProducts() : ObservableMap<Integer, Product>
+    + getPaymentData() : String
+    + setPaymentData(String paymentData) : void
+    + removeProduct(productId : Integer ) : void
+    + getProductReference(product : Product) : ROProduct
+    + removeAllProducts() : void
+}
+
+class Utils{
+    + {static} SERVER_URL : String
+    + {static} SERVER_URL_AUTH : String
+    + {static} SERVER_URL_SESSION : String
+    + {static} SERVER_URL_LOGOUT : String
+    + {static} SERVER_URL_REGISTRATION : String
+    + {static} SERVER_URL_REGISTRATION_MANAGER : String
+    + {static} SERVER_URL_MANAGER_UPDATE : String
+    + {static} SERVER_URL_CLIENT_UPDATE : String
+    + {static} SERVER_URL_GET_PRODUCT : String
+    + {static} SERVER_URL_CREATE_PRODUCT  : String
+    + {static} SERVER_URL_DELETE_PRODUCT : String
+    + {static} SERVER_URL_UPLOAD_IMAGE_PRODUCT : String
+    + {static} SERVER_URL_UPDATE_PRODUCT  : String
+    + {static} SERVER_URL_GET_ALL_PRODUCT : String
+    + {static} SERVER_URL_CREATE_ORDER : String
+    + {static} SERVER_URL_GET_USER_ORDERS : String 
+    + {static} SERVER_URL_GET_ALL_ORDERS : String 
+    + {static} SERVER_URL_ORDER_STATE_UPDATE : String 
+    + {static} SERVER_URL_GET_LOYALTY_CARD : String 
+    + {static} SERVER_URL_GET_ALL_ORDER_ITEMS : String
+    + {static} REGEX_CAP : String
+    + {static} REGEX_MAIL  : String
+    + {static} REGEX_PASSWORD : String
+    + {static} REGEX_TELEPHONE : String
+    + {static} REGEX_BADGE : String
+    + {static} authenticate(username : String, password : String) : Response
+    + {static} authenticate(session : String) : Response
+    + {static} registerClient(...) : int
+    + {static} registerManager(...) : int
+    + {static} updateUser(user : User, password : String) : Response
+    + {static} getAllProducts(session : String) : JSONObject
+    + {static} getLoyaltyCard(session : String, cardNumber : Integer) : Response
+    + {static} createOrder(...) : void
+    + {static} logOut(Stage stage) : void
+    + {static} getUserOrders(session : String) : ArrayList<Order>
+    + {static} getAllOrders(session : String)  : ArrayList<Order>
+    + {static} getOrderItems(session : String, orderId : Integer) :  ArrayList<OrderItem> 
+    + {static} getProduct(session : String , productId : Integer) : Product
+    + {static} createProduct(session : String, products : List<Product>) : void 
+    + {static} updateProduct(session : String, productId : Integer, product : Product) : void
+    + {static} deleteProduct(session : String, productId : Integer) : void
+    + {static} updateOrderState(session : String, orderId : Integer, newState : OrderSate) : void
+    + {static} uploadProductImage(session : String, file : File) : String
+}
+
+@enduml
