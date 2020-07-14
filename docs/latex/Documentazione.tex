@@ -378,7 +378,7 @@ schema del database possiamo creare una generalizzazione del User, Client e Mana
 \begin{figure}[H]
 \centering
 \includegraphics[width=\linewidth]{client_models_class.png}
-\caption{Class diagram client models}
+
 \end{figure}
 
 % Classe della Sessione
@@ -386,20 +386,68 @@ schema del database possiamo creare una generalizzazione del User, Client e Mana
 
 \subsection{Controllers}
 
+\begin{figure}[H]
+\centering
+\includegraphics[width=\linewidth]{auth_sequence.png}
+
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\linewidth]{profile_sequence.png}
+
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\linewidth]{registration_sequence.png}
+
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\linewidth]{sequence_conferma_spesa.png}
+
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\linewidth]{sequence_controllo_spese.png}
+
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\linewidth]{sequence_effettua_spesa.png}
+
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\linewidth]{sequence_gestione_prodotto.png}
+
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\linewidth]{shopping_history_sequence.png}
+
+\end{figure}
+
 % Tasks & Components
 
 \section{Discussione design patterns}
 
-pppattern
+\begin{itemize}
+\item Singleton
+\item Database
+\item Session
+\item DAO Observable Sessione
+\item Factory Utente
+\item 
+\end{itemize}
 
-% Singletons
-%   Database
-%   Sessione
-% DAO Observable Sessione
-% Factory
-%   Utente
-% Gli altri non sono factory, ma li abbiamo tenuti cosi per divisione del codice
-% e possibile ottimizzazione
+
 
 \section{Test suite}
 
