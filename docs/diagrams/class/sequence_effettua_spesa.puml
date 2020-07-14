@@ -2,7 +2,29 @@
 actor Cliente
 skinparam Style strictuml
 participant CatalogController
+participant TaskCatalog
+participant FactoryCatalog
+participant CatalogItemController
+participant "session : Session"
+participant ProductController
+box Server
+    participant Server
+    database Database
+end box
+
+
 Cliente -> CatalogController : showView()
+CatalogController->TaskCatalog **
+CatalogController->TaskCatalog : call()
+activate TaskCatalog
+TaskCatalog->Server : getAllProducts()
+activate Server
+Server->Database : getAll()
+activate Database 
+return ArrayList<Product>
+return String
+return List <Node>
+
 opt Selezione sezione
 Cliente -> CatalogController : Selezione sezione
 end opt
@@ -12,7 +34,7 @@ end opt
 activate CatalogController
 CatalogController->CatalogController : refresh()
 activate CatalogController
-CatalogController->FactoryCatalog : getCatalogList()
+CatalogController->FactoryCatalog : getCatalogList(List<Node>)
 activate FactoryCatalog
 loop Numero di prodotti
 FactoryCatalog -> CatalogItemController **: createCatalogItem()
@@ -48,6 +70,5 @@ ProductController -> ProductController : handleAddToCartAction()
 activate ProductController
 ProductController -> "session : Session" ** : getIstance()
 ProductController -> "session : Session" : addProduct()
-
 
 @enduml
