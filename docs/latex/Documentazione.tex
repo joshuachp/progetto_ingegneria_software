@@ -221,8 +221,7 @@ visualizzazione dello storico delle spese.
 \newpage
 
 \section{Activity diagram}
-
-asd
+Di seguito sono riportati gli activity diagram delle principali funzioni che dovrà avere il sistema.
 
 % Activity diagram e spiegazione
 \subsection{Autenticazione}
@@ -304,9 +303,31 @@ Nel caso di modifica dei dati il sistema provvederà alla verifica dei dati inse
 Il \textbf{cliente} prima di autenticarsi entra in registrazione ed inserisce i propri dati e se vuole la propria tessera fedeltà. 
 Quindi il sistema verifica i dati inseriti, se sono corretti registra il nuovo utente altrimenti segnala un errore nella compilazione dei campi.
 
-\section{Pattern architetturali}
+\section{Pattern Architetturali}
+\subsection{MVC Model View Controller}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\linewidth]{MVC.PNG}
+\caption{Schema Model View Controller}
+\end{figure}
+Il model View Controller è stato usato come pattern architetturale dato dall'utilizzo implicito di questo sistema da parte di JavaFX.
 
-asdfasd
+\subsection{Repository}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\linewidth]{Repository.PNG}
+\caption{Schema esempio di una Repository}
+\end{figure}
+Il model Repository è stato utilizzato come pattern architetturale per la gestione del database. 
+
+\subsection{Client Server}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\linewidth]{Client-Server.PNG}
+\caption{Schema Client Server}
+\end{figure}
+Il Server-Client è stato utilizzato come pattern architetturale di base per la comunicazione col database.
+
 % MVC Server Repository(Database)
 
 \section{Class diagram}
@@ -382,7 +403,7 @@ pppattern
 
 \section{Test suite}
 
-Unit test
+Tutti i test sono stati fatti in JUnit, a parte quelli per le funzioni di javaFX che sono stati eseguiti manualmente.
 
 % TDD crea test, crea funzione intellij genera metodi
 % Unit test tutto server, code coverage
