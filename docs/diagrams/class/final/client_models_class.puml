@@ -206,7 +206,13 @@ enum Payment {
   + toString() : String
 }
 
+class FactoryUses{
+    + getUser(username : String, password : String) : User
+    + getUser(session : String) : User
+    - createUtente(@json : JSONObject ) : User
+}
 
+FactoryUses-->User : creates
 
 Payment --  Client : saves
 Client -- "0..1" LoyaltyCard : possiede

@@ -1,20 +1,18 @@
 \documentclass[12pt, a4paper]{article}
 
-%package
-\usepackage[utf8]{inputenc}
-\usepackage{amsmath} %For both in-line and equation mode
-\numberwithin{equation}{section} %Numbering of our equations per section
-\usepackage{algorithm}
-\usepackage{algorithmic} %Algorithm styles, need to be nested for the example shown
+%\usepackage[utf8]{inputenc}
+%\usepackage{amsmath} %For both in-line and equation mode
+%\numberwithin{equation}{section} %Numbering of our equations per section
+%\usepackage{algorithm}
+%\usepackage{algorithmic} %Algorithm styles, need to be nested for the example shown
 \usepackage{fancyhdr} %For our headers
 \usepackage{graphicx} %Inserting images
-\usepackage{lipsum}  %Blank text fill, delete me when finished
-\usepackage{setspace} %Spacing on the front page for crest and titles
-\usepackage[]{fncychap} % Styles can be Sonny, Lenny, Glenn, Conny, Rejne, Bjarne and Bjornstrup
-\usepackage[hyphens]{url} %Deals with hyphens in urls to make them clickable
-\usepackage{xcolor} %Great if you want coloured text
-\usepackage{tabularx}
-\usepackage{appendix} %Take a wild guess slick
+%\usepackage{setspace} %Spacing on the front page for crest and titles
+\usepackage[Sonny]{fncychap} % Styles can be Sonny, Lenny, Glenn, Conny, Rejne, Bjarne and Bjornstrup
+%\usepackage[hyphens]{url} %Deals with hyphens in urls to make them clickable
+%\usepackage{xcolor} %Great if you want coloured text
+%\usepackage{tabularx}
+%\usepackage{appendix} %Take a wild guess slick
 
 \fancyhf{}
 \pagestyle{fancy}
@@ -35,12 +33,6 @@
   Progetto per la creazione di un sistema informatico per gestire il servizio 
   di spesa on-line di un supermercato.
 \end{abstract}
-
-% Table of content
-\tableofcontents
-\newpage
-
-\section{Introduzione}
 
 % Table of content
 \tableofcontents
@@ -141,7 +133,7 @@ Le seguenti sono gli use case del utente con i corrispettivi sequence diagrams.
 
 \subsubsection{Autenticazione}
 
-\begin{figure}[ht]
+\begin{figure}[h]
 \centering
 \includegraphics[width=\textwidth]{Use Case Model!Autenticazione!InteractionAutenticazione!SequenceDiagramAutenticazione_7.png}
 \caption{Sequence diagram autenticazione}
@@ -161,7 +153,7 @@ sequence diagrams.
 
 \subsubsection{Gestione Prodotti}
 
-\begin{figure}[ht]
+\begin{figure}[h]
 \centering
 \includegraphics[width=\textwidth]{Use Case Model!Gestione prodotti!InteractionGestioneProdotti!SequenceDiagramGestioneProdotto_9.png}
 \caption{Sequence diagram gestione prodotti}
@@ -174,7 +166,7 @@ o rimuoverlo direttamente.
 
 \subsubsection{Controllo Spese}
 
-\begin{figure}[ht]
+\begin{figure}[h]
 \centering
 \includegraphics[width=\textwidth]{Use Case Model!Controllo spese!InteractionConstrolloSpese!SequenceDiagramcontrolloSpese_11.png}
 \caption{Sequence diagram controllo spese}
@@ -192,7 +184,7 @@ Le seguenti sono gli use case del cliente con i corrispettivi sequence diagrams.
 
 \subsubsection{Registrazione}
 
-\begin{figure}[ht]
+\begin{figure}[h]
 \centering
 \includegraphics[width=\textwidth]{Use Case Model!Registrazione!InteractionRegistrazione!SequenceDiagramRegistrazione_1.png}
 \caption{Sequence diagram registrazione}
@@ -203,14 +195,14 @@ dati ha la possibilità di inserire una tessera di fedeltà, facoltativa.
 
 \subsubsection{Effettua Spesa}
 
-\begin{figure}[ht]
+\begin{figure}[h]
 \centering
 \includegraphics[width=\textwidth]{Use Case Model!Effettua spesa!InteractionEffettuaSpesa!SequenceDiagramEffettuaSpesa_3.png}
 \caption{Sequence diagram effettua spesa}
 \end{figure}
 
 
-\begin{figure}[hb]
+\begin{figure}[h]
 \centering
 \includegraphics[width=\textwidth]{Use Case Model!Conferma spesa!InteractionConfermaSpesa!SequenceDiagramConfermaSpesa_13.png}
 \caption{Sequence diagram effettua spesa}
@@ -226,10 +218,10 @@ l'ordine e selezionare una data e un ora per la consegna.
 
 \subsubsection{Gestione Profilo}
 
-\begin{figure}[ht]
+\begin{figure}[h]
 \centering
 \includegraphics[width=\textwidth]{Use Case Model!Gestione profilo!InteractionGestioneProfilo!SequenceDiagramGestioneProfilo_5.png}
-\caption{Sequence diagram registrazione}
+\caption{Sequence diagram gestione profilo}
 \end{figure}
 
 Nella gestione del profilo il cliente può vedere le proprie informazioni 
@@ -243,31 +235,76 @@ visualizzazione dello storico delle spese.
 
 \section{Activity diagram}
 
+asd
+
 % Activity diagram e spiegazione
 
 \section{Pattern architetturali}
 
+asdfasd
 % MVC Server Repository(Database)
 
 \section{Class diagram}
 
+Le classi nel sistema rispecchiano il pattern architetturale. Possiamo
+considerarle come due sistemi diversi del client e il server. 
+
+Nel server ci sono due classi principali il Router, per la gestione delle richieste
+e il Database, che controlla i modelli. Questi ultimi nel client sono i model del
+MVC, mentre i controllers gestiscono l'esecuzione dell'applicazione. Non tutti i campi
+dei model nel Database sono presenti anche sul client, visto che sono utilizzati
+per facilitare il funzionamento del database e non contengono vere informazioni.
+
+Sia il server che il client contengono una classe Utils con solo metodi statici
+che è stata crata per semplificare dei metodi e rende più modulare il codice.
+
 % Riassunto enf. classi più importanti
 % Mod nel database simi modl client non ug
 
-% Sezione server Router
+\subsection{Server e Database}
 
-% Sezione model Database
-%   model Client
+Il Router ha il compito di gestire le chiamate del client e utilizza il database
+e le classi dei model per ricavare le informazioni 
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{router_class.png}
+\caption{Class diagram server}
+\end{figure}
+
+In aggiunta al database viene anche utilizzato lo FilesystemStorageService per
+salvare le immagini dei prodotti caricate dagli utenti.
+
+\subsection{Models}
+
+Il database utilizza la classe Database per prendere una connessione al database
+fisico e i diversi models per ricavare le informazioni.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{database_models_class.png}
+\caption{Class diagram database}
+\end{figure}
+
+Invece nel client la Section non è più necessaria e non dovendo più rispettare lo
+schema del database possiamo creare una generalizzazione del User, Client e Manager.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{client_models_class.png}
+\caption{Class diagram client models}
+\end{figure}
 
 % Classe della Sessione
 %   con eventuali robe
 
-% Controllers
-% Tutte sequence diagram
+\subsection{Controllers}
 
 % Tasks & Components
 
 \section{Discussione design patterns}
+
+pppattern
 
 % Singletons
 %   Database
@@ -279,6 +316,8 @@ visualizzazione dello storico delle spese.
 % e possibile ottimizzazione
 
 \section{Test suite}
+
+Unit test
 
 % TDD crea test, crea funzione intellij genera metodi
 % Unit test tutto server, code coverage
