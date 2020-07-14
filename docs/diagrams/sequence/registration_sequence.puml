@@ -1,0 +1,45 @@
+@startuml
+skinparam Style strictuml
+actor Cliente
+Cliente->RegistrationController : showView()
+Cliente-->RegistrationController : input data
+Cliente->RegistrationController : handleConfirmAction()
+activate RegistrationController
+RegistrationController-->RegistrationController : resetError()
+RegistrationController->RegistrationController : validate()
+activate RegistrationController
+alt valid 
+  RegistrationController-->RegistrationController : true
+  participant FactoryUser
+  RegistrationController->Server : registerClient()
+  activate Server
+  box Server
+    participant Server
+    database Database
+  end box
+  Server->Database : createUser()
+  activate Database
+  return user
+  Server->Database : createClient()
+  activate Database
+  return clent
+  opt loyaltyCard
+    Server->Database : createLoyaltyCard()
+    activate Database
+    return clent
+  end
+  Server->Server : createSession()
+  Server->RegistrationController : OK
+  RegistrationController->FactoryUser : getUser()
+  activate FactoryUser
+  ref over FactoryUser, Server, Database : Autenticazione
+  return user
+  RegistrationController-->Cliente : redirect()
+else error
+  RegistrationController-->RegistrationController : false
+  deactivate RegistrationController
+  RegistrationController-->Cliente : showError()
+  deactivate RegistrationController
+end
+
+@enduml
