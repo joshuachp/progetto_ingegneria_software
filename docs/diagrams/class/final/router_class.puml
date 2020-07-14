@@ -63,8 +63,19 @@ class Utils {
   + {static} convertToIntegerMap(Map<String, Object>) : Map<Integer, Integer>
 }
 
+class Database {
+  - {static} DATABASE_URL : String
+  - {static} database : Database
+  - connection : Connection 
+  - Database()
+  - {static} getInstance() : Database
+  - getConnection() : Connection 
+  # setConnection(Connection) : void
+}
+
 left to right direction
 Router -> Utils : uses
+Router --> Database : uses
 Router -- StorageProperties : config
 Router --> FileSystemStorageService : uses
 FileSystemStorageService ..|> StorageService
