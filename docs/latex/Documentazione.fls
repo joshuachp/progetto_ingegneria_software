@@ -1,10 +1,10 @@
-PWD /home/joshuac/GitHub/progetto_ingegneria_software/docs
+PWD /home/joshuac/GitHub/progetto_ingegneria_software/docs/latex
 INPUT /usr/share/texmf-dist/web2c/texmf.cnf
 INPUT /var/lib/texmf/web2c/pdftex/pdflatex.fmt
 INPUT Documentazione.tex
 OUTPUT Documentazione.log
-INPUT /usr/share/texmf-dist/tex/latex/base/report.cls
-INPUT /usr/share/texmf-dist/tex/latex/base/report.cls
+INPUT /usr/share/texmf-dist/tex/latex/base/article.cls
+INPUT /usr/share/texmf-dist/tex/latex/base/article.cls
 INPUT /usr/share/texmf-dist/tex/latex/base/size12.clo
 INPUT /usr/share/texmf-dist/tex/latex/base/size12.clo
 INPUT /usr/share/texmf-dist/fonts/map/fontname/texfonts.map
@@ -88,10 +88,13 @@ INPUT /usr/share/texmf-dist/fonts/tfm/public/cm/cmex10.tfm
 INPUT /usr/share/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm
 OUTPUT Documentazione.pdf
 INPUT /var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map
+INPUT /usr/share/texmf-dist/fonts/tfm/public/cm/cmr10.tfm
+INPUT /usr/share/texmf-dist/fonts/tfm/public/cm/cmbx10.tfm
 INPUT /usr/share/texmf-dist/fonts/tfm/public/cm/cmr17.tfm
 INPUT /usr/share/texmf-dist/fonts/tfm/public/cm/cmbx12.tfm
 INPUT Documentazione.toc
 INPUT Documentazione.toc
+INPUT /usr/share/texmf-dist/fonts/tfm/public/cm/cmbx12.tfm
 INPUT /usr/share/texmf-dist/fonts/tfm/public/cm/cmr8.tfm
 INPUT /usr/share/texmf-dist/fonts/tfm/public/cm/cmr6.tfm
 INPUT /usr/share/texmf-dist/fonts/tfm/public/cm/cmmi12.tfm
@@ -104,11 +107,37 @@ INPUT /usr/share/texmf-dist/fonts/tfm/public/cm/cmex10.tfm
 INPUT /usr/share/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex8.tfm
 INPUT /usr/share/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm
 OUTPUT Documentazione.toc
+INPUT /usr/share/texmf-dist/fonts/tfm/jknappen/ec/tcrm1200.tfm
+INPUT ../diagrams/images/use_case_diagram.png
+INPUT ../diagrams/images/use_case_diagram.png
+INPUT ../diagrams/images/use_case_diagram.png
 INPUT /usr/share/texmf-dist/fonts/tfm/public/cm/cmbx12.tfm
-INPUT /usr/share/texmf-dist/fonts/tfm/public/cm/cmr17.tfm
-INPUT /usr/share/texmf-dist/fonts/tfm/public/cm/cmbx12.tfm
-INPUT /usr/share/texmf-dist/fonts/tfm/public/cm/cmbx12.tfm
+INPUT ../diagrams/images/png/Use Case Model!Autenticazione!InteractionAutenticazione!SequenceDiagramAutenticazione_7.png
+INPUT ../diagrams/images/png/Use Case Model!Autenticazione!InteractionAutenticazione!SequenceDiagramAutenticazione_7.png
+INPUT ../diagrams/images/png/Use Case Model!Autenticazione!InteractionAutenticazione!SequenceDiagramAutenticazione_7.png
+INPUT ../diagrams/images/png/Use Case Model!Gestione prodotti!InteractionGestioneProdotti!SequenceDiagramGestioneProdotto_9.png
+INPUT ../diagrams/images/png/Use Case Model!Gestione prodotti!InteractionGestioneProdotti!SequenceDiagramGestioneProdotto_9.png
+INPUT ../diagrams/images/png/Use Case Model!Gestione prodotti!InteractionGestioneProdotti!SequenceDiagramGestioneProdotto_9.png
+INPUT ../diagrams/images/png/Use Case Model!Controllo spese!InteractionConstrolloSpese!SequenceDiagramcontrolloSpese_11.png
+INPUT ../diagrams/images/png/Use Case Model!Controllo spese!InteractionConstrolloSpese!SequenceDiagramcontrolloSpese_11.png
+INPUT ../diagrams/images/png/Use Case Model!Controllo spese!InteractionConstrolloSpese!SequenceDiagramcontrolloSpese_11.png
+INPUT ../diagrams/images/png/Use Case Model!Registrazione!InteractionRegistrazione!SequenceDiagramRegistrazione_1.png
+INPUT ../diagrams/images/png/Use Case Model!Registrazione!InteractionRegistrazione!SequenceDiagramRegistrazione_1.png
+INPUT ../diagrams/images/png/Use Case Model!Registrazione!InteractionRegistrazione!SequenceDiagramRegistrazione_1.png
+INPUT ../diagrams/images/png/Use Case Model!Effettua spesa!InteractionEffettuaSpesa!SequenceDiagramEffettuaSpesa_3.png
+INPUT ../diagrams/images/png/Use Case Model!Effettua spesa!InteractionEffettuaSpesa!SequenceDiagramEffettuaSpesa_3.png
+INPUT ../diagrams/images/png/Use Case Model!Effettua spesa!InteractionEffettuaSpesa!SequenceDiagramEffettuaSpesa_3.png
+INPUT ../diagrams/images/png/Use Case Model!Conferma spesa!InteractionConfermaSpesa!SequenceDiagramConfermaSpesa_13.png
+INPUT ../diagrams/images/png/Use Case Model!Conferma spesa!InteractionConfermaSpesa!SequenceDiagramConfermaSpesa_13.png
+INPUT ../diagrams/images/png/Use Case Model!Conferma spesa!InteractionConfermaSpesa!SequenceDiagramConfermaSpesa_13.png
+INPUT ../diagrams/images/png/Use Case Model!Gestione profilo!InteractionGestioneProfilo!SequenceDiagramGestioneProfilo_5.png
+INPUT ../diagrams/images/png/Use Case Model!Gestione profilo!InteractionGestioneProfilo!SequenceDiagramGestioneProfilo_5.png
+INPUT ../diagrams/images/png/Use Case Model!Gestione profilo!InteractionGestioneProfilo!SequenceDiagramGestioneProfilo_5.png
 INPUT Documentazione.aux
+INPUT /usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc
+INPUT /usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
 INPUT /usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb
+INPUT /usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb
 INPUT /usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb
 INPUT /usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb
+INPUT /usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb
