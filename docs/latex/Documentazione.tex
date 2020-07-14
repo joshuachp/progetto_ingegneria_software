@@ -36,19 +36,80 @@
   di spesa on-line di un supermercato.
 \end{abstract}
 
+<<<<<<< HEAD
 % Table of content
 \tableofcontents
 \newpage
 
 \section{Introduzione}
+=======
+>>>>>>> dev
 
+% Table of content
+\tableofcontents
+\newpage
+
+
+\section{Introduzione}
 % Subsection divisione del lavoro, tentativo di scrum, e difficoltà della distanza
 % Paired developement
+Date le distanze, i tempi ristretti, e il nostro team composto da sole due persone abbiamo preferito usare al \textbf{XP programming}, in grado di adattarsi meglio alle nostre esigenze, e appoggiandoci ad un servizio di \textbf{Version Control System} quale \textbf{GIT} per poter proseguire anche in autonomia e non solo con l'ausilio del \textbf{pair programming}. Quindi durante la progettazione è stato tenuto un approccio \textbf{Test First Developement} seguito da costanti aggiornamenti di \textbf{refactoring}.
+
+\subsection{Analisi Dei Requisiti}
 % Cominciato con analisi dei requisiti, sezioni del pdf
 % Backlog dei requisiti
+Prima di tutto abbiamo cominciato con l'analisi dei requisiti forniti dalla documentazione. Quindi abbiamo estrapolato 6 macrosezioni principali:
+\begin{itemize}
+\item Registrazione
+	\begin{itemize}
+	\item Gli  utenti devono  essere  registrati.
+	\item Ogni utente registrato accede con email e password.
+	\item Gli utenti possono specificare un metodo di pagamento preferito.
+	\end{itemize}
+\item Catalogo
+	\begin{itemize}
+	\item  Se un utente inserisce un prodotto che al momento della conferma della spesa non risulta più disponibile,il sistema segnala la cosa al cliente ed elimina il prodotto dal carrello.
+	\item Ogni utente registrato accede con email e password.
+	\item Gli utenti possono specificare un metodo di pagamento preferito.
+	\item Dopo aver confermato la spesa, l’utente sceglie data e orario della consegna visualizzando le opzioni possibili.
+	\end{itemize}
+\item Carrello
+	\begin{itemize}
+	\item L’utente può visualizzare il carrello per modificare la quantità dei prodotti inseriti o rimuovere qualche prodotto.
+	\item L’utente può ricercare i prodotti per tipo (uova, biscotti, pasta), per marca o per eventuali caratteristiche.
+	\end{itemize}
+\item Effettua spesa
+	\begin{itemize}
+	\item  Ad ogni spesa vengono accreditati sulla tessera fedeltà un numero di punti pari agli euro spesi nella spesa considerata.
+	\end{itemize}
+\item Profilo utente
+	\begin{itemize}
+	\item  Il  sistema  deve  permettere  agli  utenti  di  accedere  al  loro  profilo,  modificare  i  dati  anagrafici, verificare il saldo punti e lo stato delle loro spese.
+	\item Ogni utente può vedere tutte le spese che ha effettuato nel tempo con il dettaglio dei prodotti acquistati.
+	\end{itemize}
+\item Responsabili reparto
+	\begin{itemize}
+	\item  Il  sistema  deve  permettere  agli  utenti  di  accedere  al  loro  profilo,  modificare  i  dati  anagrafici, verificare il saldo punti e lo stato delle loro spese.
+	\item Ogni utente può vedere tutte le spese che ha effettuato nel tempo con il dettaglio dei prodotti acquistati.
+	\item I responsabili del reparto spesa on-line devono autenticarsi per poter accedere al sistema e devono poter  verificare  lo  stato delle  spese  e  provvedere  all’inserimento delle  informazioni  relative  ai prodotti.
+	\end{itemize}
+\end{itemize}
+	
 
 % Subsection framework e librerie usati spring per il server e okhttp3. Javafx
 % build system gradle
+\subsection{Framework}
+Per il progetto si sono ritenuti necessarie una serie di implementazioni di librerie esterne.
+\subsubsection{Spring}
+Abbiamo utilizzato Spring (by Netfix) per un rapido sciluppo di un server compatibile con Java.
+\subsubsection{Okhttp3}
+Per la comunicazione tra client e Server, abbiamo optato per un libreria in grado di gestire le richieste http per creare una web application.
+\subsubsection{JavaSQL}
+Per la gestione del database javaSQL con il driver di SQLite.
+\subsubsection{JavaFX}
+Per l'interfaccia grafica è stato utilizzato JavaFX. Scelta perchè è il più moderno e permette di essere utilizzato senza ausilio di librerie esterne.
+\subsubsection{Gradle}
+Utilizzato per la Build System modulare e pers facilitare la compilazione cross-platform (importando automaticamente le librerie necessarie).
 
 \section{Use Cases}
 
@@ -194,7 +255,7 @@ Le seguenti sono gli use case del cliente con i corrispettivi sequence diagrams.
 % CI/CD GitHub test automatici
 
 \section{Conclusione}
-
+Il progetto è stato condotto cercando inizialmente di rispettare le metodologia \textbf{Scrum} e utilizzando un \textbf{System Version Control} quale GIT per poter gestire al meglio il lavoro a distanza sullo stesso progetto. Dopo aver concordato degli sprint molto ristretti (una settimana circa) e avendo un brief ogni due giorni invece che 1, abbiamo cominciato col progetto.
 % Pace e amore schifo java e javafx (╯°□°）╯︵ ┻━┻
 
 \end{document}
