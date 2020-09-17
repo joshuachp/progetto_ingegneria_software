@@ -16,17 +16,16 @@
   \maketitle
 \end{titlepage}
 
-\begin{abstract}
-  Progetto per la creazione di un sistema informatico per gestire il servizio 
-  di spesa on-line di un supermercato.
-\end{abstract}
-
 % Table of content
 \tableofcontents
 \newpage
 
 
 \chapter{Introduzione}
+
+Progetto per la creazione di un sistema informatico per gestire il servizio di
+spesa on-line di un supermercato.
+
 \section{Organizzazione}
 % Subsection divisione del lavoro, tentativo di scrum, e difficoltà della 
 % distanza
@@ -302,41 +301,51 @@ Il \textbf{responsabile di reparto} una volta autenticato e all'interno della vi
 
 \subsection{Effettua Spesa}
 
-\begin{figure}[H]
+Il \textbf{cliente} una volta autenticato e all'interno del catalogo potrà selezionare un reparto (di default preselezionato su All, contente tutti i prodotti a catalogo) e potrà aggiungere prodotti al carrello sia dalla lista del catalogo direttamente sia cliccando sul item corrispondente e aggiungiendolo al carrello una volta aperta la scheda del prodotto corrispondente.
+Prima dell'aggiunta il sistema controlla la disponibilità del prodotto e se è disponibile lo aggiungie al carrello.
+
+\begin{figure}[h]
   \centering
-  \includegraphics[width=\textwidth]{Use Case Model!Effettua spesa!ActivityeffettuaSpesa!ActivityDiagramEffettuaSpesa_4.png}
+  \includegraphics[width=0.8\textwidth]{Use Case Model!Effettua spesa!ActivityeffettuaSpesa!ActivityDiagramEffettuaSpesa_4.png}
   \caption{Activity diagram Effettua Spesa}
 \end{figure}
 
-Il \textbf{cliente} una volta autenticato e all'interno del catalogo potrà selezionare un reparto (di default preselezionato su All, contente tutti i prodotti a catalogo) e potrà aggiungiere prodotti al carrello sia dalla lista del catalogo direttamente sia cliccando sul item corrispondente e aggiungiendolo al carrello una volta aperta la scheda del prodotto corrispondente.
-Prima dell'aggiunta il sistema controlla la disponibilità del prodotto e se è disponibile lo aggiungie al carrello.
-
+\newpage
 
 \subsection{Modifica/Aggiungi Prodotto}
 
-\begin{figure}[H]
+Il \textbf{responsabile del reparto } una volta autenticato ed entrato nella 
+gestione dei prodotti potrà decidere se creare un nuovo prodotto o selezionarne
+uno da catalogo per procedere alla modifica o alla rimozione.  Nel caso di 
+creazione del prodotto inserisce le informazioni del prodotto che vengono 
+controllate dal sistema prima dell'aggiunta nel catalogo. Nel caso di modifica
+della quantità o modifica del prodotto sarà possibile selezionare il prodotto
+dalla lista. Una volta superati i controlli del sistema il prodotto  verrà 
+aggiornato con le nuove informazioni.
+
+NOTA:\@ Nell'implementazione è stata aggiunta la à di rimuovere il prodotto 
+selezionandolo dalla lista
+
+\begin{figure}[h]
   \centering
   \includegraphics[width=\textwidth]{Use Case Model!Gestione prodotti!ActivityGestioneProdotti!ActivityDiagramGestioneProdotti_10.png}
   \caption{Activity diagram Modifica o Aggiungi}
 \end{figure}
 
-Il \textbf{responsabile del reparto } una volta autenticato ed entrato nella gestione dei prodotti potrà decidere se creare un nuovo prodotto o selezionarne uno da catalogo per procedere alla modifica o alla rimozione.
-Nel caso di creazione del prodotto inserisce le informazioni del prodotto che vengono controllate dal sistema prima dell'aggiunta nel catalogo.
-Nel caso di modifica della quantità o modifica del prodotto sarà possibile selezionare il prodotto dalla lista. Una volta superati i controlli del sistema il prodotto  verrà aggiornato con le nuove informazioni.
-\emph{NOTA:\@ Nell'implementazione è stata aggiunta la à di rimuovere il prodotto selezionandolo dalla lista}
-
+\newpage
 
 \subsection{Gestione Profilo}
 
-\begin{figure}[H]
+Il \textbf{cliente} una volta autenticato e aver acceduto al proprio profilo può mdoifcare i propri dati o visualizzare lo stato delle proprie spese.
+Nel caso di modifica dei dati il sistema provvederà alla verifica dei dati inseriti. Se i dati risultano corretti allora i salva.
+
+\begin{figure}[h]
   \centering
   \includegraphics[width=\textwidth]{Use Case Model!Gestione profilo!Activity1!ActivityDiagramRegistrazione_6.png}
   \caption{Activity diagram Visualizza Prodotto}
 \end{figure}
 
-Il \textbf{cliente} una volta autenticato e aver acceduto al proprio profilo può mdoifcare i propri dati o visualizzare lo stato delle proprie spese.
-Nel caso di modifica dei dati il sistema provvederà alla verifica dei dati inseriti. Se i dati risultano corretti allora i salva.
-
+\newpage
 
 \subsection{Registrazione}
 
@@ -485,10 +494,9 @@ Il database utilizza la classe Database per prendere una connessione al database
 \begin{itemize}
   \item Singleton
   \item Database
-  \item Session
-  \item DAO Observable Sessione
   \item Factory Utente
-  \item 
+  \item DAO Observable Sessione
+  \item Session
 \end{itemize}
 
 \section{Test suite}
