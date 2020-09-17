@@ -3,6 +3,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage{graphicx}
 \usepackage{float}
+\usepackage{listings}
 
 \graphicspath{{../diagrams/images/}{../diagrams/images/png/}}
 
@@ -487,18 +488,36 @@ Il database utilizza la classe Database per prendere una connessione al database
   \includegraphics[width=\textwidth]{shopping_history_sequence.png}
 \end{figure}
 
+\newpage
+
+\section{Design Patterns}
+
+\subsubsection{Singleton}	
+
+Il pattern Singleton viene utilizzato per garantire uno stato globale alle istanze del Database e della Sessione dell'utente.
+L'utilizzo di questo pattern è necessario in queste due classi ma si è cercato di evitarne l'utilizzo in altri contesti per evitare che la staticità della classe rendesse impossibile il mocking durante il test.
+In particolare, nella \textbf{Sessione} viene tenuta un istanza della classe Utente per gestire tutti i dati relativi all'utente autenticato; nel \textbf{Database} tutti i modelli utilizzano la stessa istanza per creare una connessione al database SQLite. 
+
+\subsubsection{Factory Utente}
+
+Abbiamo creato una classe astratta Utente con un metodo astratto \verb|redirect()|,
+le classi Client e Manager estendono Utente e ne implementano il metodo.
+Mentre la classe FactoryUtente permette di generare un'istanza delle due classi
+in base alle credenziali fornite. Quindi quando il metodo \verb|redirect()|
+verrà chiamato si verrà indirizzati rispettivamente alla pagina del Cliente o
+del Manager.
+
+\subsubsection{DAO Observable Sessione}
+Molte views e task devono poter accedere ai dati del carrello e della sessione utente durante la fase di acquisto. 
+Più di un thread accede nello stesso momento agli stessi dati, per questo è necessario utilizzare una DAO (Data Accesses Object) per evitare possibili TOCTOU (Time Of Check Time Of Use) e race condition (osservate durante lo sviluppo).
+
+
+\subsubsection{Prodotto}
+
+
+
 % Tasks & Components
 \chapter{Discussione}
-
-\section{Discussione design patterns}
-
-\begin{itemize}
-  \item Singleton
-  \item Database
-  \item Factory Utente
-  \item DAO Observable Sessione
-  \item Session
-\end{itemize}
 
 \section{Test suite}
 
