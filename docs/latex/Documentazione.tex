@@ -2,7 +2,6 @@
 
 \usepackage[utf8]{inputenc}
 \usepackage{graphicx}
-\usepackage{float}
 \usepackage{listings}
 
 \graphicspath{{../diagrams/images/}{../diagrams/images/png/}}
@@ -471,7 +470,7 @@ immagini dei prodotti caricate dagli utenti.
 Il database utilizza la classe Database per prendere una con\-nes\-sio\-ne al
 da\-ta\-ba\-se fisico e i diversi models per ricavare le informazioni.
 
-\begin{figure}[hb]
+\begin{figure}[h]
   \centering
   \includegraphics[width=\textwidth]{database_models_class.png}
   \caption{Class diagram database}
@@ -485,7 +484,7 @@ Invece nel client la Section non è più necessaria e non dovendo più rispettar
 lo schema del database possiamo creare una generalizzazione del User, Client e
 Manager.
 
-\begin{figure}[hb]
+\begin{figure}[h]
   \centering
   \includegraphics[width=0.9\textwidth]{client_models_class.png}
   \caption{Class diagram client}
@@ -499,12 +498,13 @@ Manager.
 
 \subsubsection{Autenticazione}
 
-Per l'autenticazione l'utente inserisce le credenziali nel
-AuthenticationController. Il controller passa le credenziali al FactoryUtente,
-la cui funzione è di autenticare al server con le credenziali. Se ci sono
-errori questi vengono riportati all'utente, altrimenti una sessione viene
-ritornata dal server e utilizzata per creare l'istanza della classe User. La
-sessione verrà mantenuta fino a quando l'utente non compie il log out.
+% Per l'autenticazione l'utente inserisce le credenziali nel
+% AuthenticationController. Il controller passa le credenziali al
+% FactoryUtente, la cui funzione è di autenticare al server con le credenziali.
+% Se ci sono errori questi vengono riportati all'utente, altrimenti una
+% sessione viene ritornata dal server e utilizzata per creare l'istanza della
+% classe User. La sessione verrà mantenuta fino a quando l'utente non compie il
+% log out.
 
 \begin{figure}[h]
   \centering
@@ -516,9 +516,6 @@ sessione verrà mantenuta fino a quando l'utente non compie il log out.
 
 \subsubsection{Gestione Profilo}
 
-L'utente quando visualizza il proprio profilo utente ha l'opzione di modificare
-i propri dati
-
 \begin{figure}[h]
   \centering
   \includegraphics[width=0.9\textwidth]{profile_sequence.png}
@@ -529,7 +526,7 @@ i propri dati
 
 \subsubsection{Registrazione}
 
-\begin{figure}[ht]
+\begin{figure}[h]
   \centering
   \includegraphics[width=0.7\textwidth]{registration_sequence.png}
   \caption{Sequence diagram Registrazione}
@@ -539,7 +536,7 @@ i propri dati
 
 \subsubsection{Conferma Spesa}
 
-\begin{figure}[ht]
+\begin{figure}[h]
   \centering
   \includegraphics[width=0.9\textwidth]{sequence_conferma_spesa.png}
   \caption{Sequence diagram Conferma Spesa}
@@ -549,7 +546,7 @@ i propri dati
 
 \subsubsection{Controlla Spese}
 
-\begin{figure}[ht]
+\begin{figure}[h]
   \centering
   \includegraphics[width=0.9\textwidth]{sequence_controllo_spese.png}
   \caption{Sequence diagram Controlla Spese}
@@ -559,7 +556,7 @@ i propri dati
 
 \subsubsection{Effettua Spesa}
 
-\begin{figure}[ht]
+\begin{figure}[h]
   \centering
   \includegraphics[width=0.9\textwidth]{sequence_effettua_spesa.png}
   \caption{Sequence diagram Effettua Spesa}
@@ -569,7 +566,7 @@ i propri dati
 
 \subsubsection{Gestione Prodotti}
 
-\begin{figure}[ht]
+\begin{figure}[h]
   \centering
   \includegraphics[width=0.6\textwidth]{sequence_gestione_prodotto.png}
   \caption{Sequence diagram Gestione Prodotti}
