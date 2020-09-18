@@ -123,7 +123,7 @@ moderno e permette di essere utilizzato senza ausilio di librerie esterne.
 
 \subsubsection{Gradle}
 Utilizzato per la Build System modulare e per facilitare la compilazione
-crossplatform (importando automaticamente le librerie necessarie).
+cross platform (importando automaticamente le librerie necessarie).
 
 \chapter{Design del Progetto}
 
@@ -436,17 +436,15 @@ comunicazione col database.
 \section{Class diagram}
 
 Le classi nel sistema rispecchiano il pattern architetturale. Possiamo
-considerarle come due sistemi diversi del client e il server. 
-
-Nel server ci sono due classi principali il Router, per la gestione delle
-richieste e il Database, che controlla i modelli. Questi ultimi nel client sono
-i model del MVC, mentre i controllers gestiscono l'esecuzione
-dell'applicazione. Non tutti i campi dei model nel Database sono presenti anche
-sul client, visto che sono utilizzati per facilitare il funzionamento del
-database e non contengono vere informazioni.
-
-Sia il server che il client contengono una classe Utils con solo metodi statici
-che è stata crata per semplificare dei metodi e rende più modulare il codice.
+considerarle come due sistemi diversi del client e il server. Nel server ci
+sono due classi principali il Router, per la gestione delle richieste e il
+Database, che controlla i modelli. Questi ultimi nel client sono i model del
+MVC, mentre i controllers gestiscono l'esecuzione dell'applicazione. Non tutti
+i campi dei model nel Database sono presenti anche sul client, visto che sono
+utilizzati per facilitare il funzionamento del database e non contengono vere
+informazioni. Sia il server che il client contengono una classe Utils con solo
+metodi statici che è stata crata per semplificare dei metodi e rende più
+modulare il codice.
 
 \subsection{Server e Database}
 
@@ -616,31 +614,40 @@ race condition (osservate durante lo sviluppo).
 
 \subsubsection{Prodotto}
 
-AbstractProduct, Prodotto and ROProduct (Read Only Prodotto)
+Per riuscire ad utilizzare il prodotto sia a catalogo prodotto sono state
+utilizzate 2 classi.  Visto che è stato utilizzato il multi thread in modo
+intensivo si è avuto bisogno che i dati prodotti fossero leggibili da più
+thread ma utilizzati da uno solo. Questa caratteristica è stata soddisfatta
+dall'utilizzo di una classe astratta come base per la creazione delle classi
+ROProduct, che ne implementa solo la lettura e Prodotto che oltre ad
+implementare i metodi di lettura la estende con i metodi di scrittura.
 
-Per riuscire ad utilizzare il prodotto sia a catalogo prodotto sono state utilizzate 2 classi. 
-Visto che è stato utilizzato il multithread in modo intensivo si è avuto bisogno che i dati prodotti fossero leggibili da più thread ma utilizzati da uno solo. Questa caratteristica è stata soddisfatta dall'utilizzo di una classe astratta come base per la creazione delle classi ROProduct, che ne implementa solo la lettura e Prodotto che oltre ad implementare i metodi di lettura la estende con i metodi di scrittura.
+\subsection{Test suite}
 
-% Tasks & Components
-\chapter{Discussione}
+Durante la fase di programmazione, il nostro metodo scelto è stato il TDD, con
+il seguente metodo. Per iniziare il processo di aggiunta di un nuovo metodo, si
+crea un unit test della funzione da aggiungere, con semplici inputs e outputs e
+grazie alle funzioni della IDE si va a creare la vera funzione con i tipi delle
+variabili già presenti nel test.  Questo purtroppo non è stato possibile per le
+funzioni dell'interfaccia grafica.  Per questo motivo abbiamo raggiunto un code
+coverage dei test completo nel server ma scarso nel client.  Il tutto è stato
+testato per ogni iterazione del codice grazie ad un sistema di CI (Continuous
+Integration) tramite la piattaforma di GitHub. Ulteriori test sono stati
+aggiunti alla fine della fase di sviluppo, per eventuali casi limite e bug
+incontrati nella beta.
 
-\section{Test suite}
-
-Tutti i test sono stati fatti in JUnit, a parte quelli per le funzioni di
-JavaFX che sono stati eseguiti manualmente.
-
-
-% TDD crea test, crea funzione intellij genera metodi
+% TDD crea test, crea funzione IntelliJ genera metodi
 % Unit test tutto server, code coverage
-% Javafx non testabile, ma funzioni attorno si
+% JavaFX non testabile, ma funzioni attorno si
 % CI/CD GitHub test automatici
 
-\section{Conclusione}
+% \section{Conclusione}
 
-Il progetto è stato condotto cercando inizialmente di rispettare le metodologia
-\textbf{Scrum} e utilizzando un \textbf{System Version Control} quale GIT per
-poter gestire al meglio il lavoro a distanza sullo stesso progetto. Dopo aver
-concordato degli sprint molto ristretti (una settimana circa) e avendo un brief
-ogni due giorni invece che 1, abbiamo cominciato col progetto.
+% Il progetto è stato condotto cercando inizialmente di rispettare le
+% metodologia \textbf{Scrum} e utilizzando un \textbf{System Version Control}
+% quale GIT per poter gestire al meglio il lavoro a distanza sullo stesso
+% progetto. Dopo aver concordato degli sprint molto ristretti (una settimana
+% circa) e avendo un brief ogni due giorni invece che 1, abbiamo cominciato col
+% progetto.
 
 \end{document}
