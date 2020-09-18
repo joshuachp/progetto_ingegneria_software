@@ -621,6 +621,8 @@ race condition (osservate durante lo sviluppo).
 
 AbstractProduct, Prodotto and ROProduct (Read Only Prodotto)
 
+Per riuscire ad utilizzare il prodotto sia a catalogo prodotto sono state utilizzate 2 classi. 
+Visto che è stato utilizzato il multithread in modo intensivo si è avuto bisogno che i dati prodotti fossero leggibili da più thread ma utilizzati da uno solo. Questa caratteristica è stata soddisfatta dall'utilizzo di una classe astratta come base per la creazione delle classi ROProduct, che ne implementa solo la lettura e Prodotto che oltre ad implementare i metodi di lettura la estende con i metodi di scrittura.
 
 % Tasks & Components
 \chapter{Discussione}
@@ -629,6 +631,7 @@ AbstractProduct, Prodotto and ROProduct (Read Only Prodotto)
 
 Tutti i test sono stati fatti in JUnit, a parte quelli per le funzioni di
 JavaFX che sono stati eseguiti manualmente.
+
 
 % TDD crea test, crea funzione intellij genera metodi
 % Unit test tutto server, code coverage
