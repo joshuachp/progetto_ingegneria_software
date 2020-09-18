@@ -595,7 +595,7 @@ tenuta un istanza della classe Utente per gestire tutti i dati relativi
 all'utente autenticato; nel \textbf{Database} tutti i modelli utilizzano la
 stessa istanza per creare una connessione al database SQLite. 
 
-\subsubsection{Factory Utente}
+\subsubsection{Factory Utente e Template Utente}
 
 Abbiamo creato una classe astratta Utente con un metodo \verb|redirect()|
 astratto, le classi Client e Manager estendono Utente e ne implementano il
@@ -604,23 +604,32 @@ due classi in base alle credenziali fornite. Quindi quando il metodo
 \verb|redirect()| verrà chiamato si verrà indirizzati rispettivamente alla
 pagina del Cliente o del Manager.
 
-\subsubsection{DAO Observable Sessione}
+\subsubsection{DAO Sessione}
 
 Molte views e task devono poter accedere ai dati del carrello e della sessione
 utente durante la fase di acquisto. Più di un thread accede nello stesso
 momento agli stessi dati, per questo è necessario utilizzare una DAO (Data
-Accesses Object) per evitare possibili TOCTOU (Time Of Check Time Of Use) e
-race condition (osservate durante lo sviluppo).
+Accesses Object) per evitare multiple modifiche o accessi, che causerebbero una
+errore di TOCTOU (Time Of Check Time Of Use) e race condition (osservate
+durante lo sviluppo).
 
-\subsubsection{Prodotto}
+\subsubsection{Observable Product}
+
+Utilizziamo la classe messa a disposizione dalla libreria di JavaFX che mette
+a disposizione una implementazione di una classe Observable, con thread safety.
+La utilizziamo per aggiornare il numero di prodotti del carrello quando ne
+viene aggiunto uno da un'altra view.
+
+\subsubsection{Prototype Prodotto}
 
 Per riuscire ad utilizzare il prodotto sia a catalogo prodotto sono state
-utilizzate 2 classi.  Visto che è stato utilizzato il multi thread in modo
+utilizzate 2 classi. Visto che è stato utilizzato il multi thread in modo
 intensivo si è avuto bisogno che i dati prodotti fossero leggibili da più
 thread ma utilizzati da uno solo. Questa caratteristica è stata soddisfatta
 dall'utilizzo di una classe astratta come base per la creazione delle classi
 ROProduct, che ne implementa solo la lettura e Prodotto che oltre ad
-implementare i metodi di lettura la estende con i metodi di scrittura.
+implementare i metodi di lettura la estende con i metodi di scrittura. Questo
+permette di avere una singola reference di scrittura e multiple per la lettura.
 
 \subsection{Test suite}
 
@@ -628,9 +637,9 @@ Durante la fase di programmazione, il nostro metodo scelto è stato il TDD, con
 il seguente metodo. Per iniziare il processo di aggiunta di un nuovo metodo, si
 crea un unit test della funzione da aggiungere, con semplici inputs e outputs e
 grazie alle funzioni della IDE si va a creare la vera funzione con i tipi delle
-variabili già presenti nel test.  Questo purtroppo non è stato possibile per le
-funzioni dell'interfaccia grafica.  Per questo motivo abbiamo raggiunto un code
-coverage dei test completo nel server ma scarso nel client.  Il tutto è stato
+variabili già presenti nel test. Questo purtroppo non è stato possibile per le
+funzioni dell'interfaccia grafica. Per questo motivo abbiamo raggiunto un code
+coverage dei test completo nel server ma scarso nel client. Il tutto è stato
 testato per ogni iterazione del codice grazie ad un sistema di CI (Continuous
 Integration) tramite la piattaforma di GitHub. Ulteriori test sono stati
 aggiunti alla fine della fase di sviluppo, per eventuali casi limite e bug
