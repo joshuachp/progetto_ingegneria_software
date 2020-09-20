@@ -170,6 +170,42 @@ class Product extends ROProduct{
     + setQuantity(quantity : Integer) : void
 }
 
+class FactoryUses{
+    + getUser(username : String, password : String) : User
+    + getUser(session : String) : User
+    - createUtente(@json : JSONObject ) : User
+}
+
+class Session {
+    + {{static}} PREFERENCE_SAVE_SESSION : String
+    + {{static}} PREFERENCE_PAYMENT_DATA : String
+    - {{static}} session : Session 
+    - mapProducts : ObservableMap<Integer, Product>
+    - cartQuantity : SimpleIntegerProperty
+    - user : User
+    - saveSession : boolean
+    - paymentData : String
+    
+    - Session()
+    
+    + {{static}} getInstance() : Session
+    + {{static}} destroyInstance() : void
+    + addProduct(product : AbstractProduct, quantity : Integer) : Integer
+    + setProductQuantity(productId : Integer, quantity : Integer) : void
+    + getUser() : User
+    + setUser(User user) : void
+    + isSaveSession() : boolean
+    + setSaveSession(boolean saveSession) : void
+    + isAuth() : boolean
+    + getCartQuantity() : SimpleIntegerProperty
+    + getMapProducts() : ObservableMap<Integer, Product>
+    + getPaymentData() : String
+    + setPaymentData(String paymentData) : void
+    + removeProduct(productId : Integer ) : void
+    + getProductReference(product : Product) : ROProduct
+    + removeAllProducts() : void
+}
+
 enum DeliveryHours {
   MORNING
   AFTERNOON
@@ -208,11 +244,17 @@ enum Payment {
 
 
 
-Payment --  Client : saves
+FactoryUses --> User : creates
+
+Payment --*  Client : saves
 Client -- "0..1" LoyaltyCard : possiede
 Order *-- OrderItem
 DeliveryHours --o Order
 OrderSate --o Order
 Payment --o Order
+
+Product --o Session : addProduct
+Session --> ROProduct : getProduct
+Session *--- User : setUser
 
 @enduml

@@ -50,7 +50,7 @@ public class Utils {
     public static final String REGEX_MAIL = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0," +
             "61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$";
     @RegExp
-    public static final String REGEX_PASSWORD = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[\\W_]).{8,}$";
+    public static final String REGEX_PASSWORD = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).{8,}$";
     @RegExp
     public static final String REGEX_TELEPHONE = "^(\\((00|\\+)39\\)|(00|\\+)39)?" + 
             "(\\ )?" +
@@ -125,9 +125,9 @@ public class Utils {
      */
     public static int registerClient(String username, String password, String name, String surname,
                                      String address, Integer cap, String city,
-                                     String telephone, Integer payment, Integer cardNumber) {
+                                     String telephone, Integer payment, @Nullable Integer cardNumber) {
         OkHttpClient client = new OkHttpClient();
-        RequestBody body = new FormBody.Builder()
+        FormBody.Builder body = new FormBody.Builder()
                 .add("username", username)
                 .add("password", password)
                 .add("name", name)
@@ -136,12 +136,13 @@ public class Utils {
                 .add("cap", String.valueOf(cap))
                 .add("city", city)
                 .add("telephone", telephone)
-                .add("payment", String.valueOf(payment))
-                .add("loyalty_card_number", String.valueOf(cardNumber))
-                .build();
+                .add("payment", String.valueOf(payment));
+        if (cardNumber != null) {
+            body.add("loyalty_card_number", String.valueOf(cardNumber));
+        }
         Request request = new Request.Builder()
                 .url(SERVER_URL + SERVER_URL_REGISTRATION)
-                .post(body)
+                .post(body.build())
                 .build();
         try {
             Response response = client.newCall(request).execute();

@@ -197,7 +197,8 @@ public class RegistrationController {
         if (!error) {
             int statusCode = Utils.registerClient(email.getText(), passwordRepeat.getText(), name.getText(),
                     surname.getText(), address.getText(), Integer.valueOf(cap.getText()), city.getText(),
-                    telephone.getText(), this.paymentMethod, Integer.parseInt(this.cardNumber.getText()));
+                    telephone.getText(), this.paymentMethod,
+                    this.cardNumber.getText().isEmpty() ? null : Integer.parseInt(this.cardNumber.getText()));
             if (statusCode == 200) {
                 errorMessage("Success" + statusCode, null);
 
