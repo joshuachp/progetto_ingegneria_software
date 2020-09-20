@@ -164,6 +164,18 @@ Le seguenti sono gli use case del utente con i corrispettivi sequence diagrams.
   \includegraphics[width=\textwidth]{Use Case Model!Autenticazione!InteractionAutenticazione!SequenceDiagramAutenticazione_7.png}
   \caption{Sequence diagram autenticazione}
 \end{figure}
+\break
+\textbf{Attori}: Cliente/Responsabile reparto.\newline
+\textbf{Precondizioni}: L'utente deve essere registrato. \newline
+\textbf{Passi}: 
+\begin{enumerate}
+\item L'utente inserisce le credenziali
+\item L'utente seleziona se vuole che le proprie credenziali vengano salvate per un possibile riavvio dell'applicazione senza autenticazione esplicita.
+\item L'utente accede al catalogo o ad una schermata di scelta (visualizza spese, Gestione prodotti, Aggiunta responsabile) effettuate a seconda che sia un cliente o un responsabile reparto.
+\item I due tipi di utente si deautenticano cliccando sul logout dalle rispettive interfacce.
+\end{enumerate}
+\textbf{Postcondizioni}: L'utente è autenticato e visualizzerà la propria interfaccia di competenza.
+\break
 
 Quando l'utente deve autenticarsi, inserisce le credenziali nel portale. Queste
 verranno verificate. Nel caso siano corrette verrà autenticato con successo, e
@@ -184,11 +196,35 @@ sequence diagrams.
   \includegraphics[width=\textwidth]{Use Case Model!Gestione prodotti!InteractionGestioneProdotti!SequenceDiagramGestioneProdotto_9.png}
   \caption{Sequence diagram gestione prodotti}
 \end{figure}
+\break
+\textbf{Attori}: Responsabile reparto.\newline
+\textbf{Precondizioni}: L'utente deve essere un responsabile reparto autenticato. \newline
+\textbf{Passi}: 
+\begin{enumerate}
+\item Il responsabile accede alla gestione prodotti.
+\begin{enumerate}
+\item Il responsabile accede all'interfaccia di aggiunta del nuovo prodotto. 
+\begin{enumerate}
+\item Il responsabile completa tutti i campi con le informazioni del prodotto da aggiungere (nome, marchio, quantità confezione, quantità magazzino, reparto, caratteristiche, prezzo) e seleziona l'immagine del prodotto.
+\end{enumerate}
+\item Il responsabile seleziona un prodotto dal catalogo.
+\begin{enumerate}
+\item Il responsabile elimina il prodotto selezionato.
+\end{enumerate}
+\item Il responsabile  clicca su un prodotto e accede all'interfaccia di modifica del prodotto.
+\begin{enumerate}
+\item Il responsabile modifica i campi con le informazioni da modificare.
+\end{enumerate}
+\end{enumerate} 
+
+\end{enumerate}
+\textbf{Postcondizioni}: Il responsabile avrà creato/eliminato/modificato un prodotto dal database dei prodotti.
+\break
 
 Per la gestione dei prodotti il responsabile ha la possibilità di creare un
 nuovo prodotto, modificarne o rimuoverne uno già esistente. La vista iniziale è
 una lista dei prodotto, il responsabile può selezionarne uno e decidere se
-modificarlo o rimuoverlo direttamente.
+modificarlo o rimuoverlo direttamente.\newpage
 
 \subsubsection{Controllo Spese}
 
@@ -197,6 +233,19 @@ modificarlo o rimuoverlo direttamente.
   \includegraphics[width=\textwidth]{Use Case Model!Controllo spese!InteractionConstrolloSpese!SequenceDiagramcontrolloSpese_11.png}
   \caption{Sequence diagram controllo spese}
 \end{figure}
+\break
+\textbf{Attori}: Responsabile reparto.\newline
+\textbf{Precondizioni}: L'utente deve essere un responsabile reparto autenticato. \newline
+\textbf{Passi}: 
+\begin{enumerate}
+\item Il responsabile accede all'interfaccia di visualizzazione delle spese.
+\item Il responsabile clicca sulla spesa da controllare.
+\item Il responsabile visualizza le informazioni relative all'ordine (indirizzo, data consegna, totale, lista prodotti e stato). 
+\item Il responsabile modifica lo stato dell'ordine.
+\item Il responsabile salva l'ordine con la relativa modifica dello stato.
+\end{enumerate}
+\textbf{Postcondizioni}: Il responsabile avrà modificato lo stato dell'ordine.
+\break
 
 In fine per il controllo delle spese il responsabile ne visualizza una lista
 con tutte le informazioni riguardanti ogni ordine e ha la possibilità di
@@ -215,6 +264,20 @@ Le seguenti sono gli use case del cliente con i corrispettivi sequence diagrams.
   \includegraphics[width=\textwidth]{Use Case Model!Registrazione!InteractionRegistrazione!SequenceDiagramRegistrazione_1.png}
   \caption{Sequence diagram registrazione}
 \end{figure}
+\break
+\textbf{Attori}: Cliente.\newline
+\textbf{Precondizioni}: Essere un cliente. \newline
+\textbf{Passi}: 
+\begin{enumerate}
+\item Il cliente avvia l'applicazione.
+\item Il cliente accede all'interfaccia di registrazione.
+\item Il cliente inserisce i propri dati ai fini della registrazione (nome, cognome, indirizzo, CAP, città, numero di telefono, email, password).
+\item Il cliente seleziona il proprio metodo di pagamento preferito (tra contanti, paypal e carta di credito).
+\item Il cliente inserisce il codice della propria carta fidelty (se ne possiede una).
+\item Il cliente conferma la  propria registrazione.
+\end{enumerate}
+\textbf{Postcondizioni}: Il nuovo cliente sarà registrato nel database clienti.
+\break
 
 Il cliente accede alla vista della registrazione e dopo aver inserito i propri
 dati ha la possibilità di inserire una tessera di fedeltà, facoltativa.
@@ -228,6 +291,23 @@ dati ha la possibilità di inserire una tessera di fedeltà, facoltativa.
   \includegraphics[width=\textwidth]{Use Case Model!Effettua spesa!InteractionEffettuaSpesa!SequenceDiagramEffettuaSpesa_3.png}
   \caption{Sequence diagram effettua spesa}
 \end{figure}
+\break
+\textbf{Attori}: Cliente.\newline
+\textbf{Precondizioni}: L'utente deve essere un cliente autenticato. \newline
+\textbf{Passi}: 
+\begin{enumerate}
+\item Il cliente seleziona una categoria e l'ordine di visualizzazione in cui ricercare il prodotto desiderato (ed eventualmente ricerca il prodotto tramite l'apposita barra di ricerca).
+\item Il cliente seleziona il prodotto 
+\begin{enumerate}
+\item Il cliente seleziona la quantità e aggiunge prodotto al carrello.
+\item Il cliente clicca sul prodotto e ne visualizza i dettagli.
+\begin{enumerate}
+\item Il cliente seleziona la quantità e aggiunge prodotto al carrello.
+\end{enumerate}
+\end{enumerate}
+\end{enumerate}
+\textbf{Postcondizioni}: I prodotti sono aggiunti al carrello del cliente.
+\break 
 
 Per effettuare la spesa il cliente prima visualizza il catalogo dei prodotti.
 Qui può selezionare le diverse categorie o cercare i prodotti che vuole
@@ -243,6 +323,20 @@ aggiungere al carrello.
   \caption{Sequence diagram conferma spesa}
 \end{figure}
 
+\break
+\textbf{Attori}: Cliente.\newline
+\textbf{Precondizioni}: Almeno un prodotto nel carrello. \newline
+\textbf{Passi}: 
+\begin{enumerate}
+\item Il cliente dall'interfaccia catalogo accede all'interfaccia del carrello.
+\item Il cliente modifica eventuali quantità o rimuove determinati di prodotti dal carrello.
+\item Il cliente conferma l'ordine.
+\item Il cliente seleziona la data e l'ora per la consegna a lui più consona da quelle date disponibili dai preselettori.
+\item Il cliente riceve la conferma di buona riuscita dell'ordine.
+\end{enumerate}
+\textbf{Postcondizioni}: Evasione dell'ordine.
+\break
+
 Quando ha aggiunto almeno un prodotto al carrello può visualizzarli e
 modificarne la quantità o rimuoverli. Quando ha tutti i prodotto che gli
 servono può confermare l'ordine e selezionare una data e un ora per la
@@ -257,6 +351,29 @@ consegna.
   \includegraphics[width=\textwidth]{Use Case Model!Gestione profilo!InteractionGestioneProfilo!SequenceDiagramGestioneProfilo_5.png}
   \caption{Sequence diagram gestione profilo}
 \end{figure}
+\break
+\textbf{Attori}: Cliente.\newline
+\textbf{Precondizioni}: L'utente deve essere un cliente autenticato. \newline
+\textbf{Passi}: 
+\begin{enumerate}
+\item Il cliente dall'interfaccia catalogo accede all'interfaccia di gestione del profilo.
+\item Il cliente visualizza le informazioni del proprio profilo (nome, cognome, indirizzo, telefono, metodo di pagamento preferito, numero	carta e data di scadenza). 
+\begin{enumerate}
+\item Il cliente accede all'interfaccia di modifica del proprio profilo.
+\begin{enumerate}
+\item Il cliente modifica i campi che vuole modificare del proprio profilo.
+\end{enumerate}
+
+\item Il cliente accede all'interfaccia del suo storico ordini.
+\begin{enumerate}
+\item Il cliente visualizza le informazioni dei suoi ordini (stato, indirizzo di spedizione, totale).
+\item Il cliente clicca sull'ordine e visualizza la lista dei prodotti dell'ordine.
+\end{enumerate}
+\end{enumerate}
+\end{enumerate}
+
+\textbf{Postcondizioni}: L'anagrafica del cliente viene aggiornata.
+\break
 
 Nella gestione del profilo il cliente può vedere le proprie informazioni
 anagrafiche e modificarle. Inoltre se ha registrato una tessera fedeltà, sarà
