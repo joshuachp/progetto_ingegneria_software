@@ -72,7 +72,10 @@ public class CatalogItemController {
         this.product = product;
 
         price.setText(String.format("\u20ac %.2f", this.product.getPrice()));
-        title.setText(this.product.getName());
+        String name = this.product.getName();
+        if (name.length() > 14)
+            name = name.substring(0, 14).concat("...");
+        title.setText(name);
         if (this.product.getImage() != null) {
             setImage(this.product.getImage());
         }
