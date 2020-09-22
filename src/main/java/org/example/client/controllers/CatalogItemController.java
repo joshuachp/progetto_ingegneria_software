@@ -3,6 +3,7 @@ package org.example.client.controllers;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.Spinner;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -23,7 +24,7 @@ public class CatalogItemController {
     @FXML
     public ImageView thumbnail;
     @FXML
-    public Text title;
+    public Label title;
     @FXML
     public Text price;
     @FXML
@@ -72,10 +73,8 @@ public class CatalogItemController {
         this.product = product;
 
         price.setText(String.format("\u20ac %.2f", this.product.getPrice()));
-        String name = this.product.getName();
-        if (name.length() > 12)
-            name = name.substring(0, 12).concat("...");
-        title.setText(name);
+        title.setText(this.product.getName());
+
         if (this.product.getImage() != null) {
             setImage(this.product.getImage());
         }
