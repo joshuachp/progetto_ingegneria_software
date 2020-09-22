@@ -26,7 +26,7 @@
             <VBox.margin>
                 <Insets left="12.0" right="12.0" top="12.0"/>
             </VBox.margin>
-            <RadioButton mnemonicParsing="false" selected="true" text="Credit card" textFill="#212121">
+            <RadioButton mnemonicParsing="false" selected="true" text="Cash on delivery" textFill="#212121">
                 <toggleGroup>
                     <ToggleGroup fx:id="paymentMethod"/>
                 </toggleGroup>
@@ -34,13 +34,13 @@
                     <Font size="12.0"/>
                 </font>
             </RadioButton>
-            <RadioButton mnemonicParsing="false" text="PayPal" textFill="#212121"
+            <RadioButton mnemonicParsing="false" text="Credit card" textFill="#212121"
                          toggleGroup="$paymentMethod">
                 <font>
                     <Font size="12.0"/>
                 </font>
             </RadioButton>
-            <RadioButton mnemonicParsing="false" text="Cash on delivery" textFill="#212121"
+            <RadioButton mnemonicParsing="false" text="PayPal" textFill="#212121"
                          toggleGroup="$paymentMethod">
                 <font>
                     <Font size="12.0"/>

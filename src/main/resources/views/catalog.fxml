@@ -11,8 +11,8 @@
       fx:controller="org.example.client.controllers.CatalogController">
     <MenuBar VBox.vgrow="NEVER">
         <Menu mnemonicParsing="false" text="Account">
-            <MenuItem mnemonicParsing="false" onAction="#handlerLogoutAction" text="Profilo utente"/>
-            <MenuItem mnemonicParsing="false" onAction="#handleProfileAction" text="Logout"/>
+            <MenuItem mnemonicParsing="false" onAction="#handleProfileAction" text="Profilo utente"/>
+            <MenuItem mnemonicParsing="false" onAction="#handlerLogoutAction" text="Logout"/>
         </Menu>
     </MenuBar>
     <HBox alignment="CENTER_LEFT" VBox.vgrow="NEVER">
